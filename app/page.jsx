@@ -6,38 +6,40 @@ export default function Home() {
   return (
     <main>
       {/* HERO */}
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: "url('/hero.jpg')" }}>
+        <div className="overlay" />
         <div className="container hero-inner">
           <span className="badge">⚡ 24/7 after-storm emergency repairs</span>
-          <h1>Modern roofing & construction, <br/>done right.</h1>
+          <h1>
+            Modern roofing & construction, <br /> done right.
+          </h1>
           <p>
             Reliable installs, rapid repairs and premium finishes across Ireland.
             Domestic & commercial projects with a quality guarantee.
           </p>
-          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginTop:'10px'}}>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 10 }}>
             <a href="#contact" className="btn btn-gold">Get a quote</a>
             <a href="tel:0831762475" className="btn btn-outline">Call 083 176 2475</a>
           </div>
-
-          <div style={{marginTop:'18px'}} className="small">
+          <div style={{ marginTop: 18 }} className="small">
             <span>Based in Meath • Fully insured • SEAI-friendly installs</span>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES + WEATHER SIDEBAR */}
       <section className="section">
         <div className="container">
-          <div className="split" style={{alignItems:'start'}}>
+          <div className="split" style={{ alignItems: "start" }}>
             <div>
-              <h2 style={{margin:'0 0 8px 0'}}>What we do</h2>
+              <h2 style={{ margin: "0 0 8px 0" }}>What we do</h2>
               <div className="k-gold-line" />
               <p className="small">
                 From complete new roofs to emergency call-outs, we deliver durable results
                 with a clean, luxury finish. All work is photographed and guaranteed.
               </p>
 
-              <div className="grid grid-3" style={{marginTop:18}}>
+              <div className="grid grid-3" style={{ marginTop: 18 }}>
                 <div className="card">
                   <h3>New Roofs</h3>
                   <p>Slates, tiles, metal & flat systems. Warm-roof upgrades and insulation.</p>
@@ -52,7 +54,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="grid grid-3" style={{marginTop:18}}>
+              <div className="grid grid-3" style={{ marginTop: 18 }}>
                 <div className="card">
                   <h3>Tiling & Interiors</h3>
                   <p>Luxury tiling, drywall, painting and clean interior refurbishments.</p>
@@ -68,10 +70,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Weather + fast CTA */}
             <aside>
-              <div className="card" style={{padding:20}}>
-                <h3 style={{marginTop:0}}>Local weather check</h3>
+              <div className="card" style={{ padding: 20 }}>
+                <h3 style={{ marginTop: 0 }}>Local weather check</h3>
                 <p className="small">Plan around wind & rain — live forecast for Meath.</p>
                 <Weather />
                 <div className="k-gold-line" />
@@ -82,13 +83,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROMO STRIP */}
-      <section className="section" style={{padding:'40px 0'}}>
+      {/* WHY CHOOSE US */}
+      <section className="section">
         <div className="container">
-          <div className="card" style={{display:'grid',gap:16,alignItems:'center',gridTemplateColumns:'1fr auto'}}>
+          <h2 className="section-title">
+            Why choose <span className="gold">Krinedal-R</span>?
+          </h2>
+
+          <div className="grid grid-3">
+            <div className="card luxe">
+              <h3 className="card-title">Premium Craftsmanship</h3>
+              <p>Flawless finishing, tight tolerances, and clean sites—every job signed off with pride.</p>
+            </div>
+            <div className="card luxe">
+              <h3 className="card-title">Gold-Standard Warranty</h3>
+              <p>Clear, written guarantees on materials and workmanship for complete peace of mind.</p>
+            </div>
+            <div className="card luxe">
+              <h3 className="card-title">On-Time, On-Budget</h3>
+              <p>Detailed quotes, daily updates, and a schedule we actually keep.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROMO STRIP */}
+      <section className="section" style={{ padding: "40px 0" }}>
+        <div className="container">
+          <div className="card" style={{ display: "grid", gap: 16, alignItems: "center", gridTemplateColumns: "1fr auto" }}>
             <div>
-              <h3 style={{margin:'4px 0'}}>24/7 on-call service</h3>
-              <p className="small" style={{margin:0}}>
+              <h3 style={{ margin: "4px 0" }}>24/7 on-call service</h3>
+              <p className="small" style={{ margin: 0 }}>
                 We dispatch within 15 minutes during red warnings, heavy rain or snow.
               </p>
             </div>
@@ -101,7 +126,7 @@ export default function Home() {
       <section className="section">
         <div className="container split">
           <div>
-            <h2 style={{margin:'0 0 8px 0'}}>About Krinedal-R</h2>
+            <h2 style={{ margin: "0 0 8px 0" }}>About Krinedal-R</h2>
             <div className="k-gold-line" />
             <p className="small">
               Premium craftsmanship with clear communication, photos of progress and
@@ -109,7 +134,7 @@ export default function Home() {
             </p>
           </div>
           <div className="card">
-            <ul style={{margin:0,padding:'0 0 0 16px',color:'var(--muted)'}}>
+            <ul style={{ margin: 0, padding: "0 0 0 16px", color: "var(--muted)" }}>
               <li>Fully insured • SafePass • VAT receipts available</li>
               <li>Warranty on all new installs</li>
               <li>Free roof health check with every repair</li>
@@ -119,30 +144,23 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="section">
-        <div className="container split">
+      <section id="contact" className="contact-strip">
+        <div className="container contact-inner">
           <div>
-            <h2 style={{margin:'0 0 8px 0'}}>Get a fast quote</h2>
-            <div className="k-gold-line" />
-            <p className="small">Call, WhatsApp photos, or email site details — we’ll respond quickly.</p>
-            <div style={{display:'grid',gap:10,maxWidth:520,marginTop:14}}>
-              <a href="tel:0831762475" className="btn btn-gold btn-block">📞 Call 083 176 2475</a>
-              <a href="https://wa.me/353831762475" className="btn btn-outline btn-block">💬 WhatsApp photos</a>
-              <a href="mailto:krinedalr@gmail.com" className="btn btn-outline btn-block">✉️ krinedalr@gmail.com</a>
-            </div>
-          </div>
-          <div className="card">
-            <h3 style={{marginTop:0}}>Invoice & paperwork</h3>
-            <p className="small">
-              Need an official invoice for insurance or employer? No problem — we
-              can issue same-day PDFs.
+            <h3 className="contact-title">Need help or a same-day quote?</h3>
+            <p>
+              Email <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a> or ring us now.
             </p>
+          </div>
+          <div className="cta-buttons">
+            <a className="btn btn-gold" href="tel:0831762475">Call now</a>
+            <a className="btn btn-outline" href="mailto:krinedalr@gmail.com">Email us</a>
           </div>
         </div>
       </section>
 
       <footer className="footer">
-        <div className="container" style={{display:'flex',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
+        <div className="container" style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
           <span>© {new Date().getFullYear()} Krinedal-R • Ireland • Meath</span>
           <span className="small">Design with gold accents • Built on Next.js</span>
         </div>
@@ -150,86 +168,3 @@ export default function Home() {
     </main>
   );
 }
-// components/Weather.jsx
-"use client";
-import { useEffect, useState } from "react";
-
-export default function Weather() {
-  const [data,setData] = useState(null);
-  const [err,setErr] = useState(null);
-
-  useEffect(()=>{
-    const lat = 53.652; // Navan, Meath
-    const lon = -6.681;
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&current_weather=true&timezone=auto`;
-    fetch(url).then(r=>r.json()).then(setData).catch(e=>setErr(String(e)));
-  },[]);
-
-  if (err) return <p className="small">Weather unavailable.</p>;
-  if (!data) return <p className="small">Loading forecast…</p>;
-
-  const cur = data.current_weather;
-  const d0 = data.daily;
-
-  return (
-    <div>
-      <div className="card" style={{padding:14, margin:'8px 0'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-          <strong>Now</strong>
-          <span className="small">Meath</span>
-        </div>
-        <div style={{display:'flex',gap:12,alignItems:'baseline'}}>
-          <span style={{fontSize:28,fontWeight:700}}>{Math.round(cur.temperature)}°C</span>
-          <span className="small">Wind {Math.round(cur.windspeed)} km/h</span>
-        </div>
-      </div>
-
-      <div className="grid" style={{gridTemplateColumns:'repeat(3,1fr)'}}>
-        {[0,1,2].map(i=>(
-          <div key={i} className="card" style={{padding:12}}>
-            <strong>Day {i+1}</strong>
-            <div className="small">
-              Max {Math.round(d0.temperature_2m_max[i])}° • Min {Math.round(d0.temperature_2m_min[i])}°
-              <br/>Rain {Math.round(d0.precipitation_sum[i])} mm • Wind {Math.round(d0.wind_speed_10m_max[i])} km/h
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-{/* WHY CHOOSE US */}
-<section className="why section">
-  <div className="container">
-    <h2 className="section-title">Why choose <span className="gold">Krinedal-R</span>?</h2>
-
-    <div className="grid three">
-      <div className="card luxe">
-        <h3 className="card-title">Premium Craftsmanship</h3>
-        <p>Flawless finishing, tight tolerances, and clean sites—every job signed off with pride.</p>
-      </div>
-      <div className="card luxe">
-        <h3 className="card-title">Gold-Standard Warranty</h3>
-        <p>Clear, written guarantees on materials and workmanship for complete peace of mind.</p>
-      </div>
-      <div className="card luxe">
-        <h3 className="card-title">On-Time, On-Budget</h3>
-        <p>Detailed quotes, daily updates, and a schedule we actually keep.</p>
-      </div>
-    </div>
-  </div>
-</section>
-{/* QUICK CONTACT */}
-<section id="contact" className="contact-strip">
-  <div className="container contact-inner">
-    <div>
-      <h3 className="contact-title">Need help or a same-day quote?</h3>
-      <p>Email <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a> or ring us now.</p>
-    </div>
-    <div className="cta-buttons">
-      <a className="btn btn-gold" href="tel:0831762475">Call now</a>
-      <a className="btn btn-outline" href="mailto:krinedalr@gmail.com">Email us</a>
-    </div>
-  </div>
-</section
-  
