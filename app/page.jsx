@@ -1,7 +1,6 @@
-// app/page.tsx
 export default function Home() {
   return (
-    <main>
+    <main style={{ padding: 24 }}>
       <h1>Hello from Krinedalr!</h1>
     </main>
   );
