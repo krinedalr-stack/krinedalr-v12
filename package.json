@@ -1,14 +1,15 @@
-{
-  "name": "krinedalr-v12",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "14.2.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+export const metadata = { title: "Krinedalr" };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body style={{ margin: 0, fontFamily: "ui-sans-serif, system-ui" }}>
+        {children}
+      </body>
+    </html>
+  );
 }
