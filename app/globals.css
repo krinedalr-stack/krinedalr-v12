@@ -146,3 +146,20 @@ a {
   display: inline-block;
   margin-bottom: 16px;
 }
+/* --- Gold shimmer effect for logo --- */
+.logo {
+  display: inline-block;
+  position: relative;
+  font-weight: 700;
+  color: var(--gold);
+  background: linear-gradient(90deg, #b58b20, #f9e18b, #b58b20);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 1s ease-in-out;
+}
+
+.logo:hover {
+  background-position: 100%;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
