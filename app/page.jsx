@@ -198,3 +198,38 @@ export default function Weather() {
     </div>
   );
 }
+{/* WHY CHOOSE US */}
+<section className="why section">
+  <div className="container">
+    <h2 className="section-title">Why choose <span className="gold">Krinedal-R</span>?</h2>
+
+    <div className="grid three">
+      <div className="card luxe">
+        <h3 className="card-title">Premium Craftsmanship</h3>
+        <p>Flawless finishing, tight tolerances, and clean sites—every job signed off with pride.</p>
+      </div>
+      <div className="card luxe">
+        <h3 className="card-title">Gold-Standard Warranty</h3>
+        <p>Clear, written guarantees on materials and workmanship for complete peace of mind.</p>
+      </div>
+      <div className="card luxe">
+        <h3 className="card-title">On-Time, On-Budget</h3>
+        <p>Detailed quotes, daily updates, and a schedule we actually keep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{/* QUICK CONTACT */}
+<section id="contact" className="contact-strip">
+  <div className="container contact-inner">
+    <div>
+      <h3 className="contact-title">Need help or a same-day quote?</h3>
+      <p>Email <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a> or ring us now.</p>
+    </div>
+    <div className="cta-buttons">
+      <a className="btn btn-gold" href="tel:0831762475">Call now</a>
+      <a className="btn btn-outline" href="mailto:krinedalr@gmail.com">Email us</a>
+    </div>
+  </div>
+</section
+  
