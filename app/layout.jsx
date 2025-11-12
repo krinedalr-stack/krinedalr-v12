@@ -1,13 +1,15 @@
-export const metadata = { title: "Krinedalr" };
+// app/layout.jsx
+import './globals.css';
 
-import "./globals.css";
+export const metadata = {
+  title: 'Krinedal-R',
+  description: 'Modern roofing & construction by Krinedal-R',
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "ui-sans-serif, system-ui" }}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
