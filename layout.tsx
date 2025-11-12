@@ -1,9 +1,14 @@
-export const metadata = {
+// app/layout.tsx
+import './globals.css';
+import type { Metadata } from 'next';
+import { ReactNode } from 'react';
+
+export const metadata: Metadata = {
   title: 'Krinedalr',
-  description: 'Welcome to Krinedalr app',
+  description: 'Welcome to Krinedalr site',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
