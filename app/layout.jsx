@@ -1,5 +1,7 @@
 export const metadata = { title: "Krinedalr" };
 
+import "./globals.css";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
