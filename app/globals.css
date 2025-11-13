@@ -7,159 +7,70 @@
 
 html, body {
   font-family: 'Inter', sans-serif;
-  background-color: #0c0c0c;
-  color: #f5f5f5;
+  background-color: #e0ecec; /* light grey background */
+  color: #1f1f1f;
   scroll-behavior: smooth;
 }
 
+/* Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* Container */
 .container {
   width: 90%;
   max-width: 1200px;
   margin: auto;
 }
 
-/* Hero */
-.hero {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
-    url("/hero.jpg") center/cover no-repeat;
-  padding: 120px 0 100px 0;
-  text-align: left;
-  border-bottom: 2px solid var(--gold);
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--gold);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-}
-
-.hero p {
-  font-size: 1rem;
-  max-width: 600px;
-  color: #ccc;
-  line-height: 1.6;
-}
-
-/* Gold styling */
-:root {
-  --gold: #d4af37;
-  --dark: #0c0c0c;
-  --muted: #888;
+/* Layout spacing */
+.section {
+  padding: 60px 0;
 }
 
 /* Buttons */
-.btn {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.btn-gold {
+.btn-primary {
   background-color: var(--gold);
-  color: #000;
-  border: 1px solid var(--gold);
+  color: #1f1f1f;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.btn-gold:hover {
-  background-color: #e0c14b;
-  box-shadow: 0 0 10px var(--gold);
+.btn-primary:hover {
+  background-color: #ffcb6b;
 }
 
 .btn-outline {
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  background: transparent;
+  background: white;
+  border: 2px solid var(--blue);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--blue);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .btn-outline:hover {
-  background-color: rgba(212, 175, 55, 0.1);
-}
-
-/* Sections */
-.section {
-  padding: 80px 0;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.section h2 {
-  color: var(--gold);
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.k-gold-line {
-  width: 50px;
-  height: 3px;
-  background: var(--gold);
-  margin-bottom: 15px;
+  background-color: rgba(0, 89, 172, 0.1);
 }
 
 /* Cards */
 .card {
-  background: #151515;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  transition: 0.3s;
+  background: white;
+  padding: 24px;
+  border: 1px solid #dcdcdc;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
-.card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 0 10px rgba(212,175,55,0.3);
-}
-
-/* Grid layouts */
+/* Services grid */
 .grid {
   display: grid;
-  gap: 16px;
-}
-
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* Footer */
-.footer {
-  background: #000;
-  color: #999;
-  padding: 30px 0;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Badges */
-.badge {
-  background-color: rgba(212,175,55,0.15);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-weight: 500;
-  border-radius: 20px;
-  padding: 5px 12px;
-  display: inline-block;
-  margin-bottom: 16px;
-}
-/* --- Gold shimmer effect for logo --- */
-.logo {
-  display: inline-block;
-  position: relative;
-  font-weight: 700;
-  color: var(--gold);
-  background: linear-gradient(90deg, #b58b20, #f9e18b, #b58b20);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: background-position 1s ease-in-out;
-}
-
-.logo:hover {
-  background-position: 100%;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-}
+  grid-template-columns: repeat(auto-fit, minmax(260px,
