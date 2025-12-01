@@ -1,13 +1,17 @@
-// app/layout.jsx
+// app/layout.tsx
 import './globals.css';
 
 export const metadata = {
-  title: 'Krinedal-R | Premium Roofing, Tiling & Storm Repair',
+  title: 'Krinedal-R | Property Care & 24/7 Storm Repair Ireland',
   description:
-    '24/7 storm call-out, full roof replacement, luxury tiling and landlord-ready property care across Ireland.',
+    'Krinedal-R provides luxury tiling, full roof replacement, storm damage repairs, painting, landscaping and landlord property care across Ireland.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>{children}</body>
