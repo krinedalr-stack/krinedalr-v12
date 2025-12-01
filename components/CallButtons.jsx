@@ -1,24 +1,12 @@
 // components/CallButtons.jsx
-
 export default function CallButtons() {
   return (
-    <div style={{ display: "grid", gap: 8, marginTop: 12 }}>
-      <a href="tel:0831762475" className="btn btn-gold btn-block">
-        📞 Call 083 176 2475
+    <div className="hero-actions">
+      <a className="btn btn-primary" href="tel:0831762475">
+        Call 24/7 Storm Line
       </a>
-      <a
-        href="https://wa.me/353831762475"
-        className="btn btn-outline btn-block"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        💬 WhatsApp photos
-      </a>
-      <a
-        href="mailto:krinedalr@gmail.com"
-        className="btn btn-outline btn-block"
-      >
-        ✉️ Email krinedalr@gmail.com
+      <a className="btn btn-outline" href="mailto:hello@krinedalr.ie">
+        Request a quote by email
       </a>
     </div>
   );
