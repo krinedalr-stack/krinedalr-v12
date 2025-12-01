@@ -1,30 +1,34 @@
 // components/Weather.jsx
 export default function Weather() {
   return (
-    <div className="weather-strip">
-      <h3>Ireland Weather &amp; Storm Readiness</h3>
-      <p>
-        We monitor Met Éireann warnings before every shift. Snow, rain or storm
-        won&apos;t stop us – but it will change how we work on your roof.
-      </p>
+    <div className="weather-grid">
+      <div className="weather-pill green">
+        <h4>Green – Normal</h4>
+        <p>Normal conditions. Routine work & inspections go ahead as planned.</p>
+      </div>
 
-      <div className="weather-badges">
-        <div className="badge badge-green">
-          <span className="badge-dot" />
-          Green: Normal conditions, routine work &amp; inspections
-        </div>
-        <div className="badge badge-yellow">
-          <span className="badge-dot" />
-          Yellow: Wind or rain – extra care on roofs
-        </div>
-        <div className="badge badge-orange">
-          <span className="badge-dot" />
-          Orange: Strong winds – storm team only
-        </div>
-        <div className="badge badge-red">
-          <span className="badge-dot" />
-          Red: Emergency call-outs only, safety first
-        </div>
+      <div className="weather-pill yellow">
+        <h4>Yellow – Extra Care</h4>
+        <p>
+          Wind or rain warning. Extra care on roofs, more safety checks and
+          shorter time on ladders.
+        </p>
+      </div>
+
+      <div className="weather-pill orange">
+        <h4>Orange – Limited Roof Work</h4>
+        <p>
+          Strong winds or heavy rainfall. Emergency make-safe only until weather
+          improves.
+        </p>
+      </div>
+
+      <div className="weather-pill red">
+        <h4>Red – Safety First</h4>
+        <p>
+          Only life-safety emergency visits when conditions allow. We stay in
+          touch and plan work as soon as it is safe.
+        </p>
       </div>
     </div>
   );
