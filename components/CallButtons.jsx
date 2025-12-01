@@ -1,15 +1,14 @@
 // components/CallButtons.jsx
-export default function CallButtons() {
+
+export default function CallButtons({ variant = 'default' }) {
+  const wrapperClass = variant === 'hero' ? 'hero-actions' : 'cta-buttons';
+
   return (
-    <div className="hero-buttons">
-      <a className="btn btn-primary" href="tel:+353831762475">
+    <div className={wrapperClass}>
+      <a href="tel:+353831762475" className="btn btn-primary">
         Call 24/7 Storm Line
       </a>
-
-      <a
-        className="btn btn-outline"
-        href="mailto:krinedalr@gmail.com?subject=Quote%20request%20from%20Krinedal-R%20website"
-      >
+      <a href="mailto:krinedalr@gmail.com" className="btn btn-outline">
         Request a quote by email
       </a>
     </div>
