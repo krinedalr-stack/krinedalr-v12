@@ -1,67 +1,51 @@
 // components/Weather.jsx
-"use client";
 
-import { useEffect, useState } from "react";
+// Simple traffic-light style weather / warning strip.
+// You can later hook this up to a real API if you want.
 
-export default function Weather() {
-  const [data, setData] = useState(null);
-  const [err, setErr] = useState(null);
+const levels = [
+  {
+    label: 'Green',
+    desc: 'Normal conditions – routine work & inspections.',
+    className: 'level-green',
+  },
+  {
+    label: 'Yellow',
+    desc: 'Yellow warning – wind or rain. Extra care on roofs.',
+    className: 'level-yellow',
+  },
+  {
+    label: 'Orange',
+    desc: 'Orange warning – severe weather. Emergency work only.',
+    className: 'level-orange',
+  },
+  {
+    label: 'Red',
+    desc: 'Red warning – stay safe. 24/7 make-safe only where possible.',
+    className: 'level-red',
+  },
+];
 
-  useEffect(() => {
-    const lat = 53.652; // Navan, Meath
-    const lon = -6.681;
-
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&current_weather=true&timezone=auto`;
-
-    fetch(url)
-      .then((r) => r.json())
-      .then(setData)
-      .catch((e) => setErr(String(e)));
-  }, []);
-
-  if (err) return <p className="small">Weather unavailable right now.</p>;
-  if (!data) return <p className="small">Loading forecast…</p>;
-
-  const cur = data.current_weather;
-  const d0 = data.daily;
-
+export default function WeatherStrip() {
   return (
-    <div>
-      <div className="card" style={{ padding: 14, margin: "8px 0" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <strong>Now</strong>
-          <span className="small">Meath</span>
+    <section className="weather-strip">
+      <div className="container weather-inner">
+        <div className="weather-main">
+          <span className="weather-label">Ireland Weather & Storm Readiness</span>
+          <p className="weather-text">
+            We monitor Met Éireann warnings daily. Snow, rain or storm won’t
+            stop us – but it will change how we work on your roof.
+          </p>
         </div>
-        <div style={{ display: "flex", gap: 12, alignItems: "baseline" }}>
-          <span style={{ fontSize: 28, fontWeight: 700 }}>
-            {Math.round(cur.temperature)}°C
-          </span>
-          <span className="small">
-            Wind {Math.round(cur.windspeed)} km/h
-          </span>
-        </div>
-      </div>
-
-      <div className="grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="card" style={{ padding: 12 }}>
-            <strong>Day {i + 1}</strong>
-            <div className="small">
-              Max {Math.round(d0.temperature_2m_max[i])}° • Min{" "}
-              {Math.round(d0.temperature_2m_min[i])}°
-              <br />
-              Rain {Math.round(d0.precipitation_sum[i])} mm • Wind{" "}
-              {Math.round(d0.wind_speed_10m_max[i])} km/h
+        <div className="weather-levels">
+          {levels.map((lvl) => (
+            <div className={`weather-level ${lvl.className}`} key={lvl.label}>
+              <span className="weather-level-name">{lvl.label}</span>
+              <span className="weather-level-desc">{lvl.desc}</span>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
