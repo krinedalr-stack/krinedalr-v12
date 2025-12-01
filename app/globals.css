@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: #f4f5f7;
   color: #111827;
   line-height: 1.6;
@@ -161,7 +161,8 @@ a:hover {
   border: 2px solid transparent;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease;
+  transition: transform 0.08s ease, box-shadow 0.08s ease,
+    background-color 0.15s ease;
 }
 
 .btn-primary {
@@ -187,11 +188,9 @@ a:hover {
   text-decoration: none;
 }
 
-/* SERVICE CARDS */
+/* CARDS & GRIDS */
 .services-grid {
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
   margin-top: 28px;
 }
 
@@ -217,7 +216,7 @@ a:hover {
   padding: 16px 14px;
 }
 
-/* LANDLORD SECTION */
+/* LANDLORDS */
 .landlords {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
@@ -225,51 +224,199 @@ a:hover {
   align-items: flex-start;
 }
 
-.landlord-note {
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.landlord-list {
+.feature-list {
   list-style: disc;
   margin-left: 18px;
-  margin-top: 8px;
-  color: #4b5563;
+  color: #374151;
+  font-size: 0.95rem;
 }
 
-.landlord-pricing {
+.landlord-card {
   background: #111827;
   color: #f9fafb;
-  border-radius: 14px;
-  padding: 18px 18px 20px;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* CONTACT STRIP */
-.contact-strip {
+.landlord-card .hero-card-list {
+  color: #e5e7eb;
+}
+
+.landlord-card .hero-card-note {
+  color: #9ca3af;
+}
+
+.landlord-btn {
+  margin-top: 12px;
+}
+
+/* EMERGENCY */
+.emergency {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.emergency h2 {
+  color: #fef9c3;
+}
+
+.emergency .section-intro {
+  color: #cbd5f5;
+}
+
+.emergency-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.emergency .card {
   background: #111827;
-  color: #f9fafb;
-  padding: 28px 0;
+  border-color: #1f2937;
 }
 
-.contact-strip h3 {
-  font-size: 1.4rem;
+/* STEPS / PROCESS */
+.process-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 22px;
+}
+
+.step-number {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #f97316;
+  color: #111827;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
   margin-bottom: 6px;
 }
 
-.contact-strip p {
-  color: #d1d5db;
+.steps {
+  list-style: decimal;
+  margin-left: 18px;
+  font-size: 0.9rem;
+  color: #4b5563;
 }
 
-/* FOOTER */
-footer {
+/* REVIEWS & TRUST */
+.reviews {
+  background: #ffffff;
+}
+
+.trust-strip {
+  background: #111827;
+  color: #f9fafb;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.trust-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+}
+
+.trust-bold {
+  font-weight: 700;
+}
+
+.trust-note {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  max-width: 520px;
+}
+
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  font-size: 0.8rem;
+}
+
+.review-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.review-card {
+  position: relative;
+}
+
+.review-stars {
+  color: #facc15;
+  margin-bottom: 4px;
+}
+
+.review-name {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* CONTACT & FOOTER */
+.contact-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.contact-card {
+  align-self: stretch;
+}
+
+.footer {
   background: #020617;
   color: #9ca3af;
-  padding: 18px 0;
+  padding: 20px 0;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-size: 0.85rem;
 }
 
-footer span {
-  display: block;
-  text-align: center;
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-inner,
+  .landlords,
+  .contact-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding-top: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .hero-card {
+    margin-top: 12px;
+  }
+
+  .trust-strip {
+    padding: 14px 16px;
+  }
 }
