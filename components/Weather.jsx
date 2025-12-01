@@ -1,35 +1,47 @@
 // components/Weather.jsx
+
 export default function Weather() {
   return (
-    <div className="weather-grid">
-      <div className="weather-pill green">
-        <h4>Green – Normal</h4>
-        <p>Normal conditions. Routine work & inspections go ahead as planned.</p>
-      </div>
+    <section className="weather-section" id="weather">
+      <div className="container">
+        <div className="weather-header">
+          <h2>Ireland Weather &amp; Storm Readiness</h2>
+          <p>
+            We monitor Met Éireann warnings daily. Snow, rain or storm won’t stop us – but it will
+            change how we work on your roof.
+          </p>
+        </div>
 
-      <div className="weather-pill yellow">
-        <h4>Yellow – Extra Care</h4>
-        <p>
-          Wind or rain warning. Extra care on roofs, more safety checks and
-          shorter time on ladders.
-        </p>
-      </div>
+        <div className="weather-grid">
+          <div className="weather-badge weather-green">
+            <span className="weather-label">Green</span>
+            <span className="weather-description">
+              Normal conditions – routine work &amp; inspections.
+            </span>
+          </div>
 
-      <div className="weather-pill orange">
-        <h4>Orange – Limited Roof Work</h4>
-        <p>
-          Strong winds or heavy rainfall. Emergency make-safe only until weather
-          improves.
-        </p>
-      </div>
+          <div className="weather-badge weather-yellow">
+            <span className="weather-label">Yellow</span>
+            <span className="weather-description">
+              Wind or rain – extra care on roofs &amp; access.
+            </span>
+          </div>
 
-      <div className="weather-pill red">
-        <h4>Red – Safety First</h4>
-        <p>
-          Only life-safety emergency visits when conditions allow. We stay in
-          touch and plan work as soon as it is safe.
-        </p>
+          <div className="weather-badge weather-orange">
+            <span className="weather-label">Orange</span>
+            <span className="weather-description">
+              Severe weather – limited emergency make-safe only.
+            </span>
+          </div>
+
+          <div className="weather-badge weather-red">
+            <span className="weather-label">Red</span>
+            <span className="weather-description">
+              Extreme conditions – we pause work until it’s safe.
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
