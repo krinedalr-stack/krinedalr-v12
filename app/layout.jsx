@@ -1,10 +1,11 @@
 // app/layout.jsx
+
 import './globals.css';
 
 export const metadata = {
-  title: 'Krinedal-R | Property Maintenance & Emergency Repair',
+  title: "KRINEDAL-R | Property Maintenance & Emergency Repair",
   description:
-    'Storm damage repair, roofing, tiling, exterior & interior painting, power washing and landlord-ready refurbishments in Meath, Louth & Dublin. 24/7 emergency call-out.',
+    "Emergency repairs, storm damage, roofing, tiling, painting, power washing, property fresh-ups and full landlord services in Ireland.",
 };
 
 export default function RootLayout({ children }) {
