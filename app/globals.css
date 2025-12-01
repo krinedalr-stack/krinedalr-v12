@@ -1,6 +1,6 @@
 /* app/globals.css */
 
-/* RESET & BASE */
+/* RESET & BASE ------------------------------------------------------------ */
 *,
 *::before,
 *::after {
@@ -15,16 +15,14 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #000; /* lets marble stand out */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #050608;
   color: #f9fafb;
   line-height: 1.6;
 }
 
-/* GLOBAL ELEMENTS */
 main {
   min-height: 100vh;
-  background-color: #0b0b0d;
 }
 
 a {
@@ -36,7 +34,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* LAYOUT HELPERS */
+/* LAYOUT HELPERS ---------------------------------------------------------- */
 .container {
   width: 100%;
   max-width: 1120px;
@@ -46,23 +44,24 @@ a:hover {
 
 .section {
   padding: 64px 0;
-  background: #050506;
+  background: radial-gradient(circle at top, #020308 0, #020308 40%, #050608 100%);
 }
 
 .section-alt {
-  background: #0f172a;
+  padding: 64px 0;
+  background: #050608;
 }
 
 .section h2 {
   font-size: 2rem;
   margin-bottom: 12px;
-  color: #f9fafb;
 }
 
 .section-intro {
   max-width: 720px;
   margin-bottom: 24px;
-  color: #9ca3af;
+  color: #d1d5db;
+  font-size: 0.98rem;
 }
 
 .grid {
@@ -70,60 +69,75 @@ a:hover {
   gap: 20px;
 }
 
-/* HERO */
+/* HERO (BLACK "MARBLE" FEEL) ---------------------------------------------- */
 .hero {
-  /* Put your marble banner in /public and update url if needed */
-  background-image:
-    linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(15, 23, 42, 0.9)),
-    url('/hero-marble.jpg');
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  padding: 80px 0 60px;
   color: #f9fafb;
-  padding: 80px 0 64px;
+  overflow: hidden;
+  background-color: #050608;
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(255, 215, 0, 0.12) 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(255, 215, 0, 0.09) 0, transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(255, 215, 0, 0.08) 0, transparent 55%),
+    linear-gradient(135deg, #020308 0%, #050608 40%, #0b0f19 100%);
+  background-blend-mode: screen, screen, screen, normal;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      125deg,
+      rgba(255, 215, 0, 0.09),
+      rgba(255, 215, 0, 0.09) 1px,
+      transparent 1px,
+      transparent 16px
+    );
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.7), transparent 55%);
 }
 
 .hero-inner {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
   align-items: flex-start;
   gap: 32px;
+  z-index: 1;
 }
 
 .hero-tag {
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  color: #fde68a;
+  font-size: 0.72rem;
+  color: #fbbf24;
   margin-bottom: 10px;
 }
 
 .hero h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1.1;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.hero-r {
+.hero-accent {
   color: #ef4444;
 }
 
 .hero-lead {
   max-width: 640px;
   color: #e5e7eb;
-  margin-bottom: 18px;
-}
-
-.hero-footnote {
-  margin-top: 12px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  font-size: 1.02rem;
 }
 
 .hero-bullets {
@@ -131,25 +145,32 @@ a:hover {
   margin-left: 18px;
   color: #e5e7eb;
   font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.hero-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #9ca3af;
 }
 
 .hero-card {
-  background: rgba(15, 23, 42, 0.96);
-  color: #f9fafb;
-  padding: 22px 22px 24px;
-  border-radius: 18px;
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(6, 8, 14, 0.9);
+  border-radius: 16px;
+  padding: 20px 20px 22px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
 }
 
 .hero-card h2 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin-bottom: 8px;
 }
 
 .hero-card-text {
   font-size: 0.95rem;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #e5e7eb;
 }
 
@@ -166,31 +187,7 @@ a:hover {
   color: #9ca3af;
 }
 
-/* 24/7 red button inside hero card */
-.hero-alert-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 11px 20px;
-  margin-bottom: 12px;
-  border-radius: 999px;
-  background: #ef4444;
-  color: #f9fafb;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  box-shadow: 0 14px 30px rgba(239, 68, 68, 0.6);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.hero-alert-btn:hover {
-  background: #f97373;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-/* BUTTONS */
+/* BUTTONS ----------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -201,17 +198,22 @@ a:hover {
   border: 2px solid transparent;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  white-space: nowrap;
 }
 
 .btn-primary {
-  background: #f97316;
+  background: #ef4444;
   color: #111827;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 28px rgba(248, 113, 113, 0.6);
 }
 
 .btn-primary:hover {
-  background: #fb923c;
+  background: #f97373;
   text-decoration: none;
   transform: translateY(-1px);
 }
@@ -227,297 +229,234 @@ a:hover {
   text-decoration: none;
 }
 
-.full-width {
-  width: 100%;
-}
-
-/* CARDS & GRIDS */
+/* SERVICES & CARDS -------------------------------------------------------- */
 .services-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 28px;
 }
 
 .card {
-  background: #020617;
+  background: #020308;
   border-radius: 16px;
   padding: 20px 18px;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .card h3 {
   font-size: 1.1rem;
   margin-bottom: 8px;
-  color: #f9fafb;
 }
 
 .card p {
   font-size: 0.95rem;
-  color: #cbd5f5;
+  color: #d1d5db;
 }
 
-.card.mini {
-  padding: 16px 14px;
-}
-
-/* LANDLORDS */
-.landlords-section {
-  background: radial-gradient(circle at top left, #111827, #020617);
-}
-
+/* LANDLORDS --------------------------------------------------------------- */
 .landlords {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: 28px;
   align-items: flex-start;
+}
+
+.landlords-copy {
+  max-width: 640px;
 }
 
 .landlords-list {
   list-style: disc;
   margin-left: 18px;
-  margin-bottom: 12px;
   color: #e5e7eb;
+  font-size: 0.95rem;
 }
 
-.landlords-note {
-  font-size: 0.9rem;
-  color: #e5e7eb;
-}
-
-.landlords-card {
-  background: #020617;
-}
-
-/* MINI LISTS */
-.mini-list {
+.landlords-card ul {
   list-style: disc;
   margin-left: 18px;
-  font-size: 0.9rem;
   color: #e5e7eb;
-  margin: 8px 0 14px;
+  font-size: 0.95rem;
 }
 
-/* WEATHER STRIP */
+/* WEATHER STRIP ----------------------------------------------------------- */
 .weather-strip {
-  background: #020617;
-  border-top: 1px solid #111827;
-  border-bottom: 1px solid #111827;
+  background: #020308;
+  border-top: 1px solid rgba(148, 163, 184, 0.5);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.5);
   padding: 18px 0;
 }
 
 .weather-inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.weather-main {
-  max-width: 420px;
-}
-
-.weather-label {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #a7f3d0;
-}
-
-.weather-text {
-  font-size: 0.9rem;
+.weather-title {
+  font-size: 0.95rem;
   color: #e5e7eb;
 }
 
-.weather-levels {
+.weather-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.weather-level {
-  min-width: 180px;
-  padding: 6px 10px;
+.weather-pill {
+  font-size: 0.78rem;
   border-radius: 999px;
-  display: flex;
+  padding: 4px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.78rem;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  background: #020617;
+  background: #020308;
 }
 
-.weather-level-name {
-  font-weight: 700;
+.weather-pill span {
+  font-weight: 600;
 }
 
-.weather-level-desc {
-  opacity: 0.9;
+/* colors for each pill */
+.weather-pill--green span {
+  color: #22c55e;
 }
 
-/* traffic light colours */
-.level-green {
-  border-color: #22c55e;
+.weather-pill--yellow span {
+  color: #eab308;
 }
 
-.level-yellow {
-  border-color: #eab308;
+.weather-pill--orange span {
+  color: #f97316;
 }
 
-.level-orange {
-  border-color: #f97316;
+.weather-pill--red span {
+  color: #ef4444;
 }
 
-.level-red {
-  border-color: #ef4444;
-}
-
-/* REVIEWS */
+/* REVIEWS ----------------------------------------------------------------- */
 .reviews-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   margin-top: 24px;
 }
 
 .review-card {
-  position: relative;
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.review-name {
-  font-weight: 600;
+  background: #020308;
+  border-radius: 16px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.6);
 }
 
 .review-stars {
   color: #facc15;
+  font-size: 1rem;
+  margin-bottom: 6px;
 }
 
-.review-text {
-  font-size: 0.95rem;
+.review-card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.review-card p {
+  font-size: 0.92rem;
   color: #e5e7eb;
-  margin-bottom: 10px;
 }
 
-.review-badge {
-  display: inline-flex;
-  padding: 3px 9px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  background: rgba(249, 115, 22, 0.15);
-  color: #fed7aa;
-}
-
-.reviews-footnote {
-  margin-top: 16px;
-  font-size: 0.85rem;
+.review-meta {
+  margin-top: 8px;
+  font-size: 0.8rem;
   color: #9ca3af;
 }
 
-/* FINAL CTA */
-.final-cta {
-  background: radial-gradient(circle at top, #f97316 0, #020617 40%);
-  color: #111827;
+.reviews-note {
+  margin-top: 18px;
+  font-size: 0.86rem;
+  color: #9ca3af;
 }
 
-.final-cta-inner {
+/* FOOTER ------------------------------------------------------------------ */
+.footer {
+  background: #020308;
+  border-top: 1px solid rgba(148, 163, 184, 0.6);
+  margin-top: 40px;
+}
+
+.footer-inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
   justify-content: space-between;
+  gap: 24px;
+  padding: 28px 16px;
+  align-items: center;
 }
 
-.final-cta h2 {
-  color: #111827;
+.footer-inner h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
 }
 
-.final-cta p {
-  color: #111827;
+.footer-inner p {
+  font-size: 0.94rem;
+  color: #d1d5db;
 }
 
-.final-cta-actions {
+.footer-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-/* FOOTER */
-.footer {
-  background: #020617;
-  border-top: 1px solid #111827;
-  padding: 18px 0;
+.footer-bottom {
+  border-top: 1px solid rgba(55, 65, 81, 0.9);
+  background: #020308;
 }
 
-.footer-inner {
+.footer-bottom-inner {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-}
-
-.footer-brand {
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.footer-text {
+  padding: 12px 16px 16px;
   font-size: 0.8rem;
   color: #9ca3af;
 }
 
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 0.85rem;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-/* RESPONSIVE */
+/* RESPONSIVE -------------------------------------------------------------- */
 @media (max-width: 900px) {
   .hero-inner {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .hero-card {
-    margin-top: 24px;
+    margin-top: 18px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    gap: 4px;
   }
 
   .landlords {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .weather-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .final-cta-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media (max-width: 640px) {
   .hero {
-    padding: 64px 0 48px;
+    padding-top: 70px;
   }
 
   .hero h1 {
-    font-size: 2.1rem;
+    font-size: 2.2rem;
   }
 
-  .section {
-    padding: 48px 0;
+  .footer-inner {
+    padding: 22px 16px;
   }
 }
