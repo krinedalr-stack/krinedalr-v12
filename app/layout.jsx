@@ -2,9 +2,9 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Krinedal-R | Premium Roofing & Property Care',
+  title: 'Krinedal-R | Premium Property Care Ireland',
   description:
-    '24/7 storm damage call-out, full roof renewals, luxury tiling and landlord-ready maintenance across Ireland. Snow, rain or storm will not stop us.',
+    '24/7 storm damage call-out, full roof renewals, luxury tiling and landlord-ready property care across Ireland. Snow, rain or storm will not stop us.',
 };
 
 export default function RootLayout({ children }) {
