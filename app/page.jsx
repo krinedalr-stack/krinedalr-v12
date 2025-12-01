@@ -7,16 +7,18 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
+        <div className="hero-overlay" />
         <div className="container hero-inner">
-          <div className="hero-left">
-            <p className="hero-tag">PREMIUM PROPERTY CARE · IRELAND</p>
-            <h1 className="hero-title">
-              KRINEDAL<span className="hero-title-r">-R</span>
+          <div>
+            <div className="hero-tag">PREMIUM PROPERTY CARE · IRELAND</div>
+            <h1>
+              KRINEDAL<span className="hero-r">-R</span>
             </h1>
             <p className="hero-lead">
-              24/7 storm damage call-out, full roof renewals and{' '}
+              24/7 storm damage call-out,{' '}
+              <strong>full roof renewals</strong> and{' '}
               <strong>luxury tiling</strong> for homes and rental properties.
-              Snow, rain or storm won’t stop us.
+              Snow, rain or storm won&apos;t stop us.
             </p>
 
             <CallButtons />
@@ -28,215 +30,175 @@ export default function HomePage() {
               <li>Landlord-ready refresh between tenants</li>
             </ul>
 
-            <p className="hero-note">
+            <p className="hero-footnote">
               *Response time depends on location &amp; weather conditions.
             </p>
           </div>
 
           <aside className="hero-card">
             <h2>24/7 Storm Call-Out</h2>
-            <p>
+            <p className="hero-card-text">
               Red emergency line when your roof is leaking, tiles are down or
               trees have damaged the property.
             </p>
-            <ul>
+            <ul className="hero-card-list">
               <li>Storm make-safe &amp; temporary cover</li>
               <li>Priority for elderly &amp; vulnerable clients</li>
-              <li>Photos &amp; report for insurance claims</li>
-              <li>Snow, rain or storm won’t stop us</li>
+              <li>Photos &amp; report for insurers</li>
             </ul>
+            <p className="hero-card-note">Snow, rain or storm won&apos;t stop us.</p>
           </aside>
         </div>
       </section>
 
-      {/* LUXURY TILING */}
+      {/* SERVICES */}
       <section className="section section-alt">
         <div className="container">
-          <h2 className="section-title">Luxury Bathroom &amp; Kitchen Tiling</h2>
+          <h2>What Krinedal-R Can Do For Your Property</h2>
           <p className="section-intro">
-            High-end finishes for people who want their home or rental to feel
-            premium – from large-format marble-effect tiles to detailed feature
-            walls and perfect silicone lines.
+            From emergency make-safe to high-end finishes, we look after the
+            whole property so you can relax.
           </p>
 
           <div className="grid services-grid">
-            <article className="card">
-              <h3>Full Bathroom Re-Tile</h3>
+            <div className="card">
+              <h3>Storm &amp; Leak Response</h3>
               <p>
-                Strip-out, prep, waterproofing and premium tiling with aligned
-                grout lines and laser-straight cuts.
+                Safely make-safe after damage, trace the leak and plan permanent
+                repairs when the weather settles.
               </p>
-              <p className="card-highlight">
-                “Did a full bathroom in luxury tiles last week – just
-                phenomenal, clean, fast and professional.”
-              </p>
-            </article>
+            </div>
 
-            <article className="card">
-              <h3>Showpiece Kitchen Splashbacks</h3>
+            <div className="card">
+              <h3>Full Roof Renewals</h3>
               <p>
-                Herringbone, stacked or brick-bond layouts to match your
-                worktops and cabinets.
+                Complete roof change with modern materials, insulation upgrades
+                and clean site hand-over.
               </p>
-            </article>
+            </div>
 
-            <article className="card">
-              <h3>Hotel-Level Details</h3>
+            <div className="card">
+              <h3>Luxury Bathroom &amp; Kitchen Tiling</h3>
               <p>
-                Mitred corners, neat edges and tidy finishing so everything
-                looks straight out of a showroom.
+                Large-format porcelain, marble-look and feature walls for
+                bathrooms and kitchens that feel like a hotel.
               </p>
-            </article>
+            </div>
+
+            <div className="card">
+              <h3>Sale-Ready / New Tenant Makeover</h3>
+              <p>
+                Freshen interiors &amp; exteriors, paintwork and details so the
+                property feels bright, safe and welcoming.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* LANDLORDS */}
-      <section className="section">
+      {/* LANDLORD SECTION */}
+      <section className="section landlords-section">
         <div className="container landlords">
           <div>
-            <h2 className="section-title">Landlord &amp; Letting-Agent Ready</h2>
+            <h2>Landlord-Friendly Property Care</h2>
             <p className="section-intro">
-              Quick, reliable turn-around between tenants. We look after the
-              dirty work so you can hand over a fresh, rent-ready property.
+              Keep your portfolio storm-ready and tenant-ready with one
+              contact, clear communication and work you&apos;re proud to show.
             </p>
 
-            <div className="grid mini-grid">
-              <div className="card mini">
-                <h3>Refresh Between Tenants</h3>
-                <p>Painting, patch repairs, sealants and deep-clean level fixes.</p>
-              </div>
-              <div className="card mini">
-                <h3>Storm &amp; Leak Response</h3>
-                <p>
-                  Safely make-safe after damage, then plan permanent repairs when
-                  the weather settles.
-                </p>
-              </div>
-              <div className="card mini">
-                <h3>Sale-Ready Makeover</h3>
-                <p>
-                  Freshen exteriors, small repairs and premium tiling touches to
-                  boost buyer confidence.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <aside className="card landlord-panel">
-            <h3>Landlord-Friendly Pricing</h3>
-            <p>
-              Fair, transparent rates with options for regular clients and
-              portfolio owners.
-            </p>
-            <ul>
+            <ul className="landlords-list">
+              <li>Fair, transparent rates for regular clients</li>
               <li>Invoices suitable for tax &amp; accounts</li>
               <li>Photos before &amp; after each job</li>
               <li>Respect for tenants &amp; neighbours</li>
             </ul>
-            <p className="card-note">
-              Ask in person or by email for landlord pricing – we’ll build a
-              plan around your properties.
+
+            <p className="landlords-note">
+              Ask in person or by email for landlord pricing – we&apos;ll build
+              a plan around your properties.
             </p>
+          </div>
+
+          <aside className="card landlords-card">
+            <h3>Landlord-Friendly Pricing</h3>
+            <p>
+              Packages for portfolio owners, letting agents and single-property
+              landlords.
+            </p>
+            <ul>
+              <li>Pre-storm inspections &amp; gutter care</li>
+              <li>Priority on the 24/7 storm line</li>
+              <li>Freshen-up painting between tenants</li>
+              <li>Smart scheduling to minimise vacancy</li>
+            </ul>
           </aside>
         </div>
       </section>
 
-      {/* WEATHER & STORM READINESS */}
+      {/* WEATHER STRIP */}
       <section className="section section-alt">
         <div className="container">
-          <h2 className="section-title">Ireland Weather &amp; Storm Readiness</h2>
-          <p className="section-intro">
-            We monitor Met Éireann warnings daily. Snow, rain or storm won’t stop
-            us – but it will change how we work on your roof so we keep everyone
-            safe.
-          </p>
-
           <Weather />
-
-          <div className="weather-badges">
-            <div className="weather-chip green">
-              <strong>Green</strong>
-              <span> Normal conditions – routine work &amp; inspections.</span>
-            </div>
-            <div className="weather-chip yellow">
-              <strong>Yellow</strong>
-              <span> Wind or rain – extra care on roofs.</span>
-            </div>
-            <div className="weather-chip orange">
-              <strong>Orange</strong>
-              <span> Strong winds – make-safe work only.</span>
-            </div>
-            <div className="weather-chip red">
-              <strong>Red</strong>
-              <span> Dangerous storm – emergency call-outs only.</span>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* REVIEWS */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title">What People Say</h2>
+          <h2>What Our Customers Say</h2>
           <p className="section-intro">
-            Real feedback from homeowners and landlords we look after. Add your
-            Google review once we’ve helped you out.
+            A few examples from recent work – bathroom tiling, roof repairs and
+            emergency storm call-outs.
           </p>
-
           <div className="grid reviews-grid">
-            <article className="card review-card">
-              <div className="review-stars">★★★★★</div>
-              <p>
-                “We had a roof leak in heavy rain – Krinedal-R arrived near
-                midnight to make the roof safe and stop the water coming in.
-                Calm, professional and worth every cent.”
+            <div className="card mini review-card">
+              <p className="review-text">
+                “Krinedal-R did our full luxury bathroom tiling last week – just
+                phenomenal. Clean, fast and professional.”
               </p>
-              <p className="review-name">— Emergency Storm Call-Out Client</p>
-            </article>
-
-            <article className="card review-card">
-              <div className="review-stars">★★★★★</div>
-              <p>
-                “They did a full luxury bathroom tiling job for us last week –
-                just phenomenal. Clean, fast and extremely professional. Looks
-                like a boutique hotel now.”
+              <p className="review-name">– Homeowner in Meath</p>
+            </div>
+            <div className="card mini review-card">
+              <p className="review-text">
+                “We had a roof leak in heavy rain – they arrived close to
+                midnight to make it safe and kept us updated with photos.”
               </p>
-              <p className="review-name">— Homeowner in Meath</p>
-            </article>
-
-            <article className="card review-card">
-              <div className="review-stars">★★★★★</div>
-              <p>
-                “Great to have one contact for roof, tiling and landlord
-                maintenance. Clear communication, photos of every job and happy
-                tenants.”
+              <p className="review-name">– Family in Dublin</p>
+            </div>
+            <div className="card mini review-card">
+              <p className="review-text">
+                “Reliable for landlord refresh jobs between tenants – great
+                communication and the houses feel like home again.”
               </p>
-              <p className="review-name">— Landlord Client</p>
-            </article>
+              <p className="review-name">– Landlord in Kildare</p>
+            </div>
           </div>
 
-          <p className="reviews-footer">
-            Google Reviews widget coming soon – for now, ask us for references
-            and we’ll happily share them.
-          </p>
+          <div className="reviews-footer">
+            ★★★★★ Strong Google-style reviews look great here – ready for when
+            you start collecting them.
+          </div>
         </div>
       </section>
 
       {/* CONTACT STRIP */}
-      <footer className="section footer">
-        <div className="container footer-inner">
+      <section className="contact-strip">
+        <div className="container contact-strip-inner">
           <div>
-            <h2 className="footer-title">Need help or a same-day quote?</h2>
+            <h2>Need help or a same-day quote?</h2>
             <p>
-              Call any time for emergencies, or send photos by email and we’ll
+              Call the 24/7 storm line or send photos by email and we&apos;ll
               come back with options.
             </p>
           </div>
           <CallButtons />
         </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Krinedal-R. Built on trust, not shortcuts.</span>
+      </section>
+
+      <footer className="footer">
+        <div className="container footer-inner">
+          <span>© {new Date().getFullYear()} Krinedal-R. Built on trust.</span>
+          <span>Snow, rain or storm won&apos;t stop us.</span>
         </div>
       </footer>
     </main>
