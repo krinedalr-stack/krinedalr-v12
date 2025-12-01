@@ -1,168 +1,244 @@
 // app/page.jsx
-import Weather from "../components/Weather";
-import CallButtons from "../components/CallButtons";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main>
       {/* HERO */}
-      <section className="hero" style={{ backgroundImage: "url('/hero.jpg')" }}>
-        <div className="overlay" />
+      <header className="hero">
         <div className="container hero-inner">
-          <span className="badge">⚡ 24/7 after-storm emergency repairs</span>
-          <h1>
-            Modern roofing & construction, <br /> done right.
-          </h1>
-          <p>
-            Reliable installs, rapid repairs and premium finishes across Ireland.
-            Domestic & commercial projects with a quality guarantee.
-          </p>
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 10 }}>
-            <a href="#contact" className="btn btn-gold">Get a quote</a>
-            <a href="tel:0831762475" className="btn btn-outline">Call 083 176 2475</a>
-          </div>
-          <div style={{ marginTop: 18 }} className="small">
-            <span>Based in Meath • Fully insured • SEAI-friendly installs</span>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES + WEATHER SIDEBAR */}
-      <section className="section">
-        <div className="container">
-          <div className="split" style={{ alignItems: "start" }}>
-            <div>
-              <h2 style={{ margin: "0 0 8px 0" }}>What we do</h2>
-              <div className="k-gold-line" />
-              <p className="small">
-                From complete new roofs to emergency call-outs, we deliver durable results
-                with a clean, luxury finish. All work is photographed and guaranteed.
-              </p>
-
-              <div className="grid grid-3" style={{ marginTop: 18 }}>
-                <div className="card">
-                  <h3>New Roofs</h3>
-                  <p>Slates, tiles, metal & flat systems. Warm-roof upgrades and insulation.</p>
-                </div>
-                <div className="card">
-                  <h3>Repairs & Maintenance</h3>
-                  <p>Leaks, flashing, gutters, chimney work — fast, tidy, guaranteed.</p>
-                </div>
-                <div className="card">
-                  <h3>Exterior Works</h3>
-                  <p>Facias, soffits, cladding, carpentry, sheds, decking & more.</p>
-                </div>
-              </div>
-
-              <div className="grid grid-3" style={{ marginTop: 18 }}>
-                <div className="card">
-                  <h3>Tiling & Interiors</h3>
-                  <p>Luxury tiling, drywall, painting and clean interior refurbishments.</p>
-                </div>
-                <div className="card">
-                  <h3>Power Washing</h3>
-                  <p>Roofs, drives & exteriors — commercial grade equipment.</p>
-                </div>
-                <div className="card">
-                  <h3>Storm Response</h3>
-                  <p>On-call 24/7. We make safe, stop leaks and return for full repair.</p>
-                </div>
-              </div>
-            </div>
-
-            <aside>
-              <div className="card" style={{ padding: 20 }}>
-                <h3 style={{ marginTop: 0 }}>Local weather check</h3>
-                <p className="small">Plan around wind & rain — live forecast for Meath.</p>
-                <Weather />
-                <div className="k-gold-line" />
-                <CallButtons />
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE US */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title">
-            Why choose <span className="gold">Krinedal-R</span>?
-          </h2>
-
-          <div className="grid grid-3">
-            <div className="card luxe">
-              <h3 className="card-title">Premium Craftsmanship</h3>
-              <p>Flawless finishing, tight tolerances, and clean sites—every job signed off with pride.</p>
-            </div>
-            <div className="card luxe">
-              <h3 className="card-title">Gold-Standard Warranty</h3>
-              <p>Clear, written guarantees on materials and workmanship for complete peace of mind.</p>
-            </div>
-            <div className="card luxe">
-              <h3 className="card-title">On-Time, On-Budget</h3>
-              <p>Detailed quotes, daily updates, and a schedule we actually keep.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROMO STRIP */}
-      <section className="section" style={{ padding: "40px 0" }}>
-        <div className="container">
-          <div className="card" style={{ display: "grid", gap: 16, alignItems: "center", gridTemplateColumns: "1fr auto" }}>
-            <div>
-              <h3 style={{ margin: "4px 0" }}>24/7 on-call service</h3>
-              <p className="small" style={{ margin: 0 }}>
-                We dispatch within 15 minutes during red warnings, heavy rain or snow.
-              </p>
-            </div>
-            <a href="tel:0831762475" className="btn btn-gold">Emergency Call</a>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section className="section">
-        <div className="container split">
           <div>
-            <h2 style={{ margin: "0 0 8px 0" }}>About Krinedal-R</h2>
-            <div className="k-gold-line" />
-            <p className="small">
-              Premium craftsmanship with clear communication, photos of progress and
-              a clean handover. We treat every site like it’s our own home.
+            <p className="hero-tag">24/7 STORM EMERGENCY • MEATH • LOUTH • DUBLIN</p>
+            <h1>
+              Krinedal-R Property Maintenance
+              <span className="hero-accent"> & Emergency Repair</span>
+            </h1>
+            <p className="hero-lead">
+              Storm damage, leaks, tiles, roofs, paint and full landlord fresh-ups – handled fast,
+              safely and professionally. One call and we take care of the rest.
+            </p>
+
+            <div className="hero-actions">
+              <a href="tel:0831762475" className="btn btn-primary">
+                Call 24/7: 083&nbsp;176&nbsp;2475
+              </a>
+              <a href="#contact" className="btn btn-outline">
+                Request a quote
+              </a>
+            </div>
+
+            <ul className="hero-bullets">
+              <li>15+ years permanent experience as Operations Manager</li>
+              <li>Landlord-friendly pricing & reliable communication</li>
+              <li>Fully focused on quality finishes & fast response</li>
+            </ul>
+          </div>
+
+          <div className="hero-card">
+            <h2>Emergency Storm Call-Out</h2>
+            <p className="hero-card-text">
+              Roof blown off? Fence down? Dangerous loose tiles?
+              We secure the property first, then plan the full repair.
+            </p>
+            <ul className="hero-card-list">
+              <li>Immediate make-safe</li>
+              <li>Temporary coverings & protection</li>
+              <li>Follow-up repair plan</li>
+            </ul>
+            <p className="hero-card-note">Available 24 hours a day – 7 days a week.</p>
+          </div>
+        </div>
+      </header>
+
+      {/* SERVICES */}
+      <section className="section" id="services">
+        <div className="container">
+          <h2>Services We Provide</h2>
+          <p className="section-intro">
+            All works are completed with a clean, professional finish – ideal for landlords,
+            homeowners and agents who want a job done once and done right.
+          </p>
+
+          <div className="grid services-grid">
+            <article className="card">
+              <h3>Storm Damage Repair</h3>
+              <p>
+                Emergency make-safe, temporary protection and follow-up repairs for roofs,
+                ceilings, gutters, broken glazing and fences after heavy wind and rain.
+              </p>
+            </article>
+
+            <article className="card">
+              <h3>Roofing & Gutters</h3>
+              <p>
+                Leak tracing, tile and slate replacement, flashing repair, gutter cleaning,
+                downpipe repair and preventative maintenance to keep your property watertight.
+              </p>
+            </article>
+
+            <article className="card">
+              <h3>Tiling & Wet-rooms</h3>
+              <p>
+                Floor and wall tiling, bathrooms, showers, splashbacks and full refurbishments.
+                Straight lay, brick bond, herringbone and premium stone / wood-effect finishes.
+              </p>
+            </article>
+
+            <article className="card">
+              <h3>Interior & Exterior Painting</h3>
+              <p>
+                Freshen up single rooms, full houses and apartment blocks. Careful preparation,
+                sharp lines, durable exterior coatings and landlord-ready colour schemes.
+              </p>
+            </article>
+
+            <article className="card">
+              <h3>Power Washing & Exterior Care</h3>
+              <p>
+                Driveways, patios, decking, walls and roofs – moss removal, algae treatment and
+                sealing where required to bring tired surfaces back to life.
+              </p>
+            </article>
+
+            <article className="card">
+              <h3>Carpentry & General Repairs</h3>
+              <p>
+                Doors, skirtings, laminate floors, kitchen tweaks, minor carpentry and general
+                property fixes that keep rentals and family homes in top condition.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* LANDLORDS */}
+      <section className="section section-alt" id="landlords">
+        <div className="container landlords">
+          <div>
+            <h2>Landlord & Agent Solutions</h2>
+            <p className="section-intro">
+              Move-out, move-in, mid-tenancy or preparing for sale – Krinedal-R is your single
+              contact for getting the property ready quickly and properly.
+            </p>
+
+            <ul className="checklist">
+              <li>End-of-tenancy tidy-up, painting and minor repairs</li>
+              <li>Bathroom & kitchen tiling upgrades to lift rental value</li>
+              <li>Garden & exterior fresh-up for first-impression photos</li>
+              <li>Emergency support when tenants report storm damage</li>
+            </ul>
+
+            <p className="note">
+              <strong>Landlord pricing:</strong> we keep rates competitive and clear.  
+              For a tailored price list, please contact us directly – every property and portfolio is different.
             </p>
           </div>
-          <div className="card">
-            <ul style={{ margin: 0, padding: "0 0 0 16px", color: "var(--muted)" }}>
-              <li>Fully insured • SafePass • VAT receipts available</li>
-              <li>Warranty on all new installs</li>
-              <li>Free roof health check with every repair</li>
+
+          <aside className="landlords-card">
+            <h3>Why landlords choose Krinedal-R</h3>
+            <ul>
+              <li>15 years as a full-time Operations Manager</li>
+              <li>Practical, problem-solving approach</li>
+              <li>Professional communication with tenants and agents</li>
+              <li>Reliable before/after photo reports</li>
             </ul>
+          </aside>
+        </div>
+      </section>
+
+      {/* TILE STYLE PROMO */}
+      <section className="section" id="tiling">
+        <div className="container tile-guide">
+          <div>
+            <h2>Premium Tiling & Finish Options</h2>
+            <p className="section-intro">
+              From budget-friendly ceramic to luxury marble-look porcelain, we help you choose the
+              right tile and pattern for rental durability or premium resale value.
+            </p>
+
+            <div className="grid tile-grid">
+              <div className="card mini">
+                <h3>Tile Styles</h3>
+                <ul>
+                  <li>Marble & stone-look</li>
+                  <li>Porcelain & ceramic</li>
+                  <li>Subway & metro tiles</li>
+                  <li>Wood-effect planks</li>
+                </ul>
+              </div>
+              <div className="card mini">
+                <h3>Finishes</h3>
+                <ul>
+                  <li>Matte & slip-resistant</li>
+                  <li>Gloss & polished</li>
+                  <li>Large-format slabs</li>
+                </ul>
+              </div>
+              <div className="card mini">
+                <h3>Patterns</h3>
+                <ul>
+                  <li>Straight lay / stacked</li>
+                  <li>Brick bond</li>
+                  <li>Herringbone</li>
+                  <li>Feature walls</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="note">
+              Ask for our <strong>Krinedal-R Tile Selection Guide</strong> when planning your bathroom
+              or kitchen – ideal to show tenants or buyers clear choices.
+            </p>
           </div>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="contact-strip">
-        <div className="container contact-inner">
+      <section className="section section-contact" id="contact">
+        <div className="container contact">
           <div>
-            <h3 className="contact-title">Need help or a same-day quote?</h3>
-            <p>
-              Email <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a> or ring us now.
+            <h2>Need help or a same-day quote?</h2>
+            <p className="section-intro">
+              Call, WhatsApp or email and we’ll respond as quickly as possible.  
+              Photos of the problem always help us give a faster estimate.
+            </p>
+
+            <ul className="contact-list">
+              <li>
+                <strong>24/7 Emergency Phone:</strong>{' '}
+                <a href="tel:0831762475">083&nbsp;176&nbsp;2475</a>
+              </li>
+              <li>
+                <strong>Email:</strong>{' '}
+                <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
+              </li>
+              <li>
+                <strong>Website:</strong>{' '}
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                  www.krinedalr.ie
+                </a>
+              </li>
+            </ul>
+
+            <p className="note">
+              Based in Co. Meath – working regularly across Meath, Louth and Dublin.
             </p>
           </div>
-          <div className="cta-buttons">
-            <a className="btn btn-gold" href="tel:0831762475">Call now</a>
-            <a className="btn btn-outline" href="mailto:krinedalr@gmail.com">Email us</a>
+
+          <div className="contact-box">
+            <h3>Fast Call-Back Form</h3>
+            <p>Send us your name, location and a brief description of the job.</p>
+            <p className="contact-hint">
+              <em>(Simple HTML / email form can be added here later, or linked to your preferred system.)</em>
+            </p>
           </div>
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="footer">
-        <div className="container" style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
-          <span>© {new Date().getFullYear()} Krinedal-R • Ireland • Meath</span>
-          <span className="small">Design with gold accents • Built on Next.js</span>
+        <div className="container footer-inner">
+          <span>© {new Date().getFullYear()} Krinedal-R Property Maintenance & Emergency Repair.</span>
+          <span>Built on Next.js • Deployed on Vercel.</span>
         </div>
       </footer>
     </main>
