@@ -68,12 +68,8 @@ a:hover {
 /* HERO */
 
 .hero {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.92),
-      rgba(255, 255, 255, 0.96)
-    ),
-    url("/hero.jpg");
+  position: relative;
+  background-image: url("/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -82,7 +78,8 @@ a:hover {
 }
 
 .hero-overlay {
-  backdrop-filter: blur(1px);
+  /* No blur / veil – keep photo crisp */
+  background: transparent;
 }
 
 .hero-inner {
@@ -105,14 +102,15 @@ a:hover {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  font-weight: 700;
-  color: #022c22; /* darker green for contrast */
+  font-weight: 600;
+  color: #065f46; /* deep green for good contrast */
   margin-bottom: 10px;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.85); /* makes text readable on photo */
 }
 
 .hero-flag {
   margin-right: 6px;
+  font-size: 1rem;
+  vertical-align: middle;
 }
 
 .hero-shamrock {
@@ -159,14 +157,15 @@ a:hover {
 
 .hero-note {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #b91c1c; /* red for visibility */
+  font-weight: 600;
   margin-top: 8px;
 }
 
 /* HERO SIDE CARD */
 
 .hero-side-card {
-  background: rgba(15, 23, 42, 0.88);
+  background: rgba(15, 23, 42, 0.94);
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
@@ -330,7 +329,7 @@ a:hover {
   color: #e5e7eb;
 }
 
-/* WEATHER PILLS */
+/* WEATHER PILLS – bright circles */
 
 .weather-pills {
   display: flex;
@@ -474,6 +473,30 @@ textarea.field-input {
 
 .footer-whatsapp:hover {
   background: #38bdf8;
+}
+
+/* FLOATING WHATSAPP BUBBLE */
+
+.floating-whatsapp {
+  position: fixed;
+  right: 16px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.6);
+  z-index: 50;
+}
+
+.floating-whatsapp:hover {
+  background: #16a34a;
+  text-decoration: none;
 }
 
 /* SMALL SCREEN TWEAKS */
