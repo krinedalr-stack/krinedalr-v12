@@ -1,15 +1,32 @@
 // app/page.jsx
+'use client';
+
+import { useState } from 'react';
+import CallButtons from '../components/CallButtons';
+import Weather from '../components/Weather';
 
 export default function HomePage() {
+  // Simple roofing calculator
+  const [roofArea, setRoofArea] = useState('');
+  const [roofRate, setRoofRate] = useState(45); // €/m² example
+  const roofEstimate =
+    roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : '';
+
+  // Simple tiling calculator
+  const [tileArea, setTileArea] = useState('');
+  const [tileRate, setTileRate] = useState(65); // €/m² luxury rate
+  const tileEstimate =
+    tileArea && tileRate ? (Number(tileArea) * Number(tileRate)).toFixed(0) : '';
+
   return (
     <main>
-      {/* HERO */}
-      <section className="hero" id="top">
+      {/* HERO – OLD TOP, WITH BACKGROUND IMAGE */}
+      <section className="hero">
         <div className="hero-overlay">
           <div className="container hero-inner">
-            <div className="hero-content">
+            <div className="hero-text">
               <p className="hero-tagline">
-                PREMIUM PROPERTY CARE ACROSS IRELAND ☘️
+                PREMIUM PROPERTY CARE ACROSS IRELAND <span className="hero-clover">☘️</span>
               </p>
 
               <h1 className="hero-title">
@@ -17,195 +34,246 @@ export default function HomePage() {
               </h1>
 
               <p className="hero-lead">
-                Making homes safe, dry & beautifully finished.
-              </p>
-
-              <p className="hero-sub">
-                Luxury bathroom tiling, full roof renewals, interior & exterior
-                painting and 24/7 storm damage response. Snow, rain or storm –
-                we don&apos;t stop until your home is protected.
+                24/7 storm damage call-out, full roof renewals and{' '}
+                <strong>luxury tiling</strong> for homes and rental properties.
+                Snow, rain or storm won’t stop us.
               </p>
 
               <div className="hero-actions">
                 <a href="tel:0831762475" className="btn btn-primary">
-                  Call 083 176 2475
+                  Call 24/7 Storm Line
                 </a>
                 <a
-                  href="https://wa.me/353831762475"
-                  className="btn btn-outline"
-                  target="_blank"
-                  rel="noreferrer"
+                  href="mailto:krinedalr@gmail.com?subject=Quote%20request%20from%20website"
+                  className="btn btn-secondary"
                 >
-                  WhatsApp us now
-                </a>
-                <a href="#estimate" className="btn btn-ghost">
-                  Request free estimate
+                  Request a quote by email
                 </a>
               </div>
 
               <ul className="hero-bullets">
                 <li>Emergency storm make-safe within hours*</li>
-                <li>Luxury bathroom & kitchen tiling</li>
-                <li>Full roof change & leak tracing</li>
+                <li>Full roof change &amp; leak tracing</li>
+                <li>Luxury bathroom &amp; kitchen tiling</li>
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-footnote">
-                *Response time depends on location & weather conditions.
+              <p className="hero-note">
+                *Response time depends on location &amp; weather conditions.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* REVIEW CARD */}
+      {/* 24/7 STORM CALLOUT CARD */}
       <section className="section section-alt">
         <div className="container">
-          <div className="review-card">
-            <p className="review-label">RECENT GOOGLE-STYLE FEEDBACK</p>
-            <p className="review-stars">★★★★★</p>
-            <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn&apos;t
-              be happier.”
+          <div className="card big">
+            <h2>24/7 Storm Call-Out</h2>
+            <p>
+              Red emergency line when your roof is leaking, tiles are down or trees have damaged
+              the property. We secure the roof, make it safe and plan permanent repairs when the
+              weather settles.
             </p>
-            <p className="review-author">— Aoife, Navan</p>
+            <ul>
+              <li>Storm make-safe &amp; temporary cover</li>
+              <li>Priority for elderly &amp; vulnerable clients</li>
+              <li>Photos &amp; report for insurers on request</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* WHAT KRINEDAL-R CAN DO */}
-      <section className="section section-light" id="services">
+      {/* MAIN SERVICES */}
+      <section className="section">
         <div className="container">
           <h2>What Krinedal-R Can Do For Your Property</h2>
           <p className="section-intro">
-            From emergency roof make-safe, to full roof renewals and hotel-
-            standard luxury tiling, we keep homes and rentals safe, watertight
-            and ready to move into.
+            From emergency roof make-safe, to full roof renewals and hotel-standard luxury tiling –
+            we keep homes and rentals safe, watertight and ready to move into.
           </p>
 
           <div className="grid services-grid">
             <div className="card">
               <h3>Storm &amp; Leak Response</h3>
               <p>
-                Safely make-safe after damage, then plan permanent repairs when
-                the weather settles.
+                Safely make-safe after storm damage, then plan permanent repairs when the weather
+                allows.
               </p>
-              <ul>
-                <li>24/7 storm call-out</li>
-                <li>Temporary make-safe &amp; leak stop</li>
-                <li>Photos &amp; report for insurers</li>
-              </ul>
             </div>
 
             <div className="card">
-              <h3>Luxury Bathroom &amp; Tiling</h3>
+              <h3>Luxury Bathroom &amp; Kitchen Tiling</h3>
               <p>
-                Premium tiling for bathrooms, kitchens and feature areas –
-                aligned, level and built to last.
+                High-end tiling, perfect lines and premium details. Ideal for forever homes and
+                high-value rentals.
               </p>
-              <ul>
-                <li>Luxury bathroom tiling</li>
-                <li>Floor &amp; wall tiling</li>
-                <li>Feature patterns &amp; herringbone</li>
-              </ul>
             </div>
 
             <div className="card">
-              <h3>Roofing &amp; Exterior Care</h3>
+              <h3>Full Roof Renewals</h3>
               <p>
-                Keep the roof, gutters and exterior in top condition with
-                repairs and cleaning.
+                Complete roof replacements, leak tracing and upgrades for older properties and
+                extensions.
               </p>
-              <ul>
-                <li>Roof repairs &amp; renewals</li>
-                <li>Gutter repair &amp; cleaning</li>
-                <li>Power washing &amp; exterior paint</li>
-              </ul>
             </div>
 
             <div className="card">
-              <h3>Move-Out &amp; Sale-Ready Fresh-Ups</h3>
+              <h3>Painting &amp; Fresh-Up</h3>
               <p>
-                Perfect for landlords and sellers – fresh, clean and ready for
-                the next chapter.
+                Interior &amp; exterior painting, silicone renewal and “between-tenant” refreshes so
+                your property looks new again.
               </p>
-              <ul>
-                <li>Patch repairs &amp; repaint</li>
-                <li>Deep clean &amp; silicone refresh</li>
-                <li>Light upgrade works</li>
-              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WEATHER READINESS */}
-      <section className="section section-soft" id="weather">
+      {/* SIMPLE PRICE GUIDES / CALCULATORS */}
+      <section className="section section-alt">
         <div className="container">
-          <h2>Ireland Weather &amp; Storm Readiness</h2>
+          <h2>Roofing &amp; Tiling Price Guides</h2>
           <p className="section-intro">
-            We monitor Met Éireann warnings daily. Snow, rain or storm won&apos;t
-            stop us – but it will change how we work on your roof.
+            Every job is different, but these guides help you feel the ballpark before we visit.
+            Use the calculators for a rough idea – then request a proper written estimate.
           </p>
 
-          <div className="weather-grid">
-            <div className="weather-pill weather-pill-green">
-              <span className="weather-label">Green</span>
-              <span className="weather-text">
-                Normal conditions – routine work &amp; inspections.
-              </span>
+          <div className="grid calc-grid">
+            {/* ROOFING CALC */}
+            <div className="card">
+              <h3>Roofing Estimate</h3>
+              <p className="calc-help">
+                Enter your roof area to get an approximate labour + standard materials figure.
+              </p>
+
+              <div className="calc-row">
+                <label>
+                  Roof area (m²)
+                  <input
+                    type="number"
+                    min="0"
+                    value={roofArea}
+                    onChange={(e) => setRoofArea(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Rate €/m²
+                  <input
+                    type="number"
+                    min="0"
+                    value={roofRate}
+                    onChange={(e) => setRoofRate(e.target.value)}
+                  />
+                </label>
+              </div>
+
+              <p className="calc-result">
+                Rough total:{' '}
+                {roofEstimate ? (
+                  <strong>€{roofEstimate}</strong>
+                ) : (
+                  <span className="calc-placeholder">Enter area for an estimate</span>
+                )}
+              </p>
+
+              <ul className="mini-list">
+                <li>Minor roof repairs often €80 – €120</li>
+                <li>Tile/slate replacement from €12 – €18 per tile</li>
+                <li>Chimney sealing / waterproofing €120 – €180</li>
+              </ul>
             </div>
 
-            <div className="weather-pill weather-pill-yellow">
-              <span className="weather-label">Yellow</span>
-              <span className="weather-text">
-                Wind or rain – extra care on roofs &amp; access.
-              </span>
-            </div>
+            {/* TILING CALC */}
+            <div className="card">
+              <h3>Luxury Tiling Estimate</h3>
+              <p className="calc-help">
+                For high-end bathroom &amp; kitchen tiling. Materials not included in this rough
+                guide.
+              </p>
 
-            <div className="weather-pill weather-pill-orange">
-              <span className="weather-label">Orange</span>
-              <span className="weather-text">
-                Severe weather – limited emergency make-safe only.
-              </span>
-            </div>
+              <div className="calc-row">
+                <label>
+                  Tiled area (m²)
+                  <input
+                    type="number"
+                    min="0"
+                    value={tileArea}
+                    onChange={(e) => setTileArea(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Rate €/m²
+                  <input
+                    type="number"
+                    min="0"
+                    value={tileRate}
+                    onChange={(e) => setTileRate(e.target.value)}
+                  />
+                </label>
+              </div>
 
-            <div className="weather-pill weather-pill-red">
-              <span className="weather-label">Red</span>
-              <span className="weather-text">
-                Extreme conditions – we pause work until it&apos;s safe.
-              </span>
+              <p className="calc-result">
+                Rough total:{' '}
+                {tileEstimate ? (
+                  <strong>€{tileEstimate}</strong>
+                ) : (
+                  <span className="calc-placeholder">Enter area for an estimate</span>
+                )}
+              </p>
+
+              <ul className="mini-list">
+                <li>Luxury bathroom tiling: €35 – €45+ per m² labour</li>
+                <li>Old tile removal &amp; floor levelling priced separately</li>
+                <li>We always confirm final price on a home visit</li>
+              </ul>
             </div>
           </div>
-
-          <p className="weather-note">
-            Follow Krinedal-R on Facebook for our latest local storm updates and
-            safety tips.
-          </p>
         </div>
       </section>
 
-      {/* ESTIMATE FORM */}
-      <section className="section section-alt" id="estimate">
-        <div className="container estimate-grid">
-          <div>
-            <h2>Request a Free Estimate</h2>
-            <p className="section-intro">
-              Tell us a bit about the job and we&apos;ll reply with an estimate
-              range by email. For larger projects we&apos;ll arrange a site
-              visit.
+      {/* GOOGLE-STYLE REVIEW */}
+      <section className="section">
+        <div className="container">
+          <div className="card review-card">
+            <p className="review-label">Recent Google-style feedback</p>
+            <p className="review-stars">★★★★★</p>
+            <p className="review-text">
+              “Krinedal-R did our full luxury bathroom tiling last week – just phenomenal. Clean,
+              fast and extremely professional. Couldn&apos;t be happier.”
             </p>
+            <p className="review-name">— Aoife, Navan</p>
+          </div>
+        </div>
+      </section>
 
-            <form
-              className="estimate-form"
-              action="mailto:krinedalr@gmail.com"
-              method="post"
-              encType="text/plain"
-            >
+      {/* WEATHER SECTION (COLOURED BUTTONS) */}
+      <Weather />
+
+      {/* ESTIMATE FORM + BOOKING / PAYMENT */}
+      <section className="section section-alt">
+        <div className="container">
+          <h2>Request a Free Estimate</h2>
+          <p className="section-intro">
+            Tell us a bit about your property and we&apos;ll reply with a rough estimate or arrange
+            a site visit. No pressure, no hard sell.
+          </p>
+
+          <form
+            className="estimate-form"
+            action="mailto:krinedalr@gmail.com"
+            method="post"
+            encType="text/plain"
+          >
+            <div className="grid form-grid">
               <label>
-                Your name
+                Name
                 <input type="text" name="name" required />
+              </label>
+
+              <label>
+                Phone
+                <input type="tel" name="phone" required />
               </label>
 
               <label>
@@ -214,67 +282,44 @@ export default function HomePage() {
               </label>
 
               <label>
-                Phone
-                <input type="tel" name="phone" />
-              </label>
-
-              <label>
                 Service needed
                 <select name="service">
-                  <option>Storm / roof emergency</option>
-                  <option>Roof repairs / renewal</option>
+                  <option>Storm / roof leak</option>
+                  <option>Full roof renewal</option>
                   <option>Luxury bathroom tiling</option>
-                  <option>Kitchen / floor tiling</option>
-                  <option>Painting &amp; fresh-up</option>
-                  <option>Landlord refresh between tenants</option>
-                  <option>Other property works</option>
+                  <option>Kitchen tiling</option>
+                  <option>Painting / fresh-up</option>
+                  <option>Other / not sure yet</option>
                 </select>
               </label>
-
-              <label>
-                Tell us a bit about the job
-                <textarea
-                  name="details"
-                  placeholder="Size of area, issues, photos available, access, etc."
-                  rows={4}
-                />
-              </label>
-
-              <button type="submit" className="btn btn-primary full-width">
-                Send estimate request
-              </button>
-            </form>
-          </div>
-
-          <div>
-            <div className="card mini">
-              <h3>Typical Price Ranges (Guide Only)</h3>
-              <ul>
-                <li>Luxury bathroom tiling labour: €35 – €50 per m²</li>
-                <li>Roof tile / slate replacement: from €12 – €18 per tile</li>
-                <li>Minor roof repairs: usually €80 – €160</li>
-                <li>Interior room repaint: from €220 – €320</li>
-              </ul>
-              <p className="card-note">
-                Final price always agreed in writing before work starts. Landlord
-                &amp; repeat-customer discounts available.
-              </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* BOOKING & PAYMENT */}
-      <section className="section section-dark" id="booking">
-        <div className="container">
-          <div className="card card-dark">
-            <h2>Booking &amp; Payment</h2>
+            <label className="estimate-notes">
+              Tell us a bit about the job
+              <textarea
+                name="details"
+                rows={4}
+                placeholder="Size of area, issues, photos available, access, etc."
+              />
+            </label>
+
+            <button type="submit" className="btn btn-primary wide">
+              Send estimate request
+            </button>
+          </form>
+
+          <div className="card booking-card">
+            <h3>Booking &amp; Payment</h3>
             <ul>
-              <li>Materials-first options available for new projects.</li>
-              <li>Clear written scope agreed before starting.</li>
-              <li>Digital invoice &amp; payment by bank transfer.</li>
-              <li>Photos provided for your records on request.</li>
+              <li>Materials-first options available for new projects</li>
+              <li>Clear written scope agreed before starting</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
+              <li>Photos provided for your records on request</li>
             </ul>
+            <p className="booking-note">
+              We keep payments simple and transparent – all details are clearly written on your
+              invoice.
+            </p>
           </div>
         </div>
       </section>
@@ -282,38 +327,62 @@ export default function HomePage() {
       {/* FOOTER */}
       <footer className="footer">
         <div className="container footer-inner">
-          <div>
-            <p className="footer-logo">
+          <div className="footer-main">
+            <h2 className="footer-logo">
               KRINEDAL-<span className="hero-r">R</span>
-            </p>
+            </h2>
             <p className="footer-text">
               Premium property care, storm or sunshine – Ireland-wide.
             </p>
-          </div>
 
-          <div className="footer-contact">
             <p className="footer-text">
-              Phone: <a href="tel:0831762475">083 176 2475</a>
-            </p>
-            <p className="footer-text">
-              Email:{" "}
-              <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
-            </p>
-            <div className="footer-buttons">
-              <a href="tel:0831762475" className="btn btn-footer">
-                Call
+              Phone:{' '}
+              <a href="tel:0831762475" className="footer-link">
+                083 176 2475
               </a>
+            </p>
+            <p className="footer-text">
+              Email:{' '}
+              <a href="mailto:krinedalr@gmail.com" className="footer-link">
+                krinedalr@gmail.com
+              </a>
+            </p>
+            <p className="footer-text">
+              Web:{' '}
+              <a href="https://www.krinedalr.ie" className="footer-link">
+                www.krinedalr.ie
+              </a>
+            </p>
+
+            <p className="footer-text">
+              Follow us on Facebook:{' '}
               <a
-                href="https://wa.me/353831762475"
-                className="btn btn-footer whatsapp"
+                href="https://www.facebook.com"
                 target="_blank"
                 rel="noreferrer"
+                className="footer-link"
               >
-                WhatsApp
+                Krinedal-R
               </a>
-            </div>
+            </p>
+          </div>
+
+          <div className="footer-actions">
+            <a href="tel:0831762475" className="btn footer-call">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn footer-whatsapp"
+            >
+              WhatsApp
+            </a>
           </div>
         </div>
+
+        <CallButtons />
       </footer>
     </main>
   );
