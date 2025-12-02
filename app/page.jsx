@@ -18,64 +18,63 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        <div className="hero-overlay">
-          <div className="container hero-inner">
-            <div className="hero-text">
-              <p className="hero-tag">
-                PREMIUM PROPERTY CARE ACROSS IRELAND <span className="hero-shamrock">☘️</span>
-              </p>
+        <div className="hero-inner container">
+          <div className="hero-text">
+            <p className="hero-tag">
+              PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
+              <span className="hero-shamrock">☘️</span>
+            </p>
 
-              <h1 className="hero-title">
-                KRINEDAL-<span className="hero-r">R</span>
-              </h1>
+            <h1 className="hero-title">
+              KRINEDAL-<span className="hero-r">R</span>
+            </h1>
 
-              <p className="hero-lead">
-                24/7 storm damage call-out, full roof renewals and{" "}
-                <span className="hero-strong">luxury tiling</span> for homes and
-                rental properties. Snow, rain or storm won’t stop us.
-              </p>
+            <p className="hero-lead">
+              24/7 storm damage call-out, full roof renewals and{" "}
+              <span className="hero-strong">luxury tiling</span> for homes and
+              rental properties. Snow, rain or storm won’t stop us.
+            </p>
 
-              <div className="hero-actions">
-                <a href="tel:0831762475" className="btn btn-primary">
-                  Call 24/7 Storm Line
-                </a>
-                <a
-                  href="https://wa.me/353831762475"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-outline"
-                >
-                  WhatsApp us now
-                </a>
-              </div>
-
-              <ul className="hero-bullets">
-                <li>Emergency storm make-safe within hours*</li>
-                <li>Full roof change & leak tracing</li>
-                <li>Luxury bathroom & kitchen tiling</li>
-                <li>Landlord-ready refresh between tenants</li>
-              </ul>
-
-              <p className="hero-note">
-                *Response time depends on location & weather conditions.
-              </p>
+            <div className="hero-actions">
+              <a href="tel:0831762475" className="btn btn-primary">
+                Call 24/7 Storm Line
+              </a>
+              <a
+                href="https://wa.me/353831762475"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
+                WhatsApp us now
+              </a>
             </div>
 
-            {/* Short “card” on right side for larger screens */}
-            <aside className="hero-side-card">
-              <h2>Fast, respectful property care</h2>
-              <p>
-                From emergency leaks at midnight to full bathroom tiling that
-                looks like a hotel – we keep your home safe, dry and
-                beautifully finished.
-              </p>
-              <div className="hero-side-list">
-                <p>✓ 24/7 emergency line</p>
-                <p>✓ Photos before & after each job</p>
-                <p>✓ Clear pricing and written scope</p>
-              </div>
-            </aside>
+            <ul className="hero-bullets">
+              <li>Emergency storm make-safe within hours*</li>
+              <li>Full roof change & leak tracing</li>
+              <li>Luxury bathroom & kitchen tiling</li>
+              <li>Landlord-ready refresh between tenants</li>
+            </ul>
+
+            <p className="hero-note">
+              *Response time depends on location & weather conditions.
+            </p>
           </div>
+
+          {/* Short side card for bigger screens */}
+          <aside className="hero-side-card">
+            <h2>Fast, respectful property care</h2>
+            <p>
+              From emergency leaks at midnight to full bathroom tiling that
+              looks like a hotel – we keep your home safe, dry and beautifully
+              finished.
+            </p>
+            <div className="hero-side-list">
+              <p>✓ 24/7 emergency line</p>
+              <p>✓ Photos before & after each job</p>
+              <p>✓ Clear pricing and written scope</p>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -113,8 +112,8 @@ export default function HomePage() {
 
             <p className="muted small">
               Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
-              <span className="brand-inline">Krinedal-R</span> on Facebook for live
-              updates.
+              <span className="brand-inline">Krinedal-R</span> on Facebook for
+              live updates.
             </p>
           </div>
         </div>
@@ -141,8 +140,9 @@ export default function HomePage() {
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span>{" "}
-              for latest updates & weather radar posts.
+              Follow us on Facebook:{" "}
+              <span className="brand-inline">Krinedal-R</span> for latest
+              updates & weather radar posts.
             </p>
           </article>
         </div>
@@ -298,9 +298,8 @@ export default function HomePage() {
               <li>Photos provided for your records on request</li>
             </ul>
             <p className="muted smallest">
-              Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &
-              transfer.
+              Payment is usually by bank transfer after invoice. IBAN details
+              are provided on every invoice – simple and secure.
             </p>
           </div>
 
@@ -315,14 +314,15 @@ export default function HomePage() {
             </div>
 
             <div className="footer-contact">
-              <p>Phone: <strong>083 176 2475</strong></p>
+              <p>
+                Phone: <strong>083 176 2475</strong>
+              </p>
               <p>
                 Email:{" "}
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
               <p>
-                Web:{" "}
-                <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
 
               <div className="footer-buttons">
