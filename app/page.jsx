@@ -18,11 +18,11 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* overlay div now transparent – just for layout */}
         <div className="hero-overlay">
           <div className="container hero-inner">
             <div className="hero-text">
               <p className="hero-tag">
+                <span className="hero-flag">🇮🇪</span>
                 PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
                 <span className="hero-shamrock">☘️</span>
               </p>
@@ -107,28 +107,16 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <div className="weather-pills">
-              <div className="pill pill-green pill-active">
-                <span className="pill-main">Green</span>
-                <span className="pill-sub">Normal</span>
-              </div>
-              <div className="pill pill-yellow">
-                <span className="pill-main">Yellow</span>
-                <span className="pill-sub">Caution</span>
-              </div>
-              <div className="pill pill-orange">
-                <span className="pill-main">Orange</span>
-                <span className="pill-sub">Severe</span>
-              </div>
-              <div className="pill pill-red">
-                <span className="pill-main">Red</span>
-                <span className="pill-sub">Extreme</span>
-              </div>
+              <button className="pill pill-green">Green</button>
+              <button className="pill pill-yellow">Yellow</button>
+              <button className="pill pill-orange">Orange</button>
+              <button className="pill pill-red">Red</button>
             </div>
 
             <p className="muted small">
               Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
-              <span className="brand-inline">Krinedal-R</span> on Facebook for
-              live updates.
+              <span className="brand-inline">Krinedal-R</span> on Facebook for live
+              updates.
             </p>
           </div>
         </div>
@@ -337,7 +325,8 @@ export default function HomePage() {
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
               <p>
-                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web:{" "}
+                <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
 
               <div className="footer-buttons">
