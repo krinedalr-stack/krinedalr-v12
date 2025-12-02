@@ -299,11 +299,6 @@ export default function HomePage() {
               <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
-            <p className="muted smallest">
-              Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &
-              transfer.
-            </p>
           </div>
 
           <footer className="footer">
@@ -346,6 +341,17 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
+
+      {/* Floating WhatsApp bubble */}
+      <a
+        href="https://wa.me/353831762475"
+        target="_blank"
+        rel="noreferrer"
+        className="floating-whatsapp"
+        aria-label="Chat on WhatsApp with Krinedal-R"
+      >
+        💬
+      </a>
     </main>
   );
 }
