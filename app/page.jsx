@@ -22,8 +22,7 @@ export default function HomePage() {
           <div className="container hero-inner">
             <div className="hero-text">
               <p className="hero-tag">
-                <span className="hero-flag">🇮🇪</span>
-                PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
+                🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
                 <span className="hero-shamrock">☘️</span>
               </p>
 
@@ -58,7 +57,7 @@ export default function HomePage() {
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note">
+              <p className="hero-note hero-note-strong">
                 *Response time depends on location & weather conditions.
               </p>
             </div>
@@ -113,7 +112,7 @@ export default function HomePage() {
               <button className="pill pill-red">Red</button>
             </div>
 
-            <p className="muted small">
+            <p className="weather-text small">
               Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
               <span className="brand-inline">Krinedal-R</span> on Facebook for live
               updates.
@@ -126,7 +125,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ Google-style feedback</p>
+            <p className="review-label">★★★★★ From our customers</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
               phenomenal. Clean, fast and extremely professional. Couldn’t be
@@ -299,6 +298,11 @@ export default function HomePage() {
               <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
+            <p className="muted smallest">
+              Straight card / IBAN payment on the website can be added in the
+              future – for now we keep it simple and direct with invoice &
+              transfer.
+            </p>
           </div>
 
           <footer className="footer">
@@ -342,13 +346,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Floating WhatsApp bubble */}
+      {/* Floating WhatsApp bubble (bottom-right) */}
       <a
         href="https://wa.me/353831762475"
         target="_blank"
         rel="noreferrer"
         className="floating-whatsapp"
-        aria-label="Chat on WhatsApp with Krinedal-R"
+        aria-label="Chat on WhatsApp"
       >
         💬
       </a>
