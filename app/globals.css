@@ -68,6 +68,7 @@ a:hover {
 /* HERO */
 
 .hero {
+  position: relative;
   background-image: url("/hero.jpg");
   background-size: cover;
   background-position: center;
@@ -77,8 +78,11 @@ a:hover {
 }
 
 .hero-overlay {
-  /* almost transparent so image stays sharp */
-  background: rgba(255, 255, 255, 0.02);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.94)
+  );
 }
 
 .hero-inner {
@@ -97,33 +101,49 @@ a:hover {
   max-width: 640px;
 }
 
-.hero-tag {
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #065f46; /* darker for contrast */
-  margin-bottom: 10px;
-}
-
-.hero-shamrock {
-  margin-left: 4px;
-}
-
 .hero-title {
   font-size: 2.8rem;
   line-height: 1.05;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  color: #0b1120;
 }
 
 .hero-r {
   color: #dc2626;
 }
 
+/* TAG UNDER THE TITLE */
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.5);
+}
+
+.hero-flag {
+  font-size: 0.9rem;
+}
+
+.hero-shamrock {
+  margin-left: 2px;
+}
+
 .hero-lead {
   font-size: 1.05rem;
-  color: #1f2937;
+  color: #111827; /* darker, more visible */
   margin-bottom: 16px;
+  font-weight: 500;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .hero-strong {
@@ -142,6 +162,7 @@ a:hover {
   margin-left: 18px;
   font-size: 0.95rem;
   color: #111827;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .hero-bullets li + li {
@@ -164,7 +185,7 @@ a:hover {
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
 }
 
 .hero-side-card h2 {
@@ -210,7 +231,7 @@ a:hover {
 .btn-primary {
   background: #f97316;
   color: #111827;
-  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.45);
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.5);
 }
 
 .btn-primary:hover {
@@ -218,9 +239,10 @@ a:hover {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #f97316;
   color: #c2410c;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25);
 }
 
 .btn-outline:hover {
@@ -232,7 +254,7 @@ a:hover {
   width: 100%;
   background: #dc2626;
   color: #f9fafb;
-  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.55);
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.5);
 }
 
 .btn-storm:hover {
@@ -262,7 +284,7 @@ a:hover {
 /* TEXT UTILITIES */
 
 .muted {
-  color: #374151;
+  color: #4b5563;
 }
 
 .small {
@@ -335,31 +357,31 @@ a:hover {
 
 .pill {
   border-radius: 999px;
-  padding: 7px 18px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  font-size: 0.9rem;
+  padding: 6px 16px;
+  border: none;
+  font-size: 0.88rem;
   font-weight: 700;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18);
 }
 
 .pill-green {
-  background: #4ade80;
-  color: #064e3b;
+  background: #bbf7d0;
+  color: #166534;
 }
 
 .pill-yellow {
-  background: #fde047;
-  color: #78350f;
+  background: #fef08a;
+  color: #92400e;
 }
 
 .pill-orange {
-  background: #fb923c;
-  color: #7c2d12;
+  background: #fed7aa;
+  color: #9a3412;
 }
 
 .pill-red {
-  background: #f97373;
-  color: #7f1d1d;
+  background: #fecaca;
+  color: #b91c1c;
 }
 
 /* FORM */
@@ -475,23 +497,93 @@ textarea.field-input {
 
 .floating-whatsapp {
   position: fixed;
-  right: 20px;
-  bottom: 80px;
-  width: 60px;
-  height: 60px;
-  border-radius: 999px;
-  background: #22c55e;
-  color: #ffffff;
+  right: 18px;
+  bottom: 24px;
+  z-index: 40;
+}
+
+.floating-whatsapp a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.7rem;
-  box-shadow: 0 16px 32px rgba(22, 163, 74, 0.6);
-  z-index: 60;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #bbf7d0, #16a34a);
+  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.6);
+  font-size: 30px;
 }
 
-.floating-whatsapp:hover {
-  background: #4ade80;
+/* FAMILY BIRDS LAYER */
+
+.birds-layer {
+  position: fixed;
+  top: 10%;
+  left: -10%;
+  width: 120%;
+  height: 40%;
+  pointer-events: none;
+  z-index: 30;
+  overflow: hidden;
+}
+
+.bird {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.5));
+  animation-name: fly-krinedal;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Kristaps */
+.bird-1 {
+  top: 18%;
+  animation-duration: 42s;
+  animation-delay: 0s;
+}
+
+/* Inese */
+.bird-2 {
+  top: 24%;
+  font-size: 22px;
+  animation-duration: 48s;
+  animation-delay: 6s;
+}
+
+/* Eduards */
+.bird-3 {
+  top: 32%;
+  font-size: 20px;
+  animation-duration: 38s;
+  animation-delay: 12s;
+}
+
+/* Alisters */
+.bird-4 {
+  top: 14%;
+  font-size: 18px;
+  animation-duration: 50s;
+  animation-delay: 18s;
+}
+
+@keyframes fly-krinedal {
+  0% {
+    transform: translateX(-12%) translateY(0) scale(1);
+  }
+  25% {
+    transform: translateX(20%) translateY(-6px) scale(1.02);
+  }
+  50% {
+    transform: translateX(52%) translateY(4px) scale(0.98);
+  }
+  75% {
+    transform: translateX(84%) translateY(-4px) scale(1.03);
+  }
+  100% {
+    transform: translateX(112%) translateY(0) scale(1);
+  }
 }
 
 /* SMALL SCREEN TWEAKS */
@@ -507,5 +599,10 @@ textarea.field-input {
 
   .hero-side-card {
     margin-top: 4px;
+  }
+
+  .birds-layer {
+    top: 14%;
+    height: 36%;
   }
 }
