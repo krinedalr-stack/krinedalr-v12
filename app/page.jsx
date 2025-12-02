@@ -22,7 +22,9 @@ export default function HomePage() {
           <div className="container hero-inner">
             <div className="hero-text">
               <p className="hero-tag">
-                🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span className="hero-shamrock">☘️</span>
+                <span className="hero-flag">🇮🇪</span>
+                PREMIUM PROPERTY CARE ACROSS IRELAND
+                <span className="hero-shamrock shamrock-float">☘️</span>
               </p>
 
               <h1 className="hero-title">
@@ -35,13 +37,16 @@ export default function HomePage() {
                 rental properties. Snow, rain or storm won’t stop us.
               </p>
 
-              <p className="hero-current-status">
-                Current Ireland weather status:{" "}
-                <span className="status-pill status-pill-green">
+              <p className="hero-status-label">
+                Current Ireland weather status:
+              </p>
+
+              <div className="hero-status-row">
+                <span className="pill pill-green-strong">
                   GREEN – normal conditions
                 </span>
-                <span className="hero-inline-shamrock">☘️</span>
-              </p>
+                <span className="hero-status-shamrock shamrock-float">☘️</span>
+              </div>
 
               <div className="hero-actions">
                 <a href="tel:0831762475" className="btn btn-primary">
@@ -87,13 +92,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 24/7 STORM + WEATHER STATUS */}
+      {/* 24/7 STORM + WEATHER STATUS (cards) */}
       <section className="section section-alt">
         <div className="container grid-2">
           {/* Storm Call-out */}
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
-            <p className="muted small">
+            <p className="muted">
               Red warning, heavy rain or leaking roof – we respond fast, day or
               night.
             </p>
@@ -102,7 +107,7 @@ export default function HomePage() {
               🚨 24/7 STORM EMERGENCY LINE
             </a>
 
-            <p className="muted small storm-extra">
+            <p className="muted small">
               Elderly emergency call-outs: <strong>50% discount</strong> on the
               call-out fee.
             </p>
@@ -113,16 +118,18 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <div className="weather-pills">
-              <button className="pill pill-green">Green</button>
-              <button className="pill pill-yellow">Yellow</button>
-              <button className="pill pill-orange">Orange</button>
-              <button className="pill pill-red">Red</button>
+              <button className="pill pill-green-bright">Green</button>
+              <button className="pill pill-yellow-bright">Yellow</button>
+              <button className="pill pill-orange-bright">Orange</button>
+              <button className="pill pill-red-bright">Red</button>
             </div>
 
             <p className="muted small">
-              Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
+              Current:{" "}
+              <strong className="green-text">GREEN warning</strong>
+              <span className="shamrock-float">☘️</span> – follow{" "}
               <span className="brand-inline">Krinedal-R</span> on Facebook for
-              live updates & weather radar posts.
+              live updates.
             </p>
           </div>
         </div>
@@ -132,7 +139,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ Customer feedback</p>
+            <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
               phenomenal. Clean, fast and extremely professional. Couldn’t be
@@ -149,8 +156,9 @@ export default function HomePage() {
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span>{" "}
-              for latest updates & weather radar posts.
+              Follow us on Facebook:{" "}
+              <span className="brand-inline">Krinedal-R</span> for latest
+              updates &amp; weather radar posts.
             </p>
           </article>
         </div>
@@ -231,14 +239,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM + BOOKING CALENDAR */}
+      {/* ESTIMATE FORM */}
       <section className="section">
         <div className="container">
           <div className="card">
-            <h2>Request a Free Estimate & Preferred Time</h2>
+            <h2>Request a Free Estimate</h2>
             <p className="muted small">
-              Tell us a bit about your roof, tiling or property project and pick a
-              day & time that suits you – we&apos;ll confirm by phone or WhatsApp.
+              Tell us a bit about your roof, tiling or property project and
+              we&apos;ll come back with options and a rough budget.
             </p>
 
             <form
@@ -276,37 +284,6 @@ export default function HomePage() {
                 </select>
               </label>
 
-              {/* Booking calendar bit */}
-              <div className="booking-row">
-                <label className="field-label booking-field">
-                  Preferred visit date
-                  <input
-                    name="Preferred date"
-                    type="date"
-                    className="field-input"
-                  />
-                </label>
-
-                <label className="field-label booking-field">
-                  Preferred time
-                  <input
-                    name="Preferred time"
-                    type="time"
-                    className="field-input"
-                  />
-                </label>
-              </div>
-
-              <label className="field-label">
-                Flexibility
-                <select name="Flexibility" className="field-input">
-                  <option>Exact time if possible</option>
-                  <option>Any time that day</option>
-                  <option>Evenings / weekends best</option>
-                  <option>As soon as you can (urgent)</option>
-                </select>
-              </label>
-
               <label className="field-label">
                 Tell us a bit about the job
                 <textarea
@@ -318,7 +295,7 @@ export default function HomePage() {
               </label>
 
               <button type="submit" className="btn btn-primary btn-full">
-                Send estimate & booking request
+                Send estimate request
               </button>
             </form>
           </div>
@@ -336,11 +313,6 @@ export default function HomePage() {
               <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
-            <p className="muted smallest">
-              Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &
-              transfer.
-            </p>
           </div>
 
           <footer className="footer">
@@ -348,7 +320,7 @@ export default function HomePage() {
               <span className="footer-name">
                 KRINEDAL-<span className="hero-r">R</span>
               </span>
-              <p className="muted">
+              <p className="muted footer-tagline">
                 Premium property care, storm or sunshine – Ireland-wide.
               </p>
             </div>
@@ -384,12 +356,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Floating WhatsApp bubble */}
+      {/* Floating WhatsApp/chat button */}
       <a
         href="https://wa.me/353831762475"
         target="_blank"
         rel="noreferrer"
-        className="floating-whatsapp"
+        className="floating-chat"
         aria-label="Chat on WhatsApp"
       >
         💬
