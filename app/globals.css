@@ -69,7 +69,6 @@ a:hover {
 
 .hero {
   position: relative;
-  overflow: hidden;
   background-image: url("/hero.jpg");
   background-size: cover;
   background-position: center;
@@ -79,7 +78,12 @@ a:hover {
 }
 
 .hero-overlay {
-  /* no white cover, just let photo shine */
+  /* no white cover now, picture fully visible */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.12)
+  );
 }
 
 .hero-inner {
@@ -96,32 +100,30 @@ a:hover {
 
 .hero-text {
   max-width: 640px;
-  background: rgba(255, 255, 255, 0.88);
-  padding: 18px 18px 16px;
-  border-radius: 18px;
-  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.15);
+  padding: 8px 0 12px;
 }
 
 .hero-tag {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  font-weight: 600;
-  color: #15803d; /* green */
-  margin-bottom: 8px;
-  display: flex;
+  font-weight: 700;
+  color: #166534; /* deep Irish green */
+  margin-bottom: 10px;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.hero-flag {
+.hero-shamrock {
   font-size: 1rem;
 }
 
 .hero-title {
   font-size: 2.8rem;
   line-height: 1.05;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  color: #02131e;
 }
 
 .hero-r {
@@ -129,15 +131,31 @@ a:hover {
 }
 
 .hero-lead {
-  font-size: 1.02rem;
-  color: #1f2937;
-  margin-bottom: 8px;
+  font-size: 1.05rem;
+  color: #111827;
+  margin-bottom: 10px;
+  max-width: 640px;
 }
 
-.hero-tagline {
-  font-size: 0.95rem;
-  color: #111827;
+.hero-status {
   margin-bottom: 14px;
+  font-size: 0.92rem;
+  color: #111827;
+}
+
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.hero-status-green {
+  background: #bbf7d0;
+  color: #166534;
+  border: 1px solid #4ade80;
 }
 
 .hero-strong {
@@ -163,20 +181,24 @@ a:hover {
 }
 
 .hero-note {
-  font-size: 0.82rem;
-  color: #b91c1c; /* red for visibility */
+  font-size: 0.8rem;
+  color: #6b7280;
   margin-top: 8px;
+}
+
+.hero-note-alert {
+  color: #b91c1c;
   font-weight: 600;
 }
 
 /* HERO SIDE CARD */
 
 .hero-side-card {
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.92);
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
 }
 
 .hero-side-card h2 {
@@ -195,70 +217,6 @@ a:hover {
 
 .hero-side-list p + p {
   margin-top: 2px;
-}
-
-/* BIRDS */
-
-.bird-layer {
-  position: absolute;
-  inset: 0 0 45%;
-  pointer-events: none;
-}
-
-.bird {
-  position: absolute;
-  opacity: 0.9;
-  animation-name: bird-flight;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.bird-1 {
-  top: 18%;
-  left: -10%;
-  font-size: 1.5rem; /* adult */
-  animation-duration: 18s;
-}
-
-.bird-2 {
-  top: 22%;
-  left: -18%;
-  font-size: 1.4rem; /* adult */
-  animation-duration: 20s;
-  animation-delay: 3s;
-}
-
-.bird-3 {
-  top: 26%;
-  left: -12%;
-  font-size: 1.1rem; /* child */
-  animation-duration: 19s;
-  animation-delay: 1.5s;
-}
-
-.bird-4 {
-  top: 30%;
-  left: -20%;
-  font-size: 1rem; /* child */
-  animation-duration: 21s;
-  animation-delay: 4s;
-}
-
-@keyframes bird-flight {
-  0% {
-    transform: translateX(0) translateY(0);
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(70vw) translateY(-8px);
-  }
-  100% {
-    transform: translateX(110vw) translateY(-16px);
-    opacity: 0;
-  }
 }
 
 /* BUTTONS */
@@ -546,23 +504,85 @@ textarea.field-input {
   background: #38bdf8;
 }
 
-/* FLOATING WHATSAPP */
+/* FLOATING FLOWERS (instead of birds) */
+
+.floating-flowers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flower {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0.9;
+  color: #16a34a;
+  animation: floatSoft 9s ease-in-out infinite;
+}
+
+.flower-1 {
+  top: 12%;
+  left: 6%;
+}
+
+.flower-2 {
+  top: 22%;
+  right: 12%;
+  animation-duration: 11s;
+}
+
+.flower-3 {
+  bottom: 18%;
+  left: 18%;
+  animation-duration: 10s;
+}
+
+.flower-4 {
+  bottom: 10%;
+  right: 20%;
+  animation-duration: 12s;
+}
+
+@keyframes floatSoft {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(6px, -10px, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+}
+
+/* FLOATING WHATSAPP BUBBLE */
 
 .floating-whatsapp {
   position: fixed;
   right: 18px;
   bottom: 18px;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
   background: #22c55e;
+  box-shadow: 0 14px 30px rgba(34, 197, 94, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 14px 35px rgba(22, 163, 74, 0.6);
-  font-size: 1.6rem;
+  color: #052e16;
+  font-size: 1.8rem;
   text-decoration: none;
-  z-index: 50;
+  z-index: 40;
+  border: 2px solid #bbf7d0;
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-1px);
+  background: #4ade80;
 }
 
 /* SMALL SCREEN TWEAKS */
@@ -574,10 +594,6 @@ textarea.field-input {
 
   .hero-title {
     font-size: 2.2rem;
-  }
-
-  .hero-text {
-    padding: 14px 14px 12px;
   }
 
   .hero-side-card {
