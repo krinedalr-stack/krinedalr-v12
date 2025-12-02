@@ -18,12 +18,12 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* Birds layer – 2 adults, 2 kids */}
-        <div className="bird-layer" aria-hidden="true">
-          <span className="bird bird-1">🕊️</span>
-          <span className="bird bird-2">🕊️</span>
-          <span className="bird bird-3">🐦</span>
-          <span className="bird bird-4">🐦</span>
+        {/* Soft floating Irish flowers instead of birds */}
+        <div className="floating-flowers">
+          <span className="flower flower-1">☘️</span>
+          <span className="flower flower-2">☘️</span>
+          <span className="flower flower-3">☘️</span>
+          <span className="flower flower-4">☘️</span>
         </div>
 
         <div className="hero-overlay">
@@ -31,7 +31,7 @@ export default function HomePage() {
             <div className="hero-text">
               <p className="hero-tag">
                 PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
-                <span className="hero-flag">🇮🇪</span>
+                <span className="hero-shamrock">🇮🇪</span>
               </p>
 
               <h1 className="hero-title">
@@ -41,12 +41,14 @@ export default function HomePage() {
               <p className="hero-lead">
                 24/7 storm damage call-out, full roof renewals and{" "}
                 <span className="hero-strong">luxury tiling</span> for homes and
-                rental properties. Snow, rain or storm won&apos;t stop us.
+                rental properties. Snow, rain or storm won’t stop us.
               </p>
 
-              <p className="hero-tagline">
-                Warm, reliable and detail-focused – we look after your home like it&apos;s
-                our own.
+              <p className="hero-status">
+                Current Ireland weather status:{" "}
+                <span className="hero-status-pill hero-status-green">
+                  GREEN – normal conditions
+                </span>
               </p>
 
               <div className="hero-actions">
@@ -65,12 +67,12 @@ export default function HomePage() {
 
               <ul className="hero-bullets">
                 <li>Emergency storm make-safe within hours*</li>
-                <li>Full roof change & precise leak tracing</li>
+                <li>Full roof change & leak tracing</li>
                 <li>Luxury bathroom & kitchen tiling</li>
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note">
+              <p className="hero-note hero-note-alert">
                 *Response time depends on location & weather conditions.
               </p>
             </div>
@@ -91,6 +93,17 @@ export default function HomePage() {
             </aside>
           </div>
         </div>
+
+        {/* Floating WhatsApp bubble (bottom-right) */}
+        <a
+          href="https://wa.me/353831762475"
+          target="_blank"
+          rel="noreferrer"
+          className="floating-whatsapp"
+          aria-label="Chat with Krinedal-R on WhatsApp"
+        >
+          🟢
+        </a>
       </section>
 
       {/* 24/7 STORM + WEATHER STATUS */}
@@ -128,10 +141,11 @@ export default function HomePage() {
             <p className="muted small">
               Current:{" "}
               <strong className="green-text">
-                GREEN warning – normal conditions.
-              </strong>{" "}
-              Follow <span className="brand-inline">Krinedal-R</span> on Facebook
-              for live weather radar & storm updates.
+                GREEN warning – normal conditions
+              </strong>
+              . Follow{" "}
+              <span className="brand-inline">Krinedal-R</span> on Facebook for live
+              updates and storm posts.
             </p>
           </div>
         </div>
@@ -144,7 +158,7 @@ export default function HomePage() {
             <p className="review-label">★★★★★ Recent customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn&apos;t be
+              phenomenal. Clean, fast and extremely professional. Couldn’t be
               happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
@@ -153,13 +167,13 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-text">
               “We had a roof leak in heavy rain, they arrived close to midnight
-              to make the house safe. Snow, rain and storm didn&apos;t stop them.”
+              to make the house safe. Snow, rain and storm didn&apos;t stop
+              them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook:{" "}
-              <span className="brand-inline">Krinedal-R</span> for latest updates &
-              weather radar posts.
+              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span>{" "}
+              for latest updates & weather radar posts.
             </p>
           </article>
         </div>
@@ -360,17 +374,6 @@ export default function HomePage() {
             </div>
           </footer>
         </div>
-
-        {/* Floating WhatsApp */}
-        <a
-          href="https://wa.me/353831762475"
-          target="_blank"
-          rel="noreferrer"
-          className="floating-whatsapp"
-          aria-label="WhatsApp Krinedal-R"
-        >
-          💬
-        </a>
       </section>
     </main>
   );
