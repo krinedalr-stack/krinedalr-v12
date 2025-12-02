@@ -18,30 +18,35 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* birds */}
-        <div className="birds">
+        {/* Birds layer – 2 adults, 2 kids */}
+        <div className="bird-layer" aria-hidden="true">
           <span className="bird bird-1">🕊️</span>
           <span className="bird bird-2">🕊️</span>
-          <span className="bird bird-3">🕊️</span>
-          <span className="bird bird-4">🕊️</span>
+          <span className="bird bird-3">🐦</span>
+          <span className="bird bird-4">🐦</span>
         </div>
 
         <div className="hero-overlay">
           <div className="container hero-inner">
             <div className="hero-text">
+              <p className="hero-tag">
+                PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
+                <span className="hero-flag">🇮🇪</span>
+              </p>
+
               <h1 className="hero-title">
                 KRINEDAL-<span className="hero-r">R</span>
               </h1>
 
-              <p className="hero-tag">
-                <span className="hero-flag">🇮🇪</span>{" "}
-                PREMIUM PROPERTY CARE ACROSS IRELAND
-              </p>
-
               <p className="hero-lead">
                 24/7 storm damage call-out, full roof renewals and{" "}
                 <span className="hero-strong">luxury tiling</span> for homes and
-                rental properties. Snow, rain or storm won’t stop us.
+                rental properties. Snow, rain or storm won&apos;t stop us.
+              </p>
+
+              <p className="hero-tagline">
+                Warm, reliable and detail-focused – we look after your home like it&apos;s
+                our own.
               </p>
 
               <div className="hero-actions">
@@ -60,7 +65,7 @@ export default function HomePage() {
 
               <ul className="hero-bullets">
                 <li>Emergency storm make-safe within hours*</li>
-                <li>Full roof change & leak tracing</li>
+                <li>Full roof change & precise leak tracing</li>
                 <li>Luxury bathroom & kitchen tiling</li>
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
@@ -123,10 +128,10 @@ export default function HomePage() {
             <p className="muted small">
               Current:{" "}
               <strong className="green-text">
-                GREEN warning – safe conditions
+                GREEN warning – normal conditions.
               </strong>{" "}
-              – follow <span className="brand-inline">Krinedal-R</span> on
-              Facebook for live updates.
+              Follow <span className="brand-inline">Krinedal-R</span> on Facebook
+              for live weather radar & storm updates.
             </p>
           </div>
         </div>
@@ -139,7 +144,7 @@ export default function HomePage() {
             <p className="review-label">★★★★★ Recent customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn’t be
+              phenomenal. Clean, fast and extremely professional. Couldn&apos;t be
               happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
@@ -148,14 +153,13 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-text">
               “We had a roof leak in heavy rain, they arrived close to midnight
-              to make the house safe. Snow, rain and storm didn&apos;t stop
-              them.”
+              to make the house safe. Snow, rain and storm didn&apos;t stop them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
               Follow us on Facebook:{" "}
-              <span className="brand-inline">Krinedal-R</span> for latest
-              updates &amp; weather radar posts.
+              <span className="brand-inline">Krinedal-R</span> for latest updates &
+              weather radar posts.
             </p>
           </article>
         </div>
@@ -202,7 +206,7 @@ export default function HomePage() {
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
               For hotel-style bathrooms and premium finishes. Labour only, tiles
-              &amp; materials separate.
+              & materials separate.
             </p>
             <label className="field-label">
               Tiled area (m²)
@@ -242,8 +246,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
-              Tell us a bit about your roof, tiling or property project and we&apos;ll
-              come back with options and a rough budget.
+              Tell us a bit about your roof, tiling or property project and
+              we&apos;ll come back with options and a rough budget.
             </p>
 
             <form
@@ -275,7 +279,7 @@ export default function HomePage() {
                   <option>Roof repair</option>
                   <option>Luxury bathroom tiling</option>
                   <option>Kitchen tiling</option>
-                  <option>Painting &amp; fresh-up</option>
+                  <option>Painting & fresh-up</option>
                   <option>Landlord end-of-tenancy</option>
                   <option>Other (describe below)</option>
                 </select>
@@ -307,12 +311,12 @@ export default function HomePage() {
             <ul className="list">
               <li>Materials-first options available for new projects</li>
               <li>Clear written scope agreed before starting</li>
-              <li>Digital invoice &amp; payment by bank transfer</li>
+              <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
             <p className="muted smallest">
               Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &amp;
+              future – for now we keep it simple and direct with invoice &
               transfer.
             </p>
           </div>
@@ -356,6 +360,17 @@ export default function HomePage() {
             </div>
           </footer>
         </div>
+
+        {/* Floating WhatsApp */}
+        <a
+          href="https://wa.me/353831762475"
+          target="_blank"
+          rel="noreferrer"
+          className="floating-whatsapp"
+          aria-label="WhatsApp Krinedal-R"
+        >
+          💬
+        </a>
       </section>
     </main>
   );
