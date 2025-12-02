@@ -68,24 +68,30 @@ a:hover {
 /* HERO */
 
 .hero {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.92),
-      rgba(255, 255, 255, 0.96)
-    ),
-    url("/hero.jpg");
+  position: relative;
+  background-image: url("/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 56px 0 40px;
+  padding: 72px 0 48px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 
-.hero-overlay {
-  backdrop-filter: blur(1px);
+/* soft daylight overlay so picture is visible but text still readable */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.82),
+    rgba(255, 255, 255, 0.72)
+  );
 }
 
 .hero-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 32px;
   align-items: flex-start;
@@ -161,7 +167,7 @@ a:hover {
 /* HERO SIDE CARD */
 
 .hero-side-card {
-  background: rgba(15, 23, 42, 0.88);
+  background: rgba(15, 23, 42, 0.9);
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
@@ -475,7 +481,7 @@ textarea.field-input {
 
 @media (max-width: 600px) {
   .hero {
-    padding-top: 40px;
+    padding-top: 56px;
   }
 
   .hero-title {
