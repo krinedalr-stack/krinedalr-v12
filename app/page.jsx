@@ -22,7 +22,10 @@ export default function HomePage() {
           <div className="container hero-inner">
             <div className="hero-text">
               <p className="hero-tag">
-                🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
+                <span className="hero-flag" aria-hidden="true">
+                  🇮🇪
+                </span>
+                PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
                 <span className="hero-shamrock">☘️</span>
               </p>
 
@@ -57,8 +60,8 @@ export default function HomePage() {
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note hero-note-strong">
-                *Response time depends on location & weather conditions.
+              <p className="hero-note">
+                *Response time depends on location &amp; weather conditions.
               </p>
             </div>
 
@@ -67,12 +70,12 @@ export default function HomePage() {
               <h2>Fast, respectful property care</h2>
               <p>
                 From emergency leaks at midnight to full bathroom tiling that
-                looks like a hotel – we keep your home safe, dry and
-                beautifully finished.
+                looks like a hotel – we keep your home safe, dry and beautifully
+                finished.
               </p>
               <div className="hero-side-list">
                 <p>✓ 24/7 emergency line</p>
-                <p>✓ Photos before & after each job</p>
+                <p>✓ Photos before &amp; after each job</p>
                 <p>✓ Clear pricing and written scope</p>
               </div>
             </aside>
@@ -112,10 +115,10 @@ export default function HomePage() {
               <button className="pill pill-red">Red</button>
             </div>
 
-            <p className="weather-text small">
+            <p className="muted small">
               Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
-              <span className="brand-inline">Krinedal-R</span> on Facebook for live
-              updates.
+              <span className="brand-inline">Krinedal-R</span> on Facebook for
+              live updates.
             </p>
           </div>
         </div>
@@ -125,7 +128,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ From our customers</p>
+            <p className="review-label">★★★★★ Customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
               phenomenal. Clean, fast and extremely professional. Couldn’t be
@@ -142,8 +145,9 @@ export default function HomePage() {
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span>{" "}
-              for latest updates & weather radar posts.
+              Follow us on Facebook:{" "}
+              <span className="brand-inline">Krinedal-R</span> for latest updates
+              &amp; weather radar posts.
             </p>
           </article>
         </div>
@@ -190,7 +194,7 @@ export default function HomePage() {
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
               For hotel-style bathrooms and premium finishes. Labour only, tiles
-              & materials separate.
+              &amp; materials separate.
             </p>
             <label className="field-label">
               Tiled area (m²)
@@ -295,12 +299,12 @@ export default function HomePage() {
             <ul className="list">
               <li>Materials-first options available for new projects</li>
               <li>Clear written scope agreed before starting</li>
-              <li>Digital invoice & payment by bank transfer</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
             <p className="muted smallest">
               Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &
+              future – for now we keep it simple and direct with invoice &amp;
               transfer.
             </p>
           </div>
@@ -324,8 +328,7 @@ export default function HomePage() {
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
               <p>
-                Web:{" "}
-                <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
 
               <div className="footer-buttons">
@@ -346,13 +349,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Floating WhatsApp bubble (bottom-right) */}
+      {/* FLOATING WHATSAPP BUBBLE */}
       <a
         href="https://wa.me/353831762475"
         target="_blank"
         rel="noreferrer"
-        className="floating-whatsapp"
-        aria-label="Chat on WhatsApp"
+        className="whatsapp-fab"
+        aria-label="Chat with Krinedal-R on WhatsApp"
       >
         💬
       </a>
