@@ -18,14 +18,6 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* floating Irish flowers */}
-        <div className="floating-flowers">
-          <span className="flower flower-1">✿</span>
-          <span className="flower flower-2">✿</span>
-          <span className="flower flower-3">✿</span>
-          <span className="flower flower-4">✿</span>
-        </div>
-
         <div className="container hero-inner">
           <div className="hero-text">
             <h1 className="hero-title">
@@ -33,13 +25,19 @@ export default function HomePage() {
             </h1>
 
             <p className="hero-tag">
-              <span className="hero-flag">🇮🇪</span> Premium property care across Ireland
+              <span className="hero-flag" aria-hidden="true">
+                🇮🇪
+              </span>
+              PREMIUM PROPERTY CARE ACROSS IRELAND
+              <span className="hero-shamrock" aria-hidden="true">
+                ☘️
+              </span>
             </p>
 
             <p className="hero-lead">
               24/7 storm damage call-out, full roof renewals and{" "}
-              <span className="hero-strong">luxury tiling</span> for homes and rental
-              properties. Snow, rain or storm won&apos;t stop us.
+              <span className="hero-strong">luxury tiling</span> for homes and
+              rental properties. Snow, rain or storm won&apos;t stop us.
             </p>
 
             <div className="hero-actions">
@@ -58,40 +56,53 @@ export default function HomePage() {
 
             <ul className="hero-bullets">
               <li>Emergency storm make-safe within hours*</li>
-              <li>Full roof change & leak tracing</li>
-              <li>Luxury bathroom & kitchen tiling</li>
+              <li>Full roof change &amp; leak tracing</li>
+              <li>Luxury bathroom &amp; kitchen tiling</li>
               <li>Landlord-ready refresh between tenants</li>
             </ul>
 
-            <p className="hero-note">
-              *Response time depends on location & weather conditions.
+            <p className="hero-note hero-note-red">
+              *Response time depends on location &amp; weather conditions.
             </p>
+
+            <div className="hero-status">
+              <p className="hero-status-label">Current Ireland weather status:</p>
+              <div className="hero-status-row">
+                <span className="pill pill-green hero-status-pill">
+                  GREEN – normal conditions
+                </span>
+                <span className="hero-status-shamrock" aria-hidden="true">
+                  ☘️
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Short card on the right for larger screens */}
+          {/* Short “card” on right side for larger screens */}
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
-              From emergency leaks at midnight to full bathroom tiling that looks like a
-              hotel – we keep your home safe, dry and beautifully finished.
+              From emergency leaks at midnight to full bathroom tiling that looks
+              like a hotel – we keep your home safe, dry and beautifully finished.
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
-              <p>✓ Photos before & after each job</p>
+              <p>✓ Photos before &amp; after each job</p>
               <p>✓ Clear pricing and written scope</p>
             </div>
           </aside>
         </div>
       </section>
 
-      {/* 24/7 STORM + WEATHER STATUS */}
+      {/* 24/7 STORM + WEATHER STATUS CARDS */}
       <section className="section section-alt">
         <div className="container grid-2">
           {/* Storm Call-out */}
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">
-              Red warning, heavy rain or leaking roof – we respond fast, day or night.
+              Red warning, heavy rain or leaking roof – we respond fast, day or
+              night.
             </p>
 
             <a href="tel:0831762475" className="btn btn-storm">
@@ -99,8 +110,8 @@ export default function HomePage() {
             </a>
 
             <p className="muted small">
-              Elderly emergency call-outs: <strong>50% discount</strong> on the call-out
-              fee.
+              Elderly emergency call-outs: <strong>50% discount</strong> on the
+              call-out fee.
             </p>
           </div>
 
@@ -116,8 +127,7 @@ export default function HomePage() {
             </div>
 
             <p className="muted small">
-              Current:{" "}
-              <strong className="green-text">GREEN warning</strong> – follow{" "}
+              Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
               <span className="brand-inline">Krinedal-R</span> on Facebook for live
               updates.
             </p>
@@ -129,23 +139,24 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ Customer feedback</p>
+            <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – just phenomenal.
-              Clean, fast and extremely professional. Couldn’t be happier.”
+              “Krinedal-R did our full luxury bathroom tiling last week – just
+              phenomenal. Clean, fast and extremely professional. Couldn’t be
+              happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, they arrived close to midnight to make
-              the house safe. Snow, rain and storm didn&apos;t stop them.”
+              “We had a roof leak in heavy rain, they arrived close to midnight to
+              make the house safe. Snow, rain and storm didn&apos;t stop them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span> for
-              latest updates & weather radar posts.
+              Follow us on Facebook: <span className="brand-inline">Krinedal-R</span>{" "}
+              for latest updates &amp; weather radar posts.
             </p>
           </article>
         </div>
@@ -158,8 +169,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
-              Handy calculator to get a feel for budget. Final prices always confirmed
-              after inspection.
+              Handy calculator to get a feel for budget. Final prices always
+              confirmed after inspection.
             </p>
             <label className="field-label">
               Roof area (m²)
@@ -191,8 +202,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
-              For hotel-style bathrooms and premium finishes. Labour only, tiles &
-              materials separate.
+              For hotel-style bathrooms and premium finishes. Labour only, tiles
+              &amp; materials separate.
             </p>
             <label className="field-label">
               Tiled area (m²)
@@ -219,8 +230,8 @@ export default function HomePage() {
               {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Luxury projects can be higher – we&apos;ll always discuss options and
-              finishes with you.
+              Luxury projects can be higher – we&apos;ll always discuss options
+              and finishes with you.
             </p>
           </div>
         </div>
@@ -232,8 +243,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
-              Tell us a bit about your roof, tiling or property project and we&apos;ll
-              come back with options and a rough budget.
+              Tell us a bit about your roof, tiling or property project and
+              we&apos;ll come back with options and a rough budget.
             </p>
 
             <form
@@ -265,7 +276,7 @@ export default function HomePage() {
                   <option>Roof repair</option>
                   <option>Luxury bathroom tiling</option>
                   <option>Kitchen tiling</option>
-                  <option>Painting & fresh-up</option>
+                  <option>Painting &amp; fresh-up</option>
                   <option>Landlord end-of-tenancy</option>
                   <option>Other (describe below)</option>
                 </select>
@@ -293,13 +304,17 @@ export default function HomePage() {
       <section className="section section-dark">
         <div className="container">
           <div className="card card-dark">
-            <h2>Booking & Payment</h2>
+            <h2>Booking &amp; Payment</h2>
             <ul className="list">
               <li>Materials-first options available for new projects</li>
               <li>Clear written scope agreed before starting</li>
-              <li>Digital invoice & payment by bank transfer</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
+            <p className="muted smallest">
+              We keep payments simple with invoice &amp; bank transfer. Card /
+              IBAN integration can be added in the future as the business grows.
+            </p>
           </div>
 
           <footer className="footer">
@@ -307,7 +322,7 @@ export default function HomePage() {
               <span className="footer-name">
                 KRINEDAL-<span className="hero-r">R</span>
               </span>
-              <p className="muted footer-muted">
+              <p className="muted">
                 Premium property care, storm or sunshine – Ireland-wide.
               </p>
             </div>
@@ -341,17 +356,18 @@ export default function HomePage() {
             </div>
           </footer>
         </div>
-      </section>
 
-      {/* Floating WhatsApp button */}
-      <a
-        href="https://wa.me/353831762475"
-        target="_blank"
-        rel="noreferrer"
-        className="whatsapp-float"
-      >
-        WA
-      </a>
+        {/* Floating WhatsApp-style chat button */}
+        <a
+          href="https://wa.me/353831762475"
+          target="_blank"
+          rel="noreferrer"
+          className="floating-chat"
+          aria-label="Chat on WhatsApp"
+        >
+          <span className="floating-chat-icon">💬</span>
+        </a>
+      </section>
     </main>
   );
 }
