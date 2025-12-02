@@ -18,20 +18,11 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* Soft floating Irish flowers instead of birds */}
-        <div className="floating-flowers">
-          <span className="flower flower-1">☘️</span>
-          <span className="flower flower-2">☘️</span>
-          <span className="flower flower-3">☘️</span>
-          <span className="flower flower-4">☘️</span>
-        </div>
-
         <div className="hero-overlay">
           <div className="container hero-inner">
             <div className="hero-text">
               <p className="hero-tag">
-                PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
-                <span className="hero-shamrock">🇮🇪</span>
+                🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span className="hero-shamrock">☘️</span>
               </p>
 
               <h1 className="hero-title">
@@ -44,11 +35,12 @@ export default function HomePage() {
                 rental properties. Snow, rain or storm won’t stop us.
               </p>
 
-              <p className="hero-status">
+              <p className="hero-current-status">
                 Current Ireland weather status:{" "}
-                <span className="hero-status-pill hero-status-green">
+                <span className="status-pill status-pill-green">
                   GREEN – normal conditions
                 </span>
+                <span className="hero-inline-shamrock">☘️</span>
               </p>
 
               <div className="hero-actions">
@@ -72,7 +64,7 @@ export default function HomePage() {
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note hero-note-alert">
+              <p className="hero-note hero-note-warning">
                 *Response time depends on location & weather conditions.
               </p>
             </div>
@@ -93,17 +85,6 @@ export default function HomePage() {
             </aside>
           </div>
         </div>
-
-        {/* Floating WhatsApp bubble (bottom-right) */}
-        <a
-          href="https://wa.me/353831762475"
-          target="_blank"
-          rel="noreferrer"
-          className="floating-whatsapp"
-          aria-label="Chat with Krinedal-R on WhatsApp"
-        >
-          🟢
-        </a>
       </section>
 
       {/* 24/7 STORM + WEATHER STATUS */}
@@ -112,7 +93,7 @@ export default function HomePage() {
           {/* Storm Call-out */}
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
-            <p className="muted">
+            <p className="muted small">
               Red warning, heavy rain or leaking roof – we respond fast, day or
               night.
             </p>
@@ -121,7 +102,7 @@ export default function HomePage() {
               🚨 24/7 STORM EMERGENCY LINE
             </a>
 
-            <p className="muted small">
+            <p className="muted small storm-extra">
               Elderly emergency call-outs: <strong>50% discount</strong> on the
               call-out fee.
             </p>
@@ -139,13 +120,9 @@ export default function HomePage() {
             </div>
 
             <p className="muted small">
-              Current:{" "}
-              <strong className="green-text">
-                GREEN warning – normal conditions
-              </strong>
-              . Follow{" "}
-              <span className="brand-inline">Krinedal-R</span> on Facebook for live
-              updates and storm posts.
+              Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
+              <span className="brand-inline">Krinedal-R</span> on Facebook for
+              live updates & weather radar posts.
             </p>
           </div>
         </div>
@@ -155,7 +132,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ Recent customer feedback</p>
+            <p className="review-label">★★★★★ Customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
               phenomenal. Clean, fast and extremely professional. Couldn’t be
@@ -254,14 +231,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM */}
+      {/* ESTIMATE FORM + BOOKING CALENDAR */}
       <section className="section">
         <div className="container">
           <div className="card">
-            <h2>Request a Free Estimate</h2>
+            <h2>Request a Free Estimate & Preferred Time</h2>
             <p className="muted small">
-              Tell us a bit about your roof, tiling or property project and
-              we&apos;ll come back with options and a rough budget.
+              Tell us a bit about your roof, tiling or property project and pick a
+              day & time that suits you – we&apos;ll confirm by phone or WhatsApp.
             </p>
 
             <form
@@ -299,6 +276,37 @@ export default function HomePage() {
                 </select>
               </label>
 
+              {/* Booking calendar bit */}
+              <div className="booking-row">
+                <label className="field-label booking-field">
+                  Preferred visit date
+                  <input
+                    name="Preferred date"
+                    type="date"
+                    className="field-input"
+                  />
+                </label>
+
+                <label className="field-label booking-field">
+                  Preferred time
+                  <input
+                    name="Preferred time"
+                    type="time"
+                    className="field-input"
+                  />
+                </label>
+              </div>
+
+              <label className="field-label">
+                Flexibility
+                <select name="Flexibility" className="field-input">
+                  <option>Exact time if possible</option>
+                  <option>Any time that day</option>
+                  <option>Evenings / weekends best</option>
+                  <option>As soon as you can (urgent)</option>
+                </select>
+              </label>
+
               <label className="field-label">
                 Tell us a bit about the job
                 <textarea
@@ -310,7 +318,7 @@ export default function HomePage() {
               </label>
 
               <button type="submit" className="btn btn-primary btn-full">
-                Send estimate request
+                Send estimate & booking request
               </button>
             </form>
           </div>
@@ -375,6 +383,17 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
+
+      {/* Floating WhatsApp bubble */}
+      <a
+        href="https://wa.me/353831762475"
+        target="_blank"
+        rel="noreferrer"
+        className="floating-whatsapp"
+        aria-label="Chat on WhatsApp"
+      >
+        💬
+      </a>
     </main>
   );
 }
