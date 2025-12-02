@@ -1,9 +1,10 @@
+// app/layout.jsx
 import "./globals.css";
 
 export const metadata = {
-  title: "Krinedal-R | Premium Roofing, Tiling & Property Care",
+  title: "Krinedal-R | Premium Roofing & Luxury Tiling",
   description:
-    "Luxury bathroom tiling, full roof renewals, storm damage call-outs and landlord-ready property refresh across Ireland.",
+    "24/7 storm damage call-out, full roof renewals and luxury tiling for homes and rental properties across Ireland.",
 };
 
 export default function RootLayout({ children }) {
