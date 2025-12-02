@@ -16,16 +16,16 @@ export default function HomePage() {
 
   return (
     <main>
-      {/* FAMILY BIRDS – FLYING OVER THE PAGE */}
-      <div className="birds-layer" aria-hidden="true">
-        <span className="bird bird-1">🕊️</span>
-        <span className="bird bird-2">🕊️</span>
-        <span className="bird bird-3">🕊️</span>
-        <span className="bird bird-4">🕊️</span>
-      </div>
-
       {/* HERO */}
       <section className="hero">
+        {/* birds */}
+        <div className="birds">
+          <span className="bird bird-1">🕊️</span>
+          <span className="bird bird-2">🕊️</span>
+          <span className="bird bird-3">🕊️</span>
+          <span className="bird bird-4">🕊️</span>
+        </div>
+
         <div className="hero-overlay">
           <div className="container hero-inner">
             <div className="hero-text">
@@ -34,9 +34,8 @@ export default function HomePage() {
               </h1>
 
               <p className="hero-tag">
-                <span className="hero-flag">🇮🇪</span>
-                <span>Premium property care across Ireland</span>
-                <span className="hero-shamrock">☘️</span>
+                <span className="hero-flag">🇮🇪</span>{" "}
+                PREMIUM PROPERTY CARE ACROSS IRELAND
               </p>
 
               <p className="hero-lead">
@@ -66,7 +65,7 @@ export default function HomePage() {
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note hero-note-warning">
+              <p className="hero-note">
                 *Response time depends on location & weather conditions.
               </p>
             </div>
@@ -122,9 +121,12 @@ export default function HomePage() {
             </div>
 
             <p className="muted small">
-              Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
-              <span className="brand-inline">Krinedal-R</span> on Facebook for
-              live updates.
+              Current:{" "}
+              <strong className="green-text">
+                GREEN warning – safe conditions
+              </strong>{" "}
+              – follow <span className="brand-inline">Krinedal-R</span> on
+              Facebook for live updates.
             </p>
           </div>
         </div>
@@ -134,7 +136,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">★★★★★ Customer feedback</p>
+            <p className="review-label">★★★★★ Recent customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
               phenomenal. Clean, fast and extremely professional. Couldn’t be
@@ -153,7 +155,7 @@ export default function HomePage() {
             <p className="review-follow">
               Follow us on Facebook:{" "}
               <span className="brand-inline">Krinedal-R</span> for latest
-              updates & weather radar posts.
+              updates &amp; weather radar posts.
             </p>
           </article>
         </div>
@@ -200,7 +202,7 @@ export default function HomePage() {
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
               For hotel-style bathrooms and premium finishes. Labour only, tiles
-              & materials separate.
+              &amp; materials separate.
             </p>
             <label className="field-label">
               Tiled area (m²)
@@ -240,8 +242,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
-              Tell us a bit about your roof, tiling or property project and
-              we&apos;ll come back with options and a rough budget.
+              Tell us a bit about your roof, tiling or property project and we&apos;ll
+              come back with options and a rough budget.
             </p>
 
             <form
@@ -273,7 +275,7 @@ export default function HomePage() {
                   <option>Roof repair</option>
                   <option>Luxury bathroom tiling</option>
                   <option>Kitchen tiling</option>
-                  <option>Painting & fresh-up</option>
+                  <option>Painting &amp; fresh-up</option>
                   <option>Landlord end-of-tenancy</option>
                   <option>Other (describe below)</option>
                 </select>
@@ -305,12 +307,12 @@ export default function HomePage() {
             <ul className="list">
               <li>Materials-first options available for new projects</li>
               <li>Clear written scope agreed before starting</li>
-              <li>Digital invoice & payment by bank transfer</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
             <p className="muted smallest">
               Straight card / IBAN payment on the website can be added in the
-              future – for now we keep it simple and direct with invoice &
+              future – for now we keep it simple and direct with invoice &amp;
               transfer.
             </p>
           </div>
@@ -334,7 +336,8 @@ export default function HomePage() {
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
               <p>
-                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web:{" "}
+                <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
 
               <div className="footer-buttons">
@@ -354,18 +357,6 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
-
-      {/* FLOATING WHATSAPP BUBBLE */}
-      <div className="floating-whatsapp">
-        <a
-          href="https://wa.me/353831762475"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Chat on WhatsApp"
-        >
-          💬
-        </a>
-      </div>
     </main>
   );
 }
