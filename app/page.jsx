@@ -5,9 +5,9 @@ import { useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(45); // €/m² example
+  const [roofRate, setRoofRate] = useState(65); // €/m² – updated guide
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(38); // €/m² example
+  const [tileRate, setTileRate] = useState(55); // €/m² – updated guide
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
@@ -18,61 +18,86 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* floating shamrock in the background */}
-        <span className="floating-clover floating-clover-1">☘️</span>
-        <div className="container hero-inner">
-          <div className="hero-text-card">
-            <p className="hero-tag">
-              🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
-              <span className="hero-shamrock">☘️</span>
-            </p>
+        {/* main hero card sitting on top of full–brightness photo */}
+        <div className="container hero-card">
+          {/* floating shamrock near top-left of hero card */}
+          <span className="floating-shamrock hero-shamrock">☘️</span>
 
-            <h1 className="hero-title">
-              KRINEDAL-<span className="hero-r">R</span>
-            </h1>
+          <div className="hero-inner">
+            <div className="hero-text">
+              <p className="hero-tag">
+                <span role="img" aria-label="Irish flag">
+                  🇮🇪
+                </span>{" "}
+                PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
+                <span className="hero-shamrock-inline">☘️</span>
+              </p>
 
-            <p className="hero-services">
-              Roofing · Luxury Tiling · Painting · Storm Damage · Landlord
-              Fresh-Ups
-            </p>
+              <h1 className="hero-title">
+                KRINEDAL-<span className="hero-r">R</span>
+              </h1>
 
-            <p className="hero-lead">
-              24/7 storm damage call-out, full roof renewals and{" "}
-              <span className="hero-strong">luxury tiling</span> for homes and
-              rental properties. Snow, rain or storm won’t stop us.
-            </p>
+              <p className="hero-services-line">
+                ROOFING · LUXURY TILING · PAINTING · STORM DAMAGE · LANDLORD
+                FRESH-UPS
+              </p>
 
-            <p className="hero-weather-line">
-              Current Ireland weather status:{" "}
-              <span className="hero-weather-pill">GREEN – normal conditions</span>{" "}
-              <span className="hero-inline-clover">☘️</span>
-            </p>
+              <p className="hero-lead">
+                24/7 storm damage call-out, full roof renewals and{" "}
+                <span className="hero-strong">luxury tiling</span> for homes and
+                rental properties. Snow, rain or storm won’t stop us.
+              </p>
 
-            <div className="hero-actions">
-              <a href="tel:0831762475" className="btn btn-primary">
-                Call 24/7 Storm Line
-              </a>
-              <a
-                href="https://wa.me/353831762475"
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-outline"
-              >
-                WhatsApp us now
-              </a>
+              <p className="hero-weather-label">
+                Current Ireland weather status:
+              </p>
+              <div className="hero-weather-row">
+                <span className="pill pill-hero-green">
+                  GREEN – normal conditions
+                </span>
+                <span className="hero-weather-clover">☘️</span>
+              </div>
+
+              <div className="hero-actions">
+                <a href="tel:0831762475" className="btn btn-primary">
+                  Call 24/7 Storm Line
+                </a>
+                <a
+                  href="https://wa.me/353831762475"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-outline"
+                >
+                  WhatsApp us now
+                </a>
+              </div>
+
+              <ul className="hero-bullets">
+                <li>Emergency storm make-safe within hours*</li>
+                <li>Full roof change & leak tracing</li>
+                <li>Luxury bathroom & kitchen tiling</li>
+                <li>Landlord-ready refresh between tenants</li>
+              </ul>
+
+              <p className="hero-note">
+                *Response time depends on location & weather conditions.
+              </p>
             </div>
 
-            <ul className="hero-bullets">
-              <li>Emergency storm make-safe within hours*</li>
-              <li>Full roof change & leak tracing</li>
-              <li>Luxury bathroom & kitchen tiling</li>
-              <li>Landlord-ready refresh between tenants</li>
-            </ul>
-
-            <p className="hero-note">
-              *Response time depends on location & <br />
-              <span className="hero-note-strong">weather conditions.</span>
-            </p>
+            {/* Short “card” on right side for larger screens */}
+            <aside className="hero-side-card">
+              <h2>Fast, respectful property care</h2>
+              <p>
+                From emergency leaks at midnight to full bathroom tiling that
+                looks like a hotel – we keep your home safe, dry and beautifully
+                finished.
+              </p>
+              <div className="hero-side-list">
+                <p>✓ 24/7 emergency line</p>
+                <p>✓ Photos before & after each job</p>
+                <p>✓ Clear pricing and written scope</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -103,23 +128,24 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <div className="weather-pills">
-              <span className="pill pill-green">Green</span>
-              <span className="pill pill-yellow">Yellow</span>
-              <span className="pill pill-orange">Orange</span>
-              <span className="pill pill-red">Red</span>
+              <button className="pill pill-green">Green</button>
+              <button className="pill pill-yellow">Yellow</button>
+              <button className="pill pill-orange">Orange</button>
+              <button className="pill pill-red">Red</button>
             </div>
 
             <p className="muted small">
-              Current: <strong className="green-text">GREEN warning</strong> – follow{" "}
+              Current:{" "}
+              <strong className="green-text">GREEN warning</strong> – follow{" "}
               <a
                 href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                 target="_blank"
                 rel="noreferrer"
-                className="brand-inline-link"
+                className="brand-inline link-inline"
               >
                 Krinedal-R on Facebook
               </a>{" "}
-              for live updates.
+              for live updates & weather radar posts.
             </p>
           </div>
         </div>
@@ -151,7 +177,7 @@ export default function HomePage() {
                 href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                 target="_blank"
                 rel="noreferrer"
-                className="brand-inline-link"
+                className="brand-inline link-inline"
               >
                 Krinedal-R
               </a>{" "}
@@ -236,11 +262,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM */}
+      {/* SIMPLE BOOKING CALENDAR (visual only) */}
       <section className="section">
         <div className="container">
           <div className="card">
-            <span className="floating-clover floating-clover-2">☘️</span>
+            <h2>Booking calendar – quick view</h2>
+            <p className="muted small">
+              Pick the day that suits you best and include it in your message
+              below – we&apos;ll text or call back to confirm a time.
+            </p>
+
+            <div className="calendar-grid">
+              <div className="calendar-cell">
+                <span className="cal-day">Mon</span>
+                <span className="cal-status cal-free">Spaces</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Tue</span>
+                <span className="cal-status cal-limited">Few left</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Wed</span>
+                <span className="cal-status cal-full">Booking up</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Thu</span>
+                <span className="cal-status cal-free">Spaces</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Fri</span>
+                <span className="cal-status cal-limited">Few left</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Sat</span>
+                <span className="cal-status cal-free">Daytime only</span>
+              </div>
+              <div className="calendar-cell">
+                <span className="cal-day">Sun</span>
+                <span className="cal-status cal-emergency">Emergency only</span>
+              </div>
+            </div>
+
+            <p className="muted smallest">
+              For red-warning storms or serious leaks, please{" "}
+              <strong>call the 24/7 emergency line</strong> instead of using the
+              calendar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ESTIMATE FORM */}
+      <section className="section section-alt">
+        <div className="container">
+          <div className="card">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
               Tell us a bit about your roof, tiling or property project and
@@ -260,12 +335,22 @@ export default function HomePage() {
 
               <label className="field-label">
                 Phone number
-                <input name="Phone" type="tel" className="field-input" required />
+                <input
+                  name="Phone"
+                  type="tel"
+                  className="field-input"
+                  required
+                />
               </label>
 
               <label className="field-label">
                 Email
-                <input name="Email" type="email" className="field-input" required />
+                <input
+                  name="Email"
+                  type="email"
+                  className="field-input"
+                  required
+                />
               </label>
 
               <label className="field-label">
@@ -311,6 +396,9 @@ export default function HomePage() {
               <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
+            <p className="muted smallest">
+              We keep payment simple and direct with invoice &amp; bank transfer.
+            </p>
           </div>
 
           <footer className="footer">
@@ -335,6 +423,16 @@ export default function HomePage() {
                 Web:{" "}
                 <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
+              <p>
+                Facebook:{" "}
+                <a
+                  href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Visit Krinedal-R on Facebook
+                </a>
+              </p>
 
               <div className="footer-buttons">
                 <a href="tel:0831762475" className="btn footer-call">
@@ -353,15 +451,14 @@ export default function HomePage() {
           </footer>
         </div>
 
-        {/* floating WhatsApp chat button */}
+        {/* floating WhatsApp bubble */}
         <a
           href="https://wa.me/353831762475"
           target="_blank"
           rel="noreferrer"
-          className="floating-whatsapp"
-          aria-label="Chat on WhatsApp"
+          className="floating-chat"
         >
-          💬
+          <span className="floating-chat-icon">💬</span>
         </a>
       </section>
     </main>
