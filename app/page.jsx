@@ -5,9 +5,9 @@ import { useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(58); // €/m² example
+  const [roofRate, setRoofRate] = useState(45); // €/m² example
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(48); // €/m² example
+  const [tileRate, setTileRate] = useState(38); // €/m² example
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
@@ -18,40 +18,34 @@ export default function HomePage() {
     <main>
       {/* HERO */}
       <section className="hero">
-        <div className="hero-inner container">
-          <div className="hero-text">
-            <p className="hero-tag">
-              <span role="img" aria-label="Ireland flag">
-                🇮🇪
-              </span>{" "}
-              PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
-              <span className="hero-shamrock" aria-hidden="true">
-                ☘️
-              </span>
-            </p>
+        {/* floating shamrocks */}
+        <span className="shamrock shamrock-left">☘️</span>
+        <span className="shamrock shamrock-right">☘️</span>
 
+        <div className="container hero-inner">
+          <div className="hero-text">
             <h1 className="hero-title">
               KRINEDAL-<span className="hero-r">R</span>
             </h1>
 
-            <p className="hero-services">
-              ROOFING · LUXURY TILING · PAINTING · STORM DAMAGE · LANDLORD
-              FRESH-UPS
+            {/* green line now UNDER the big title */}
+            <p className="hero-tag">
+              🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
 
             <p className="hero-lead">
               24/7 storm damage call-out, full roof renewals and{" "}
               <span className="hero-strong">luxury tiling</span> for homes and
-              rental properties. Snow, rain or storm won&apos;t stop us.
+              rental properties. Snow, rain or storm won’t stop us.
             </p>
 
-            <p className="hero-weather-line">
-              Current Ireland weather status:{" "}
-              <span className="weather-pill-main">
+            <p className="hero-weather-label">Current Ireland weather status:</p>
+            <div className="hero-weather-row">
+              <span className="weather-chip weather-chip-green">
                 GREEN – normal conditions
               </span>
-              <span className="floating-shamrock shamrock-hero">☘️</span>
-            </p>
+              <span className="hero-weather-shamrock">☘️</span>
+            </div>
 
             <div className="hero-actions">
               <a href="tel:0831762475" className="btn btn-primary">
@@ -69,8 +63,8 @@ export default function HomePage() {
 
             <ul className="hero-bullets">
               <li>Emergency storm make-safe within hours*</li>
-              <li>Full roof change &amp; leak tracing</li>
-              <li>Luxury bathroom &amp; kitchen tiling</li>
+              <li>Full roof change & leak tracing</li>
+              <li>Luxury bathroom & kitchen tiling</li>
               <li>Landlord-ready refresh between tenants</li>
             </ul>
 
@@ -94,11 +88,6 @@ export default function HomePage() {
             </div>
           </aside>
         </div>
-
-        {/* floating shamrocks */}
-        <span className="floating-shamrock shamrock-top-left">☘️</span>
-        <span className="floating-shamrock shamrock-top-right">☘️</span>
-        <span className="floating-shamrock shamrock-mid-right">☘️</span>
       </section>
 
       {/* 24/7 STORM + WEATHER STATUS */}
@@ -135,15 +124,16 @@ export default function HomePage() {
 
             <p className="muted small">
               Current: <strong className="green-text">GREEN warning</strong> –{" "}
+              follow{" "}
               <a
                 href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                 target="_blank"
                 rel="noreferrer"
-                className="brand-inline link-underline"
+                className="brand-inline"
               >
-                follow Krinedal-R on Facebook
+                Krinedal-R on Facebook
               </a>{" "}
-              for live updates &amp; weather radar posts.
+              for live updates.
             </p>
           </div>
         </div>
@@ -156,8 +146,8 @@ export default function HomePage() {
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn&apos;t
-              be happier.”
+              phenomenal. Clean, fast and extremely professional. Couldn’t be
+              happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
@@ -170,14 +160,14 @@ export default function HomePage() {
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              Follow us on Facebook:{" "}
+              Follow us on{" "}
               <a
                 href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                 target="_blank"
                 rel="noreferrer"
-                className="brand-inline link-underline"
+                className="brand-inline"
               >
-                Krinedal-R
+                Facebook: Krinedal-R
               </a>{" "}
               for latest updates &amp; weather radar posts.
             </p>
@@ -192,10 +182,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
-              Handy calculator to get a feel for budget. Full roof renewals
-              usually range from <strong>€5,800–€10,000+</strong> depending on
-              house size and condition. Final prices are always confirmed after
-              inspection.
+              Handy calculator to get a feel for budget. Final prices always
+              confirmed after inspection.
             </p>
             <label className="field-label">
               Roof area (m²)
@@ -227,8 +215,8 @@ export default function HomePage() {
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
-              For hotel-style bathrooms and premium finishes. Labour only – tiles
-              &amp; materials are separate.
+              For hotel-style bathrooms and premium finishes. Labour only, tiles
+              &amp; materials separate.
             </p>
             <label className="field-label">
               Tiled area (m²)
@@ -263,7 +251,7 @@ export default function HomePage() {
       </section>
 
       {/* ESTIMATE FORM */}
-      <section className="section section-dark">
+      <section className="section section-form">
         <div className="container">
           <div className="card card-dark">
             <h2>Request a Free Estimate</h2>
@@ -285,22 +273,12 @@ export default function HomePage() {
 
               <label className="field-label">
                 Phone number
-                <input
-                  name="Phone"
-                  type="tel"
-                  className="field-input"
-                  required
-                />
+                <input name="Phone" type="tel" className="field-input" required />
               </label>
 
               <label className="field-label">
                 Email
-                <input
-                  name="Email"
-                  type="email"
-                  className="field-input"
-                  required
-                />
+                <input name="Email" type="email" className="field-input" required />
               </label>
 
               <label className="field-label">
@@ -332,53 +310,75 @@ export default function HomePage() {
               </button>
             </form>
           </div>
+        </div>
+      </section>
 
-          {/* SIMPLE BOOKING CALENDAR CARD */}
-          <div className="card card-dark booking-card">
+      {/* BOOKING CALENDAR */}
+      <section className="section section-dark">
+        <div className="container">
+          <div className="card card-dark calendar-card">
             <h2>Booking calendar (rough guide)</h2>
-            <p className="muted smallest">
+            <p className="muted small">
               Pick a day that suits you – we&apos;ll confirm exact time by phone
               or WhatsApp after your request.
             </p>
 
-            <div className="booking-calendar">
-              <div className="booking-row booking-header">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
+            <div className="calendar-grid">
+              <div className="calendar-row calendar-header">
+                <span>MON</span>
+                <span>TUE</span>
+                <span>WED</span>
+                <span>THU</span>
+                <span>FRI</span>
+                <span>SAT</span>
+                <span>SUN</span>
               </div>
-
-              <div className="booking-row">
-                <span className="slot-free">1</span>
-                <span className="slot-free">2</span>
-                <span className="slot-busy">3</span>
-                <span className="slot-free">4</span>
-                <span className="slot-free">5</span>
-                <span className="slot-limited">6</span>
-                <span className="slot-free">7</span>
+              <div className="calendar-row">
+                <span className="cal-dot cal-free">1</span>
+                <span className="cal-dot cal-free">2</span>
+                <span className="cal-dot cal-busy">3</span>
+                <span className="cal-dot cal-free">4</span>
+                <span className="cal-dot cal-free">5</span>
+                <span className="cal-dot cal-busy">6</span>
+                <span className="cal-dot cal-free">7</span>
               </div>
-
-              <div className="booking-row">
-                <span className="slot-free">8</span>
-                <span className="slot-limited">9</span>
-                <span className="slot-busy">10</span>
-                <span className="slot-free">11</span>
-                <span className="slot-free">12</span>
-                <span className="slot-limited">13</span>
-                <span className="slot-free">14</span>
+              <div className="calendar-row">
+                <span className="cal-dot cal-free">8</span>
+                <span className="cal-dot cal-limited">9</span>
+                <span className="cal-dot cal-busy">10</span>
+                <span className="cal-dot cal-free">11</span>
+                <span className="cal-dot cal-free">12</span>
+                <span className="cal-dot cal-busy">13</span>
+                <span className="cal-dot cal-free">14</span>
               </div>
-
-              <p className="booking-legend muted smallest">
-                <span className="legend-box legend-free" /> Free ·{" "}
-                <span className="legend-box legend-limited" /> Limited ·{" "}
-                <span className="legend-box legend-busy" /> Busy – emergency
-                only
-              </p>
             </div>
+
+            <div className="calendar-legend">
+              <span>
+                <span className="legend-dot cal-free" /> Free
+              </span>
+              <span>
+                <span className="legend-dot cal-limited" /> Limited
+              </span>
+              <span>
+                <span className="legend-dot cal-busy" /> Busy – emergency only
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BOOKING & FOOTER */}
+      <section className="section section-dark">
+        <div className="container">
+          <div className="card card-dark">
+            <h2>Booking &amp; Payment</h2>
+            <ul className="list">
+              <li>Materials-first options available for new projects</li>
+              <li>Clear written scope agreed before starting</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
+              <li>Photos provided for your records on request</li>
+            </ul>
           </div>
 
           <footer className="footer">
@@ -386,7 +386,7 @@ export default function HomePage() {
               <span className="footer-name">
                 KRINEDAL-<span className="hero-r">R</span>
               </span>
-              <p className="muted">
+              <p className="muted footer-line">
                 Premium property care, storm or sunshine – Ireland-wide.
               </p>
             </div>
@@ -409,7 +409,6 @@ export default function HomePage() {
                   href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                   target="_blank"
                   rel="noreferrer"
-                  className="link-underline"
                 >
                   Visit our page
                 </a>
@@ -431,18 +430,17 @@ export default function HomePage() {
             </div>
           </footer>
         </div>
-      </section>
 
-      {/* FLOATING WHATSAPP BUBBLE */}
-      <a
-        href="https://wa.me/353831762475"
-        target="_blank"
-        rel="noreferrer"
-        className="floating-whatsapp"
-        aria-label="Chat on WhatsApp"
-      >
-        <span className="floating-whatsapp-inner">💬</span>
-      </a>
+        {/* floating WhatsApp bubble */}
+        <a
+          href="https://wa.me/353831762475"
+          target="_blank"
+          rel="noreferrer"
+          className="wa-floating"
+        >
+          💬
+        </a>
+      </section>
     </main>
   );
 }
