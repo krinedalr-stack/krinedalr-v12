@@ -5,9 +5,9 @@ import { useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(45); // €/m² example
+  const [roofRate, setRoofRate] = useState(45); // €/m² example for general roofing work
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(38); // €/m² example
+  const [tileRate, setTileRate] = useState(48); // €/m² example for luxury tiling
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
@@ -209,6 +209,11 @@ export default function HomePage() {
               Rough roofing total:{" "}
               {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
+            <p className="muted smallest">
+              Typical full roof renewal for a standard Irish home usually falls
+              between <strong>€5,800–€10,000</strong> depending on size,
+              materials and access.
+            </p>
           </div>
 
           {/* Tiling */}
@@ -243,8 +248,10 @@ export default function HomePage() {
               {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Luxury projects can be higher – we&apos;ll always discuss options
-              and finishes with you.
+              Premium luxury tiling typically ranges between{" "}
+              <strong>€42–€58 per m²</strong>; this calculator starts at{" "}
+              <strong>€48 per m²</strong> as an example. Final quote depends on
+              tile type, layout and details.
             </p>
           </div>
         </div>
