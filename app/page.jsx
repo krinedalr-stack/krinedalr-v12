@@ -63,8 +63,8 @@ export default function HomePage() {
 
             <ul className="hero-bullets">
               <li>Emergency storm make-safe within hours*</li>
-              <li>Full roof change & leak tracing</li>
-              <li>Luxury bathroom & kitchen tiling</li>
+              <li>Full roof change &amp; leak tracing</li>
+              <li>Luxury bathroom &amp; kitchen tiling</li>
               <li>Landlord-ready refresh between tenants</li>
             </ul>
 
@@ -250,14 +250,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM */}
+      {/* ESTIMATE FORM + REAL DATE/TIME PICKER */}
       <section className="section section-form">
         <div className="container">
           <div className="card card-dark">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
               Tell us a bit about your roof, tiling or property project and
-              we&apos;ll come back with options and a rough budget.
+              we&apos;ll come back with options, a rough budget and confirm a
+              time around your preferred date.
             </p>
 
             <form
@@ -295,6 +296,28 @@ export default function HomePage() {
                 </select>
               </label>
 
+              {/* *** REAL BOOKING CALENDAR & TIME PICKER *** */}
+              <label className="field-label">
+                Preferred date
+                <input
+                  name="Preferred date"
+                  type="date"
+                  className="field-input"
+                  required
+                />
+              </label>
+
+              <label className="field-label">
+                Preferred time
+                <input
+                  name="Preferred time"
+                  type="time"
+                  className="field-input"
+                  required
+                />
+              </label>
+              {/* *** END DATE/TIME PICKER *** */}
+
               <label className="field-label">
                 Tell us a bit about the job
                 <textarea
@@ -313,62 +336,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BOOKING CALENDAR */}
-      <section className="section section-dark">
-        <div className="container">
-          <div className="card card-dark calendar-card">
-            <h2>Booking calendar (rough guide)</h2>
-            <p className="muted small">
-              Pick a day that suits you – we&apos;ll confirm exact time by phone
-              or WhatsApp after your request.
-            </p>
-
-            <div className="calendar-grid">
-              <div className="calendar-row calendar-header">
-                <span>MON</span>
-                <span>TUE</span>
-                <span>WED</span>
-                <span>THU</span>
-                <span>FRI</span>
-                <span>SAT</span>
-                <span>SUN</span>
-              </div>
-              <div className="calendar-row">
-                <span className="cal-dot cal-free">1</span>
-                <span className="cal-dot cal-free">2</span>
-                <span className="cal-dot cal-busy">3</span>
-                <span className="cal-dot cal-free">4</span>
-                <span className="cal-dot cal-free">5</span>
-                <span className="cal-dot cal-busy">6</span>
-                <span className="cal-dot cal-free">7</span>
-              </div>
-              <div className="calendar-row">
-                <span className="cal-dot cal-free">8</span>
-                <span className="cal-dot cal-limited">9</span>
-                <span className="cal-dot cal-busy">10</span>
-                <span className="cal-dot cal-free">11</span>
-                <span className="cal-dot cal-free">12</span>
-                <span className="cal-dot cal-busy">13</span>
-                <span className="cal-dot cal-free">14</span>
-              </div>
-            </div>
-
-            <div className="calendar-legend">
-              <span>
-                <span className="legend-dot cal-free" /> Free
-              </span>
-              <span>
-                <span className="legend-dot cal-limited" /> Limited
-              </span>
-              <span>
-                <span className="legend-dot cal-busy" /> Busy – emergency only
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BOOKING & FOOTER */}
+      {/* BOOKING & FOOTER (no picture calendar now) */}
       <section className="section section-dark">
         <div className="container">
           <div className="card card-dark">
