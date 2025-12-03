@@ -5,9 +5,9 @@ import { useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(55); // €/m² example for full roof work
+  const [roofRate, setRoofRate] = useState(58); // €/m² – updated guide
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(42); // €/m² example for luxury tiling
+  const [tileRate, setTileRate] = useState(95); // €/m² – luxury guide
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
@@ -16,37 +16,44 @@ export default function HomePage() {
 
   return (
     <main>
+      {/* FLOATING SHAMROCKS */}
+      <div className="floating-shamrocks">
+        <span className="shamrock shamrock-1">☘️</span>
+        <span className="shamrock shamrock-2">☘️</span>
+        <span className="shamrock shamrock-3">☘️</span>
+      </div>
+
       {/* HERO */}
       <section className="hero">
-        {/* little floating “Irish flowers” */}
-        <div className="hero-decor">
-          <span className="flower flower-1" />
-          <span className="flower flower-2" />
-          <span className="flower flower-3" />
-          <span className="flower flower-4" />
-        </div>
-
         <div className="hero-overlay">
           <div className="container hero-inner">
             <div className="hero-text">
+              <p className="hero-tag">
+                <span className="hero-flag">🇮🇪</span>
+                <span className="hero-tag-text">
+                  PREMIUM PROPERTY CARE ACROSS IRELAND
+                </span>
+              </p>
+
               <h1 className="hero-title">
                 KRINEDAL-<span className="hero-r">R</span>
               </h1>
 
-              <p className="hero-tag">
-                PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
-              </p>
-
-              <p className="hero-subline">
-                Roofing · Luxury Tiling · Painting · Storm Damage · Landlord
-                Fresh-Ups
-              </p>
-
               <p className="hero-lead">
                 24/7 storm damage call-out, full roof renewals and{" "}
                 <span className="hero-strong">luxury tiling</span> for homes and
-                rental properties. Snow, rain or storm won&apos;t stop us.
+                rental properties. Snow, rain or storm won’t stop us.
               </p>
+
+              {/* CURRENT WEATHER STATUS (HERO) */}
+              <div className="hero-weather">
+                <p className="hero-weather-label">
+                  Current Ireland weather status:
+                </p>
+                <button className="pill pill-green hero-weather-pill">
+                  GREEN – normal conditions
+                </button>
+              </div>
 
               <div className="hero-actions">
                 <a href="tel:0831762475" className="btn btn-primary">
@@ -69,7 +76,7 @@ export default function HomePage() {
                 <li>Landlord-ready refresh between tenants</li>
               </ul>
 
-              <p className="hero-note">
+              <p className="hero-note hero-note-warning">
                 *Response time depends on location & weather conditions.
               </p>
             </div>
@@ -79,8 +86,8 @@ export default function HomePage() {
               <h2>Fast, respectful property care</h2>
               <p>
                 From emergency leaks at midnight to full bathroom tiling that
-                looks like a hotel – we keep your home safe, dry and
-                beautifully finished.
+                looks like a hotel – we keep your home safe, dry and beautifully
+                finished.
               </p>
               <div className="hero-side-list">
                 <p>✓ 24/7 emergency line</p>
@@ -92,7 +99,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 24/7 STORM + WEATHER STATUS */}
+      {/* 24/7 STORM + WEATHER STATUS CARDS */}
       <section className="section section-alt">
         <div className="container grid-2">
           {/* Storm Call-out */}
@@ -100,7 +107,7 @@ export default function HomePage() {
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">
               Red warning, heavy rain or leaking roof – we respond fast, day or
-              night, to make your home safe.
+              night.
             </p>
 
             <a href="tel:0831762475" className="btn btn-storm">
@@ -126,22 +133,9 @@ export default function HomePage() {
 
             <p className="muted small">
               Current:{" "}
-              <strong className="green-text">
-                GREEN warning – normal conditions
-              </strong>
-              .
-            </p>
-            <p className="muted smallest">
-              Follow{" "}
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="brand-inline"
-              >
-                Krinedal-R on Facebook
-              </a>{" "}
-              for live updates & weather radar posts.
+              <strong className="green-text">GREEN warning</strong> – follow{" "}
+              <span className="brand-inline">Krinedal-R</span> on Facebook for
+              live updates.
             </p>
           </div>
         </div>
@@ -151,11 +145,11 @@ export default function HomePage() {
       <section className="section">
         <div className="container reviews-grid">
           <article className="card review-card">
-            <p className="review-label">Client feedback</p>
+            <p className="review-label">★★★★★ Customer feedback</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn&apos;t
-              be happier.”
+              phenomenal. Clean, fast and extremely professional. Couldn’t be
+              happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
@@ -168,62 +162,16 @@ export default function HomePage() {
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
-              “We now use Krinedal-R as our first call for property issues.”
+              Follow us on Facebook:{" "}
+              <span className="brand-inline">Krinedal-R</span> for latest
+              updates & weather radar posts.
             </p>
           </article>
         </div>
       </section>
 
-      {/* PRICING SNAPSHOT */}
-      <section className="section section-alt">
-        <div className="container">
-          <div className="card">
-            <h2>Pricing snapshot (guide only)</h2>
-            <p className="muted smallest">
-              Final prices always confirmed after inspection. Landlord packages
-              and multi-property rates available on request.
-            </p>
-
-            <div className="pricing-grid">
-              <div>
-                <h3>Storm & Call-Outs</h3>
-                <ul className="list">
-                  <li>Standard daytime call-out from €100</li>
-                  <li>24/7 emergency call-out from €150</li>
-                  <li>Temporary storm make-safe from €350</li>
-                </ul>
-              </div>
-              <div>
-                <h3>Roofing</h3>
-                <ul className="list">
-                  <li>Minor roof repairs from €120</li>
-                  <li>Leak tracing & tile replacement from €220</li>
-                  <li>Full roof replacement approx. €5,800 – €10,000</li>
-                </ul>
-              </div>
-              <div>
-                <h3>Luxury Tiling</h3>
-                <ul className="list">
-                  <li>Standard tiling labour from €30–€40 per m²</li>
-                  <li>Luxury / marble tiling from €40–€55 per m²</li>
-                  <li>Complex patterns (herringbone etc.) quoted on design</li>
-                </ul>
-              </div>
-              <div>
-                <h3>Fresh-Ups & Painting</h3>
-                <ul className="list">
-                  <li>End-of-tenancy “fresh-up” from €250</li>
-                  <li>Interior room repaint from €200</li>
-                  <li>Power washing & exterior care quoted per property</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ROOF & TILING CALCULATORS */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container grid-2">
           {/* Roof */}
           <div className="card">
@@ -255,6 +203,10 @@ export default function HomePage() {
             <p className="calc-result">
               Rough roofing total:{" "}
               {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+            </p>
+            <p className="muted smallest">
+              Full roof replacement jobs often range from around €5,800 to
+              €10,000+ depending on size, access and materials.
             </p>
           </div>
 
@@ -298,7 +250,7 @@ export default function HomePage() {
       </section>
 
       {/* ESTIMATE FORM */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container">
           <div className="card">
             <h2>Request a Free Estimate</h2>
@@ -325,17 +277,12 @@ export default function HomePage() {
 
               <label className="field-label">
                 Email
-                <input name="Email" type="email" className="field-input" required />
-              </label>
-
-              <label className="field-label">
-                Preferred date
-                <input name="Preferred date" type="date" className="field-input" />
-              </label>
-
-              <label className="field-label">
-                Preferred time
-                <input name="Preferred time" type="time" className="field-input" />
+                <input
+                  name="Email"
+                  type="email"
+                  className="field-input"
+                  required
+                />
               </label>
 
               <label className="field-label">
@@ -381,10 +328,6 @@ export default function HomePage() {
               <li>Digital invoice & payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
-            <p className="muted smallest">
-              Landlord bundles, multi-property and repeat-work rates are
-              available – please contact us directly to discuss.
-            </p>
           </div>
 
           <footer className="footer">
@@ -427,17 +370,6 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
-
-      {/* FLOATING WHATSAPP BUTTON */}
-      <a
-        href="https://wa.me/353831762475"
-        target="_blank"
-        rel="noreferrer"
-        className="whatsapp-float"
-        aria-label="Chat on WhatsApp"
-      >
-        WA
-      </a>
     </main>
   );
 }
