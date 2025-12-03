@@ -15,14 +15,13 @@ body {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #0f172a;
-  color: #111827;
+  background: #050816;
+  color: #e5e7eb;
   line-height: 1.6;
 }
 
 main {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #fef3c7 0, #020617 65%);
 }
 
 a {
@@ -48,7 +47,8 @@ a:hover {
 }
 
 .section-alt {
-  background: #fff9ed;
+  background: #fefaf3;
+  color: #020617;
 }
 
 .section-dark {
@@ -66,7 +66,7 @@ a:hover {
   }
 }
 
-/* HERO */
+/* HERO – 100% VISIBLE PICTURE */
 
 .hero {
   background-image: url("/hero.jpg");
@@ -74,85 +74,97 @@ a:hover {
   background-position: center;
   background-repeat: no-repeat;
   padding: 56px 0 40px;
-  color: #111827;
+  color: #f9fafb;
 }
 
 .hero-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 16px 24px;
-  background: rgba(255, 255, 255, 0.82);
-  border-radius: 28px;
-  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
 }
 
-.hero-header {
-  margin-bottom: 8px;
+.hero-text-card {
+  width: 100%;
+  max-width: 780px;
+  background: rgba(0, 0, 0, 0.28); /* small dark card only behind text */
+  border-radius: 32px;
+  padding: 24px 18px 20px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+}
+
+.hero-tag {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #bbf7d0;
+  margin-bottom: 4px;
+}
+
+.hero-shamrock {
+  margin-left: 4px;
 }
 
 .hero-title {
   font-size: 2.8rem;
   line-height: 1.05;
-  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
 }
 
 .hero-r {
-  color: #dc2626;
+  color: #f97316;
 }
 
-.hero-tagline {
-  margin-top: 4px;
-  font-size: 0.86rem;
-  letter-spacing: 0.16em;
+.hero-services {
+  font-size: 0.9rem;
   text-transform: uppercase;
-  color: #15803d;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.hero-tag-text {
-  white-space: nowrap;
-}
-
-.hero-shamrock {
-  font-size: 1rem;
-}
-
-.hero-inline-shamrock {
-  margin-left: 4px;
+  letter-spacing: 0.16em;
+  color: #facc15;
+  margin-bottom: 10px;
 }
 
 .hero-lead {
-  margin-top: 16px;
-  font-size: 1rem;
-  color: #111827;
+  font-size: 1.02rem;
+  color: #e5e7eb;
+  margin-bottom: 10px;
 }
 
 .hero-strong {
   font-weight: 700;
 }
 
-.hero-weather-inline {
-  margin-top: 10px;
+.hero-weather-line {
   font-size: 0.9rem;
-  color: #111827;
+  margin-bottom: 10px;
+}
+
+.hero-weather-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #ecfdf5;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.hero-inline-clover {
+  margin-left: 4px;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 16px;
+  margin: 10px 0 12px;
 }
 
 .hero-bullets {
   list-style: disc;
   margin-left: 18px;
   font-size: 0.95rem;
-  color: #1f2933;
-  margin-top: 12px;
 }
 
 .hero-bullets li + li {
@@ -162,10 +174,12 @@ a:hover {
 .hero-note {
   font-size: 0.8rem;
   margin-top: 10px;
+  color: #fecaca;
 }
 
-.hero-note-warning {
-  color: #b91c1c;
+.hero-note-strong {
+  color: #fecaca;
+  font-weight: 700;
 }
 
 /* BUTTONS */
@@ -193,7 +207,7 @@ a:hover {
 .btn-primary {
   background: #f97316;
   color: #111827;
-  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.45);
 }
 
 .btn-primary:hover {
@@ -201,13 +215,13 @@ a:hover {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.4);
   border-color: #f97316;
-  color: #c2410c;
+  color: #fed7aa;
 }
 
 .btn-outline:hover {
-  background: #fffbeb;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .btn-storm {
@@ -227,33 +241,14 @@ a:hover {
   margin-top: 12px;
 }
 
-/* FLOATING WHATSAPP BUBBLE */
-
-.wa-floating {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
-  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #022c22;
-  font-weight: 700;
-  z-index: 40;
-}
-
 /* CARDS */
 
 .card {
   background: #ffffff;
-  border-radius: 20px;
-  padding: 20px 18px 18px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 24px;
+  padding: 22px 18px 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+  border: 1px solid rgba(148, 163, 184, 0.32);
 }
 
 .card h2 {
@@ -264,6 +259,10 @@ a:hover {
 /* TEXT UTILITIES */
 
 .muted {
+  color: #9ca3af;
+}
+
+.section-alt .muted {
   color: #4b5563;
 }
 
@@ -277,14 +276,19 @@ a:hover {
 
 .green-text {
   color: #16a34a;
-}
-
-.fb-link {
-  color: #2563eb;
   font-weight: 600;
 }
 
-.fb-link:hover {
+.brand-inline {
+  font-weight: 600;
+}
+
+.brand-inline-link {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.brand-inline-link:hover {
   text-decoration: underline;
 }
 
@@ -342,37 +346,30 @@ a:hover {
 
 .pill {
   border-radius: 999px;
-  padding: 6px 16px;
+  padding: 6px 18px;
   border: none;
   font-size: 0.88rem;
-  font-weight: 600;
-}
-
-.pill-green-inline {
-  background: #22c55e;
-  color: #052e16;
-  padding: 3px 10px;
-  border-radius: 999px;
+  font-weight: 700;
 }
 
 .pill-green {
-  background: #22c55e;
-  color: #f9fafb;
+  background: #16a34a;
+  color: #ecfdf5;
 }
 
 .pill-yellow {
-  background: #eab308;
+  background: #facc15;
   color: #422006;
 }
 
 .pill-orange {
-  background: #f97316;
-  color: #7c2d12;
+  background: #fb923c;
+  color: #451a03;
 }
 
 .pill-red {
-  background: #dc2626;
-  color: #fee2e2;
+  background: #ef4444;
+  color: #fef2f2;
 }
 
 /* FORM */
@@ -380,7 +377,7 @@ a:hover {
 .estimate-form {
   display: grid;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .field-label {
@@ -391,17 +388,20 @@ a:hover {
   color: #111827;
 }
 
+.section-dark .field-label {
+  color: #e5e7eb;
+}
+
 .field-input {
   border-radius: 999px;
   border: 1px solid #d1d5db;
   padding: 9px 14px;
   font: inherit;
-  background: #020617;
-  color: #f9fafb;
+  background: #f9fafb;
 }
 
 textarea.field-input {
-  border-radius: 16px;
+  border-radius: 18px;
   resize: vertical;
 }
 
@@ -418,10 +418,6 @@ textarea.field-input {
 }
 
 /* BOOKING / FOOTER */
-
-.section-dark {
-  color: #f9fafb;
-}
 
 .card-dark {
   background: #020617;
@@ -443,6 +439,7 @@ textarea.field-input {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  color: #e5e7eb;
 }
 
 @media (min-width: 720px) {
@@ -456,10 +453,6 @@ textarea.field-input {
 .footer-name {
   font-size: 1.3rem;
   font-weight: 700;
-}
-
-.footer-tagline {
-  margin-top: 4px;
 }
 
 .footer-contact p {
@@ -490,23 +483,70 @@ textarea.field-input {
   background: #38bdf8;
 }
 
-.footer-facebook {
-  background: #2563eb;
-  color: #f9fafb;
+/* FLOATING WHATSAPP BUTTON */
+
+.floating-whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  box-shadow: 0 22px 50px rgba(5, 150, 105, 0.5);
+  z-index: 40;
 }
 
-.footer-facebook:hover {
-  background: #3b82f6;
+/* FLOATING CLOVERS */
+
+.floating-clover {
+  position: absolute;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: floatClover 16s linear infinite;
+}
+
+.floating-clover-1 {
+  top: 18%;
+  left: 6%;
+}
+
+.floating-clover-2 {
+  bottom: 10%;
+  left: 18%;
+}
+
+@keyframes floatClover {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(40px, -18px) rotate(12deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(-8deg);
+    opacity: 0.8;
+  }
 }
 
 /* SMALL SCREEN TWEAKS */
 
 @media (max-width: 600px) {
-  .hero-inner {
-    padding: 18px 16px 20px;
+  .hero {
+    padding-top: 40px;
   }
 
   .hero-title {
     font-size: 2.2rem;
+  }
+
+  .hero-text-card {
+    padding: 18px 14px 16px;
   }
 }
