@@ -54,8 +54,6 @@ a:hover {
   background: #020617;
 }
 
-/* GRID */
-
 .grid-2 {
   display: grid;
   gap: 24px;
@@ -67,20 +65,102 @@ a:hover {
   }
 }
 
+/* FLOATING SHAMROCKS */
+
+.floating-shamrocks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.shamrock {
+  position: absolute;
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+.shamrock-1 {
+  left: 6%;
+  top: 22%;
+  animation: shamrockFloat1 18s linear infinite;
+}
+
+.shamrock-2 {
+  right: 8%;
+  top: 35%;
+  animation: shamrockFloat2 22s linear infinite;
+}
+
+.shamrock-3 {
+  left: 12%;
+  bottom: 18%;
+  animation: shamrockFloat3 20s linear infinite;
+}
+
+@keyframes shamrockFloat1 {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(40px, -40px, 0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(-10px, -80px, 0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes shamrockFloat2 {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-30px, -50px, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(10px, -90px, 0);
+    opacity: 0.85;
+  }
+}
+
+@keyframes shamrockFloat3 {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate3d(50px, -30px, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(-20px, -70px, 0);
+    opacity: 0.8;
+  }
+}
+
 /* HERO */
 
 .hero {
-  position: relative;
   background-image: url("/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 64px 0 48px;
+  padding: 56px 0 40px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  position: relative;
 }
 
 .hero-overlay {
-  /* no strong white cover, just a soft base so text sits nicely */
-  padding: 8px 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.18)
+  );
 }
 
 .hero-inner {
@@ -97,19 +177,7 @@ a:hover {
 
 .hero-text {
   max-width: 640px;
-  text-shadow: 0 1px 3px rgba(15, 23, 42, 0.3);
-}
-
-.hero-title {
-  font-size: 2.8rem;
-  line-height: 1.05;
-  margin-bottom: 4px;
-  color: #020617;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.hero-r {
-  color: #dc2626;
+  color: #111827;
 }
 
 .hero-tag {
@@ -117,25 +185,48 @@ a:hover {
   text-transform: uppercase;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #15803d;
-  margin-bottom: 6px;
+  color: #065f46;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.hero-subline {
-  font-size: 0.9rem;
-  color: #14532d;
-  margin-bottom: 10px;
-  font-weight: 600;
+.hero-flag {
+  font-size: 1rem;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.hero-r {
+  color: #dc2626;
 }
 
 .hero-lead {
   font-size: 1.05rem;
   color: #111827;
   margin-bottom: 16px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .hero-strong {
+  font-weight: 700;
+}
+
+.hero-weather {
+  margin-bottom: 12px;
+}
+
+.hero-weather-label {
+  font-size: 0.9rem;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.hero-weather-pill {
   font-weight: 700;
 }
 
@@ -159,15 +250,18 @@ a:hover {
 
 .hero-note {
   font-size: 0.8rem;
-  color: #b91c1c;
   margin-top: 8px;
+}
+
+.hero-note-warning {
+  color: #b91c1c;
   font-weight: 600;
 }
 
 /* HERO SIDE CARD */
 
 .hero-side-card {
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.9);
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
@@ -190,54 +284,6 @@ a:hover {
 
 .hero-side-list p + p {
   margin-top: 2px;
-}
-
-/* HERO DECOR - “IRISH FLOWERS” */
-
-.hero-decor {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.flower {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background: #16a34a;
-  opacity: 0.7;
-  box-shadow: 0 0 12px rgba(22, 163, 74, 0.6);
-  animation: floatFlower 14s ease-in-out infinite alternate;
-}
-
-.flower-1 {
-  top: 12%;
-  left: 6%;
-}
-
-.flower-2 {
-  top: 22%;
-  right: 10%;
-}
-
-.flower-3 {
-  bottom: 18%;
-  left: 12%;
-}
-
-.flower-4 {
-  bottom: 10%;
-  right: 14%;
-}
-
-@keyframes floatFlower {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-10px);
-  }
 }
 
 /* BUTTONS */
@@ -273,10 +319,9 @@ a:hover {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.9);
   border-color: #f97316;
   color: #c2410c;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
 }
 
 .btn-outline:hover {
@@ -318,6 +363,10 @@ a:hover {
 /* TEXT UTILITIES */
 
 .muted {
+  color: #e5e7eb;
+}
+
+.section:not(.section-dark) .muted {
   color: #4b5563;
 }
 
@@ -391,30 +440,29 @@ a:hover {
 
 .pill {
   border-radius: 999px;
-  padding: 7px 18px;
+  padding: 6px 16px;
   border: none;
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* brighter, solid colours */
 .pill-green {
   background: #16a34a;
   color: #ecfdf5;
 }
 
 .pill-yellow {
-  background: #eab308;
-  color: #171717;
+  background: #facc15;
+  color: #713f12;
 }
 
 .pill-orange {
   background: #f97316;
-  color: #111827;
+  color: #7c2d12;
 }
 
 .pill-red {
-  background: #dc2626;
+  background: #ef4444;
   color: #fee2e2;
 }
 
@@ -439,7 +487,6 @@ a:hover {
   border: 1px solid #d1d5db;
   padding: 9px 14px;
   font: inherit;
-  background: #f9fafb;
 }
 
 textarea.field-input {
@@ -457,19 +504,6 @@ textarea.field-input {
 .calc-result {
   margin-top: 8px;
   font-size: 0.95rem;
-}
-
-/* PRICING GRID */
-
-.pricing-grid {
-  display: grid;
-  gap: 20px;
-  margin-top: 16px;
-}
-
-.pricing-grid h3 {
-  font-size: 1rem;
-  margin-bottom: 6px;
 }
 
 /* BOOKING / FOOTER */
@@ -539,32 +573,6 @@ textarea.field-input {
 
 .footer-whatsapp:hover {
   background: #38bdf8;
-}
-
-/* FLOATING WHATSAPP */
-
-.whatsapp-float {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  width: 52px;
-  height: 52px;
-  border-radius: 999px;
-  background: #22c55e;
-  color: #052e16;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 14px 35px rgba(34, 197, 94, 0.65);
-  z-index: 40;
-  border: 2px solid #bbf7d0;
-  font-size: 0.75rem;
-}
-
-.whatsapp-float:hover {
-  background: #4ade80;
-  text-decoration: none;
 }
 
 /* SMALL SCREEN TWEAKS */
