@@ -15,13 +15,14 @@ body {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #fdf6ec; /* warm daylight */
+  background: #0b1120;
   color: #111827;
   line-height: 1.6;
 }
 
 main {
   min-height: 100vh;
+  background: radial-gradient(circle at top, #111827 0, #020617 55%, #020617 100%);
 }
 
 a {
@@ -50,8 +51,13 @@ a:hover {
   background: #fffdf7;
 }
 
+.section-form {
+  background: radial-gradient(circle at top, #020617 0, #020617 100%);
+}
+
 .section-dark {
   background: #020617;
+  color: #f9fafb;
 }
 
 .grid-2 {
@@ -74,14 +80,43 @@ a:hover {
   background-position: center;
   background-repeat: no-repeat;
   padding: 56px 0 40px;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
-  color: #111827;
+}
+
+/* floating shamrocks top corners */
+.shamrock {
+  position: absolute;
+  top: 18px;
+  font-size: 1.7rem;
+  animation: floatY 12s ease-in-out infinite;
+  z-index: 1;
+}
+
+.shamrock-left {
+  left: 16px;
+}
+
+.shamrock-right {
+  right: 16px;
+  animation-delay: 3s;
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
 }
 
 .hero-inner {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: 32px;
   align-items: flex-start;
+  color: #f9fafb;
 }
 
 @media (min-width: 900px) {
@@ -92,7 +127,17 @@ a:hover {
 
 .hero-text {
   max-width: 640px;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 6px rgba(15, 23, 42, 0.8);
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.hero-r {
+  color: #dc2626;
 }
 
 .hero-tag {
@@ -100,57 +145,50 @@ a:hover {
   text-transform: uppercase;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #047857; /* strong green */
-  margin-bottom: 10px;
-}
-
-.hero-shamrock {
-  margin-left: 4px;
-}
-
-.hero-title {
-  font-size: 2.8rem;
-  line-height: 1.05;
-  margin-bottom: 4px;
-  color: #0f172a;
-}
-
-.hero-r {
-  color: #dc2626;
-}
-
-.hero-services {
-  font-size: 0.92rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #b45309;
-  margin-bottom: 10px;
+  color: #4ade80; /* same family as shamrock */
+  margin-bottom: 18px;
 }
 
 .hero-lead {
-  font-size: 1.02rem;
-  color: #111827;
-  margin-bottom: 12px;
+  font-size: 1.05rem;
+  color: #f9fafb; /* bright white for readability */
+  margin-bottom: 16px;
+}
+
+.hero-weather-label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: #e5e7eb;
+}
+
+.hero-weather-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.hero-weather-shamrock {
+  font-size: 1.3rem;
+}
+
+.weather-chip {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-chip-green {
+  background: #16a34a;
+  color: #ecfdf5;
 }
 
 .hero-strong {
   font-weight: 700;
-}
-
-.hero-weather-line {
-  font-size: 0.94rem;
-  margin-bottom: 14px;
-  color: #111827;
-}
-
-.weather-pill-main {
-  display: inline-block;
-  margin-left: 4px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: #16a34a;
-  color: #ecfdf5;
-  font-weight: 600;
 }
 
 .hero-actions {
@@ -164,7 +202,7 @@ a:hover {
   list-style: disc;
   margin-left: 18px;
   font-size: 0.95rem;
-  color: #111827;
+  color: #f9fafb; /* white bullets text */
 }
 
 .hero-bullets li + li {
@@ -173,18 +211,18 @@ a:hover {
 
 .hero-note {
   font-size: 0.8rem;
-  color: #b91c1c;
-  margin-top: 10px;
+  color: #f97373;
+  margin-top: 8px;
 }
 
 /* HERO SIDE CARD */
 
 .hero-side-card {
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.94);
   color: #f9fafb;
   padding: 18px 18px 16px;
   border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
 }
 
 .hero-side-card h2 {
@@ -230,7 +268,7 @@ a:hover {
 .btn-primary {
   background: #f97316;
   color: #111827;
-  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.45);
 }
 
 .btn-primary:hover {
@@ -238,7 +276,7 @@ a:hover {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.98);
   border-color: #f97316;
   color: #c2410c;
 }
@@ -279,6 +317,12 @@ a:hover {
   margin-bottom: 8px;
 }
 
+.card-dark {
+  background: #020617;
+  border-color: rgba(55, 65, 81, 0.8);
+  color: #f9fafb;
+}
+
 /* TEXT UTILITIES */
 
 .muted {
@@ -299,10 +343,6 @@ a:hover {
 
 .brand-inline {
   font-weight: 600;
-}
-
-.link-underline {
-  text-decoration: underline;
 }
 
 /* REVIEWS */
@@ -326,7 +366,7 @@ a:hover {
 
 .review-label {
   font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fdba74;
   margin-bottom: 10px;
@@ -348,7 +388,7 @@ a:hover {
   color: #e5e7eb;
 }
 
-/* WEATHER PILLS (CARD) */
+/* WEATHER PILLS */
 
 .weather-pills {
   display: flex;
@@ -366,13 +406,13 @@ a:hover {
 }
 
 .pill-green {
-  background: #16a34a;
-  color: #ecfdf5;
+  background: #22c55e;
+  color: #064e3b;
 }
 
 .pill-yellow {
   background: #facc15;
-  color: #451a03;
+  color: #78350f;
 }
 
 .pill-orange {
@@ -381,11 +421,23 @@ a:hover {
 }
 
 .pill-red {
-  background: #ef4444;
-  color: #fee2e2;
+  background: #f97373;
+  color: #7f1d1d;
 }
 
 /* FORM */
+
+.section-form .card-dark {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+.section-form h2 {
+  color: #f9fafb;
+}
+
+.section-form .muted {
+  color: #d1d5db;
+}
 
 .estimate-form {
   display: grid;
@@ -398,12 +450,12 @@ a:hover {
   flex-direction: column;
   gap: 4px;
   font-size: 0.9rem;
-  color: #111827;
+  color: #f9fafb;
 }
 
 .field-input {
   border-radius: 999px;
-  border: 1px solid #374151;
+  border: 1px solid #4b5563;
   padding: 9px 14px;
   font: inherit;
   background: #020617;
@@ -429,18 +481,8 @@ textarea.field-input {
 
 /* BOOKING / FOOTER */
 
-.section-dark {
-  color: #f9fafb;
-}
-
-.card-dark {
-  background: #020617;
-  border-color: rgba(55, 65, 81, 0.8);
-  margin-bottom: 24px;
-}
-
-.booking-card {
-  margin-top: 24px;
+.section-dark .muted {
+  color: #9ca3af;
 }
 
 .list {
@@ -457,7 +499,12 @@ textarea.field-input {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 32px;
+  color: #f9fafb;
+}
+
+.footer a {
+  color: #bfdbfe;
 }
 
 @media (min-width: 720px) {
@@ -501,140 +548,85 @@ textarea.field-input {
   background: #38bdf8;
 }
 
+/* floating WhatsApp bubble */
+
+.wa-floating {
+  position: fixed;
+  right: 18px;
+  bottom: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #bbf7d0 0, #22c55e 35%, #15803d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
+  z-index: 50;
+}
+
 /* BOOKING CALENDAR */
 
-.booking-calendar {
-  margin-top: 12px;
-  border-radius: 16px;
-  border: 1px solid #1f2937;
-  padding: 10px 12px;
-  background: radial-gradient(circle at top, #0f172a, #020617 60%);
+.calendar-card {
+  margin-top: 16px;
 }
 
-.booking-row {
+.calendar-grid {
+  margin-top: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.calendar-row {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
-  margin-top: 4px;
-}
-
-.booking-header span {
-  font-size: 0.7rem;
+  gap: 8px;
   text-align: center;
-  text-transform: uppercase;
-  color: #9ca3af;
-}
-
-.booking-row span {
   font-size: 0.8rem;
-  text-align: center;
-  padding: 4px 0;
-  border-radius: 999px;
 }
 
-.slot-free {
+.calendar-header span {
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.cal-dot {
+  border-radius: 999px;
+  padding: 10px 0;
+  font-weight: 600;
+}
+
+.cal-free {
   background: #16a34a;
   color: #ecfdf5;
 }
 
-.slot-limited {
-  background: #f97316;
-  color: #111827;
+.cal-limited {
+  background: #facc15;
+  color: #78350f;
 }
 
-.slot-busy {
-  background: #ef4444;
+.cal-busy {
+  background: #dc2626;
   color: #fee2e2;
 }
 
-.booking-legend {
-  margin-top: 8px;
+.calendar-legend {
   display: flex;
-  align-items: center;
-  gap: 6px;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: #e5e7eb;
 }
 
-.legend-box {
+.legend-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  margin-right: 2px;
-}
-
-.legend-free {
-  background: #16a34a;
-}
-
-.legend-limited {
-  background: #f97316;
-}
-
-.legend-busy {
-  background: #ef4444;
-}
-
-/* FLOATING SHAMROCKS */
-
-.floating-shamrock {
-  position: absolute;
-  font-size: 1.4rem;
-  animation: float 6s ease-in-out infinite;
-  opacity: 0.9;
-}
-
-.shamrock-top-left {
-  top: 22px;
-  left: 12px;
-}
-
-.shamrock-top-right {
-  top: 26px;
-  right: 18px;
-}
-
-.shamrock-mid-right {
-  top: 56%;
-  right: 12px;
-}
-
-.shamrock-hero {
-  margin-left: 6px;
-  animation-duration: 4s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* FLOATING WHATSAPP */
-
-.floating-whatsapp {
-  position: fixed;
-  right: 18px;
-  bottom: 22px;
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, #bbf7d0, #16a34a 60%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 18px 45px rgba(22, 163, 74, 0.7);
-  z-index: 50;
-}
-
-.floating-whatsapp-inner {
-  font-size: 1.6rem;
+  margin-right: 6px;
 }
 
 /* SMALL SCREEN TWEAKS */
@@ -649,6 +641,6 @@ textarea.field-input {
   }
 
   .hero-side-card {
-    margin-top: 10px;
+    margin-top: 4px;
   }
 }
