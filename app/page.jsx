@@ -28,7 +28,7 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </h1>
 
-            {/* green line now UNDER the big title */}
+            {/* green line UNDER the big title */}
             <p className="hero-tag">
               🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
@@ -36,7 +36,7 @@ export default function HomePage() {
             <p className="hero-lead">
               24/7 storm damage call-out, full roof renewals and{" "}
               <span className="hero-strong">luxury tiling</span> for homes and
-              rental properties. Snow, rain or storm won’t stop us.
+              rental properties. Snow, rain or storm won&apos;t stop us.
             </p>
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
@@ -146,8 +146,8 @@ export default function HomePage() {
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – just
-              phenomenal. Clean, fast and extremely professional. Couldn’t be
-              happier.”
+              phenomenal. Clean, fast and extremely professional. Couldn&apos;t
+              be happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
@@ -250,15 +250,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM + REAL DATE/TIME PICKER */}
+      {/* ESTIMATE FORM WITH REAL DATE + TIME PICKERS */}
       <section className="section section-form">
         <div className="container">
           <div className="card card-dark">
             <h2>Request a Free Estimate</h2>
             <p className="muted small">
               Tell us a bit about your roof, tiling or property project and
-              we&apos;ll come back with options, a rough budget and confirm a
-              time around your preferred date.
+              we&apos;ll come back with options and a rough budget.
             </p>
 
             <form
@@ -296,7 +295,7 @@ export default function HomePage() {
                 </select>
               </label>
 
-              {/* *** REAL BOOKING CALENDAR & TIME PICKER *** */}
+              {/* REAL BOOKING FIELDS */}
               <label className="field-label">
                 Preferred date
                 <input
@@ -316,7 +315,6 @@ export default function HomePage() {
                   required
                 />
               </label>
-              {/* *** END DATE/TIME PICKER *** */}
 
               <label className="field-label">
                 Tell us a bit about the job
@@ -336,7 +334,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BOOKING & FOOTER (no picture calendar now) */}
+      {/* BOOKING & FOOTER (NO MORE FAKE CALENDAR) */}
       <section className="section section-dark">
         <div className="container">
           <div className="card card-dark">
