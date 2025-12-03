@@ -347,8 +347,7 @@ a:hover {
 
 /* REVIEWS */
 
-.reviews-grid {
-  display: grid;
+.reviews-grid isplay: grid;
   gap: 20px;
 }
 
@@ -564,69 +563,6 @@ textarea.field-input {
   font-size: 1.7rem;
   box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
   z-index: 50;
-}
-
-/* BOOKING CALENDAR */
-
-.calendar-card {
-  margin-top: 16px;
-}
-
-.calendar-grid {
-  margin-top: 16px;
-  display: grid;
-  gap: 8px;
-}
-
-.calendar-row {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-  text-align: center;
-  font-size: 0.8rem;
-}
-
-.calendar-header span {
-  color: #9ca3af;
-  font-weight: 600;
-}
-
-.cal-dot {
-  border-radius: 999px;
-  padding: 10px 0;
-  font-weight: 600;
-}
-
-.cal-free {
-  background: #16a34a;
-  color: #ecfdf5;
-}
-
-.cal-limited {
-  background: #facc15;
-  color: #78350f;
-}
-
-.cal-busy {
-  background: #dc2626;
-  color: #fee2e2;
-}
-
-.calendar-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 14px;
-  font-size: 0.85rem;
-  color: #e5e7eb;
-}
-
-.legend-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  margin-right: 6px;
 }
 
 /* SMALL SCREEN TWEAKS */
