@@ -180,13 +180,21 @@ export default function HomePage() {
             ) : (
               <p className="muted smallest" style={{ marginTop: 8 }}>
                 Auto-updated from Met Éireann open data
-                {fetchedAt ? ` • Last check: ${new Date(fetchedAt).toLocaleString()}` : ""}
+                {fetchedAt && (
+                  <span>
+                    {" "}
+                    • Last check: {new Date(fetchedAt).toLocaleString()}
+                  </span>
+                )}
               </p>
             )}
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                <p
+                  className="muted small"
+                  style={{ fontWeight: 700, marginBottom: 6 }}
+                >
                   Latest warnings:
                 </p>
                 <ul className="list" style={{ marginTop: 0 }}>
@@ -378,12 +386,22 @@ export default function HomePage() {
 
               <label className="field-label">
                 Preferred date
-                <input name="Preferred date" type="date" className="field-input" required />
+                <input
+                  name="Preferred date"
+                  type="date"
+                  className="field-input"
+                  required
+                />
               </label>
 
               <label className="field-label">
                 Preferred time
-                <input name="Preferred time" type="time" className="field-input" required />
+                <input
+                  name="Preferred time"
+                  type="time"
+                  className="field-input"
+                  required
+                />
               </label>
 
               <label className="field-label">
@@ -477,4 +495,3 @@ export default function HomePage() {
     </main>
   );
 }
-```0
