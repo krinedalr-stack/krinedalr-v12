@@ -1,24 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(45); // €/m² example for general roofing work
+  const [roofRate, setRoofRate] = useState(45);
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(48); // €/m² example for luxury tiling
+  const [tileRate, setTileRate] = useState(48);
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
   const tileTotal =
     tileArea && tileRate ? (Number(tileArea) * Number(tileRate)).toFixed(0) : "";
 
+  // REAL weather status
+  const [weatherStatus, setWeatherStatus] = useState("green"); // green/yellow/orange/red
+  const [weatherWarnings, setWeatherWarnings] = useState([]);
+  const [weatherLoaded, setWeatherLoaded] = useState(false);
+  const [weatherError, setWeatherError] = useState("");
+  const [fetchedAt, setFetchedAt] = useState("");
+
+  const weatherUI = useMemo(() => {
+    const map = {
+      green: {
+        label: "GREEN – normal conditions",
+        textClass: "green-text",
+        chipClass: "weather-chip weather-chip-green",
+      },
+      yellow: {
+        label: "YELLOW – be aware",
+        textClass: "yellow-text",
+        chipClass: "weather-chip weather-chip-yellow",
+      },
+      orange: {
+        label: "ORANGE – take action",
+        textClass: "orange-text",
+        chipClass: "weather-chip weather-chip-orange",
+      },
+      red: {
+        label: "RED – danger to life",
+        textClass: "red-text",
+        chipClass: "weather-chip weather-chip-red",
+      },
+    };
+    return map[weatherStatus] || map.green;
+  }, [weatherStatus]);
+
+  const pillClass = (key) =>
+    `pill pill-${key} ${weatherStatus === key ? "pill-active" : ""}`;
+
+  async function loadWeather() {
+    try {
+      setWeatherError("");
+      const res = await fetch("/api/weather-status", { cache: "no-store" });
+      const json = await res.json();
+
+      if (!json?.ok) {
+        setWeatherError(json?.error || "Weather unavailable");
+      }
+
+      const s = json?.status || "green";
+      setWeatherStatus(s);
+      setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
+      setFetchedAt(json?.fetchedAt || "");
+      setWeatherLoaded(true);
+    } catch (e) {
+      setWeatherError("Weather unavailable");
+      setWeatherLoaded(true);
+    }
+  }
+
+  useEffect(() => {
+    loadWeather();
+    const id = setInterval(loadWeather, 5 * 60 * 1000); // 5 minutes
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <main>
       {/* HERO */}
       <section className="hero">
-        {/* floating shamrocks */}
         <span className="shamrock shamrock-left">☘️</span>
         <span className="shamrock shamrock-right">☘️</span>
 
@@ -28,7 +90,6 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </h1>
 
-            {/* green line UNDER the big title */}
             <p className="hero-tag">
               🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
@@ -41,8 +102,8 @@ export default function HomePage() {
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
             <div className="hero-weather-row">
-              <span className="weather-chip weather-chip-green">
-                GREEN – normal conditions
+              <span className={weatherUI.chipClass}>
+                {weatherLoaded ? weatherUI.label : "Loading weather…"}
               </span>
               <span className="hero-weather-shamrock">☘️</span>
             </div>
@@ -73,7 +134,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Short “card” on right side for larger screens */}
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
@@ -116,15 +176,27 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <div className="weather-pills">
-              <button className="pill pill-green">Green</button>
-              <button className="pill pill-yellow">Yellow</button>
-              <button className="pill pill-orange">Orange</button>
-              <button className="pill pill-red">Red</button>
+              {/* Optional: manual override buttons (still useful for testing) */}
+              <button type="button" className={pillClass("green")} onClick={() => setWeatherStatus("green")}>
+                Green
+              </button>
+              <button type="button" className={pillClass("yellow")} onClick={() => setWeatherStatus("yellow")}>
+                Yellow
+              </button>
+              <button type="button" className={pillClass("orange")} onClick={() => setWeatherStatus("orange")}>
+                Orange
+              </button>
+              <button type="button" className={pillClass("red")} onClick={() => setWeatherStatus("red")}>
+                Red
+              </button>
             </div>
 
             <p className="muted small">
-              Current: <strong className="green-text">GREEN warning</strong> –{" "}
-              follow{" "}
+              Current:{" "}
+              <strong className={weatherUI.textClass}>
+                {weatherStatus.toUpperCase()} warning
+              </strong>{" "}
+              – follow{" "}
               <a
                 href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
                 target="_blank"
@@ -135,6 +207,37 @@ export default function HomePage() {
               </a>{" "}
               for live updates.
             </p>
+
+            {weatherError ? (
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                ⚠️ {weatherError}
+              </p>
+            ) : (
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                Auto-updated from Met Éireann open data
+                {fetchedAt ? ` • Last check: ${new Date(fetchedAt).toLocaleString()}` : ""}
+              </p>
+            )}
+
+            {/* Show top warnings (real data) */}
+            {weatherWarnings.length > 0 && (
+              <div style={{ marginTop: 12 }}>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                  Latest warnings:
+                </p>
+
+                <ul className="list" style={{ marginTop: 0 }}>
+                  {weatherWarnings.slice(0, 3).map((w) => (
+                    <li key={w.id || w.headline}>
+                      <strong style={{ textTransform: "uppercase" }}>
+                        {w.level}
+                      </strong>
+                      {w.headline ? ` – ${w.headline}` : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -178,7 +281,6 @@ export default function HomePage() {
       {/* ROOF & TILING CALCULATORS */}
       <section className="section section-alt">
         <div className="container grid-2">
-          {/* Roof */}
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
@@ -216,7 +318,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Tiling */}
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
@@ -257,7 +358,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM WITH REAL DATE + TIME PICKERS */}
+      {/* ESTIMATE FORM */}
       <section className="section section-form">
         <div className="container">
           <div className="card card-dark">
@@ -302,25 +403,14 @@ export default function HomePage() {
                 </select>
               </label>
 
-              {/* REAL BOOKING FIELDS */}
               <label className="field-label">
                 Preferred date
-                <input
-                  name="Preferred date"
-                  type="date"
-                  className="field-input"
-                  required
-                />
+                <input name="Preferred date" type="date" className="field-input" required />
               </label>
 
               <label className="field-label">
                 Preferred time
-                <input
-                  name="Preferred time"
-                  type="time"
-                  className="field-input"
-                  required
-                />
+                <input name="Preferred time" type="time" className="field-input" required />
               </label>
 
               <label className="field-label">
@@ -341,7 +431,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BOOKING & FOOTER (NO MORE FAKE CALENDAR) */}
+      {/* FOOTER */}
       <section className="section section-dark">
         <div className="container">
           <div className="card card-dark">
@@ -369,12 +459,10 @@ export default function HomePage() {
                 Phone: <strong>083 176 2475</strong>
               </p>
               <p>
-                Email:{" "}
-                <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
+                Email: <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
               <p>
-                Web:{" "}
-                <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
               </p>
               <p>
                 Facebook:{" "}
@@ -404,7 +492,6 @@ export default function HomePage() {
           </footer>
         </div>
 
-        {/* floating WhatsApp bubble */}
         <a
           href="https://wa.me/353831762475"
           target="_blank"
