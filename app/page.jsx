@@ -5,9 +5,9 @@ import { useEffect, useMemo, useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate, setRoofRate] = useState(45);
+  const [roofRate] = useState(45); // locked (users can't change)
   const [tileArea, setTileArea] = useState("");
-  const [tileRate, setTileRate] = useState(48);
+  const [tileRate] = useState(48); // locked (users can't change)
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
@@ -47,21 +47,15 @@ export default function HomePage() {
     return map[weatherStatus] || map.green;
   }, [weatherStatus]);
 
-  const pillClass = (key) =>
-    `pill pill-${key} ${weatherStatus === key ? "pill-active" : ""}`;
-
   async function loadWeather() {
     try {
       setWeatherError("");
       const res = await fetch("/api/weather-status", { cache: "no-store" });
       const json = await res.json();
 
-      if (!json?.ok) {
-        setWeatherError(json?.error || "Weather unavailable");
-      }
+      if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
 
-      const s = json?.status || "green";
-      setWeatherStatus(s);
+      setWeatherStatus(json?.status || "green");
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
@@ -73,7 +67,7 @@ export default function HomePage() {
 
   useEffect(() => {
     loadWeather();
-    const id = setInterval(loadWeather, 5 * 60 * 1000); // 5 minutes
+    const id = setInterval(loadWeather, 5 * 60 * 1000); // every 5 minutes
     return () => clearInterval(id);
   }, []);
 
@@ -137,9 +131,8 @@ export default function HomePage() {
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
-              From emergency leaks at midnight to full bathroom tiling that
-              looks like a hotel – we keep your home safe, dry and beautifully
-              finished.
+              From emergency leaks at midnight to full bathroom tiling that looks
+              like a hotel – we keep your home safe, dry and beautifully finished.
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
@@ -153,7 +146,6 @@ export default function HomePage() {
       {/* 24/7 STORM + WEATHER STATUS */}
       <section className="section section-alt">
         <div className="container grid-2">
-          {/* Storm Call-out */}
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">
@@ -171,41 +163,14 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Weather */}
           <div className="card">
             <h2>Ireland Weather Status</h2>
 
-            <div className="weather-pills">
-              {/* Optional: manual override buttons (still useful for testing) */}
-              <button type="button" className={pillClass("green")} onClick={() => setWeatherStatus("green")}>
-                Green
-              </button>
-              <button type="button" className={pillClass("yellow")} onClick={() => setWeatherStatus("yellow")}>
-                Yellow
-              </button>
-              <button type="button" className={pillClass("orange")} onClick={() => setWeatherStatus("orange")}>
-                Orange
-              </button>
-              <button type="button" className={pillClass("red")} onClick={() => setWeatherStatus("red")}>
-                Red
-              </button>
-            </div>
-
-            <p className="muted small">
+            <p className="muted small" style={{ marginTop: 8 }}>
               Current:{" "}
               <strong className={weatherUI.textClass}>
                 {weatherStatus.toUpperCase()} warning
-              </strong>{" "}
-              – follow{" "}
-              <a
-                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
-                target="_blank"
-                rel="noreferrer"
-                className="brand-inline"
-              >
-                Krinedal-R on Facebook
-              </a>{" "}
-              for live updates.
+              </strong>
             </p>
 
             {weatherError ? (
@@ -219,13 +184,11 @@ export default function HomePage() {
               </p>
             )}
 
-            {/* Show top warnings (real data) */}
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
                 <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
                   Latest warnings:
                 </p>
-
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w) => (
                     <li key={w.id || w.headline}>
@@ -238,6 +201,19 @@ export default function HomePage() {
                 </ul>
               </div>
             )}
+
+            <p className="muted small" style={{ marginTop: 12 }}>
+              Follow{" "}
+              <a
+                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                target="_blank"
+                rel="noreferrer"
+                className="brand-inline"
+              >
+                Krinedal-R on Facebook
+              </a>{" "}
+              for live updates.
+            </p>
           </div>
         </div>
       </section>
@@ -258,8 +234,7 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-text">
               “We had a roof leak in heavy rain, they arrived close to midnight
-              to make the house safe. Snow, rain and storm didn&apos;t stop
-              them.”
+              to make the house safe. Snow, rain and storm didn&apos;t stop them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
             <p className="review-follow">
@@ -281,12 +256,14 @@ export default function HomePage() {
       {/* ROOF & TILING CALCULATORS */}
       <section className="section section-alt">
         <div className="container grid-2">
+          {/* Roof */}
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
               Handy calculator to get a feel for budget. Final prices always
               confirmed after inspection.
             </p>
+
             <label className="field-label">
               Roof area (m²)
               <input
@@ -297,20 +274,17 @@ export default function HomePage() {
                 min="0"
               />
             </label>
-            <label className="field-label">
-              Rate per m² (€)
-              <input
-                type="number"
-                value={roofRate}
-                onChange={(e) => setRoofRate(e.target.value)}
-                className="field-input"
-                min="0"
-              />
-            </label>
+
+            {/* LOCKED RATE DISPLAY */}
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{roofRate}</strong>
+            </p>
+
             <p className="calc-result">
               Rough roofing total:{" "}
               {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
+
             <p className="muted smallest">
               Typical full roof renewal for a standard Irish home usually falls
               between <strong>€5,800–€10,000</strong> depending on size,
@@ -318,12 +292,14 @@ export default function HomePage() {
             </p>
           </div>
 
+          {/* Tiling */}
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
               For hotel-style bathrooms and premium finishes. Labour only, tiles
               &amp; materials separate.
             </p>
+
             <label className="field-label">
               Tiled area (m²)
               <input
@@ -334,20 +310,17 @@ export default function HomePage() {
                 min="0"
               />
             </label>
-            <label className="field-label">
-              Rate per m² (€)
-              <input
-                type="number"
-                value={tileRate}
-                onChange={(e) => setTileRate(e.target.value)}
-                className="field-input"
-                min="0"
-              />
-            </label>
+
+            {/* LOCKED RATE DISPLAY */}
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{tileRate}</strong>
+            </p>
+
             <p className="calc-result">
               Rough tiling total:{" "}
               {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
+
             <p className="muted smallest">
               Premium luxury tiling typically ranges between{" "}
               <strong>€42–€58 per m²</strong>; this calculator starts at{" "}
@@ -504,3 +477,4 @@ export default function HomePage() {
     </main>
   );
 }
+```0
