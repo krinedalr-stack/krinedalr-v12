@@ -437,7 +437,6 @@ export default function HomePage() {
             </form>
 
             <p className="muted smallest" style={{ marginTop: 12 }}>
-              Tip: photos help us price faster. (File attachments will be fully enabled when we switch from mailto to a proper form handler.)
             </p>
           </div>
         </div>
