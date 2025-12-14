@@ -502,7 +502,11 @@ export default function HomePage() {
 
               <p>
                 Web:{" "}
-                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.krinedalr.ie"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   www.krinedalr.ie
                 </a>
               </p>
@@ -535,15 +539,40 @@ export default function HomePage() {
           </footer>
         </div>
 
-        <a
-          href="https://wa.me/353831762475"
-          target="_blank"
-          rel="noreferrer"
-          className="wa-floating"
-        >
-          💬
-        </a>
+        {/* FLOATING BUTTONS (WhatsApp + Messenger + Outlook) */}
+        <div className="float-stack">
+          <a
+            href="https://wa.me/353831762475"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-wa"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            💬
+          </a>
+
+          <a
+            href="https://m.me/61581354904730"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-msgr"
+            aria-label="Messenger"
+            title="Messenger"
+          >
+            📘
+          </a>
+
+          <a
+            href="mailto:krinedalr@outlook.com"
+            className="float-btn float-mail"
+            aria-label="Email"
+            title="Email"
+          >
+            ✉️
+          </a>
+        </div>
       </section>
     </main>
   );
-}
+                }
