@@ -348,7 +348,7 @@ export default function HomePage() {
             </p>
 
             <form
-              action="mailto:krinedalr@gmail.com"
+              action="mailto:krinedalr@gmail.com?cc=krinedalr@outlook.com"
               method="POST"
               encType="text/plain"
             >
@@ -356,12 +356,24 @@ export default function HomePage() {
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input id="name" name="Name" type="text" placeholder="Full name" required />
+                  <input
+                    id="name"
+                    name="Name"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                  />
                 </div>
 
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
+                  <input
+                    id="phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                  />
                 </div>
               </div>
 
@@ -369,7 +381,13 @@ export default function HomePage() {
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
+                  <input
+                    id="email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                  />
                 </div>
               </div>
 
@@ -414,6 +432,9 @@ export default function HomePage() {
                     multiple
                     accept="image/*,.pdf,.doc,.docx,.heic"
                   />
+                  <p className="muted smallest" style={{ marginTop: 6 }}>
+                    Tip: Photos can also be sent by WhatsApp after submitting this form.
+                  </p>
                 </div>
               </div>
 
@@ -437,7 +458,8 @@ export default function HomePage() {
             </form>
 
             <p className="muted smallest" style={{ marginTop: 12 }}>
-            Thank you for contacting us. Our team will review your request and get back to you shortly. 
+              Thank you for contacting us. Our team will review your request and
+              get back to you shortly.
             </p>
           </div>
         </div>
@@ -470,12 +492,21 @@ export default function HomePage() {
               <p>
                 Phone: <strong>083 176 2475</strong>
               </p>
+
               <p>
-                Email: <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
+                Email:{" "}
+                <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a>{" "}
+                /{" "}
+                <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
+
               <p>
-                Web: <a href="https://www.krinedalr.ie">www.krinedalr.ie</a>
+                Web:{" "}
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                  www.krinedalr.ie
+                </a>
               </p>
+
               <p>
                 Facebook:{" "}
                 <a
