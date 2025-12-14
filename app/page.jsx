@@ -283,7 +283,6 @@ export default function HomePage() {
               />
             </label>
 
-            {/* LOCKED RATE DISPLAY */}
             <p className="muted small" style={{ marginTop: 8 }}>
               Rate per m²: <strong>€{roofRate}</strong>
             </p>
@@ -319,7 +318,6 @@ export default function HomePage() {
               />
             </label>
 
-            {/* LOCKED RATE DISPLAY */}
             <p className="muted small" style={{ marginTop: 8 }}>
               Rate per m²: <strong>€{tileRate}</strong>
             </p>
@@ -339,12 +337,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM */}
+      {/* ESTIMATE FORM (LUXURY VERSION) */}
       <section className="section section-form">
         <div className="container">
-          <div className="card card-dark">
+          <div className="form-card">
             <h2>Request a Free Estimate</h2>
-            <p className="muted small">
+            <p className="form-sub">
               Tell us a bit about your roof, tiling or property project and
               we&apos;ll come back with options and a rough budget.
             </p>
@@ -353,71 +351,94 @@ export default function HomePage() {
               action="mailto:krinedalr@gmail.com"
               method="POST"
               encType="text/plain"
-              className="estimate-form"
             >
-              <label className="field-label">
-                Your name
-                <input name="Name" type="text" className="field-input" required />
-              </label>
+              {/* Row 1 */}
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="name">Your name</label>
+                  <input id="name" name="Name" type="text" placeholder="Full name" required />
+                </div>
 
-              <label className="field-label">
-                Phone number
-                <input name="Phone" type="tel" className="field-input" required />
-              </label>
+                <div className="field">
+                  <label htmlFor="phone">Phone number</label>
+                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
+                </div>
+              </div>
 
-              <label className="field-label">
-                Email
-                <input name="Email" type="email" className="field-input" required />
-              </label>
+              {/* Row 2 */}
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="email">Email</label>
+                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
+                </div>
+              </div>
 
-              <label className="field-label">
-                Type of work
-                <select name="Service" className="field-input">
-                  <option>Storm / leak emergency</option>
-                  <option>Full roof renewal</option>
-                  <option>Roof repair</option>
-                  <option>Luxury bathroom tiling</option>
-                  <option>Kitchen tiling</option>
-                  <option>Painting &amp; fresh-up</option>
-                  <option>Landlord end-of-tenancy</option>
-                  <option>Other (describe below)</option>
-                </select>
-              </label>
+              {/* Row 3 */}
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="service">Type of work</label>
+                  <select id="service" name="Service">
+                    <option>Storm / leak emergency</option>
+                    <option>Full roof renewal</option>
+                    <option>Roof repair</option>
+                    <option>Luxury bathroom tiling</option>
+                    <option>Kitchen tiling</option>
+                    <option>Painting &amp; fresh-up</option>
+                    <option>Landlord end-of-tenancy</option>
+                    <option>Other (describe below)</option>
+                  </select>
+                </div>
+              </div>
 
-              <label className="field-label">
-                Preferred date
-                <input
-                  name="Preferred date"
-                  type="date"
-                  className="field-input"
-                  required
-                />
-              </label>
+              {/* Row 4 */}
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="date">Preferred date</label>
+                  <input id="date" name="Preferred date" type="date" required />
+                </div>
 
-              <label className="field-label">
-                Preferred time
-                <input
-                  name="Preferred time"
-                  type="time"
-                  className="field-input"
-                  required
-                />
-              </label>
+                <div className="field">
+                  <label htmlFor="time">Preferred time</label>
+                  <input id="time" name="Preferred time" type="time" required />
+                </div>
+              </div>
 
-              <label className="field-label">
-                Tell us a bit about the job
-                <textarea
-                  name="Details"
-                  rows={4}
-                  className="field-input"
-                  placeholder="Size of area, issues, photos available, access, etc."
-                />
-              </label>
+              {/* Row 5 - Upload UI (NOTE: mailto won't send files reliably) */}
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="files">Upload photos / files (optional)</label>
+                  <input
+                    id="files"
+                    name="files"
+                    type="file"
+                    multiple
+                    accept="image/*,.pdf,.doc,.docx,.heic"
+                  />
+                </div>
+              </div>
 
-              <button type="submit" className="btn btn-primary btn-full">
-                Send estimate request
-              </button>
+              {/* Row 6 */}
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="details">Tell us a bit about the job</label>
+                  <textarea
+                    id="details"
+                    name="Details"
+                    placeholder="Size of area, issues, photos available, access, etc."
+                  />
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button type="submit" className="btn btn-storm">
+                  Send estimate request
+                </button>
+              </div>
             </form>
+
+            <p className="muted smallest" style={{ marginTop: 12 }}>
+              Tip: photos help us price faster. (File attachments will be fully enabled when we switch from mailto to a proper form handler.)
+            </p>
           </div>
         </div>
       </section>
