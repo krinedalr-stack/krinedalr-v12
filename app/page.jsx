@@ -437,7 +437,7 @@ export default function HomePage() {
             </form>
 
             <p className="muted smallest" style={{ marginTop: 12 }}>
-            Thank you For Contacting Us -Our Team member Will Get back to you soon as possible!  
+            Thank you for contacting us. Our team will review your request and get back to you shortly. 
             </p>
           </div>
         </div>
