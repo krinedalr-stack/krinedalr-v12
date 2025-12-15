@@ -3,18 +3,38 @@
 import { useEffect, useMemo, useState } from "react";
 
 export default function HomePage() {
-  // Simple roofing & tiling calculators
+  // ===== Single source of truth: Services shown in hero bullets =====
+  const SERVICES = [
+    "Emergency storm make-safe within hours*",
+    "Full roof change & leak tracing",
+    "Luxury bathroom & kitchen tiling",
+    "Flooring installation (laminate, vinyl & engineered wood)",
+    "Garage flooring systems (rubber / PVC tiles / resin-coated floors)",
+    "Marble-look & decorative floor coatings",
+    "Outdoor concrete stairs & entrance upgrades (integrated lighting)",
+    "Landlord-ready refresh between tenants",
+  ];
+
+  // ===== Calculators =====
   const [roofArea, setRoofArea] = useState("");
   const [roofRate] = useState(45); // locked
+
   const [tileArea, setTileArea] = useState("");
   const [tileRate] = useState(48); // locked
+
+  const [floorArea, setFloorArea] = useState("");
+  const [floorRate] = useState(26); // locked
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
   const tileTotal =
     tileArea && tileRate ? (Number(tileArea) * Number(tileRate)).toFixed(0) : "";
+  const floorTotal =
+    floorArea && floorRate
+      ? (Number(floorArea) * Number(floorRate)).toFixed(0)
+      : "";
 
-  // REAL weather status
+  // ===== REAL weather status =====
   const [weatherStatus, setWeatherStatus] = useState("green"); // green/yellow/orange/red
   const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
@@ -127,10 +147,9 @@ export default function HomePage() {
             </div>
 
             <ul className="hero-bullets">
-              <li>Emergency storm make-safe within hours*</li>
-              <li>Full roof change &amp; leak tracing</li>
-              <li>Luxury bathroom &amp; kitchen tiling</li>
-              <li>Landlord-ready refresh between tenants</li>
+              {SERVICES.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
             </ul>
 
             <p className="hero-note">
@@ -201,13 +220,18 @@ export default function HomePage() {
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                <p
+                  className="muted small"
+                  style={{ fontWeight: 700, marginBottom: 6 }}
+                >
                   Latest warnings:
                 </p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w) => (
                     <li key={w.id || w.headline}>
-                      <strong style={{ textTransform: "uppercase" }}>{w.level}</strong>
+                      <strong style={{ textTransform: "uppercase" }}>
+                        {w.level}
+                      </strong>
                       {w.headline ? ` – ${w.headline}` : ""}
                     </li>
                   ))}
@@ -247,16 +271,18 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-text">
               “We had a roof leak in heavy rain, they arrived close to midnight
-              to make the house safe. Snow, rain and storm didn&apos;t stop them.”
+              to make the house safe. Snow, rain and storm didn&apos;t stop
+              them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
         </div>
       </section>
 
-      {/* ROOF & TILING CALCULATORS */}
+      {/* ROOF + TILING + FLOORING CALCULATORS */}
       <section className="section section-alt">
-        <div className="container grid-2">
+        <div className="container grid-3">
+          {/* Roof */}
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
@@ -291,6 +317,7 @@ export default function HomePage() {
             </p>
           </div>
 
+          {/* Tiling */}
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
@@ -325,6 +352,45 @@ export default function HomePage() {
               tile type, layout and details.
             </p>
           </div>
+
+          {/* Flooring */}
+          <div className="card">
+            <h2>Flooring cost idea</h2>
+            <p className="muted small">
+              Rough guide for laminate, vinyl and engineered wood flooring.
+              Final prices always confirmed after inspection.
+            </p>
+
+            <label className="field-label">
+              Floor area (m²)
+              <input
+                type="number"
+                value={floorArea}
+                onChange={(e) => setFloorArea(e.target.value)}
+                className="field-input"
+                min="0"
+              />
+            </label>
+
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{floorRate}</strong>
+            </p>
+
+            <p className="calc-result">
+              Rough flooring total:{" "}
+              {floorTotal ? (
+                <strong>€{floorTotal}</strong>
+              ) : (
+                "— enter size above"
+              )}
+            </p>
+
+            <p className="muted smallest">
+              Flooring labour often ranges between <strong>€18–€45 per m²</strong>{" "}
+              depending on preparation and material. This calculator uses{" "}
+              <strong>€26 per m²</strong> as a guide.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -346,19 +412,37 @@ export default function HomePage() {
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input id="name" name="Name" type="text" placeholder="Full name" required />
+                  <input
+                    id="name"
+                    name="Name"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                  />
                 </div>
 
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
+                  <input
+                    id="phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
+                  <input
+                    id="email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                  />
                 </div>
               </div>
 
@@ -398,6 +482,12 @@ export default function HomePage() {
                     <option>Roof repair</option>
                     <option>Luxury bathroom tiling</option>
                     <option>Kitchen tiling</option>
+                    <option>Flooring installation (laminate / vinyl / engineered wood)</option>
+                    <option>Garage flooring systems (rubber / tiles / resin-coated)</option>
+                    <option>Marble-look &amp; decorative floor coatings</option>
+                    <option>Outdoor concrete stairs</option>
+                    <option>Front entrance upgrade</option>
+                    <option>Exterior lighting installation</option>
                     <option>Painting &amp; fresh-up</option>
                     <option>Landlord end-of-tenancy</option>
                     <option>Other (describe below)</option>
@@ -428,7 +518,8 @@ export default function HomePage() {
                     accept="image/*,.pdf,.doc,.docx,.heic"
                   />
                   <p className="muted smallest" style={{ marginTop: 6 }}>
-                    Tip: Photos can also be sent by WhatsApp after submitting this form.
+                    Tip: Photos can also be sent by WhatsApp after submitting
+                    this form.
                   </p>
                 </div>
               </div>
@@ -465,11 +556,27 @@ export default function HomePage() {
           <div className="card card-dark">
             <h2>Booking &amp; Payment</h2>
             <ul className="list">
-              <li>Materials-first options available for new projects</li>
               <li>Clear written scope agreed before starting</li>
               <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
+
+            {/* Materials-first / labour-after rule (Footer only) */}
+            <p className="muted small" style={{ marginTop: 12 }}>
+              <strong>Materials &amp; Payment:</strong> For most projects, the
+              customer pays for all necessary materials up front (tiles,
+              flooring, timber, concrete, lighting, membranes, fixings, skips,
+              etc.). Labour is paid after the job is completed and the work is
+              signed off. For larger jobs, staged payments may apply and will be
+              agreed in writing before we start.
+            </p>
+
+            {/* small trust/SEO line */}
+            <p className="muted small" style={{ marginTop: 10 }}>
+              We also design and build bespoke outdoor concrete stairs, entrance
+              upgrades and specialist flooring systems including garage and
+              decorative finishes.
+            </p>
           </div>
 
           <footer className="footer">
@@ -496,7 +603,11 @@ export default function HomePage() {
 
               <p>
                 Web:{" "}
-                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.krinedalr.ie"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   www.krinedalr.ie
                 </a>
               </p>
