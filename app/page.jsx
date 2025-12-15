@@ -201,18 +201,13 @@ export default function HomePage() {
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p
-                  className="muted small"
-                  style={{ fontWeight: 700, marginBottom: 6 }}
-                >
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
                   Latest warnings:
                 </p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w) => (
                     <li key={w.id || w.headline}>
-                      <strong style={{ textTransform: "uppercase" }}>
-                        {w.level}
-                      </strong>
+                      <strong style={{ textTransform: "uppercase" }}>{w.level}</strong>
                       {w.headline ? ` – ${w.headline}` : ""}
                     </li>
                   ))}
@@ -360,43 +355,55 @@ export default function HomePage() {
               method="POST"
               encType="text/plain"
             >
+              {/* Row 1 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input
-                    id="name"
-                    name="Name"
-                    type="text"
-                    placeholder="Full name"
-                    required
-                  />
+                  <input id="name" name="Name" type="text" placeholder="Full name" required />
                 </div>
 
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input
-                    id="phone"
-                    name="Phone"
-                    type="tel"
-                    placeholder="+353"
-                    required
-                  />
+                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
                 </div>
               </div>
 
+              {/* Row 2 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
+                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
+                </div>
+              </div>
+
+              {/* Row 2b - EIRCODE (REQUIRED) */}
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="eircode">Eircode</label>
                   <input
-                    id="email"
-                    name="Email"
-                    type="email"
-                    placeholder="you@email.com"
+                    id="eircode"
+                    name="Eircode"
+                    type="text"
+                    placeholder="e.g. C15 XXXX"
                     required
+                    autoComplete="postal-code"
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="town">Town / County</label>
+                  <input
+                    id="town"
+                    name="Town/County"
+                    type="text"
+                    placeholder="e.g. Navan, Co. Meath"
+                    required
+                    autoComplete="address-level2"
                   />
                 </div>
               </div>
 
+              {/* Row 3 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="service">Type of work</label>
@@ -413,6 +420,7 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Row 4 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="date">Preferred date</label>
@@ -425,6 +433,7 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Row 5 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="files">Upload photos / files (optional)</label>
@@ -441,6 +450,7 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* Row 6 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="details">Tell us a bit about the job</label>
@@ -517,9 +527,8 @@ export default function HomePage() {
                   rel="noreferrer"
                 >
                   Visit our page
-                </a>
-                {" "}•{" "}
-                Instagram:{" "}
+                </a>{" "}
+                • Instagram:{" "}
                 <a
                   href="https://www.instagram.com/krinedalr/"
                   target="_blank"
@@ -546,7 +555,7 @@ export default function HomePage() {
           </footer>
         </div>
 
-        {/* FLOATING BUTTONS (WhatsApp + Messenger + Instagram + Outlook) */}
+        {/* FLOATING BUTTONS */}
         <div className="float-stack">
           <a
             href="https://wa.me/353831762475"
