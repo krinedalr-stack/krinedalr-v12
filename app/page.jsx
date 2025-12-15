@@ -14,8 +14,8 @@ export default function HomePage() {
   const tileTotal =
     tileArea && tileRate ? (Number(tileArea) * Number(tileRate)).toFixed(0) : "";
 
-  // Weather
-  const [weatherStatus, setWeatherStatus] = useState("green");
+  // REAL weather status
+  const [weatherStatus, setWeatherStatus] = useState("green"); // green/yellow/orange/red
   const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
   const [weatherError, setWeatherError] = useState("");
@@ -67,7 +67,7 @@ export default function HomePage() {
 
   useEffect(() => {
     loadWeather();
-    const id = setInterval(loadWeather, 5 * 60 * 1000);
+    const id = setInterval(loadWeather, 5 * 60 * 1000); // every 5 minutes
     return () => clearInterval(id);
   }, []);
 
@@ -250,18 +250,6 @@ export default function HomePage() {
               to make the house safe. Snow, rain and storm didn&apos;t stop them.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
-            <p className="review-follow">
-              Follow us on{" "}
-              <a
-                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
-                target="_blank"
-                rel="noreferrer"
-                className="brand-inline"
-              >
-                Facebook: Krinedal-R
-              </a>{" "}
-              for latest updates &amp; weather radar posts.
-            </p>
           </article>
         </div>
       </section>
@@ -355,7 +343,6 @@ export default function HomePage() {
               method="POST"
               encType="text/plain"
             >
-              {/* Row 1 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
@@ -368,7 +355,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 2 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
@@ -376,7 +362,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 2b - EIRCODE (REQUIRED) */}
+              {/* EIRCODE REQUIRED */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="eircode">Eircode</label>
@@ -403,7 +389,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 3 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="service">Type of work</label>
@@ -420,7 +405,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 4 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="date">Preferred date</label>
@@ -433,7 +417,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 5 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="files">Upload photos / files (optional)</label>
@@ -450,7 +433,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 6 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="details">Tell us a bit about the job</label>
