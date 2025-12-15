@@ -5,17 +5,17 @@ import { useEffect, useMemo, useState } from "react";
 export default function HomePage() {
   // Simple roofing & tiling calculators
   const [roofArea, setRoofArea] = useState("");
-  const [roofRate] = useState(45); // locked (users can't change)
+  const [roofRate] = useState(45); // locked
   const [tileArea, setTileArea] = useState("");
-  const [tileRate] = useState(48); // locked (users can't change)
+  const [tileRate] = useState(48); // locked
 
   const roofTotal =
     roofArea && roofRate ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
   const tileTotal =
     tileArea && tileRate ? (Number(tileArea) * Number(tileRate)).toFixed(0) : "";
 
-  // REAL weather status
-  const [weatherStatus, setWeatherStatus] = useState("green"); // green/yellow/orange/red
+  // Weather
+  const [weatherStatus, setWeatherStatus] = useState("green");
   const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
   const [weatherError, setWeatherError] = useState("");
@@ -67,7 +67,7 @@ export default function HomePage() {
 
   useEffect(() => {
     loadWeather();
-    const id = setInterval(loadWeather, 5 * 60 * 1000); // every 5 minutes
+    const id = setInterval(loadWeather, 5 * 60 * 1000);
     return () => clearInterval(id);
   }, []);
 
@@ -106,6 +106,7 @@ export default function HomePage() {
               <a href="tel:0831762475" className="btn btn-primary">
                 Call 24/7 Storm Line
               </a>
+
               <a
                 href="https://wa.me/353831762475"
                 target="_blank"
@@ -113,6 +114,15 @@ export default function HomePage() {
                 className="btn btn-outline"
               >
                 WhatsApp us now
+              </a>
+
+              <a
+                href="https://www.instagram.com/krinedalr/"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
+                Instagram
               </a>
             </div>
 
@@ -264,7 +274,6 @@ export default function HomePage() {
       {/* ROOF & TILING CALCULATORS */}
       <section className="section section-alt">
         <div className="container grid-2">
-          {/* Roof */}
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">
@@ -299,7 +308,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Tiling */}
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
             <p className="muted small">
@@ -337,7 +345,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTIMATE FORM (LUXURY VERSION) */}
+      {/* ESTIMATE FORM */}
       <section className="section section-form">
         <div className="container">
           <div className="form-card">
@@ -352,7 +360,6 @@ export default function HomePage() {
               method="POST"
               encType="text/plain"
             >
-              {/* Row 1 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
@@ -377,7 +384,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 2 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
@@ -391,7 +397,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 3 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="service">Type of work</label>
@@ -408,7 +413,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 4 */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="date">Preferred date</label>
@@ -421,7 +425,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 5 - Upload UI (NOTE: mailto won't send files reliably) */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="files">Upload photos / files (optional)</label>
@@ -438,7 +441,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 6 */}
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="details">Tell us a bit about the job</label>
@@ -502,11 +504,7 @@ export default function HomePage() {
 
               <p>
                 Web:{" "}
-                <a
-                  href="https://www.krinedalr.ie"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
                   www.krinedalr.ie
                 </a>
               </p>
@@ -519,6 +517,15 @@ export default function HomePage() {
                   rel="noreferrer"
                 >
                   Visit our page
+                </a>
+                {" "}•{" "}
+                Instagram:{" "}
+                <a
+                  href="https://www.instagram.com/krinedalr/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @krinedalr
                 </a>
               </p>
 
@@ -539,7 +546,7 @@ export default function HomePage() {
           </footer>
         </div>
 
-        {/* FLOATING BUTTONS (WhatsApp + Messenger + Outlook) */}
+        {/* FLOATING BUTTONS (WhatsApp + Messenger + Instagram + Outlook) */}
         <div className="float-stack">
           <a
             href="https://wa.me/353831762475"
@@ -564,6 +571,17 @@ export default function HomePage() {
           </a>
 
           <a
+            href="https://www.instagram.com/krinedalr/"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-ig"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            📸
+          </a>
+
+          <a
             href="mailto:krinedalr@outlook.com"
             className="float-btn float-mail"
             aria-label="Email"
@@ -575,4 +593,4 @@ export default function HomePage() {
       </section>
     </main>
   );
-                }
+}
