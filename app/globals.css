@@ -34,6 +34,12 @@ a:hover{ text-decoration:underline; }
   .grid-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
 }
 
+/* NEW: 3-column grid for calculators on desktop */
+.grid-3{ display:grid; gap:24px; }
+@media (min-width:900px){
+  .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+}
+
 /* =========================
    HERO (NO MUDDY BLACK LAYER)
 ========================= */
@@ -338,6 +344,11 @@ a:hover{ text-decoration:underline; }
   border-color: rgba(249,115,22,0.55);
   box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
 }
+
+/* FIX: Desktop dropdown list readability (white on white bug) */
+.field select { color:#f9fafb; background: rgba(255,255,255,0.04); }
+.field select option { background:#0b1120; color:#f9fafb; }
+.field select optgroup { background:#0b1120; color:#f9fafb; }
 
 .field input[type="file"]{ padding:12px 14px; }
 
