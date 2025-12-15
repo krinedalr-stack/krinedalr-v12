@@ -59,13 +59,29 @@ a:hover { text-decoration: underline; }
   padding: 56px 0 40px;
 }
 
+/* premium overlay for readability */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(2,6,23,0.55) 0%,
+    rgba(2,6,23,0.72) 60%,
+    rgba(2,6,23,0.80) 100%
+  );
+  z-index:1;
+}
+
+.hero-inner{ position:relative; z-index:2; }
+
 /* floating shamrocks */
 .shamrock {
   position: absolute;
   top: 18px;
   font-size: 1.7rem;
   animation: floatY 12s ease-in-out infinite;
-  z-index: 1;
+  z-index: 2;
 }
 
 .shamrock-left { left: 16px; }
@@ -74,20 +90,6 @@ a:hover { text-decoration: underline; }
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(12px); }
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  gap: 32px;
-  color: #f9fafb;
-}
-
-@media (min-width: 900px) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  }
 }
 
 .hero-text {
@@ -169,7 +171,7 @@ a:hover { text-decoration: underline; }
 .hero-side-list { margin-top: 10px; font-size: 0.9rem; }
 
 /* =========================
-   WEATHER CHIP (REAL DATA)
+   WEATHER CHIP
 ========================= */
 .weather-chip {
   padding: 6px 16px;
@@ -197,14 +199,17 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   border: 2px solid transparent;
   transition: transform 0.08s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 
 .btn-primary {
   background: #f97316;
   color: #111827;
   box-shadow: 0 12px 30px rgba(249, 115, 22, 0.45);
+  letter-spacing: 0.2px;
 }
 
 .btn-outline {
@@ -218,10 +223,10 @@ a:hover { text-decoration: underline; }
   background: #dc2626;
   color: #fff;
   box-shadow: 0 14px 30px rgba(220, 38, 38, 0.5);
+  letter-spacing: 0.2px;
 }
 
 .btn-full { width: 100%; margin-top: 12px; }
-.btn, .pill { -webkit-tap-highlight-color: transparent; }
 
 /* =========================
    TEXT UTILITIES
@@ -229,6 +234,11 @@ a:hover { text-decoration: underline; }
 .muted { color: #4b5563; }
 .small { font-size: 0.9rem; }
 .smallest { font-size: 0.82rem; }
+
+.section-dark .muted,
+.section-form .muted{
+  color: rgba(229,231,235,0.75);
+}
 
 .green-text { color: #16a34a; }
 .yellow-text { color: #facc15; }
@@ -238,11 +248,12 @@ a:hover { text-decoration: underline; }
 /* =========================
    CARDS
 ========================= */
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+.card{
+  background:#fff;
+  border-radius:22px;
+  padding:22px;
+  box-shadow: 0 18px 50px rgba(2,6,23,0.10);
+  border: 1px solid rgba(2,6,23,0.06);
 }
 
 .card-dark {
@@ -339,7 +350,7 @@ a:hover { text-decoration: underline; }
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(212,175,55,0.22);
+  border: 1px solid rgba(226,232,240,0.22);
   background: rgba(255,255,255,0.04);
   color: #f9fafb;
   outline: none;
@@ -361,8 +372,8 @@ a:hover { text-decoration: underline; }
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: rgba(212,175,55,0.60);
-  box-shadow: 0 0 0 4px rgba(212,175,55,0.12);
+  border-color: rgba(249,115,22,0.55);
+  box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
 }
 
 .field input[type="file"] { padding: 12px 14px; }
@@ -371,8 +382,8 @@ a:hover { text-decoration: underline; }
   margin-right: 12px;
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(212,175,55,0.35);
-  background: rgba(212,175,55,0.10);
+  border: 1px solid rgba(226,232,240,0.25);
+  background: rgba(255,255,255,0.06);
   color: #f9fafb;
   font-weight: 750;
   cursor: pointer;
@@ -437,7 +448,7 @@ a:hover { text-decoration: underline; }
 .review-follow { margin-top: 10px; font-size: 0.9rem; color: #4b5563; }
 
 /* =========================
-   FLOATING BUTTONS (WhatsApp + Messenger + Email)
+   FLOATING BUTTONS
 ========================= */
 .float-stack {
   position: fixed;
@@ -479,6 +490,15 @@ a:hover { text-decoration: underline; }
   background: radial-gradient(circle at 30% 20%, #dbeafe 0, #3b82f6 40%, #1d4ed8 100%);
 }
 
+.float-ig {
+  background: radial-gradient(circle at 30% 20%, #fbcfe8 0, #ec4899 40%, #7c3aed 100%);
+}
+
 .float-mail {
   background: radial-gradient(circle at 30% 20%, #fde68a 0, #f97316 45%, #c2410c 100%);
+}
+
+@media (max-width: 420px){
+  .float-btn{ width:56px; height:56px; font-size:1.5rem; }
+  .float-stack{ right:14px; bottom:18px; gap:10px; }
 }
