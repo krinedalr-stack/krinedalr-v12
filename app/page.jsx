@@ -79,7 +79,7 @@ export default function HomePage() {
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
-    } catch {
+    } catch (e) {
       setWeatherError("Weather unavailable");
       setWeatherLoaded(true);
     }
@@ -93,6 +93,32 @@ export default function HomePage() {
 
   return (
     <main>
+      {/* FIXED TOP BAR */}
+      <header className="topbar">
+        <div className="container topbar-inner">
+          <div className="topbar-brand">
+            KRINEDAL-<span className="hero-r">R</span>
+          </div>
+
+          <div className="topbar-actions">
+            <a href="tel:0831762475" className="btn btn-primary">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
+              WhatsApp
+            </a>
+            <a href="#estimate" className="btn btn-outline">
+              Get Quote
+            </a>
+          </div>
+        </div>
+      </header>
+
       {/* HERO */}
       <section className="hero">
         <span className="shamrock shamrock-left">☘️</span>
@@ -347,9 +373,8 @@ export default function HomePage() {
 
             <p className="muted smallest">
               Premium luxury tiling typically ranges between{" "}
-              <strong>€42–€58 per m²</strong>; this calculator starts at{" "}
-              <strong>€48 per m²</strong> as an example. Final quote depends on
-              tile type, layout and details.
+              <strong>€42–€58 per m²</strong>; this calculator uses{" "}
+              <strong>€48 per m²</strong> as a guide.
             </p>
           </div>
 
@@ -383,15 +408,15 @@ export default function HomePage() {
 
             <p className="muted smallest">
               Flooring labour often ranges between <strong>€18–€45 per m²</strong>{" "}
-              depending on preparation and material. This calculator uses{" "}
-              <strong>€26 per m²</strong> as a guide.
+              depending on prep and material. This calculator uses{" "}
+              <strong>€26 per m²</strong>.
             </p>
           </div>
         </div>
       </section>
 
       {/* ESTIMATE FORM */}
-      <section className="section section-form">
+      <section id="estimate" className="section section-form">
         <div className="container">
           <div className="form-card">
             <h2>Request a Free Estimate</h2>
@@ -408,41 +433,22 @@ export default function HomePage() {
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input
-                    id="name"
-                    name="Name"
-                    type="text"
-                    placeholder="Full name"
-                    required
-                  />
+                  <input id="name" name="Name" type="text" placeholder="Full name" required />
                 </div>
 
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input
-                    id="phone"
-                    name="Phone"
-                    type="tel"
-                    placeholder="+353"
-                    required
-                  />
+                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    name="Email"
-                    type="email"
-                    placeholder="you@email.com"
-                    required
-                  />
+                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
                 </div>
               </div>
 
-              {/* EIRCODE REQUIRED */}
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="eircode">Eircode</label>
@@ -514,8 +520,7 @@ export default function HomePage() {
                     accept="image/*,.pdf,.doc,.docx,.heic"
                   />
                   <p className="muted smallest" style={{ marginTop: 6 }}>
-                    Tip: Photos can also be sent by WhatsApp after submitting
-                    this form.
+                    Tip: Photos can also be sent by WhatsApp after submitting this form.
                   </p>
                 </div>
               </div>
@@ -558,18 +563,16 @@ export default function HomePage() {
             </ul>
 
             <p className="muted small" style={{ marginTop: 12 }}>
-              <strong>Materials &amp; Payment:</strong> For most projects, the
-              customer pays for all necessary materials up front (tiles,
-              flooring, timber, concrete, lighting, membranes, fixings, skips,
-              etc.). Labour is paid after the job is completed and the work is
-              signed off. For larger jobs, staged payments may apply and will be
-              agreed in writing before we start.
+              <strong>Materials &amp; Payment:</strong> For most projects, the customer pays
+              for all necessary materials up front (tiles, flooring, timber, concrete,
+              lighting, membranes, fixings, skips, etc.). Labour is paid after the job
+              is completed and the work is signed off. For larger jobs, staged payments
+              may apply and will be agreed in writing before we start.
             </p>
 
             <p className="muted small" style={{ marginTop: 10 }}>
-              We also design and build bespoke outdoor concrete stairs, entrance
-              upgrades and specialist flooring systems including garage and
-              decorative finishes.
+              We also build bespoke outdoor concrete stairs, entrance upgrades and specialist
+              flooring systems including garage and decorative finishes.
             </p>
           </div>
 
@@ -584,14 +587,11 @@ export default function HomePage() {
             </div>
 
             <div className="footer-contact">
-              <p>
-                Phone: <strong>083 176 2475</strong>
-              </p>
+              <p>Phone: <strong>083 176 2475</strong></p>
 
               <p>
                 Email:{" "}
-                <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a>{" "}
-                /{" "}
+                <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
 
@@ -618,9 +618,7 @@ export default function HomePage() {
               </p>
 
               <div className="footer-buttons">
-                <a href="tel:0831762475" className="btn footer-call">
-                  Call
-                </a>
+                <a href="tel:0831762475" className="btn footer-call">Call</a>
                 <a
                   href="https://wa.me/353831762475"
                   target="_blank"
