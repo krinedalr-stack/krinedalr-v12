@@ -79,7 +79,7 @@ export default function HomePage() {
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
-    } catch (e) {
+    } catch {
       setWeatherError("Weather unavailable");
       setWeatherLoaded(true);
     }
@@ -378,11 +378,7 @@ export default function HomePage() {
 
             <p className="calc-result">
               Rough flooring total:{" "}
-              {floorTotal ? (
-                <strong>€{floorTotal}</strong>
-              ) : (
-                "— enter size above"
-              )}
+              {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
 
             <p className="muted smallest">
@@ -561,7 +557,6 @@ export default function HomePage() {
               <li>Photos provided for your records on request</li>
             </ul>
 
-            {/* Materials-first / labour-after rule (Footer only) */}
             <p className="muted small" style={{ marginTop: 12 }}>
               <strong>Materials &amp; Payment:</strong> For most projects, the
               customer pays for all necessary materials up front (tiles,
@@ -571,7 +566,6 @@ export default function HomePage() {
               agreed in writing before we start.
             </p>
 
-            {/* small trust/SEO line */}
             <p className="muted small" style={{ marginTop: 10 }}>
               We also design and build bespoke outdoor concrete stairs, entrance
               upgrades and specialist flooring systems including garage and
@@ -603,11 +597,7 @@ export default function HomePage() {
 
               <p>
                 Web:{" "}
-                <a
-                  href="https://www.krinedalr.ie"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
                   www.krinedalr.ie
                 </a>
               </p>
@@ -622,11 +612,7 @@ export default function HomePage() {
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
-                <a
-                  href="https://www.instagram.com/krinedalr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
                   @krinedalr
                 </a>
               </p>
