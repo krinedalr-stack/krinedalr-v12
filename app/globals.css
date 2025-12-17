@@ -113,6 +113,7 @@ a:hover{ text-decoration:underline; }
   padding:56px 0 40px;
 }
 
+/* floating shamrocks */
 .shamrock{
   position:absolute;
   top:18px;
@@ -140,6 +141,7 @@ a:hover{ text-decoration:underline; }
   .hero-inner{ grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); }
 }
 
+/* IMPORTANT: remove text-shadow to stop muddy Windows effect */
 .hero-text{ max-width:640px; text-shadow:none; }
 
 .hero-title{
@@ -214,6 +216,7 @@ a:hover{ text-decoration:underline; }
   margin-top:8px;
 }
 
+/* HERO SIDE CARD */
 .hero-side-card{
   background: rgba(15, 23, 42, 0.88);
   color:#f9fafb;
@@ -280,15 +283,6 @@ a:hover{ text-decoration:underline; }
 
 .btn-full{ width:100%; margin-top:12px; }
 
-/* ✅ Used by “saved details” feature */
-.btn-clear{
-  margin-top: 10px;
-  width: 100%;
-  border-color: rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
-  color:#f9fafb;
-}
-
 /* =========================
    TEXT UTILITIES
 ========================= */
@@ -311,6 +305,7 @@ a:hover{ text-decoration:underline; }
   box-shadow:0 16px 40px rgba(15,23,42,0.08);
 }
 .card-dark{ background:#020617; color:#f9fafb; }
+.review-card{ border: 1px solid rgba(15,23,42,0.06); }
 
 /* =========================
    FOOTER
@@ -443,7 +438,6 @@ a:hover{ text-decoration:underline; }
   font-weight:700;
   color:#111827;
 }
-
 .field-input{
   margin-top:8px;
   padding:12px 14px;
@@ -451,7 +445,6 @@ a:hover{ text-decoration:underline; }
   border:1px solid #e5e7eb;
   background:#fff;
 }
-
 .calc-result{
   margin-top:12px;
   font-size:1.05rem;
@@ -548,7 +541,6 @@ a:hover{ text-decoration:underline; }
 }
 
 .modal h2{ font-size: 1.2rem; margin-bottom: 6px; }
-
 .modal hr{
   border:none;
   height:1px;
@@ -583,9 +575,8 @@ a:hover{ text-decoration:underline; }
   margin-top: 10px;
 }
 
-/* keep close button looking premium */
 .modal .btn{
   background:#fff;
-  border:2px solid #f97316;
-  color:#c2410c;
+  border-color:#e5e7eb;
+  color:#111827;
 }
