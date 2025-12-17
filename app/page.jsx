@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 function PeopleCultureModal({ open, onClose }) {
   if (!open) return null;
+
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -13,7 +14,9 @@ function PeopleCultureModal({ open, onClose }) {
 
         <div className="k-block">
           <div className="k-title">1. Our Leadership Philosophy</div>
-          <p>Leadership at KRINEDAL-R is not about authority. It is about service.</p>
+          <p>
+            Leadership at KRINEDAL-R is not about authority. It is about service.
+          </p>
           <ul className="k-list">
             <li>Remove obstacles</li>
             <li>Provide clear systems</li>
@@ -21,7 +24,10 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Protect dignity</li>
             <li>Set standards and live by them</li>
           </ul>
-          <p>We lead from the front, stay calm under pressure, and remember results come from people, not shouting.</p>
+          <p>
+            We lead from the front, stay calm under pressure, and remember results
+            come from people, not shouting.
+          </p>
         </div>
 
         <div className="k-block">
@@ -96,6 +102,7 @@ function PeopleCultureModal({ open, onClose }) {
 export default function HomePage() {
   const [pcOpen, setPcOpen] = useState(false);
 
+  // ===== Services =====
   const SERVICES = [
     "Emergency storm make-safe within hours*",
     "Full roof change & leak tracing",
@@ -119,7 +126,7 @@ export default function HomePage() {
   const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
   const floorTotal = floorArea ? (Number(floorArea) * floorRate).toFixed(0) : "";
 
-  // ===== Weather status =====
+  // ===== Weather status (kept EXACTLY) =====
   const [weatherStatus, setWeatherStatus] = useState("green");
   const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
@@ -142,6 +149,7 @@ export default function HomePage() {
       const res = await fetch("/api/weather-status", { cache: "no-store" });
       const json = await res.json();
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
+
       setWeatherStatus(json?.status || "green");
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
@@ -158,17 +166,65 @@ export default function HomePage() {
     return () => clearInterval(id);
   }, []);
 
-  // ===== Secure Contact Form (NO mailto) =====
+  // ===== Quote form: AUTOFILL + phone memory =====
+  const STORAGE_KEY = "krinedalr_quote_prefill_v1";
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    eircode: "",
+    town: "",
+    service: "Storm / leak emergency",
+    date: "",
+    time: "",
+    details: "",
+    website: "", // honeypot
+  });
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (saved && typeof saved === "object") {
+        setForm((prev) => ({
+          ...prev,
+          name: saved.name || "",
+          phone: saved.phone || "",
+          email: saved.email || "",
+          eircode: saved.eircode || "",
+          town: saved.town || "",
+        }));
+      }
+    } catch {}
+  }, []);
+
+  function setField(key, value) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
   const [submitting, setSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState("");
 
   async function onSubmit(e) {
     e.preventDefault();
+
+    // honeypot bots
+    if (form.website) return;
+
     setSubmitting(true);
     setSubmitMsg("");
 
-    const form = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(form.entries());
+    const payload = {
+      Name: form.name,
+      Phone: form.phone,
+      Email: form.email,
+      Eircode: form.eircode,
+      "Town/County": form.town,
+      Service: form.service,
+      "Preferred date": form.date,
+      "Preferred time": form.time,
+      Details: form.details,
+    };
 
     try {
       const res = await fetch("/api/contact", {
@@ -177,12 +233,35 @@ export default function HomePage() {
         body: JSON.stringify(payload),
       });
 
-      const json = await res.json();
+      const json = await res.json().catch(() => ({}));
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
 
+      // Save only the "typing-heavy" fields for next time
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            name: form.name,
+            phone: form.phone,
+            email: form.email,
+            eircode: form.eircode,
+            town: form.town,
+          })
+        );
+      } catch {}
+
       setSubmitMsg("Sent ✅ We’ll get back to you shortly.");
-      e.currentTarget.reset();
-    } catch (err) {
+
+      // reset non-identity fields only
+      setForm((prev) => ({
+        ...prev,
+        service: "Storm / leak emergency",
+        date: "",
+        time: "",
+        details: "",
+        website: "",
+      }));
+    } catch {
       setSubmitMsg("Could not send right now. Please call 083 176 2475 or WhatsApp.");
     } finally {
       setSubmitting(false);
@@ -204,9 +283,13 @@ export default function HomePage() {
           </div>
 
           <div className="topbar-actions">
-            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
+            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
+              People &amp; Culture
+            </button>
             <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
+            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+              WhatsApp
+            </a>
             <a href="#estimate" className="btn btn-outline">Get Quote</a>
           </div>
         </div>
@@ -226,36 +309,53 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </h1>
 
-            <p className="hero-tag">🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span></p>
-            <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
+            <p className="hero-tag">
+              🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
+            </p>
+
+            <p className="hero-subline">
+              Built on standards • Run by systems • Powered by people
+            </p>
 
             <p className="hero-lead">
               24/7 storm damage call-out, full roof renewals and{" "}
-              <span className="hero-strong">luxury tiling</span> for homes and rental properties. Snow, rain or storm won&apos;t stop us.
+              <span className="hero-strong">luxury tiling</span> for homes and rental properties.
+              Snow, rain or storm won&apos;t stop us.
             </p>
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
             <div className="hero-weather-row">
-              <span className={weatherUI.chipClass}>{weatherLoaded ? weatherUI.label : "Loading weather…"}</span>
+              <span className={weatherUI.chipClass}>
+                {weatherLoaded ? weatherUI.label : "Loading weather…"}
+              </span>
               <span className="hero-weather-shamrock">☘️</span>
             </div>
 
             <div className="hero-actions">
               <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
-              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp us now</a>
-              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">Instagram</a>
+              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+                WhatsApp us now
+              </a>
+              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">
+                Instagram
+              </a>
             </div>
 
             <ul className="hero-bullets">
               {SERVICES.map((s) => (<li key={s}>{s}</li>))}
             </ul>
 
-            <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
+            <p className="hero-note">
+              *Response time depends on location &amp; weather conditions.
+            </p>
           </div>
 
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
-            <p>From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe, dry and beautifully finished.</p>
+            <p>
+              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe,
+              dry and beautifully finished.
+            </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
               <p>✓ Photos before &amp; after each job</p>
@@ -272,13 +372,19 @@ export default function HomePage() {
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
             <a href="tel:0831762475" className="btn btn-storm">🚨 24/7 STORM EMERGENCY LINE</a>
-            <p className="muted small">Elderly emergency call-outs: <strong>50% discount</strong> on the call-out fee.</p>
+            <p className="muted small">
+              Elderly emergency call-outs: <strong>50% discount</strong> on the call-out fee.
+            </p>
           </div>
 
           <div className="card">
             <h2>Ireland Weather Status</h2>
+
             <p className="muted small" style={{ marginTop: 8 }}>
-              Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
+              Current:{" "}
+              <strong className={weatherUI.textClass}>
+                {weatherStatus.toUpperCase()} warning
+              </strong>
             </p>
 
             {weatherError ? (
@@ -286,13 +392,15 @@ export default function HomePage() {
             ) : (
               <p className="muted smallest" style={{ marginTop: 8 }}>
                 Auto-updated from Met Éireann warnings
-                {fetchedAt && <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span>}
+                {fetchedAt ? <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span> : null}
               </p>
             )}
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>Latest warnings:</p>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                  Latest warnings:
+                </p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w, idx) => (
                     <li key={w.id || w.headline || idx}>
@@ -306,7 +414,12 @@ export default function HomePage() {
 
             <p className="muted small" style={{ marginTop: 12 }}>
               Follow{" "}
-              <a href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user" target="_blank" rel="noreferrer" className="brand-inline">
+              <a
+                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                target="_blank"
+                rel="noreferrer"
+                className="brand-inline"
+              >
                 Krinedal-R on Facebook
               </a>{" "}
               for live updates.
@@ -320,12 +433,18 @@ export default function HomePage() {
         <div className="container reviews-grid">
           <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
-            <p className="review-text">“Krinedal-R did our full luxury bathroom tiling last week – just phenomenal. Clean, fast and extremely professional. Couldn&apos;t be happier.”</p>
+            <p className="review-text">
+              “Krinedal-R did our full luxury bathroom tiling last week – just phenomenal.
+              Clean, fast and extremely professional. Couldn&apos;t be happier.”
+            </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
-            <p className="review-text">“We had a roof leak in heavy rain, they arrived close to midnight to make the house safe. Snow, rain and storm didn&apos;t stop them.”</p>
+            <p className="review-text">
+              “We had a roof leak in heavy rain, they arrived close to midnight to make the house safe.
+              Snow, rain and storm didn&apos;t stop them.”
+            </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
         </div>
@@ -337,82 +456,185 @@ export default function HomePage() {
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
             <p className="muted small">Handy calculator to get a feel for budget. Final prices always confirmed after inspection.</p>
+
             <label className="field-label">
               Roof area (m²)
               <input type="number" value={roofArea} onChange={(e) => setRoofArea(e.target.value)} className="field-input" min="0" />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
-            <p className="calc-result">Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Typical full roof renewal for a standard Irish home usually falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.</p>
+
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{roofRate}</strong>
+            </p>
+
+            <p className="calc-result">
+              Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Typical full roof renewal for a standard Irish home usually falls between{" "}
+              <strong>€5,800–€10,000</strong> depending on size, materials and access.
+            </p>
           </div>
 
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
-            <p className="muted small">For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.</p>
+            <p className="muted small">
+              For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.
+            </p>
+
             <label className="field-label">
               Tiled area (m²)
               <input type="number" value={tileArea} onChange={(e) => setTileArea(e.target.value)} className="field-input" min="0" />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
-            <p className="calc-result">Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Premium luxury tiling typically ranges between <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong> as a guide.</p>
+
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{tileRate}</strong>
+            </p>
+
+            <p className="calc-result">
+              Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Premium luxury tiling typically ranges between <strong>€42–€58 per m²</strong>;
+              this calculator uses <strong> €48 per m²</strong> as a guide.
+            </p>
           </div>
 
           <div className="card">
             <h2>Flooring cost idea</h2>
-            <p className="muted small">Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.</p>
+            <p className="muted small">
+              Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.
+            </p>
+
             <label className="field-label">
               Floor area (m²)
               <input type="number" value={floorArea} onChange={(e) => setFloorArea(e.target.value)} className="field-input" min="0" />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
-            <p className="calc-result">Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Flooring labour often ranges between <strong>€18–€45 per m²</strong> depending on prep and material. This calculator uses <strong>€26 per m²</strong>.</p>
+
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{floorRate}</strong>
+            </p>
+
+            <p className="calc-result">
+              Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Flooring labour often ranges between <strong>€18–€45 per m²</strong> depending on prep and material.
+              This calculator uses <strong> €26 per m²</strong>.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ESTIMATE FORM (SECURE) */}
+      {/* ESTIMATE FORM (SECURE + remembers details) */}
       <section id="estimate" className="section section-form">
         <div className="container">
           <div className="form-card">
             <h2>Request a Free Estimate</h2>
-            <p className="form-sub">Tell us a bit about your project and we&apos;ll come back with options and a rough budget.</p>
+            <p className="form-sub">
+              Tell us a bit about your project and we&apos;ll come back with options and a rough budget.
+            </p>
 
             <form onSubmit={onSubmit}>
+              {/* Honeypot (hidden for bots) */}
+              <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+                value={form.website}
+                onChange={(e) => setField("website", e.target.value)}
+                autoComplete="off"
+                tabIndex={-1}
+              />
+
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input id="name" name="Name" type="text" placeholder="Full name" required />
+                  <input
+                    id="name"
+                    name="Name"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                    value={form.name}
+                    onChange={(e) => setField("name", e.target.value)}
+                    autoComplete="name"
+                  />
                 </div>
+
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input id="phone" name="Phone" type="tel" placeholder="+353" required />
+                  <input
+                    id="phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                    value={form.phone}
+                    onChange={(e) => setField("phone", e.target.value)}
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="Email" type="email" placeholder="you@email.com" required />
+                  <input
+                    id="email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                    value={form.email}
+                    onChange={(e) => setField("email", e.target.value)}
+                    autoComplete="email"
+                  />
                 </div>
               </div>
 
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="eircode">Eircode</label>
-                  <input id="eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                  <input
+                    id="eircode"
+                    name="Eircode"
+                    type="text"
+                    placeholder="e.g. C15 XXXX"
+                    required
+                    value={form.eircode}
+                    onChange={(e) => setField("eircode", e.target.value)}
+                    autoComplete="postal-code"
+                  />
                 </div>
+
                 <div className="field">
                   <label htmlFor="town">Town / County</label>
-                  <input id="town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                  <input
+                    id="town"
+                    name="Town/County"
+                    type="text"
+                    placeholder="e.g. Navan, Co. Meath"
+                    required
+                    value={form.town}
+                    onChange={(e) => setField("town", e.target.value)}
+                    autoComplete="address-level2"
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="service">Type of work</label>
-                  <select id="service" name="Service">
+                  <select
+                    id="service"
+                    name="Service"
+                    value={form.service}
+                    onChange={(e) => setField("service", e.target.value)}
+                  >
                     <option>Storm / leak emergency</option>
                     <option>Full roof renewal</option>
                     <option>Roof repair</option>
@@ -434,18 +656,39 @@ export default function HomePage() {
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="date">Preferred date</label>
-                  <input id="date" name="Preferred date" type="date" required />
+                  <input
+                    id="date"
+                    name="Preferred date"
+                    type="date"
+                    required
+                    value={form.date}
+                    onChange={(e) => setField("date", e.target.value)}
+                  />
                 </div>
+
                 <div className="field">
                   <label htmlFor="time">Preferred time</label>
-                  <input id="time" name="Preferred time" type="time" required />
+                  <input
+                    id="time"
+                    name="Preferred time"
+                    type="time"
+                    required
+                    value={form.time}
+                    onChange={(e) => setField("time", e.target.value)}
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="details">Tell us a bit about the job</label>
-                  <textarea id="details" name="Details" placeholder="Size of area, issues, photos available, access, etc." />
+                  <textarea
+                    id="details"
+                    name="Details"
+                    placeholder="Size of area, issues, photos available, access, etc."
+                    value={form.details}
+                    onChange={(e) => setField("details", e.target.value)}
+                  />
                 </div>
               </div>
 
@@ -453,7 +696,11 @@ export default function HomePage() {
                 <button type="submit" className="btn btn-storm" disabled={submitting}>
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
-                {submitMsg && <p className="muted small" style={{ marginTop: 10 }}>{submitMsg}</p>}
+                {submitMsg && (
+                  <p className="muted small" style={{ marginTop: 10 }}>
+                    {submitMsg}
+                  </p>
+                )}
               </div>
             </form>
           </div>
@@ -470,32 +717,63 @@ export default function HomePage() {
               <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
+
             <p className="muted small" style={{ marginTop: 12 }}>
               <strong>Materials &amp; Payment:</strong> For most projects, the customer pays for all necessary materials up front
-              (tiles, flooring, timber, concrete, lighting, membranes, fixings, skips, etc.). Labour is paid after the job is completed and the work is signed off.
-              For larger jobs, staged payments may apply and will be agreed in writing before we start.
+              (tiles, flooring, timber, concrete, lighting, membranes, fixings, skips, etc.). Labour is paid after the job is completed
+              and the work is signed off. For larger jobs, staged payments may apply and will be agreed in writing before we start.
             </p>
           </div>
 
           <footer className="footer">
             <div className="footer-brand">
-              <span className="footer-name">KRINEDAL-<span className="hero-r">R</span></span>
-              <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
-              <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
+              <span className="footer-name">
+                KRINEDAL-<span className="hero-r">R</span>
+              </span>
+              <p className="muted footer-line">
+                Premium property care, storm or sunshine – Ireland-wide.
+              </p>
+              <p className="footer-dna">
+                Built on standards • Run by systems • Powered by people
+              </p>
             </div>
 
             <div className="footer-contact">
               <p>Phone: <strong>083 176 2475</strong></p>
-              <p>Email: <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> / <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a></p>
-              <p>Web: <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">www.krinedalr.ie</a></p>
               <p>
-                Facebook: <a href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user" target="_blank" rel="noreferrer">Visit our page</a> •{" "}
-                Instagram: <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">@krinedalr</a>
+                Email:{" "}
+                <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
+                <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
+              <p>
+                Web:{" "}
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                  www.krinedalr.ie
+                </a>
+              </p>
+              <p>
+                Facebook:{" "}
+                <a
+                  href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Visit our page
+                </a>{" "}
+                • Instagram:{" "}
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
+                  @krinedalr
+                </a>
+              </p>
+
               <div className="footer-buttons">
                 <a href="tel:0831762475" className="btn footer-call">Call</a>
-                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">WhatsApp</a>
-                <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
+                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">
+                  WhatsApp
+                </a>
+                <button className="btn footer-call" onClick={() => setPcOpen(true)}>
+                  People &amp; Culture
+                </button>
               </div>
             </div>
           </footer>
