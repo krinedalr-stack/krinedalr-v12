@@ -1,89 +1,105 @@
+export const runtime = "nodejs";
+
+function toBase64(buf) {
+  return Buffer.from(buf).toString("base64");
+}
+
 export async function POST(req) {
   try {
-    const body = await req.json();
-
-    // Basic sanitize
-    const data = {
-      name: String(body?.Name || "").trim(),
-      phone: String(body?.Phone || "").trim(),
-      email: String(body?.Email || "").trim(),
-      eircode: String(body?.Eircode || "").trim(),
-      town: String(body?.["Town/County"] || "").trim(),
-      service: String(body?.Service || "").trim(),
-      date: String(body?.["Preferred date"] || "").trim(),
-      time: String(body?.["Preferred time"] || "").trim(),
-      details: String(body?.Details || "").trim(),
-    };
-
-    // If Resend key not set, return a friendly error (site still builds)
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      return Response.json(
-        { ok: false, error: "Email sending is not configured yet (RESEND_API_KEY missing)." },
-        { status: 500 }
-      );
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    if (!RESEND_API_KEY) {
+      return Response.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
     }
+
+    const form = await req.formData();
+
+    // bot trap
+    const honey = form.get("website");
+    if (honey) return Response.json({ ok: true });
+
+    const Name = String(form.get("Name") || "").trim();
+    const Phone = String(form.get("Phone") || "").trim();
+    const Email = String(form.get("Email") || "").trim();
+    const Eircode = String(form.get("Eircode") || "").trim();
+    const Town = String(form.get("Town/County") || "").trim();
+    const Service = String(form.get("Service") || "").trim();
+    const PrefDate = String(form.get("Preferred date") || "").trim();
+    const PrefTime = String(form.get("Preferred time") || "").trim();
+    const Details = String(form.get("Details") || "").trim();
 
     const toList = (process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com")
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
 
-    // IMPORTANT: With Resend, FROM must be a verified sender/domain in your Resend account
     const from = process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
-    const subject = `New website quote request — ${data.service || "Enquiry"}`;
+    // attachments
+    const raw = form.getAll("files");
+    const attachments = [];
+    for (const f of raw) {
+      if (!f || typeof f === "string") continue;
+      // limit to protect Vercel / email size
+      if (f.size > 6 * 1024 * 1024) continue; // 6MB per file
+      const ab = await f.arrayBuffer();
+      attachments.push({
+        filename: f.name || "file",
+        content: toBase64(ab),
+      });
+      if (attachments.length >= 5) break; // max 5 files
+    }
+
+    const subject = `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
 
     const html = `
-      <div style="font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5">
-        <h2 style="margin:0 0 10px">KRINEDAL-R — New Estimate Request</h2>
-        <p style="margin:0 0 12px;color:#444">A customer submitted the website form.</p>
-        <table cellpadding="8" cellspacing="0" style="border-collapse:collapse;border:1px solid #eee;width:100%">
-          <tr><td style="border:1px solid #eee"><strong>Name</strong></td><td style="border:1px solid #eee">${escapeHtml(data.name)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Phone</strong></td><td style="border:1px solid #eee">${escapeHtml(data.phone)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Email</strong></td><td style="border:1px solid #eee">${escapeHtml(data.email)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Eircode</strong></td><td style="border:1px solid #eee">${escapeHtml(data.eircode)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Town/County</strong></td><td style="border:1px solid #eee">${escapeHtml(data.town)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Service</strong></td><td style="border:1px solid #eee">${escapeHtml(data.service)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Date</strong></td><td style="border:1px solid #eee">${escapeHtml(data.date)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Time</strong></td><td style="border:1px solid #eee">${escapeHtml(data.time)}</td></tr>
-          <tr><td style="border:1px solid #eee"><strong>Details</strong></td><td style="border:1px solid #eee;white-space:pre-wrap">${escapeHtml(data.details)}</td></tr>
-        </table>
+      <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
+        <h2>KRINEDAL-R — New estimate request</h2>
+        <p><b>Name:</b> ${escapeHtml(Name)}</p>
+        <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
+        <p><b>Email:</b> ${escapeHtml(Email)}</p>
+        <p><b>Eircode:</b> ${escapeHtml(Eircode)}</p>
+        <p><b>Town/County:</b> ${escapeHtml(Town)}</p>
+        <p><b>Service:</b> ${escapeHtml(Service)}</p>
+        <p><b>Preferred date:</b> ${escapeHtml(PrefDate)}</p>
+        <p><b>Preferred time:</b> ${escapeHtml(PrefTime)}</p>
+        <hr/>
+        <p><b>Details:</b><br/>${escapeHtml(Details).replace(/\n/g, "<br/>")}</p>
+        <hr/>
+        <p style="color:#6b7280;font-size:12px">Sent from krinedalr.ie</p>
       </div>
     `;
 
-    const resp = await fetch("https://api.resend.com/emails", {
+    const payload = {
+      from,
+      to: toList,
+      subject,
+      html,
+      reply_to: Email || undefined,
+      attachments: attachments.length ? attachments : undefined,
+    };
+
+    const r = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        from,
-        to: toList,
-        subject,
-        html,
-        reply_to: data.email || undefined,
-      }),
+      body: JSON.stringify(payload),
     });
 
-    const json = await resp.json().catch(() => ({}));
-
-    if (!resp.ok) {
-      return Response.json(
-        { ok: false, error: json?.message || "Failed to send email" },
-        { status: 500 }
-      );
+    if (!r.ok) {
+      const text = await r.text().catch(() => "");
+      return Response.json({ ok: false, error: "Resend failed", details: text }, { status: 500 });
     }
 
     return Response.json({ ok: true });
   } catch (e) {
-    return Response.json({ ok: false, error: "Bad request" }, { status: 400 });
+    return Response.json({ ok: false, error: "Server error" }, { status: 500 });
   }
 }
 
-function escapeHtml(str) {
-  return String(str || "")
+function escapeHtml(s) {
+  return String(s || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
