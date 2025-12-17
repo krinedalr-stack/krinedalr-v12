@@ -1,47 +1,55 @@
+export const runtime = "nodejs";
+
 export async function GET() {
   const fetchedAt = new Date().toISOString();
 
   try {
-    // Best-effort: fetch Met Éireann warnings page and detect highest level
-    const res = await fetch("https://www.met.ie/warnings", {
-      headers: { "User-Agent": "krinedalr-site/1.0" },
-      cache: "no-store",
-    });
+    // Met endpoints sometimes change. We try a few, but NEVER crash the build.
+    const candidates = [
+      "https://www.met.ie/Open_Data/json/warnings.json",
+      "https://www.met.ie/Open_Data/json/warnings/warnings.json",
+      "https://www.met.ie/Open_Data/json/warnings",
+    ];
 
-    const html = await res.text();
+    let data = null;
+    for (const url of candidates) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) continue;
+        const j = await r.json();
+        data = j;
+        break;
+      } catch {}
+    }
 
-    // Detect levels
-    const hasRed = /Status\s*Red/i.test(html);
-    const hasOrange = /Status\s*Orange/i.test(html);
-    const hasYellow = /Status\s*Yellow/i.test(html);
+    if (!data) {
+      // fallback: safe green
+      return Response.json({ ok: true, status: "green", warnings: [], fetchedAt });
+    }
+
+    // Try to normalize
+    const list = Array.isArray(data) ? data : (data.warnings || data.Warnings || data.data || []);
+    const warnings = Array.isArray(list) ? list : [];
+
+    // Determine highest severity
+    const levels = warnings
+      .map((w) => (w.level || w.Level || w.severity || w.Severity || "").toString().toLowerCase())
+      .filter(Boolean);
+
+    const hasRed = levels.some((x) => x.includes("red"));
+    const hasOrange = levels.some((x) => x.includes("orange"));
+    const hasYellow = levels.some((x) => x.includes("yellow"));
 
     const status = hasRed ? "red" : hasOrange ? "orange" : hasYellow ? "yellow" : "green";
 
-    // Pull some warning headings (best effort)
-    const warnings = [];
-    const matches = html.match(/Status\s*(Red|Orange|Yellow)[^<]{0,120}/gi) || [];
-    for (const m of matches.slice(0, 6)) {
-      const level = (m.match(/Red|Orange|Yellow/i)?.[0] || "").toLowerCase();
-      warnings.push({
-        id: m,
-        level,
-        headline: m.replace(/\s+/g, " ").trim(),
-      });
-    }
+    const cleaned = warnings.slice(0, 10).map((w) => ({
+      id: w.id || w.ID || w.identifier || null,
+      level: (w.level || w.Level || w.severity || w.Severity || "unknown").toString(),
+      headline: (w.headline || w.Headline || w.title || w.Title || "").toString(),
+    }));
 
-    return Response.json({
-      ok: true,
-      status,
-      warnings,
-      fetchedAt,
-    });
-  } catch (e) {
-    return Response.json({
-      ok: true,
-      status: "green",
-      warnings: [],
-      fetchedAt,
-      error: "Weather source unavailable",
-    });
+    return Response.json({ ok: true, status, warnings: cleaned, fetchedAt });
+  } catch {
+    return Response.json({ ok: true, status: "green", warnings: [], fetchedAt });
   }
 }
