@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 
 function PeopleCultureModal({ open, onClose }) {
   if (!open) return null;
-
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -22,10 +21,7 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Protect dignity</li>
             <li>Set standards and live by them</li>
           </ul>
-          <p>
-            We lead from the front, stay calm under pressure, and remember results
-            come from people, not shouting.
-          </p>
+          <p>We lead from the front, stay calm under pressure, and remember results come from people, not shouting.</p>
         </div>
 
         <div className="k-block">
@@ -64,10 +60,7 @@ function PeopleCultureModal({ open, onClose }) {
 
         <div className="k-block">
           <div className="k-title">6. Accountability Goes Both Ways</div>
-          <p>
-            We hold people accountable fairly — and leadership is accountable for
-            planning, support, and decisions.
-          </p>
+          <p>We hold people accountable fairly — and leadership is accountable for planning, support, and decisions.</p>
         </div>
 
         <div className="k-block">
@@ -114,21 +107,19 @@ export default function HomePage() {
     "Landlord-ready refresh between tenants",
   ];
 
-  // ===== Calculators =====
+  // Calculators
   const [roofArea, setRoofArea] = useState("");
   const [roofRate] = useState(45); // locked
-
   const [tileArea, setTileArea] = useState("");
   const [tileRate] = useState(48); // locked
-
   const [floorArea, setFloorArea] = useState("");
   const [floorRate] = useState(26); // locked
 
-  const roofTotal = roofArea ? (Number(roofArea) * roofRate).toFixed(0) : "";
-  const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
-  const floorTotal = floorArea ? (Number(floorArea) * floorRate).toFixed(0) : "";
+  const roofTotal = roofArea ? (Number(roofArea) * Number(roofRate)).toFixed(0) : "";
+  const tileTotal = tileArea ? (Number(tileArea) * Number(tileRate)).toFixed(0) : "";
+  const floorTotal = floorArea ? (Number(floorArea) * Number(floorRate)).toFixed(0) : "";
 
-  // ===== Weather =====
+  // Weather
   const [weatherStatus, setWeatherStatus] = useState("green");
   const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
@@ -138,9 +129,9 @@ export default function HomePage() {
   const weatherUI = useMemo(() => {
     const map = {
       green: { label: "GREEN – normal conditions", textClass: "green-text", chipClass: "weather-chip weather-chip-green" },
-      yellow:{ label: "YELLOW – be aware",          textClass: "yellow-text", chipClass: "weather-chip weather-chip-yellow" },
-      orange:{ label: "ORANGE – take action",       textClass: "orange-text", chipClass: "weather-chip weather-chip-orange" },
-      red:   { label: "RED – danger to life",       textClass: "red-text",    chipClass: "weather-chip weather-chip-red" },
+      yellow:{ label: "YELLOW – be aware", textClass: "yellow-text", chipClass: "weather-chip weather-chip-yellow" },
+      orange:{ label: "ORANGE – take action", textClass: "orange-text", chipClass: "weather-chip weather-chip-orange" },
+      red:   { label: "RED – danger to life", textClass: "red-text", chipClass: "weather-chip weather-chip-red" },
     };
     return map[weatherStatus] || map.green;
   }, [weatherStatus]);
@@ -151,7 +142,6 @@ export default function HomePage() {
       const res = await fetch("/api/weather-status", { cache: "no-store" });
       const json = await res.json();
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
-
       setWeatherStatus(json?.status || "green");
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
@@ -168,17 +158,12 @@ export default function HomePage() {
     return () => clearInterval(id);
   }, []);
 
-  // ===== Secure contact form (no mailto) =====
+  // Secure contact form
   const [submitting, setSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState("");
-  const [hp, setHp] = useState(""); // honeypot
 
   async function onSubmit(e) {
     e.preventDefault();
-
-    // bots fill hidden field
-    if (hp) return;
-
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
 
@@ -191,11 +176,11 @@ export default function HomePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      const json = await res.json();
+      if (!res.ok || !json?.ok) throw new Error("Failed");
 
-      if (!res.ok) throw new Error("Failed");
       setSubmitMsg("Sent ✅ We’ll get back to you shortly.");
       e.currentTarget.reset();
-      setHp("");
     } catch {
       setSubmitMsg("Could not send right now. Please call 083 176 2475 or WhatsApp.");
     } finally {
@@ -205,7 +190,6 @@ export default function HomePage() {
 
   return (
     <main>
-      {/* FIXED TOP BAR */}
       <header className="topbar">
         <div className="container topbar-inner">
           <div>
@@ -213,7 +197,7 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </div>
             <small className="topbar-sub">
-              🇮🇪 Premium Property Care Across Ireland ☘️ — Built on standards • Run by systems • Powered by people
+              🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
             </small>
           </div>
 
@@ -228,10 +212,8 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* PEOPLE & CULTURE MODAL */}
       <PeopleCultureModal open={pcOpen} onClose={() => setPcOpen(false)} />
 
-      {/* HERO */}
       <section className="hero">
         <span className="shamrock shamrock-left">☘️</span>
         <span className="shamrock shamrock-right">☘️</span>
@@ -266,7 +248,7 @@ export default function HomePage() {
             </div>
 
             <ul className="hero-bullets">
-              {SERVICES.map((s) => <li key={s}>{s}</li>)}
+              {SERVICES.map((s) => (<li key={s}>{s}</li>))}
             </ul>
 
             <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
@@ -275,8 +257,8 @@ export default function HomePage() {
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
-              From emergency leaks at midnight to full bathroom tiling that looks like a hotel –
-              we keep your home safe, dry and beautifully finished.
+              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe,
+              dry and beautifully finished.
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
@@ -287,7 +269,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 24/7 STORM + WEATHER STATUS */}
       <section className="section section-alt">
         <div className="container grid-2">
           <div className="card">
@@ -326,51 +307,34 @@ export default function HomePage() {
                 </ul>
               </div>
             )}
-
-            <p className="muted small" style={{ marginTop: 12 }}>
-              Follow{" "}
-              <a
-                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
-                target="_blank"
-                rel="noreferrer"
-                className="brand-inline"
-              >
-                Krinedal-R on Facebook
-              </a>{" "}
-              for live updates.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* REVIEWS */}
       <section className="section">
         <div className="container reviews-grid">
-          <article className="card">
+          <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – just phenomenal.
-              Clean, fast and extremely professional. Couldn&apos;t be happier.”
+              “Krinedal-R did our full luxury bathroom tiling last week – just phenomenal. Clean, fast and extremely professional.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
-          <article className="card">
+          <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, they arrived close to midnight to make the house safe.
-              Snow, rain and storm didn&apos;t stop them.”
+              “We had a roof leak in heavy rain, they arrived close to midnight to make the house safe.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
         </div>
       </section>
 
-      {/* CALCULATORS */}
       <section className="section section-alt">
         <div className="container grid-3">
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
-            <p className="muted small">Handy calculator to get a feel for budget. Final prices confirmed after inspection.</p>
+            <p className="muted small">Final prices always confirmed after inspection.</p>
 
             <label className="field-label">
               Roof area (m²)
@@ -378,13 +342,15 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
-            <p className="calc-result">Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Typical full roof renewal: <strong>€5,800–€10,000</strong> depending on size, materials and access.</p>
+
+            <p className="calc-result">
+              Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+            </p>
           </div>
 
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
-            <p className="muted small">Hotel-style bathrooms &amp; premium finishes. Labour only.</p>
+            <p className="muted small">Labour only. Tiles &amp; materials separate.</p>
 
             <label className="field-label">
               Tiled area (m²)
@@ -392,13 +358,15 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
-            <p className="calc-result">Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Premium tiling usually <strong>€42–€58/m²</strong>; this uses <strong>€48/m²</strong>.</p>
+
+            <p className="calc-result">
+              Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
+            </p>
           </div>
 
           <div className="card">
             <h2>Flooring cost idea</h2>
-            <p className="muted small">Laminate, vinyl &amp; engineered wood (labour guide).</p>
+            <p className="muted small">Final prices always confirmed after inspection.</p>
 
             <label className="field-label">
               Floor area (m²)
@@ -406,13 +374,14 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
-            <p className="calc-result">Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}</p>
-            <p className="muted smallest">Labour often <strong>€18–€45/m²</strong>. This uses <strong>€26/m²</strong>.</p>
+
+            <p className="calc-result">
+              Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ESTIMATE FORM (SECURE SUBMIT) */}
       <section id="estimate" className="section section-form">
         <div className="container">
           <div className="form-card">
@@ -420,16 +389,8 @@ export default function HomePage() {
             <p className="form-sub">Tell us a bit about your project and we&apos;ll come back with options and a rough budget.</p>
 
             <form onSubmit={onSubmit}>
-              {/* Honeypot (hidden bot field) */}
-              <input
-                type="text"
-                name="website"
-                value={hp}
-                onChange={(e) => setHp(e.target.value)}
-                autoComplete="off"
-                tabIndex={-1}
-                style={{ display: "none" }}
-              />
+              {/* Honeypot (bots fill this; humans never see it) */}
+              <input type="text" name="website" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
 
               <div className="form-grid two-col">
                 <div className="field">
@@ -469,13 +430,13 @@ export default function HomePage() {
                     <option>Roof repair</option>
                     <option>Luxury bathroom tiling</option>
                     <option>Kitchen tiling</option>
-                    <option>Flooring installation (laminate / vinyl / engineered wood)</option>
-                    <option>Garage flooring systems (rubber / tiles / resin-coated)</option>
-                    <option>Marble-look &amp; decorative floor coatings</option>
+                    <option>Flooring installation</option>
+                    <option>Garage flooring systems</option>
+                    <option>Marble-look & decorative floor coatings</option>
                     <option>Outdoor concrete stairs</option>
                     <option>Front entrance upgrade</option>
                     <option>Exterior lighting installation</option>
-                    <option>Painting &amp; fresh-up</option>
+                    <option>Painting & fresh-up</option>
                     <option>Landlord end-of-tenancy</option>
                     <option>Other (describe below)</option>
                   </select>
@@ -496,7 +457,7 @@ export default function HomePage() {
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="details">Tell us a bit about the job</label>
-                  <textarea id="details" name="Details" placeholder="Size of area, issues, photos available, access, etc." />
+                  <textarea id="details" name="Details" placeholder="Size of area, issues, access, etc." />
                 </div>
               </div>
 
@@ -511,7 +472,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <section className="section section-dark">
         <div className="container">
           <div className="card card-dark">
@@ -521,15 +481,6 @@ export default function HomePage() {
               <li>Digital invoice &amp; payment by bank transfer</li>
               <li>Photos provided for your records on request</li>
             </ul>
-
-            <p className="muted small" style={{ marginTop: 12 }}>
-              <strong>Materials &amp; Payment:</strong> For most projects, the customer pays for all necessary materials up front.
-              Labour is paid after the job is completed and the work is signed off. For larger jobs, staged payments may apply.
-            </p>
-
-            <p className="muted small" style={{ marginTop: 10 }}>
-              We also build bespoke outdoor concrete stairs, entrance upgrades and specialist flooring systems including garage and decorative finishes.
-            </p>
           </div>
 
           <footer className="footer">
@@ -542,7 +493,6 @@ export default function HomePage() {
             <div className="footer-contact">
               <p>Phone: <strong>083 176 2475</strong></p>
               <p>Email: <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> / <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a></p>
-              <p>Web: <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">www.krinedalr.ie</a></p>
 
               <div className="footer-buttons">
                 <a href="tel:0831762475" className="btn footer-call">Call</a>
@@ -553,7 +503,6 @@ export default function HomePage() {
           </footer>
         </div>
 
-        {/* FLOATING BUTTONS */}
         <div className="float-stack">
           <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="float-btn float-wa" aria-label="WhatsApp" title="WhatsApp">💬</a>
           <a href="https://m.me/61581354904730" target="_blank" rel="noreferrer" className="float-btn float-msgr" aria-label="Messenger" title="Messenger">📘</a>
