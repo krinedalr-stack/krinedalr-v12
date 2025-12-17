@@ -280,6 +280,15 @@ a:hover{ text-decoration:underline; }
 
 .btn-full{ width:100%; margin-top:12px; }
 
+/* ✅ Used by “saved details” feature */
+.btn-clear{
+  margin-top: 10px;
+  width: 100%;
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color:#f9fafb;
+}
+
 /* =========================
    TEXT UTILITIES
 ========================= */
@@ -434,6 +443,7 @@ a:hover{ text-decoration:underline; }
   font-weight:700;
   color:#111827;
 }
+
 .field-input{
   margin-top:8px;
   padding:12px 14px;
@@ -441,6 +451,7 @@ a:hover{ text-decoration:underline; }
   border:1px solid #e5e7eb;
   background:#fff;
 }
+
 .calc-result{
   margin-top:12px;
   font-size:1.05rem;
@@ -511,7 +522,7 @@ a:hover{ text-decoration:underline; }
 }
 
 /* =========================
-   PEOPLE & CULTURE MODAL  ✅ (THIS WAS MISSING)
+   PEOPLE & CULTURE MODAL ✅
 ========================= */
 .modal-backdrop{
   position:fixed;
@@ -537,6 +548,7 @@ a:hover{ text-decoration:underline; }
 }
 
 .modal h2{ font-size: 1.2rem; margin-bottom: 6px; }
+
 .modal hr{
   border:none;
   height:1px;
@@ -571,8 +583,9 @@ a:hover{ text-decoration:underline; }
   margin-top: 10px;
 }
 
+/* keep close button looking premium */
 .modal .btn{
   background:#fff;
-  border-color:#e5e7eb;
-  color:#111827;
+  border:2px solid #f97316;
+  color:#c2410c;
 }
