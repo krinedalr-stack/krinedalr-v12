@@ -96,14 +96,24 @@ export default function HomePage() {
       {/* FIXED TOP BAR */}
       <header className="topbar">
         <div className="container topbar-inner">
-          <div className="topbar-brand">
-            KRINEDAL-<span className="hero-r">R</span>
+          <div>
+            <div className="topbar-brand">
+              KRINEDAL-<span className="hero-r">R</span>
+            </div>
+            <small className="topbar-sub">
+              🇮🇪 Premium Property Care Across Ireland ☘️ — Built on standards • Run by systems • Powered by people
+            </small>
           </div>
 
           <div className="topbar-actions">
+            <a href="#people-culture" className="btn btn-outline">
+              Our People
+            </a>
+
             <a href="tel:0831762475" className="btn btn-primary">
               Call
             </a>
+
             <a
               href="https://wa.me/353831762475"
               target="_blank"
@@ -112,6 +122,7 @@ export default function HomePage() {
             >
               WhatsApp
             </a>
+
             <a href="#estimate" className="btn btn-outline">
               Get Quote
             </a>
@@ -132,6 +143,10 @@ export default function HomePage() {
 
             <p className="hero-tag">
               🇮🇪 PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
+            </p>
+
+            <p className="hero-subline">
+              Built on standards • Run by systems • Powered by people
             </p>
 
             <p className="hero-lead">
@@ -415,6 +430,103 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* PEOPLE & CULTURE (FULL POLICY) */}
+      <section id="people-culture" className="section section-alt">
+        <div className="container">
+          <div className="card">
+            <h2>KRINEDAL-R — Our People &amp; Culture Policy</h2>
+            <p className="muted" style={{ marginTop: 10 }}>
+              At KRINEDAL-R, we believe great work starts with how people are treated.
+            </p>
+            <p className="muted">
+              <strong>People who live better, work better.</strong>
+            </p>
+            <p className="muted" style={{ marginTop: 10 }}>
+              We don’t lead through fear, pressure, or empty titles.
+              We lead through structure, respect, clarity, and accountability.
+              <strong> This culture is locked in. It does not change.</strong>
+            </p>
+
+            <hr style={{ margin: "24px 0" }} />
+
+            <h3>1. Our Leadership Philosophy</h3>
+            <p className="muted">
+              Leadership at KRINEDAL-R is not about authority. It is about service.
+              Our role as leaders is to remove obstacles, provide clear systems,
+              support growth, protect dignity, and set standards — then live by them.
+              We lead from the front, stay calm under pressure, and never forget:
+              results come from people, not shouting.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>2. Respect Is Non-Negotiable</h3>
+            <p className="muted">
+              Every person working with KRINEDAL-R is treated with respect, fairness,
+              honesty and human dignity. There is zero tolerance for bullying,
+              intimidation, disrespect, discrimination, or abuse of authority.
+              Skill can be taught. Character is required.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>3. Clear Pay, Clear Hours, Clear Rules</h3>
+            <p className="muted">
+              We do not play games with people’s livelihoods.
+              Clear hourly rates or agreed contract terms. Transparent working hours.
+              No hidden expectations. No unpaid labour. No pressure to “stay quiet”.
+              People should always know what they are paid, what is expected, and what comes next.
+              Uncertainty destroys trust — we remove uncertainty.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>4. Training, Development &amp; Growth</h3>
+            <p className="muted">
+              We invest in people — professional training, safety certifications,
+              skills development, equipment competency, and career progression.
+              Mistakes are handled through training and improvement, not blame or humiliation.
+              If someone wants to grow, we help them grow.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>5. Safety Before Speed</h3>
+            <p className="muted">
+              No job is worth an injury. We work with risk assessments, method statements,
+              proper equipment and planning — and every worker has the right to stop unsafe work
+              without fear. Safety is leadership in action.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>6. Accountability Goes Both Ways</h3>
+            <p className="muted">
+              We hold people accountable fairly — quality, reliability, respect, and procedures.
+              But leadership is accountable too: planning, communication, support, and decisions.
+              Accountability is shared, not one-sided.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>7. No Ego Culture</h3>
+            <p className="muted">
+              Titles do not impress us. Work ethic, attitude, and consistency do.
+              No power games. No “I’m the boss” mentality.
+              We value calm confidence, quiet excellence, and team success.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>8. Long-Term Thinking</h3>
+            <p className="muted">
+              KRINEDAL-R is built for the long run.
+              We aim to create stable jobs, better living standards,
+              pride in workmanship, and a workplace people recommend — not escape from.
+              We don’t burn people out. We build people up.
+            </p>
+
+            <h3 style={{ marginTop: 16 }}>9. Our Promise</h3>
+            <p className="muted">
+              If you work with KRINEDAL-R, you can expect fair treatment,
+              clear systems, honest communication, respect for your time and effort,
+              and a workplace where standards matter and people matter more.
+              This is not marketing — this is how we operate.
+            </p>
+
+            <p style={{ marginTop: 22, fontWeight: 900 }}>
+              Built on standards. Run by systems. Powered by people.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ESTIMATE FORM */}
       <section id="estimate" className="section section-form">
         <div className="container">
@@ -584,6 +696,9 @@ export default function HomePage() {
               <p className="muted footer-line">
                 Premium property care, storm or sunshine – Ireland-wide.
               </p>
+              <p className="muted small footer-dna">
+                Built on standards • Run by systems • Powered by people
+              </p>
             </div>
 
             <div className="footer-contact">
@@ -626,6 +741,9 @@ export default function HomePage() {
                   className="btn footer-whatsapp"
                 >
                   WhatsApp
+                </a>
+                <a href="#people-culture" className="btn footer-call">
+                  People &amp; Culture
                 </a>
               </div>
             </div>
