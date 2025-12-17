@@ -1,80 +1,102 @@
+export const runtime = "nodejs"; // important for server-side fetch on Vercel
+
+function clean(s) {
+  return String(s || "").trim();
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
 
     // Honeypot (bots fill this)
-    if (body.website) {
-      return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    if (clean(body.website)) {
+      return new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    const name = (body.Name || "").trim();
-    const phone = (body.Phone || "").trim();
-    const email = (body.Email || "").trim();
-    const eircode = (body.Eircode || "").trim();
-    const town = (body["Town/County"] || "").trim();
-    const service = (body.Service || "").trim();
-    const date = (body["Preferred date"] || "").trim();
-    const time = (body["Preferred time"] || "").trim();
-    const details = (body.Details || "").trim();
+    const name = clean(body.Name);
+    const phone = clean(body.Phone);
+    const email = clean(body.Email);
+    const eircode = clean(body.Eircode);
+    const town = clean(body["Town/County"]);
+    const service = clean(body.Service);
+    const prefDate = clean(body["Preferred date"]);
+    const prefTime = clean(body["Preferred time"]);
+    const details = clean(body.Details);
 
-    // Basic validation
-    if (!name || !phone || !email || !eircode || !town || !service || !date || !time) {
-      return new Response(
-        JSON.stringify({ ok: false, error: "Missing required fields." }),
-        { status: 400 }
-      );
+    if (!name || !phone || !email || !eircode || !town) {
+      return new Response(JSON.stringify({ ok: false, error: "Missing required fields." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
-    // Email content (goes to your inbox)
-    const subject = `KRINEDAL-R Estimate Request — ${service} — ${town}`;
-    const text = `
-NEW ESTIMATE REQUEST — KRINEDAL-R
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    const CONTACT_TO = process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
+    const CONTACT_FROM = process.env.CONTACT_FROM || "KRINEDAL-R <no-reply@krinedalr.ie>";
+
+    if (!RESEND_API_KEY) {
+      return new Response(JSON.stringify({ ok: false, error: "Email service not configured." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const subject = `KRINEDAL-R Quote Request — ${name} (${town})`;
+
+    const text =
+`NEW QUOTE REQUEST (KRINEDAL-R)
 
 Name: ${name}
 Phone: ${phone}
 Email: ${email}
-
 Eircode: ${eircode}
 Town/County: ${town}
 
-Service: ${service}
-Preferred date: ${date}
-Preferred time: ${time}
+Service: ${service || "-"}
+Preferred date: ${prefDate || "-"}
+Preferred time: ${prefTime || "-"}
 
 Details:
-${details || "(none provided)"}
+${details || "-"}
 
----- 
-Sent from krinedalr.ie contact form
-`;
+---
+Sent from krinedalr.ie`;
 
-    // ✅ OPTION A (FAST + SIMPLE): Resend (recommended)
-    // 1) Install: npm i resend
-    // 2) Add env: RESEND_API_KEY=xxxx
-    // 3) Add env: CONTACT_TO=krinedalr@outlook.com,krinedalr@gmail.com
-    // 4) Add env: CONTACT_FROM=contact@krinedalr.ie  (must be verified domain in Resend)
+    const toList = CONTACT_TO.split(",").map((s) => s.trim()).filter(Boolean);
 
-    const { Resend } = await import("resend");
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
-    const toList = (process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    await resend.emails.send({
-      from: process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>",
-      to: toList,
-      subject,
-      text,
-      reply_to: email, // so you can reply directly to customer
+    const resendResp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: CONTACT_FROM,
+        to: toList,
+        subject,
+        text,
+      }),
     });
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 });
-  } catch (err) {
-    return new Response(
-      JSON.stringify({ ok: false, error: "Server error. Please try again." }),
-      { status: 500 }
-    );
+    if (!resendResp.ok) {
+      const errText = await resendResp.text().catch(() => "");
+      return new Response(JSON.stringify({ ok: false, error: "Email send failed.", detail: errText }), {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ ok: false, error: "Bad request." }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
