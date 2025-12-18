@@ -588,3 +588,62 @@ a:hover{ text-decoration:underline; }
   border-color:#e5e7eb;
   color:#111827;
 }
+
+/* =========================
+   ✅ ONLY ADDED (YOUR REQUEST)
+========================= */
+
+/* White text under red submit button */
+.submit-tip{
+  margin-top:10px;
+  color:#ffffff;
+  font-weight:700;
+  line-height:1.5;
+}
+
+/* Call-out pricing block under red emergency button */
+.callout-pricing{
+  margin-top:14px;
+  padding:14px;
+  border-radius:16px;
+  background: rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(15,23,42,0.12);
+}
+
+.callout-title{
+  font-weight:900;
+  letter-spacing:0.2px;
+  margin-bottom:10px;
+  color:#111827;
+}
+
+.callout-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:12px;
+  margin-top:8px;
+  font-weight:800;
+}
+
+.callout-row .left{ letter-spacing:0.08em; }
+.callout-row .right{ font-weight:900; }
+
+.callout-row.green{ background: rgba(22,163,74,0.12); }
+.callout-row.yellow{ background: rgba(250,204,21,0.18); }
+.callout-row.orange{ background: rgba(251,146,60,0.18); }
+.callout-row.red{ background: rgba(220,38,38,0.16); }
+
+.callout-row.active{
+  outline: 2px solid rgba(249,115,22,0.45);
+  box-shadow: 0 0 0 4px rgba(249,115,22,0.10);
+}
+
+.callout-foot{
+  margin-top:10px;
+  font-size:0.82rem;
+  color:#4b5563;
+  font-weight:650;
+  line-height:1.4;
+}
