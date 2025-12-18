@@ -551,7 +551,7 @@ export default function HomePage() {
                 <button type="submit" className="btn btn-storm" disabled={submitting}>
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
-
+                Tip: Thank you for Contacting us, Our team member will be in touch with you shottly, In case of Emergency call 0831762475
                 {submitMsg && (
                   <p className="muted small" style={{ marginTop: 10 }}>{submitMsg}</p>
                 )}
