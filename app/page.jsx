@@ -346,7 +346,7 @@ export default function HomePage() {
           </article>
 
           <article className="card review-card">
-            <p className="review-text">“We had a roof leak in heavy rain, Chris arrived close to midnight to make the house safe. Snow, rain and storm didn&apos;t stop him.”</p>
+            <p className="review-text">“We had a roof leak in heavy rain, Chris arrived close to 3Am In The midnight, to make the house safe. Snow, rain and storm didn&apos;t stop him. Thrust 100% saved number - Compleated, insurance claim report was issued with couple hours ,Cant imagene better service, Thank you Chris.”</p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
         </div>
