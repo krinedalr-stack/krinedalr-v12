@@ -375,22 +375,22 @@ export default function HomePage() {
 
               <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
                 <span className="left">GREEN</span>
-                <span className="right">€120 – €250</span>
+                <span className="right">€250 – €350</span>
               </div>
 
               <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
                 <span className="left">YELLOW</span>
-                <span className="right">€250 – €450</span>
+                <span className="right">€350 – €450</span>
               </div>
 
               <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
                 <span className="left">ORANGE</span>
-                <span className="right">€450 – €750</span>
+                <span className="right">€450 – €550</span>
               </div>
 
               <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
                 <span className="left">RED</span>
-                <span className="right">€750 – €1,500</span>
+                <span className="right">€550 – €1000</span>
               </div>
 
               <div className="callout-foot">
