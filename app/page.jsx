@@ -341,12 +341,12 @@ export default function HomePage() {
         <div className="container reviews-grid">
           <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
-            <p className="review-text">“Krinedal-R did our full luxury bathroom tiling last week – just phenomenal. Clean, fast and extremely professional. Couldn&apos;t be happier.”</p>
+            <p className="review-text">“Krinedal-R did our full luxury bathroom tiling last week –Chris just phenomenal. Clean, fast and extremely professional. Couldn&apos;t be happier.”</p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
-            <p className="review-text">“We had a roof leak in heavy rain, they arrived close to midnight to make the house safe. Snow, rain and storm didn&apos;t stop them.”</p>
+            <p className="review-text">“We had a roof leak in heavy rain, Chris arrived close to midnight to make the house safe. Snow, rain and storm didn&apos;t stop him.”</p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
         </div>
