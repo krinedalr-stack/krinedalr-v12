@@ -1,28 +1,43 @@
 /* app/globals.css */
 
 /* =========================
-   RESET + CLARITY (DESKTOP FIX)
+   RESET
 ========================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 
+:root{
+  --bg0:#020617;
+  --bg1:#0b1120;
+  --text:#e5e7eb;
+  --text2:rgba(229,231,235,0.85);
+  --muted:#4b5563;
+  --card:#ffffff;
+  --ink:#111827;
+  --brand:#f97316;
+  --green:#16a34a;
+  --yellow:#facc15;
+  --orange:#fb923c;
+  --red:#dc2626;
+}
+
 body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background:#0b1120;
-  color:#111827;
-  line-height:1.6;
+  background: var(--bg1);
+  color: var(--text);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 main{
-  min-height:100vh;
+  min-height: 100vh;
   background: radial-gradient(circle at top, #111827 0, #020617 55%, #020617 100%);
   padding-top: 72px;
 }
 
-a{ color:inherit; text-decoration:none; }
-a:hover{ text-decoration:underline; }
+a{ color: inherit; text-decoration: none; }
+a:hover{ text-decoration: underline; }
 
 /* small inline SVG flag */
 .flag{ vertical-align: -2px; margin-right: 6px; }
@@ -91,14 +106,23 @@ a:hover{ text-decoration:underline; }
 ========================= */
 .container{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
 .section{ padding:64px 0; }
-.section-alt{ background:#fffdf7; }
-.section-dark{ background:#020617; color:#f9fafb; }
+
+/* Light sections */
+.section-alt{
+  background:#fffdf7;
+  color: var(--ink);
+}
+
+/* Dark sections */
+.section-dark{
+  background:#020617;
+  color:#f9fafb;
+}
 
 .grid-2{ display:grid; gap:24px; }
 @media (min-width:900px){
   .grid-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
 }
-
 .grid-3{ display:grid; gap:24px; }
 @media (min-width:900px){
   .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
@@ -144,19 +168,16 @@ a:hover{ text-decoration:underline; }
 }
 
 .hero-text{ max-width:640px; text-shadow:none; }
-
 .hero-title{
   font-size:2.8rem;
   line-height:1.05;
   margin-bottom:6px;
   text-rendering: geometricPrecision;
 }
-
 .hero-r{
   color:#ff2d2d;
   text-shadow: 0 0 14px rgba(255,45,45,0.55);
 }
-
 .hero-tag{
   letter-spacing:0.12em;
   text-transform:uppercase;
@@ -165,25 +186,21 @@ a:hover{ text-decoration:underline; }
   color:#4ade80;
   margin-bottom:14px;
 }
-
 .hero-subline{
   color: rgba(249,250,251,0.90);
   font-weight: 700;
   margin-bottom: 14px;
 }
-
 .hero-lead{
   font-size:1.05rem;
   color:#f9fafb;
   margin-bottom:16px;
 }
-
 .hero-weather-label{
   font-size:0.9rem;
   margin-bottom:4px;
   color:#e5e7eb;
 }
-
 .hero-weather-row{
   display:inline-flex;
   align-items:center;
@@ -191,7 +208,6 @@ a:hover{ text-decoration:underline; }
   margin-bottom:16px;
   flex-wrap:wrap;
 }
-
 .hero-weather-shamrock{ font-size:1.3rem; }
 .hero-strong{ font-weight:800; }
 
@@ -228,6 +244,10 @@ a:hover{ text-decoration:underline; }
 }
 .hero-side-card h2{ font-size:1.1rem; margin-bottom:6px; }
 .hero-side-list{ margin-top:10px; font-size:0.9rem; }
+
+@media (max-width:600px){
+  .hero-title{ font-size:2.2rem; }
+}
 
 /* =========================
    WEATHER CHIP
@@ -268,13 +288,11 @@ a:hover{ text-decoration:underline; }
   color:#111827;
   box-shadow:0 12px 30px rgba(249,115,22,0.45);
 }
-
 .btn-outline{
   background:#fff;
   border-color:#f97316;
   color:#c2410c;
 }
-
 .btn-storm{
   width:100%;
   background:#ff2d2d;
@@ -303,11 +321,14 @@ a:hover{ text-decoration:underline; }
 .orange-text{ color:#fb923c; }
 .red-text{ color:#ef4444; }
 
+.brand-inline{ color:#16a34a; font-weight:800; }
+
 /* =========================
    CARDS
 ========================= */
 .card{
   background:#fff;
+  color:#111827;
   border-radius:20px;
   padding:20px;
   box-shadow:0 16px 40px rgba(15,23,42,0.08);
@@ -315,36 +336,10 @@ a:hover{ text-decoration:underline; }
 .card-dark{ background:#020617; color:#f9fafb; }
 
 /* =========================
-   FOOTER
+   LISTS
 ========================= */
-.footer{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  margin-top:32px;
-}
-.footer-name{ font-size:1.25rem; font-weight:900; }
-.footer-line{ margin-top:6px; }
-.footer-dna{ margin-top:6px; color: rgba(249,250,251,0.80); }
-
-.footer-buttons{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
-
-.footer-call{
-  background:#fff;
-  border:2px solid #e5e7eb;
-  color:#111827;
-}
-.footer-whatsapp{
-  background:#22c55e;
-  color:#064e3b;
-}
-
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:600px){
-  .hero-title{ font-size:2.2rem; }
-}
+.list{ margin-top:10px; padding-left:18px; }
+.list li + li{ margin-top:6px; }
 
 /* =========================
    FORM SECTION
@@ -409,7 +404,7 @@ a:hover{ text-decoration:underline; }
 .field textarea{ min-height:150px; resize: vertical; }
 
 .field input::placeholder,
-.field textarea::placeholder{ color: rgba(229,231,235,0.55); }
+.field textarea::placeholder{ color: rgba(229,231,235,0.65); }
 
 .field input:focus,
 .field select:focus,
@@ -422,7 +417,7 @@ a:hover{ text-decoration:underline; }
 .field select { color:#f9fafb; background: rgba(255,255,255,0.04); }
 .field select option { background:#0b1120; color:#f9fafb; }
 
-/* File input button styling (upload button) */
+/* File input button styling */
 .field input[type="file"]{ padding:12px 14px; }
 .field input[type="file"]::file-selector-button{
   margin-right:12px;
@@ -444,11 +439,33 @@ a:hover{ text-decoration:underline; }
   letter-spacing:0.2px;
 }
 
-/* Eircode always uppercase */
-#eircode{ text-transform:uppercase; letter-spacing:0.08em; }
+/* White text under red submit button */
+.submit-tip{
+  margin-top:10px;
+  color:#ffffff;
+  font-weight:700;
+  line-height:1.5;
+}
+
+/* Better visibility for form messages */
+.membership-msg{
+  margin-top: 10px;
+  color: rgba(249,250,251,0.92);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+/* iOS/Safari autofill fix (white background bug) */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill{
+  -webkit-text-fill-color:#f9fafb !important;
+  box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
 
 /* =========================
-   CLASSES USED IN JSX
+   CALCULATOR INPUTS (LIGHT CARDS)
 ========================= */
 .field-label{
   display:flex;
@@ -464,6 +481,7 @@ a:hover{ text-decoration:underline; }
   border-radius:14px;
   border:1px solid #e5e7eb;
   background:#fff;
+  color:#111827;
 }
 .calc-result{
   margin-top:12px;
@@ -471,16 +489,190 @@ a:hover{ text-decoration:underline; }
   font-weight:750;
 }
 
-.list{ margin-top:10px; padding-left:18px; }
-.list li + li{ margin-top:6px; }
+/* =========================
+   MEMBERSHIPS (THE FIX)
+========================= */
+.section-memberships{
+  background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%);
+  color:#f9fafb;
+}
 
-.brand-inline{ color:#16a34a; font-weight:800; }
+.section-memberships .plans-title{ color:#f9fafb; }
+.section-memberships .plans-sub{ color: rgba(249,250,251,0.85); }
 
+.plans-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.plans-title{
+  font-size:1.35rem;
+  font-weight:950;
+  letter-spacing:0.2px;
+}
+
+.plans-sub{ max-width:720px; }
+
+.plans-grid{
+  display:grid;
+  gap:18px;
+}
+@media (min-width:900px){
+  .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
+}
+
+/* Plan cards stay light (readable) */
+.plan{
+  border-radius:20px;
+  background:#ffffff;
+  border:1px solid rgba(15,23,42,0.10);
+  box-shadow:0 16px 40px rgba(15,23,42,0.08);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  min-height: 290px;
+  color:#111827;
+}
+
+.plan-kicker{
+  font-size:0.78rem;
+  letter-spacing:0.12em;
+  font-weight:950;
+  color:#16a34a;
+  margin-bottom:6px;
+}
+
+.plan-name{
+  font-size:1.05rem;
+  font-weight:950;
+  margin-bottom:6px;
+  color:#111827;
+}
+
+.plan-price{
+  font-weight:950;
+  font-size:1.35rem;
+  margin-bottom:10px;
+  color:#f97316;
+}
+
+.plan ul{
+  padding-left:18px;
+  margin-top:6px;
+  color:#111827;
+}
+
+.plan ul li + li{ margin-top:6px; }
+
+.plan-foot{
+  margin-top:auto;
+  font-size:0.82rem;
+  color:#4b5563;
+  line-height:1.45;
+  padding-top:10px;
+}
+
+.plan-highlight{
+  border:2px solid rgba(249,115,22,0.45);
+  box-shadow:0 18px 55px rgba(249,115,22,0.18);
+}
+
+.plan-actions{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* Membership form inside memberships section */
+.section-memberships .form-card{
+  background: rgba(255,255,255,0.04);
+}
+
+/* Terms box + agreement row */
+.terms-box{
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  color: rgba(249,250,251,0.90);
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.agree-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:10px;
+  color: rgba(249,250,251,0.92);
+  font-weight: 800;
+}
+.agree-row input{
+  margin-top:4px;
+  transform: scale(1.12);
+}
+
+/* =========================
+   CALL-OUT PRICING BLOCK
+========================= */
+.callout-pricing{
+  margin-top:14px;
+  padding:14px;
+  border-radius:16px;
+  background: rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(15,23,42,0.12);
+}
+
+.callout-title{
+  font-weight:900;
+  letter-spacing:0.2px;
+  margin-bottom:10px;
+  color:#111827;
+}
+
+.callout-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:12px;
+  margin-top:8px;
+  font-weight:800;
+}
+
+.callout-row .left{ letter-spacing:0.08em; }
+.callout-row .right{ font-weight:900; }
+
+.callout-row.green{ background: rgba(22,163,74,0.12); }
+.callout-row.yellow{ background: rgba(250,204,21,0.18); }
+.callout-row.orange{ background: rgba(251,146,60,0.18); }
+.callout-row.red{ background: rgba(220,38,38,0.16); }
+
+.callout-row.active{
+  outline: 2px solid rgba(249,115,22,0.45);
+  box-shadow: 0 0 0 4px rgba(249,115,22,0.10);
+}
+
+.callout-foot{
+  margin-top:10px;
+  font-size:0.82rem;
+  color:#4b5563;
+  font-weight:650;
+  line-height:1.4;
+}
+
+/* =========================
+   REVIEWS
+========================= */
 .reviews-grid{ display:grid; gap:18px; }
 @media (min-width:900px){
   .reviews-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
 }
-
 .review-label{
   font-size:0.78rem;
   letter-spacing:0.12em;
@@ -490,6 +682,31 @@ a:hover{ text-decoration:underline; }
 }
 .review-text{ font-size:1rem; }
 .review-author{ margin-top:10px; font-weight:900; }
+
+/* =========================
+   FOOTER
+========================= */
+.footer{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin-top:32px;
+}
+.footer-name{ font-size:1.25rem; font-weight:900; }
+.footer-line{ margin-top:6px; }
+.footer-dna{ margin-top:6px; color: rgba(249,250,251,0.80); }
+
+.footer-buttons{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+
+.footer-call{
+  background:#fff;
+  border:2px solid #e5e7eb;
+  color:#111827;
+}
+.footer-whatsapp{
+  background:#22c55e;
+  color:#064e3b;
+}
 
 /* =========================
    FLOATING BUTTONS
@@ -599,226 +816,4 @@ a:hover{ text-decoration:underline; }
   background:#fff;
   border-color:#e5e7eb;
   color:#111827;
-}
-
-/* =========================
-   ✅ ONLY ADDED (YOUR REQUEST)
-========================= */
-
-/* White text under red submit button */
-.submit-tip{
-  margin-top:10px;
-  color:#ffffff;
-  font-weight:700;
-  line-height:1.5;
-}
-
-/* Call-out pricing block under red emergency button */
-.callout-pricing{
-  margin-top:14px;
-  padding:14px;
-  border-radius:16px;
-  background: rgba(2, 6, 23, 0.06);
-  border: 1px solid rgba(15,23,42,0.12);
-}
-
-.callout-title{
-  font-weight:900;
-  letter-spacing:0.2px;
-  margin-bottom:10px;
-  color:#111827;
-}
-
-.callout-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 12px;
-  border-radius:12px;
-  margin-top:8px;
-  font-weight:800;
-}
-
-.callout-row .left{ letter-spacing:0.08em; }
-.callout-row .right{ font-weight:900; }
-
-.callout-row.green{ background: rgba(22,163,74,0.12); }
-.callout-row.yellow{ background: rgba(250,204,21,0.18); }
-.callout-row.orange{ background: rgba(251,146,60,0.18); }
-.callout-row.red{ background: rgba(220,38,38,0.16); }
-
-.callout-row.active{
-  outline: 2px solid rgba(249,115,22,0.45);
-  box-shadow: 0 0 0 4px rgba(249,115,22,0.10);
-}
-
-.callout-foot{
-  margin-top:10px;
-  font-size:0.82rem;
-  color:#4b5563;
-  font-weight:650;
-  line-height:1.4;
-}
-
-/* =========================
-   ✅ MEMBERSHIP PLANS (FIXED BACKGROUND + TEXT)
-========================= */
-
-/* If your Memberships section/page has an id/class, this prevents the "white wash" */
-.memberships,
-#memberships,
-section.memberships,
-.section-memberships{
-  background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%) !important;
-  color:#f9fafb !important;
-}
-
-/* Membership headings / descriptions on dark background */
-.memberships h1,
-.memberships h2,
-#memberships h1,
-#memberships h2,
-.section-memberships h1,
-.section-memberships h2{
-  color:#f9fafb !important;
-}
-
-.memberships p,
-#memberships p,
-.section-memberships p{
-  color: rgba(249,250,251,0.86) !important;
-}
-
-/* Plans head text */
-.plans-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:16px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-}
-
-.plans-title{
-  font-size:1.35rem;
-  font-weight:950;
-  letter-spacing:0.2px;
-  color:#f9fafb;
-}
-
-.plans-sub{
-  color: rgba(249,250,251,0.82);
-  max-width:720px;
-}
-
-/* Plans grid */
-.plans-grid{
-  display:grid;
-  gap:18px;
-}
-@media (min-width:900px){
-  .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
-}
-
-/* Plan cards stay light, readable */
-.plan{
-  border-radius:20px;
-  background:#ffffff;
-  border:1px solid rgba(15,23,42,0.10);
-  box-shadow:0 16px 40px rgba(15,23,42,0.08);
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  min-height: 260px;
-  color:#111827;
-}
-
-.plan-kicker{
-  font-size:0.78rem;
-  letter-spacing:0.12em;
-  font-weight:950;
-  color:#16a34a;
-  margin-bottom:6px;
-}
-
-.plan-name{
-  font-size:1.05rem;
-  font-weight:950;
-  margin-bottom:6px;
-  color:#111827;
-}
-
-/* ✅ PRICE VISIBILITY FIX */
-.plan-price{
-  font-weight:950;
-  font-size:1.35rem;
-  margin-bottom:10px;
-  color:#f97316;
-}
-
-/* Plan list text */
-.plan ul{
-  padding-left:18px;
-  margin-top:6px;
-  color:#111827;
-}
-
-.plan ul li + li{ margin-top:6px; }
-
-.plan-foot{
-  margin-top:auto;
-  font-size:0.82rem;
-  color:#4b5563;
-  line-height:1.45;
-  padding-top:10px;
-}
-
-.plan-highlight{
-  border:2px solid rgba(249,115,22,0.45);
-  box-shadow:0 18px 55px rgba(249,115,22,0.18);
-}
-
-.plan-actions{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-/* ✅ Membership form readability fix */
-.memberships .field label,
-#memberships .field label,
-.section-memberships .field label{
-  color: rgba(249,250,251,0.95) !important;
-}
-
-.memberships .field input,
-.memberships .field select,
-.memberships .field textarea,
-#memberships .field input,
-#memberships .field select,
-#memberships .field textarea,
-.section-memberships .field input,
-.section-memberships .field select,
-.section-memberships .field textarea{
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(226,232,240,0.25) !important;
-  color:#f9fafb !important;
-}
-
-/* placeholders visible */
-.memberships .field input::placeholder,
-.memberships .field textarea::placeholder,
-#memberships .field input::placeholder,
-#memberships .field textarea::placeholder{
-  color: rgba(229,231,235,0.65) !important;
-}
-
-/* iOS/Safari autofill fix (white background bug) */
-input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill{
-  -webkit-text-fill-color:#f9fafb !important;
-  box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
-  transition: background-color 9999s ease-in-out 0s;
 }
