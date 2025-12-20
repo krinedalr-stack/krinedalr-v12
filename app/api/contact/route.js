@@ -1,3 +1,4 @@
+// app/api/contact/route.js
 export const runtime = "nodejs";
 
 function toBase64(buf) {
@@ -17,15 +18,25 @@ export async function POST(req) {
     const honey = form.get("website");
     if (honey) return Response.json({ ok: true });
 
+    // common fields
+    const FormType = String(form.get("FormType") || "Estimate").trim(); // "Estimate" | "Membership"
     const Name = String(form.get("Name") || "").trim();
     const Phone = String(form.get("Phone") || "").trim();
     const Email = String(form.get("Email") || "").trim();
     const Eircode = String(form.get("Eircode") || "").trim();
     const Town = String(form.get("Town/County") || "").trim();
+
+    // estimate fields
     const Service = String(form.get("Service") || "").trim();
     const PrefDate = String(form.get("Preferred date") || "").trim();
     const PrefTime = String(form.get("Preferred time") || "").trim();
     const Details = String(form.get("Details") || "").trim();
+
+    // membership fields
+    const Plan = String(form.get("Plan") || "").trim(); // Silver/Bronze/Gold/Diamond
+    const Billing = String(form.get("Billing") || "").trim(); // Monthly/Yearly
+    const Address = String(form.get("Address") || "").trim();
+    const MemberNotes = String(form.get("Member notes") || "").trim();
 
     const toList = (process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com")
       .split(",")
@@ -34,40 +45,66 @@ export async function POST(req) {
 
     const from = process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
-    // attachments
+    // attachments (estimate only — still harmless if none)
     const raw = form.getAll("files");
     const attachments = [];
     for (const f of raw) {
       if (!f || typeof f === "string") continue;
-      // limit to protect Vercel / email size
       if (f.size > 6 * 1024 * 1024) continue; // 6MB per file
       const ab = await f.arrayBuffer();
       attachments.push({
         filename: f.name || "file",
         content: toBase64(ab),
       });
-      if (attachments.length >= 5) break; // max 5 files
+      if (attachments.length >= 5) break;
     }
 
-    const subject = `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
+    const isMembership = FormType.toLowerCase().includes("member");
 
-    const html = `
-      <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
-        <h2>KRINEDAL-R — New estimate request</h2>
-        <p><b>Name:</b> ${escapeHtml(Name)}</p>
-        <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
-        <p><b>Email:</b> ${escapeHtml(Email)}</p>
-        <p><b>Eircode:</b> ${escapeHtml(Eircode)}</p>
-        <p><b>Town/County:</b> ${escapeHtml(Town)}</p>
-        <p><b>Service:</b> ${escapeHtml(Service)}</p>
-        <p><b>Preferred date:</b> ${escapeHtml(PrefDate)}</p>
-        <p><b>Preferred time:</b> ${escapeHtml(PrefTime)}</p>
-        <hr/>
-        <p><b>Details:</b><br/>${escapeHtml(Details).replace(/\n/g, "<br/>")}</p>
-        <hr/>
-        <p style="color:#6b7280;font-size:12px">Sent from krinedalr.ie</p>
-      </div>
-    `;
+    const subject = isMembership
+      ? `New membership application — ${Plan || "Plan not selected"} (${Name || "No name"})`
+      : `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
+
+    const html = isMembership
+      ? `
+        <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
+          <h2>KRINEDAL-R — New membership application</h2>
+          <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
+          <hr/>
+          <p><b>Plan:</b> ${escapeHtml(Plan || "—")}</p>
+          <p><b>Billing:</b> ${escapeHtml(Billing || "—")}</p>
+          <hr/>
+          <p><b>Name:</b> ${escapeHtml(Name)}</p>
+          <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
+          <p><b>Email:</b> ${escapeHtml(Email)}</p>
+          <p><b>Eircode:</b> ${escapeHtml(Eircode)}</p>
+          <p><b>Town/County:</b> ${escapeHtml(Town)}</p>
+          <p><b>Address (optional):</b> ${escapeHtml(Address)}</p>
+          <hr/>
+          <p><b>Notes:</b><br/>${escapeHtml(MemberNotes).replace(/\n/g, "<br/>")}</p>
+          <hr/>
+          <p style="color:#6b7280;font-size:12px">
+            Admin note: Membership is subject to confirmation (area coverage, workload, and availability).
+          </p>
+        </div>
+      `
+      : `
+        <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
+          <h2>KRINEDAL-R — New estimate request</h2>
+          <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
+          <hr/>
+          <p><b>Name:</b> ${escapeHtml(Name)}</p>
+          <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
+          <p><b>Email:</b> ${escapeHtml(Email)}</p>
+          <p><b>Eircode:</b> ${escapeHtml(Eircode)}</p>
+          <p><b>Town/County:</b> ${escapeHtml(Town)}</p>
+          <p><b>Service:</b> ${escapeHtml(Service)}</p>
+          <p><b>Preferred date:</b> ${escapeHtml(PrefDate)}</p>
+          <p><b>Preferred time:</b> ${escapeHtml(PrefTime)}</p>
+          <hr/>
+          <p><b>Details:</b><br/>${escapeHtml(Details).replace(/\n/g, "<br/>")}</p>
+        </div>
+      `;
 
     const payload = {
       from,
@@ -75,7 +112,7 @@ export async function POST(req) {
       subject,
       html,
       reply_to: Email || undefined,
-      attachments: attachments.length ? attachments : undefined,
+      attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
     const r = await fetch("https://api.resend.com/emails", {
@@ -93,7 +130,7 @@ export async function POST(req) {
     }
 
     return Response.json({ ok: true });
-  } catch (e) {
+  } catch {
     return Response.json({ ok: false, error: "Server error" }, { status: 500 });
   }
 }
