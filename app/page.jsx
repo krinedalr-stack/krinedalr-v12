@@ -40,7 +40,9 @@ function PeopleCultureModal({ open, onClose }) {
     >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>KRINEDAL-R — Our People &amp; Culture Policy</h2>
-        <p className="muted">Built on standards • Run by systems • Powered by people</p>
+        <p className="muted">
+          Built on standards • Run by systems • Powered by people
+        </p>
         <hr />
 
         <div className="k-block">
@@ -105,7 +107,10 @@ function PeopleCultureModal({ open, onClose }) {
 
         <div className="k-block">
           <div className="k-title">8. Long-term thinking</div>
-          <p>We build stable work, better living standards and pride in workmanship.</p>
+          <p>
+            We build stable work, better living standards and pride in
+            workmanship.
+          </p>
         </div>
 
         <hr />
@@ -149,7 +154,9 @@ export default function HomePage() {
 
   const roofTotal = roofArea ? (Number(roofArea) * roofRate).toFixed(0) : "";
   const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
-  const floorTotal = floorArea ? (Number(floorArea) * floorRate).toFixed(0) : "";
+  const floorTotal = floorArea
+    ? (Number(floorArea) * floorRate).toFixed(0)
+    : "";
 
   // ===== Weather status =====
   const [weatherStatus, setWeatherStatus] = useState("green");
@@ -194,7 +201,9 @@ export default function HomePage() {
       setWeatherError("");
 
       // ✅ bust cache properly so it never "sticks"
-      const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
+      const res = await fetch(`/api/weather-status?_=${Date.now()}`, {
+        cache: "no-store",
+      });
       const json = await res.json();
 
       if (!json?.ok) {
@@ -228,16 +237,19 @@ export default function HomePage() {
   useEffect(() => {
     if (!weatherLoaded) return;
     const id = setInterval(() => {
-      const tooLong = lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000; // 20 min
+      const tooLong =
+        lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000; // 20 min
       if (tooLong) {
         setWeatherStatus("green");
-        setWeatherError("Weather feed delayed — showing safe default (GREEN) until refreshed.");
+        setWeatherError(
+          "Weather feed delayed — showing safe default (GREEN) until refreshed."
+        );
       }
     }, 60 * 1000);
     return () => clearInterval(id);
   }, [weatherLoaded, lastWeatherOkAt]);
 
-  // ===== Secure Contact Form (with Autofill + file upload) =====
+  // ===== Secure Contact Form (Estimate) =====
   const [submitting, setSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState("");
   const [filesLabel, setFilesLabel] = useState("");
@@ -254,6 +266,9 @@ export default function HomePage() {
       // simple anti-bot
       if (fd.get("website")) return;
 
+      // Explicit form type
+      fd.set("FormType", "Estimate");
+
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
@@ -262,11 +277,71 @@ export default function HomePage() {
       setFilesLabel("");
       formEl.reset();
     } catch {
-      setSubmitMsg("Could not send right now. Please call 083 176 2475 or WhatsApp.");
+      setSubmitMsg(
+        "Could not send right now. Please call 083 176 2475 or WhatsApp."
+      );
     } finally {
       setSubmitting(false);
     }
   }
+
+  // ===== Membership form =====
+  const [membershipSubmitting, setMembershipSubmitting] = useState(false);
+  const [membershipMsg, setMembershipMsg] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("Diamond");
+  const [selectedBilling, setSelectedBilling] = useState("Yearly");
+  const [agreeMembership, setAgreeMembership] = useState(false);
+
+  function scrollToMembership(plan = "Diamond") {
+    setSelectedPlan(plan);
+    setSelectedBilling(plan === "Diamond" ? "Yearly" : "Yearly");
+    setMembershipMsg("");
+    // Slight delay so state applies before scroll on some mobiles
+    setTimeout(() => {
+      const el = document.getElementById("membership");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  }
+
+  async function onMembershipSubmit(e) {
+    e.preventDefault();
+    setMembershipSubmitting(true);
+    setMembershipMsg("");
+
+    try {
+      if (!agreeMembership) {
+        setMembershipMsg("Please tick the agreement box to submit.");
+        return;
+      }
+
+      const formEl = e.currentTarget;
+      const fd = new FormData(formEl);
+
+      // bot trap
+      if (fd.get("website")) return;
+
+      fd.set("FormType", "Membership");
+      fd.set("Plan", selectedPlan);
+      fd.set("Billing", selectedBilling);
+      fd.set("AgreedToTerms", "YES");
+
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
+
+      setMembershipMsg("Application sent ✅ We’ll confirm availability shortly.");
+      setAgreeMembership(false);
+      formEl.reset();
+    } catch {
+      setMembershipMsg(
+        "Could not send right now. Please call 083 176 2475 or WhatsApp."
+      );
+    } finally {
+      setMembershipSubmitting(false);
+    }
+  }
+
+  const diamondNoCallout = weatherStatus === "green" || weatherStatus === "yellow" || weatherStatus === "orange";
 
   return (
     <main>
@@ -278,7 +353,8 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </div>
             <small className="topbar-sub">
-              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND
+              ☘️ — Built on standards • Run by systems • Powered by people
             </small>
           </div>
 
@@ -300,6 +376,14 @@ export default function HomePage() {
             <a href="#estimate" className="btn btn-outline">
               Get Quote
             </a>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => scrollToMembership("Diamond")}
+              title="Membership plans"
+            >
+              Memberships
+            </button>
           </div>
         </div>
       </header>
@@ -322,7 +406,10 @@ export default function HomePage() {
               <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
               <span>☘️</span>
             </p>
-            <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
+
+            <p className="hero-subline">
+              Built on standards • Run by systems • Powered by people
+            </p>
 
             <p className="hero-lead">
               24/7 storm damage call-out, full roof renewals and{" "}
@@ -370,6 +457,13 @@ export default function HomePage() {
               >
                 Instagram
               </a>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => scrollToMembership("Diamond")}
+              >
+                View memberships
+              </button>
             </div>
 
             <ul className="hero-bullets">
@@ -411,36 +505,41 @@ export default function HomePage() {
               🚨 24/7 STORM EMERGENCY LINE
             </a>
 
-            {/* ✅ NEW: Elderly + Single parent policy block (heart + protection) */}
+            {/* ✅ NEW: Elderly + Single parent policy block */}
             <div style={{ marginTop: 14 }}>
               <p className="muted small" style={{ fontWeight: 800, marginBottom: 6 }}>
                 Community support discounts
               </p>
 
               <p className="muted small" style={{ lineHeight: 1.55 }}>
-                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
-                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage,
-                unsafe roof), we offer:
+                We help where we can — especially during storms. If you are{" "}
+                <strong>elderly</strong> or a <strong>single parent</strong> and you
+                are dealing with an urgent emergency (leaks, storm damage, unsafe roof),
+                we offer:
               </p>
 
               <ul className="list" style={{ marginTop: 10 }}>
                 <li>
-                  <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+                  <strong>50% OFF</strong> emergency call-out fee for{" "}
+                  <strong>elderly customers</strong>
                 </li>
                 <li>
-                  <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+                  <strong>35% OFF</strong> emergency call-out fee for{" "}
+                  <strong>single parents</strong>
                 </li>
               </ul>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
-                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
-                for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist hire and any
-                additional works are charged separately. Availability depends on weather conditions, travel distance
-                and workload. Final price is always confirmed before work starts.
+                <strong>Important:</strong> Discounts apply to the{" "}
+                <strong>call-out fee only</strong> and are intended for genuine
+                emergency make-safe visits. Materials, skips, scaffolding, specialist
+                hire and any additional works are charged separately. Availability
+                depends on weather conditions, travel distance and workload. Final
+                price is always confirmed before work starts.
               </p>
             </div>
 
-            {/* ✅ RESTORED PRICING (ONLY THIS ADDED) */}
+            {/* ✅ PRICING */}
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
 
@@ -480,7 +579,6 @@ export default function HomePage() {
               </strong>
             </p>
 
-            {/* ✅ NEW: manual refresh button also here (optional but safe) */}
             <div style={{ marginTop: 10 }}>
               <button
                 type="button"
@@ -507,10 +605,7 @@ export default function HomePage() {
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p
-                  className="muted small"
-                  style={{ fontWeight: 700, marginBottom: 6 }}
-                >
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
                   Latest warnings:
                 </p>
                 <ul className="list" style={{ marginTop: 0 }}>
@@ -591,7 +686,8 @@ export default function HomePage() {
               Rate per m²: <strong>€{roofRate}</strong>
             </p>
             <p className="calc-result">
-              Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+              Rough roofing total:{" "}
+              {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
               Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.
@@ -620,7 +716,8 @@ export default function HomePage() {
               Rate per m²: <strong>€{tileRate}</strong>
             </p>
             <p className="calc-result">
-              Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
+              Rough tiling total:{" "}
+              {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
               Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
@@ -649,11 +746,340 @@ export default function HomePage() {
               Rate per m²: <strong>€{floorRate}</strong>
             </p>
             <p className="calc-result">
-              Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
+              Rough flooring total:{" "}
+              {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
               Flooring labour often ranges <strong>€18–€45 per m²</strong>. This calculator uses <strong>€26 per m²</strong>.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ✅ MEMBERSHIPS */}
+      <section id="membership" className="section section-alt">
+        <div className="container">
+          <div className="plans-head">
+            <div>
+              <div className="plans-title">Customer memberships</div>
+              <p className="plans-sub">
+                Priority support, clear rules, and fair use. Memberships are for
+                customers who want reliable cover during storms and property issues.
+                Approval depends on area coverage and workload.
+              </p>
+            </div>
+            <div className="plans-sub small" style={{ fontWeight: 800 }}>
+              Current status:{" "}
+              <span className={weatherUI.textClass}>
+                {weatherStatus.toUpperCase()}
+              </span>
+            </div>
+          </div>
+
+          <div className="plans-grid">
+            <div className="plan">
+              <div className="plan-kicker">BRONZE</div>
+              <div className="plan-name">Bronze support</div>
+              <div className="plan-price">Request pricing</div>
+              <ul>
+                <li>Priority booking (non-emergency)</li>
+                <li>Discounted inspection / check-ups</li>
+                <li>Written scope and photo report</li>
+              </ul>
+              <div className="plan-foot">
+                For homeowners who want regular support and planning.
+              </div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Bronze")}>
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <div className="plan">
+              <div className="plan-kicker">SILVER</div>
+              <div className="plan-name">Silver cover</div>
+              <div className="plan-price">Request pricing</div>
+              <ul>
+                <li>Priority scheduling</li>
+                <li>Basic emergency support (make-safe)</li>
+                <li>Fair use rules apply</li>
+              </ul>
+              <div className="plan-foot">
+                Great for families and rentals needing faster response.
+              </div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Silver")}>
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <div className="plan">
+              <div className="plan-kicker">GOLD</div>
+              <div className="plan-name">Gold priority</div>
+              <div className="plan-price">Request pricing</div>
+              <ul>
+                <li>High priority response</li>
+                <li>Out-of-hours support (when safe)</li>
+                <li>Written emergency report for insurance</li>
+              </ul>
+              <div className="plan-foot">
+                Ideal for landlords / multi-property owners.
+              </div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Gold")}>
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <div className="plan plan-highlight">
+              <div className="plan-kicker">DIAMOND</div>
+              <div className="plan-name">Diamond emergency cover</div>
+              <div className="plan-price">€699 / year</div>
+              <ul>
+                <li>
+                  <strong>0 call-out fee</strong> on{" "}
+                  <strong>GREEN / YELLOW / ORANGE</strong>
+                </li>
+                <li>Emergency make-safe included (fair use)</li>
+                <li>Priority queue</li>
+                <li>Photos + written report</li>
+              </ul>
+              <div className="plan-foot">
+                {diamondNoCallout ? (
+                  <span>
+                    ✅ Right now your call-out fee would be <strong>€0</strong> under Diamond (status:{" "}
+                    <strong>{weatherStatus.toUpperCase()}</strong>).
+                  </span>
+                ) : (
+                  <span>
+                    ⚠️ On <strong>RED</strong> warnings, call-out fees may apply due to danger / limited access.
+                  </span>
+                )}
+              </div>
+              <div className="plan-actions">
+                <button className="btn btn-primary" type="button" onClick={() => scrollToMembership("Diamond")}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Membership form card (uses your existing form styles) */}
+          <div className="form-card" style={{ marginTop: 22 }}>
+            <h2>Membership application</h2>
+            <p className="form-sub">
+              Apply in 60 seconds. We’ll confirm coverage and availability by phone / email.
+            </p>
+
+            <form onSubmit={onMembershipSubmit}>
+              {/* Honeypot */}
+              <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+                autoComplete="off"
+                tabIndex={-1}
+              />
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="m_name">Your name</label>
+                  <input
+                    id="m_name"
+                    name="Name"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                    autoComplete="name"
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="m_phone">Phone number</label>
+                  <input
+                    id="m_phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="m_email">Email</label>
+                  <input
+                    id="m_email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                    autoComplete="email"
+                    inputMode="email"
+                  />
+                </div>
+              </div>
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="m_eircode">Eircode</label>
+                  <input
+                    id="m_eircode"
+                    name="Eircode"
+                    type="text"
+                    placeholder="e.g. C15 XXXX"
+                    required
+                    autoComplete="postal-code"
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="m_town">Town / County</label>
+                  <input
+                    id="m_town"
+                    name="Town/County"
+                    type="text"
+                    placeholder="e.g. Navan, Co. Meath"
+                    required
+                    autoComplete="address-level2"
+                  />
+                </div>
+              </div>
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="m_plan">Plan</label>
+                  <select
+                    id="m_plan"
+                    name="Plan"
+                    value={selectedPlan}
+                    onChange={(e) => setSelectedPlan(e.target.value)}
+                    autoComplete="off"
+                  >
+                    <option>Bronze</option>
+                    <option>Silver</option>
+                    <option>Gold</option>
+                    <option>Diamond</option>
+                  </select>
+                </div>
+
+                <div className="field">
+                  <label htmlFor="m_billing">Billing</label>
+                  <select
+                    id="m_billing"
+                    name="Billing"
+                    value={selectedBilling}
+                    onChange={(e) => setSelectedBilling(e.target.value)}
+                    autoComplete="off"
+                  >
+                    <option>Yearly</option>
+                    <option>Monthly</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="m_address">Address (optional)</label>
+                  <input
+                    id="m_address"
+                    name="Address"
+                    type="text"
+                    placeholder="Street / Estate / House number"
+                    autoComplete="street-address"
+                  />
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="m_notes">Anything we should know?</label>
+                  <textarea
+                    id="m_notes"
+                    name="Member notes"
+                    placeholder="Roof type, recurring leak, rental property, access, pets, etc."
+                  />
+                </div>
+              </div>
+
+              {/* Legal protection wording */}
+              <div className="form-grid">
+                <div className="field" style={{ gap: 8 }}>
+                  <label style={{ marginBottom: 0 }}>Important membership terms</label>
+                  <div
+                    style={{
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: 14,
+                      padding: 14,
+                      background: "rgba(255,255,255,0.03)",
+                      color: "rgba(249,250,251,0.90)",
+                      lineHeight: 1.55,
+                      fontSize: 14,
+                    }}
+                  >
+                    <p style={{ marginBottom: 10 }}>
+                      <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
+                    </p>
+                    <p style={{ marginBottom: 10 }}>
+                      <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
+                      misuse, or abusive behaviour may lead to suspension/cancellation without refund.
+                    </p>
+                    <p style={{ marginBottom: 0 }}>
+                      <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to stop immediate damage (e.g. tarping, temporary sealing,
+                      isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
+                      During <strong>RED</strong> warnings, access may be unsafe and additional fees may apply.
+                    </p>
+                  </div>
+
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 10,
+                      marginTop: 10,
+                      color: "rgba(249,250,251,0.92)",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={agreeMembership}
+                      onChange={(e) => setAgreeMembership(e.target.checked)}
+                      style={{ marginTop: 4, transform: "scale(1.1)" }}
+                      aria-label="Agree to membership terms"
+                    />
+                    I understand and agree to the membership terms above.
+                  </label>
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button
+                  type="submit"
+                  className="btn btn-storm"
+                  disabled={membershipSubmitting}
+                >
+                  {membershipSubmitting ? "Sending…" : "Send membership application"}
+                </button>
+
+                <p className="submit-tip">
+                  Once approved, we’ll confirm your plan and activation by phone/email.
+                  Emergency line: <strong>083 176 2475</strong>.
+                </p>
+
+                {membershipMsg && (
+                  <p className="muted small" style={{ marginTop: 10 }}>
+                    {membershipMsg}
+                  </p>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -664,41 +1090,85 @@ export default function HomePage() {
           <div className="form-card">
             <h2>Request a Free Estimate</h2>
             <p className="form-sub">
-              Tell us a bit about your project and we&apos;ll come back with options and a rough budget.
+              Tell us a bit about your project and we&apos;ll come back with options
+              and a rough budget.
             </p>
 
             <form onSubmit={onSubmit}>
               {/* Honeypot */}
-              <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
+              <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+                autoComplete="off"
+                tabIndex={-1}
+              />
 
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
-                  <input id="name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
+                  <input
+                    id="name"
+                    name="Name"
+                    type="text"
+                    placeholder="Full name"
+                    required
+                    autoComplete="name"
+                  />
                 </div>
 
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input id="phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
+                  <input
+                    id="phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="Email" type="email" placeholder="you@email.com" required autoComplete="email" inputMode="email" />
+                  <input
+                    id="email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                    autoComplete="email"
+                    inputMode="email"
+                  />
                 </div>
               </div>
 
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="eircode">Eircode</label>
-                  <input id="eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                  <input
+                    id="eircode"
+                    name="Eircode"
+                    type="text"
+                    placeholder="e.g. C15 XXXX"
+                    required
+                    autoComplete="postal-code"
+                  />
                 </div>
 
                 <div className="field">
                   <label htmlFor="town">Town / County</label>
-                  <input id="town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                  <input
+                    id="town"
+                    name="Town/County"
+                    type="text"
+                    placeholder="e.g. Navan, Co. Meath"
+                    required
+                    autoComplete="address-level2"
+                  />
                 </div>
               </div>
 
@@ -778,7 +1248,7 @@ export default function HomePage() {
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
 
-                {/* ✅ FIXED: WHITE TEXT UNDER RED BUTTON */}
+                {/* ✅ WHITE TEXT UNDER RED BUTTON */}
                 <p className="submit-tip">
                   Thank you for contacting us — our team member will be in touch shortly.
                   In case of emergency call <strong>083 176 2475</strong>.
@@ -821,7 +1291,9 @@ export default function HomePage() {
               <p className="muted footer-line">
                 Premium property care, storm or sunshine – Ireland-wide.
               </p>
-              <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
+              <p className="footer-dna">
+                Built on standards • Run by systems • Powered by people
+              </p>
             </div>
 
             <div className="footer-contact">
