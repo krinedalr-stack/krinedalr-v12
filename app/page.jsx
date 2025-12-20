@@ -158,6 +158,10 @@ export default function HomePage() {
   const [weatherError, setWeatherError] = useState("");
   const [fetchedAt, setFetchedAt] = useState("");
 
+  // ✅ added: refresh button UX
+  const [refreshingWeather, setRefreshingWeather] = useState(false);
+  const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
+
   const weatherUI = useMemo(() => {
     const map = {
       green: {
@@ -184,20 +188,32 @@ export default function HomePage() {
     return map[weatherStatus] || map.green;
   }, [weatherStatus]);
 
-  async function loadWeather() {
+  async function loadWeather({ manual = false } = {}) {
     try {
+      if (manual) setRefreshingWeather(true);
       setWeatherError("");
-      const res = await fetch("/api/weather-status", { cache: "no-store" });
-      const json = await res.json();
-      if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
 
-      setWeatherStatus(json?.status || "green");
+      // ✅ bust cache properly so it never "sticks"
+      const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
+      const json = await res.json();
+
+      if (!json?.ok) {
+        setWeatherError(json?.error || "Weather unavailable");
+      }
+
+      const nextStatus = json?.status || "green";
+      setWeatherStatus(nextStatus);
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
+
+      // ✅ track last successful fetch
+      if (json?.ok) setLastWeatherOkAt(Date.now());
     } catch {
       setWeatherError("Weather unavailable");
       setWeatherLoaded(true);
+    } finally {
+      if (manual) setRefreshingWeather(false);
     }
   }
 
@@ -206,6 +222,20 @@ export default function HomePage() {
     const id = setInterval(loadWeather, 5 * 60 * 1000);
     return () => clearInterval(id);
   }, []);
+
+  // ✅ anti-stuck safeguard:
+  // if nothing successful for a long time, force "green" and show warning message
+  useEffect(() => {
+    if (!weatherLoaded) return;
+    const id = setInterval(() => {
+      const tooLong = lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000; // 20 min
+      if (tooLong) {
+        setWeatherStatus("green");
+        setWeatherError("Weather feed delayed — showing safe default (GREEN) until refreshed.");
+      }
+    }, 60 * 1000);
+    return () => clearInterval(id);
+  }, [weatherLoaded, lastWeatherOkAt]);
 
   // ===== Secure Contact Form (with Autofill + file upload) =====
   const [submitting, setSubmitting] = useState(false);
@@ -306,6 +336,18 @@ export default function HomePage() {
                 {weatherLoaded ? weatherUI.label : "Loading weather…"}
               </span>
               <span className="hero-weather-shamrock">☘️</span>
+
+              {/* ✅ NEW: manual refresh button */}
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+                aria-label="Refresh weather"
+                title="Refresh weather"
+              >
+                {refreshingWeather ? "Refreshing…" : "↻ Refresh"}
+              </button>
             </div>
 
             <div className="hero-actions">
@@ -369,6 +411,35 @@ export default function HomePage() {
               🚨 24/7 STORM EMERGENCY LINE
             </a>
 
+            {/* ✅ NEW: Elderly + Single parent policy block (heart + protection) */}
+            <div style={{ marginTop: 14 }}>
+              <p className="muted small" style={{ fontWeight: 800, marginBottom: 6 }}>
+                Community support discounts
+              </p>
+
+              <p className="muted small" style={{ lineHeight: 1.55 }}>
+                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
+                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage,
+                unsafe roof), we offer:
+              </p>
+
+              <ul className="list" style={{ marginTop: 10 }}>
+                <li>
+                  <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+                </li>
+                <li>
+                  <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+                </li>
+              </ul>
+
+              <p className="muted smallest" style={{ marginTop: 10 }}>
+                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
+                for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist hire and any
+                additional works are charged separately. Availability depends on weather conditions, travel distance
+                and workload. Final price is always confirmed before work starts.
+              </p>
+            </div>
+
             {/* ✅ RESTORED PRICING (ONLY THIS ADDED) */}
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
@@ -397,10 +468,6 @@ export default function HomePage() {
                 Includes call-out + make-safe only. Final price confirmed before work.
               </div>
             </div>
-
-            <p className="muted small">
-              Elderly emergency call-outs: <strong>50% discount</strong> on the call-out fee.
-            </p>
           </div>
 
           <div className="card">
@@ -412,6 +479,18 @@ export default function HomePage() {
                 {weatherStatus.toUpperCase()} warning
               </strong>
             </p>
+
+            {/* ✅ NEW: manual refresh button also here (optional but safe) */}
+            <div style={{ marginTop: 10 }}>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+              >
+                {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
+              </button>
+            </div>
 
             {weatherError ? (
               <p className="muted smallest" style={{ marginTop: 8 }}>
@@ -840,3 +919,4 @@ export default function HomePage() {
     </main>
   );
 }
+
