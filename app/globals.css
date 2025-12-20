@@ -279,6 +279,15 @@ a:hover{ text-decoration:underline; }
   box-shadow:0 14px 34px rgba(255,45,45,0.55);
 }
 
+/* ✅ added: small "refresh weather" button style */
+.btn-weather{
+  background:#fff;
+  border:2px solid rgba(15,23,42,0.10);
+  color:#111827;
+  padding:8px 14px;
+  font-size:0.92rem;
+}
+
 /* =========================
    TEXT UTILITIES
 ========================= */
