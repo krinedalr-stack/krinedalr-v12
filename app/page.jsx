@@ -165,7 +165,6 @@ export default function HomePage() {
   const [weatherError, setWeatherError] = useState("");
   const [fetchedAt, setFetchedAt] = useState("");
 
-  // ✅ added: refresh button UX
   const [refreshingWeather, setRefreshingWeather] = useState(false);
   const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
 
@@ -205,9 +204,7 @@ export default function HomePage() {
       });
       const json = await res.json();
 
-      if (!json?.ok) {
-        setWeatherError(json?.error || "Weather unavailable");
-      }
+      if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
 
       const nextStatus = json?.status || "green";
       setWeatherStatus(nextStatus);
@@ -286,7 +283,7 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
-  // ✅ PRICES (EDIT HERE IF YOU WANT)
+  // PRICES (edit if you want)
   const PLAN_PRICE = {
     Bronze: "€199 / year",
     Silver: "€399 / year",
@@ -494,8 +491,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* MEMBERSHIPS */}
-      <section id="membership" className="section section-alt">
+      {/* MEMBERSHIPS — ✅ FIXED (NO section-alt) */}
+      <section id="membership" className="section section-memberships">
         <div className="container">
           <div className="plans-head">
             <div>
@@ -765,7 +762,9 @@ export default function HomePage() {
 
               <div className="form-grid">
                 <div className="field" style={{ gap: 8 }}>
-                  <label style={{ marginBottom: 0 }}>Important membership terms</label>
+                  <label style={{ marginBottom: 0 }}>
+                    Important membership terms
+                  </label>
                   <div
                     style={{
                       border: "1px solid rgba(255,255,255,0.12)",
@@ -778,16 +777,22 @@ export default function HomePage() {
                     }}
                   >
                     <p style={{ marginBottom: 10 }}>
-                      <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
+                      <strong>Non-refundable:</strong> Membership payments are
+                      non-refundable once activated, unless required by law.
                     </p>
                     <p style={{ marginBottom: 10 }}>
-                      <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
-                      misuse, or abusive behaviour may lead to suspension/cancellation without refund.
+                      <strong>Fair use:</strong> Membership is for genuine property
+                      issues and emergency make-safe. Repeated non-urgent call-outs,
+                      misuse, or abusive behaviour may lead to suspension/cancellation
+                      without refund.
                     </p>
                     <p style={{ marginBottom: 0 }}>
-                      <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to stop immediate damage (e.g. tarping, temporary sealing,
-                      isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
-                      During <strong>RED</strong> warnings, access may be unsafe and additional fees may apply.
+                      <strong>Emergency scope:</strong> “Make-safe” includes temporary
+                      actions to stop immediate damage (e.g. tarping, temporary sealing,
+                      isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong>{" "}
+                      and permanent repairs are quoted separately. During{" "}
+                      <strong>RED</strong> warnings, access may be unsafe and additional
+                      fees may apply.
                     </p>
                   </div>
 
@@ -838,15 +843,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* (Rest of your page stays the same below — storm/weather, reviews, calculators, estimate form, footer) */}
-
       {/* STORM + WEATHER */}
       <section className="section section-alt">
         <div className="container grid-2">
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">
-              Red warning, heavy rain or leaking roof – we respond fast, day or night.
+              Red warning, heavy rain or leaking roof – we respond fast, day or
+              night.
             </p>
 
             <a href="tel:0831762475" className="btn btn-storm">
@@ -854,58 +858,83 @@ export default function HomePage() {
             </a>
 
             <div style={{ marginTop: 14 }}>
-              <p className="muted small" style={{ fontWeight: 800, marginBottom: 6 }}>
+              <p
+                className="muted small"
+                style={{ fontWeight: 800, marginBottom: 6 }}
+              >
                 Community support discounts
               </p>
 
               <p className="muted small" style={{ lineHeight: 1.55 }}>
-                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
-                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage,
-                unsafe roof), we offer:
+                We help where we can — especially during storms. If you are{" "}
+                <strong>elderly</strong> or a <strong>single parent</strong> and you
+                are dealing with an urgent emergency (leaks, storm damage, unsafe
+                roof), we offer:
               </p>
 
               <ul className="list" style={{ marginTop: 10 }}>
                 <li>
-                  <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+                  <strong>50% OFF</strong> emergency call-out fee for{" "}
+                  <strong>elderly customers</strong>
                 </li>
                 <li>
-                  <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+                  <strong>35% OFF</strong> emergency call-out fee for{" "}
+                  <strong>single parents</strong>
                 </li>
               </ul>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
-                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
-                for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist hire and any
-                additional works are charged separately. Availability depends on weather conditions, travel distance
-                and workload. Final price is always confirmed before work starts.
+                <strong>Important:</strong> Discounts apply to the{" "}
+                <strong>call-out fee only</strong> and are intended for genuine
+                emergency make-safe visits. Materials, skips, scaffolding,
+                specialist hire and any additional works are charged separately.
+                Availability depends on weather conditions, travel distance and
+                workload. Final price is always confirmed before work starts.
               </p>
             </div>
 
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
 
-              <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
+              <div
+                className={`callout-row green ${
+                  weatherStatus === "green" ? "active" : ""
+                }`}
+              >
                 <span className="left">GREEN</span>
                 <span className="right">€250 – €350</span>
               </div>
 
-              <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
+              <div
+                className={`callout-row yellow ${
+                  weatherStatus === "yellow" ? "active" : ""
+                }`}
+              >
                 <span className="left">YELLOW</span>
                 <span className="right">€350 – €450</span>
               </div>
 
-              <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
+              <div
+                className={`callout-row orange ${
+                  weatherStatus === "orange" ? "active" : ""
+                }`}
+              >
                 <span className="left">ORANGE</span>
                 <span className="right">€450 – €550</span>
               </div>
 
-              <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
+              <div
+                className={`callout-row red ${
+                  weatherStatus === "red" ? "active" : ""
+                }`}
+              >
                 <span className="left">RED</span>
                 <span className="right">€550 – €1000</span>
               </div>
 
               <div className="callout-foot">
-                Includes call-out + make-safe only. Final price confirmed before work.
+                Includes call-out + make-safe only. Final price confirmed before
+                work.
               </div>
             </div>
           </div>
@@ -939,10 +968,44 @@ export default function HomePage() {
               <p className="muted smallest" style={{ marginTop: 8 }}>
                 Auto-updated from Met Éireann warnings
                 {fetchedAt && (
-                  <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span>
+                  <span>
+                    {" "}
+                    • Last check: {new Date(fetchedAt).toLocaleString()}
+                  </span>
                 )}
               </p>
             )}
+
+            {weatherWarnings.length > 0 && (
+              <div style={{ marginTop: 12 }}>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                  Latest warnings:
+                </p>
+                <ul className="list" style={{ marginTop: 0 }}>
+                  {weatherWarnings.slice(0, 3).map((w, idx) => (
+                    <li key={w.id || w.headline || idx}>
+                      <strong style={{ textTransform: "uppercase" }}>
+                        {w.level}
+                      </strong>
+                      {w.headline ? ` – ${w.headline}` : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <p className="muted small" style={{ marginTop: 12 }}>
+              Follow{" "}
+              <a
+                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                target="_blank"
+                rel="noreferrer"
+                className="brand-inline"
+              >
+                Krinedal-R on Facebook
+              </a>{" "}
+              for live updates.
+            </p>
           </div>
         </div>
       </section>
@@ -1002,7 +1065,8 @@ export default function HomePage() {
               {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.
+              Typical full roof renewal often falls between{" "}
+              <strong>€5,800–€10,000</strong> depending on size, materials and access.
             </p>
           </div>
 
@@ -1032,7 +1096,8 @@ export default function HomePage() {
               {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
+              Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this
+              calculator uses <strong>€48 per m²</strong>.
             </p>
           </div>
 
@@ -1062,7 +1127,8 @@ export default function HomePage() {
               {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Flooring labour often ranges <strong>€18–€45 per m²</strong>. This calculator uses <strong>€26 per m²</strong>.
+              Flooring labour often ranges <strong>€18–€45 per m²</strong>. This
+              calculator uses <strong>€26 per m²</strong>.
             </p>
           </div>
         </div>
@@ -1199,7 +1265,9 @@ export default function HomePage() {
                     accept="image/*,.pdf,.doc,.docx,.heic"
                     onChange={(e) => {
                       const list = Array.from(e.target.files || []);
-                      setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
+                      setFilesLabel(
+                        list.length ? `${list.length} file(s) selected` : ""
+                      );
                     }}
                   />
                   {filesLabel && (
@@ -1225,13 +1293,18 @@ export default function HomePage() {
               </div>
 
               <div className="form-actions">
-                <button type="submit" className="btn btn-storm" disabled={submitting}>
+                <button
+                  type="submit"
+                  className="btn btn-storm"
+                  disabled={submitting}
+                >
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
 
                 <p className="submit-tip">
-                  Thank you for contacting us — our team member will be in touch shortly.
-                  In case of emergency call <strong>083 176 2475</strong>.
+                  Thank you for contacting us — our team member will be in touch
+                  shortly. In case of emergency call{" "}
+                  <strong>083 176 2475</strong>.
                 </p>
 
                 {submitMsg && (
@@ -1257,9 +1330,12 @@ export default function HomePage() {
             </ul>
 
             <p className="muted small" style={{ marginTop: 12 }}>
-              <strong>Materials &amp; Payment:</strong> For most projects, the customer pays for all necessary materials up front
-              (tiles, flooring, timber, concrete, lighting, membranes, fixings, skips, etc.). Labour is paid after the job is completed and the work is signed off.
-              For larger jobs, staged payments may apply and will be agreed in writing before we start.
+              <strong>Materials &amp; Payment:</strong> For most projects, the
+              customer pays for all necessary materials up front (tiles, flooring,
+              timber, concrete, lighting, membranes, fixings, skips, etc.). Labour
+              is paid after the job is completed and the work is signed off. For
+              larger jobs, staged payments may apply and will be agreed in writing
+              before we start.
             </p>
           </div>
 
@@ -1287,7 +1363,11 @@ export default function HomePage() {
               </p>
               <p>
                 Web:{" "}
-                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.krinedalr.ie"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   www.krinedalr.ie
                 </a>
               </p>
@@ -1330,6 +1410,7 @@ export default function HomePage() {
           </footer>
         </div>
 
+        {/* FLOATING BUTTONS */}
         <div className="float-stack">
           <a
             href="https://wa.me/353831762475"
@@ -1374,3 +1455,4 @@ export default function HomePage() {
     </main>
   );
 }
+```0
