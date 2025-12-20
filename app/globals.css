@@ -748,12 +748,12 @@ section.memberships,
   color:#111827;
 }
 
-/* ✅ PRICE VISIBILITY FIX (THIS IS WHAT YOU MISSED) */
+/* ✅ PRICE VISIBILITY FIX */
 .plan-price{
   font-weight:950;
   font-size:1.35rem;
   margin-bottom:10px;
-  color:#f97316; /* orange price */
+  color:#f97316;
 }
 
 /* Plan list text */
@@ -785,7 +785,7 @@ section.memberships,
   flex-wrap:wrap;
 }
 
-/* ✅ Membership form readability fix (labels + inputs always visible) */
+/* ✅ Membership form readability fix */
 .memberships .field label,
 #memberships .field label,
 .section-memberships .field label{
