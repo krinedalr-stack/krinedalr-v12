@@ -9,7 +9,10 @@ export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
-      return Response.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
+      return Response.json(
+        { ok: false, error: "Missing RESEND_API_KEY" },
+        { status: 500 }
+      );
     }
 
     const form = await req.formData();
@@ -37,8 +40,10 @@ export async function POST(req) {
     const Billing = String(form.get("Billing") || "").trim(); // Monthly/Yearly
     const Address = String(form.get("Address") || "").trim();
     const MemberNotes = String(form.get("Member notes") || "").trim();
+    const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim(); // "YES"
 
-    const toList = (process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com")
+    const toList = (process.env.CONTACT_TO ||
+      "krinedalr@outlook.com,krinedalr@gmail.com")
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
@@ -65,6 +70,20 @@ export async function POST(req) {
       ? `New membership application — ${Plan || "Plan not selected"} (${Name || "No name"})`
       : `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
 
+    const membershipLegal = `
+      <div style="margin-top:12px;padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #e5e7eb">
+        <p style="margin:0 0 8px 0"><b>Membership protection wording:</b></p>
+        <ul style="margin:0;padding-left:18px;line-height:1.5">
+          <li><b>Non-refundable:</b> membership payments are non-refundable once activated (unless required by law).</li>
+          <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse or abusive behaviour may lead to suspension/cancellation without refund.</li>
+          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Materials/scaffolding/skips/specialist hire and permanent repairs are quoted separately. During RED warnings, access may be unsafe and extra fees may apply.</li>
+        </ul>
+        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${
+          escapeHtml(AgreedToTerms || "NO")
+        }</p>
+      </div>
+    `;
+
     const html = isMembership
       ? `
         <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
@@ -82,6 +101,7 @@ export async function POST(req) {
           <p><b>Address (optional):</b> ${escapeHtml(Address)}</p>
           <hr/>
           <p><b>Notes:</b><br/>${escapeHtml(MemberNotes).replace(/\n/g, "<br/>")}</p>
+          ${membershipLegal}
           <hr/>
           <p style="color:#6b7280;font-size:12px">
             Admin note: Membership is subject to confirmation (area coverage, workload, and availability).
@@ -126,7 +146,10 @@ export async function POST(req) {
 
     if (!r.ok) {
       const text = await r.text().catch(() => "");
-      return Response.json({ ok: false, error: "Resend failed", details: text }, { status: 500 });
+      return Response.json(
+        { ok: false, error: "Resend failed", details: text },
+        { status: 500 }
+      );
     }
 
     return Response.json({ ok: true });
