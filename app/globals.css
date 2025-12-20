@@ -1,7 +1,7 @@
 /* app/globals.css */
 
 /* =========================
-   RESET + BASE
+   RESET + CLARITY (DESKTOP FIX)
 ========================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
@@ -116,11 +116,6 @@ a:hover{ text-decoration:underline; }
   padding:56px 0 40px;
 }
 
-@keyframes floatY{
-  0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(12px); }
-}
-
 .shamrock{
   position:absolute;
   top:18px;
@@ -130,6 +125,11 @@ a:hover{ text-decoration:underline; }
 }
 .shamrock-left{ left:16px; }
 .shamrock-right{ right:16px; animation-delay:3s; }
+
+@keyframes floatY{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(12px); }
+}
 
 .hero-inner{
   position:relative;
@@ -282,6 +282,7 @@ a:hover{ text-decoration:underline; }
   box-shadow:0 14px 34px rgba(255,45,45,0.55);
 }
 
+/* small refresh weather button */
 .btn-weather{
   background:#fff;
   border:2px solid rgba(15,23,42,0.10);
@@ -346,14 +347,13 @@ a:hover{ text-decoration:underline; }
 }
 
 /* =========================
-   FORM SECTION (ESTIMATE + MEMBERSHIP)
+   FORM SECTION
 ========================= */
 .section-form{
   background: radial-gradient(circle at top, #020617 0, #020617 100%);
   padding:72px 0;
 }
 
-/* this is the key: always wrap forms in .form-card to avoid white/blank look */
 .form-card{
   max-width:820px;
   margin:0 auto;
@@ -363,7 +363,6 @@ a:hover{ text-decoration:underline; }
   border: 1px solid rgba(255,255,255,0.10);
   box-shadow: 0 20px 60px rgba(0,0,0,0.55);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .form-card h1, .form-card h2{ color:#f9fafb; margin-bottom:8px; }
@@ -423,7 +422,7 @@ a:hover{ text-decoration:underline; }
 .field select { color:#f9fafb; background: rgba(255,255,255,0.04); }
 .field select option { background:#0b1120; color:#f9fafb; }
 
-/* file input button */
+/* File input button styling (upload button) */
 .field input[type="file"]{ padding:12px 14px; }
 .field input[type="file"]::file-selector-button{
   margin-right:12px;
@@ -448,16 +447,8 @@ a:hover{ text-decoration:underline; }
 /* Eircode always uppercase */
 #eircode{ text-transform:uppercase; letter-spacing:0.08em; }
 
-/* White text under red submit button */
-.submit-tip{
-  margin-top:10px;
-  color:#ffffff;
-  font-weight:700;
-  line-height:1.5;
-}
-
 /* =========================
-   CALCULATORS (light cards)
+   CLASSES USED IN JSX
 ========================= */
 .field-label{
   display:flex;
@@ -526,7 +517,6 @@ a:hover{ text-decoration:underline; }
   box-shadow:0 18px 40px rgba(0,0,0,0.35);
   border:1px solid rgba(255,255,255,0.18);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   transition: transform 0.1s ease, box-shadow 0.15s ease;
 }
 .float-btn:hover{
@@ -612,8 +602,18 @@ a:hover{ text-decoration:underline; }
 }
 
 /* =========================
-   CALL-OUT PRICING (storm fee guide)
+   ✅ ONLY ADDED (YOUR REQUEST)
 ========================= */
+
+/* White text under red submit button */
+.submit-tip{
+  margin-top:10px;
+  color:#ffffff;
+  font-weight:700;
+  line-height:1.5;
+}
+
+/* Call-out pricing block under red emergency button */
 .callout-pricing{
   margin-top:14px;
   padding:14px;
@@ -661,9 +661,35 @@ a:hover{ text-decoration:underline; }
 }
 
 /* =========================
-   MEMBERSHIP PLANS (fixed readability + pricing)
-   IMPORTANT: wrap the membership application form in .form-card
+   ✅ MEMBERSHIP PLANS (FIXED BACKGROUND + TEXT)
 ========================= */
+
+/* If your Memberships section/page has an id/class, this prevents the "white wash" */
+.memberships,
+#memberships,
+section.memberships,
+.section-memberships{
+  background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%) !important;
+  color:#f9fafb !important;
+}
+
+/* Membership headings / descriptions on dark background */
+.memberships h1,
+.memberships h2,
+#memberships h1,
+#memberships h2,
+.section-memberships h1,
+.section-memberships h2{
+  color:#f9fafb !important;
+}
+
+.memberships p,
+#memberships p,
+.section-memberships p{
+  color: rgba(249,250,251,0.86) !important;
+}
+
+/* Plans head text */
 .plans-head{
   display:flex;
   align-items:flex-end;
@@ -677,13 +703,15 @@ a:hover{ text-decoration:underline; }
   font-size:1.35rem;
   font-weight:950;
   letter-spacing:0.2px;
+  color:#f9fafb;
 }
 
 .plans-sub{
-  color:#4b5563;
+  color: rgba(249,250,251,0.82);
   max-width:720px;
 }
 
+/* Plans grid */
 .plans-grid{
   display:grid;
   gap:18px;
@@ -692,6 +720,7 @@ a:hover{ text-decoration:underline; }
   .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
 }
 
+/* Plan cards stay light, readable */
 .plan{
   border-radius:20px;
   background:#ffffff;
@@ -719,13 +748,15 @@ a:hover{ text-decoration:underline; }
   color:#111827;
 }
 
+/* ✅ PRICE VISIBILITY FIX (THIS IS WHAT YOU MISSED) */
 .plan-price{
   font-weight:950;
-  font-size:1.3rem;
+  font-size:1.35rem;
   margin-bottom:10px;
-  color:#111827;
+  color:#f97316; /* orange price */
 }
 
+/* Plan list text */
 .plan ul{
   padding-left:18px;
   margin-top:6px;
@@ -754,23 +785,40 @@ a:hover{ text-decoration:underline; }
   flex-wrap:wrap;
 }
 
-/* membership apply button (optional) */
-.plan .btn{
-  padding:10px 16px;
-  font-size:0.92rem;
+/* ✅ Membership form readability fix (labels + inputs always visible) */
+.memberships .field label,
+#memberships .field label,
+.section-memberships .field label{
+  color: rgba(249,250,251,0.95) !important;
 }
 
-/* membership application area fix:
-   if your membership form sits on a light section, force dark readable form inputs */
-.membership-form,
-.membership-form .field label{
-  color: rgba(249,250,251,0.92);
+.memberships .field input,
+.memberships .field select,
+.memberships .field textarea,
+#memberships .field input,
+#memberships .field select,
+#memberships .field textarea,
+.section-memberships .field input,
+.section-memberships .field select,
+.section-memberships .field textarea{
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(226,232,240,0.25) !important;
+  color:#f9fafb !important;
 }
-.membership-form .field input,
-.membership-form .field select,
-.membership-form .field textarea{
-  background: rgba(255,255,255,0.04);
-  color:#f9fafb;
-  border-color: rgba(226,232,240,0.22);
+
+/* placeholders visible */
+.memberships .field input::placeholder,
+.memberships .field textarea::placeholder,
+#memberships .field input::placeholder,
+#memberships .field textarea::placeholder{
+  color: rgba(229,231,235,0.65) !important;
 }
-.membership-form .muted{ color: rgba(249,250,251,0.75); }
+
+/* iOS/Safari autofill fix (white background bug) */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill{
+  -webkit-text-fill-color:#f9fafb !important;
+  box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
