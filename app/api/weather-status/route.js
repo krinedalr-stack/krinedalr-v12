@@ -1,3 +1,4 @@
+// app/api/weather-status/route.js
 export const runtime = "nodejs";
 
 export async function GET() {
@@ -46,13 +47,7 @@ export async function GET() {
     const hasOrange = levels.some((x) => x.includes("orange"));
     const hasYellow = levels.some((x) => x.includes("yellow"));
 
-    const status = hasRed
-      ? "red"
-      : hasOrange
-      ? "orange"
-      : hasYellow
-      ? "yellow"
-      : "green";
+    const status = hasRed ? "red" : hasOrange ? "orange" : hasYellow ? "yellow" : "green";
 
     const cleaned = warnings.slice(0, 10).map((w) => ({
       id: w.id || w.ID || w.identifier || null,
