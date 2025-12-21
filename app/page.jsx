@@ -29,7 +29,13 @@ function IrelandFlag({ className = "" }) {
   );
 }
 
-function PeopleCultureModal({ open, onClose }) {
+function PeopleCultureModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
   if (!open) return null;
   return (
     <div
@@ -40,7 +46,9 @@ function PeopleCultureModal({ open, onClose }) {
     >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>KRINEDAL-R — Our People &amp; Culture Policy</h2>
-        <p className="muted">Built on standards • Run by systems • Powered by people</p>
+        <p className="muted">
+          Built on standards • Run by systems • Powered by people
+        </p>
         <hr />
 
         <div className="k-block">
@@ -58,7 +66,8 @@ function PeopleCultureModal({ open, onClose }) {
           <div className="k-title">2. Respect is non-negotiable</div>
           <ul className="k-list">
             <li>
-              Zero tolerance: bullying, intimidation, discrimination, abuse of authority
+              Zero tolerance: bullying, intimidation, discrimination, abuse of
+              authority
             </li>
             <li>Skill can be taught. Character is required.</li>
           </ul>
@@ -76,8 +85,8 @@ function PeopleCultureModal({ open, onClose }) {
         <div className="k-block">
           <div className="k-title">4. Training &amp; development</div>
           <p>
-            We invest in training, safety certs, and workmanship. Mistakes are handled
-            through improvement, not humiliation.
+            We invest in training, safety certs, and workmanship. Mistakes are
+            handled through improvement, not humiliation.
           </p>
         </div>
 
@@ -92,8 +101,8 @@ function PeopleCultureModal({ open, onClose }) {
         <div className="k-block">
           <div className="k-title">6. Accountability both ways</div>
           <p>
-            People are accountable fairly — and leadership is accountable for planning,
-            support and decisions.
+            People are accountable fairly — and leadership is accountable for
+            planning, support and decisions.
           </p>
         </div>
 
@@ -152,7 +161,7 @@ export default function HomePage() {
 
   // ===== Weather status =====
   const [weatherStatus, setWeatherStatus] = useState("green");
-  const [weatherWarnings, setWeatherWarnings] = useState([]);
+  const [weatherWarnings, setWeatherWarnings] = useState<any[]>([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
   const [weatherError, setWeatherError] = useState("");
   const [fetchedAt, setFetchedAt] = useState("");
@@ -161,7 +170,7 @@ export default function HomePage() {
   const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
 
   const weatherUI = useMemo(() => {
-    const map = {
+    const map: any = {
       green: {
         label: "GREEN – normal conditions",
         textClass: "green-text",
@@ -223,9 +232,7 @@ export default function HomePage() {
       const tooLong = lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000;
       if (tooLong) {
         setWeatherStatus("green");
-        setWeatherError(
-          "Weather feed delayed — showing safe default (GREEN) until refreshed."
-        );
+        setWeatherError("Weather feed delayed — showing safe default (GREEN) until refreshed.");
       }
     }, 60 * 1000);
     return () => clearInterval(id);
@@ -236,7 +243,7 @@ export default function HomePage() {
   const [submitMsg, setSubmitMsg] = useState("");
   const [filesLabel, setFilesLabel] = useState("");
 
-  async function onSubmit(e) {
+  async function onSubmit(e: any) {
     e.preventDefault();
     setSubmitting(true);
     setSubmitMsg("");
@@ -270,24 +277,34 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
-  const PLAN_PRICE = {
+  const PLAN_PRICE: Record<string, string> = {
     Bronze: "€199 / year",
     Silver: "€399 / year",
-    Gold: "€549 / year",
-    Diamond: "€699 / year",
+    Gold: "€599 / year",
+    Diamond: "€899 / year",
   };
 
-  function scrollToMembership(plan = "Diamond") {
-    setSelectedPlan(plan);
-    setSelectedBilling("Yearly");
+  // Membership menu button: show plans
+  function scrollToMembershipSection() {
     setMembershipMsg("");
     setTimeout(() => {
       const el = document.getElementById("membership");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
+
+  // Apply buttons: go to application + select plan
+  function scrollToMembershipApplication(plan = "Diamond") {
+    setSelectedPlan(plan);
+    setSelectedBilling("Yearly");
+    setMembershipMsg("");
+    setTimeout(() => {
+      const el = document.getElementById("membership-application");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
   }
 
-  async function onMembershipSubmit(e) {
+  async function onMembershipSubmit(e: any) {
     e.preventDefault();
     setMembershipSubmitting(true);
     setMembershipMsg("");
@@ -322,7 +339,7 @@ export default function HomePage() {
     }
   }
 
-  // ✅ Diamond rule: €0 call-out only on Green/Yellow/Orange. Red = paid / may be unsafe.
+  // Diamond rule: €0 call-out on Green/Yellow/Orange
   const diamondNoCallout =
     weatherStatus === "green" || weatherStatus === "yellow" || weatherStatus === "orange";
 
@@ -336,7 +353,8 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </div>
             <small className="topbar-sub">
-              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ —
+              Built on standards • Run by systems • Powered by people
             </small>
           </div>
 
@@ -361,7 +379,7 @@ export default function HomePage() {
             <button
               type="button"
               className="btn btn-outline"
-              onClick={() => scrollToMembership("Diamond")}
+              onClick={scrollToMembershipSection}
               title="Membership plans"
             >
               Memberships
@@ -438,7 +456,7 @@ export default function HomePage() {
               >
                 Instagram
               </a>
-              <button type="button" className="btn btn-outline" onClick={() => scrollToMembership("Diamond")}>
+              <button type="button" className="btn btn-outline" onClick={scrollToMembershipSection}>
                 View memberships
               </button>
             </div>
@@ -467,7 +485,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* MEMBERSHIPS — ✅ DARK BACKGROUND + CLEAR PLAN DIFFERENCES */}
+      {/* MEMBERSHIPS */}
       <section id="membership" className="section section-memberships">
         <div className="container">
           <div className="plans-head">
@@ -478,8 +496,12 @@ export default function HomePage() {
                 Memberships are approved based on area coverage and current workload.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use).
+                Note: Membership covers <strong>priority + planning + make-safe</strong> (fair use).
                 Permanent repairs/materials are quoted separately.
+              </p>
+              <p className="plans-sub smallest" style={{ marginTop: 6 }}>
+                ✅ All memberships include a <strong>photo report</strong> and an{" "}
+                <strong>insurance-ready written report</strong>.
               </p>
             </div>
 
@@ -499,7 +521,7 @@ export default function HomePage() {
               <ul>
                 <li><strong>Priority booking</strong> for non-emergency jobs</li>
                 <li><strong>1 discounted inspection</strong> / check-up per year</li>
-                <li><strong>Photo report</strong> + written scope</li>
+                <li><strong>Photo report</strong> + <strong>insurance-ready written report</strong></li>
                 <li><strong>Member pricing</strong> on small repairs (quoted)</li>
               </ul>
 
@@ -508,7 +530,7 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Bronze")}>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
                   Apply
                 </button>
               </div>
@@ -524,7 +546,7 @@ export default function HomePage() {
                 <li><strong>Higher priority queue</strong> than Bronze</li>
                 <li><strong>Emergency make-safe</strong> supported (fair use)</li>
                 <li><strong>Discounted call-out</strong> on GREEN/YELLOW/ORANGE</li>
-                <li><strong>Photo report</strong> after visit</li>
+                <li><strong>Photo report</strong> + <strong>insurance-ready written report</strong></li>
               </ul>
 
               <div className="plan-foot">
@@ -532,7 +554,7 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Silver")}>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
                   Apply
                 </button>
               </div>
@@ -547,8 +569,9 @@ export default function HomePage() {
               <ul>
                 <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
                 <li><strong>Out-of-hours support</strong> when safe &amp; possible</li>
-                <li><strong>Written emergency report</strong> (useful for insurance)</li>
+                <li><strong>Insurance-ready report</strong> + photo evidence</li>
                 <li><strong>Annual inspection</strong> included (scheduled)</li>
+                <li><strong>Chimney inspection &amp; cleaning 1×/year</strong> (repairs quoted separately)</li>
               </ul>
 
               <div className="plan-foot">
@@ -556,7 +579,7 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembership("Gold")}>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
                   Apply
                 </button>
               </div>
@@ -565,21 +588,24 @@ export default function HomePage() {
             {/* DIAMOND */}
             <div className="plan plan-highlight">
               <div className="plan-kicker">DIAMOND</div>
-              <div className="plan-name">Diamond — emergency cover</div>
+              <div className="plan-name">Diamond — owner-level coverage</div>
               <div className="plan-price">{PLAN_PRICE.Diamond}</div>
 
               <ul>
+                <li><strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE</strong></li>
                 <li>
-                  <strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE</strong>
-                </li>
-                <li>
-                  <strong>RED warning:</strong> call-out is <strong>paid</strong> (and may be delayed if unsafe)
+                  <strong>RED warning:</strong> call-out is <strong>paid</strong>. Delay only if{" "}
+                  <strong>roads are closed / impassable</strong> or restricted by emergency services (owner attends — no staff on RED).
                 </li>
                 <li><strong>Emergency make-safe</strong> included (fair use)</li>
-                <li><strong>Priority queue</strong> + fastest scheduling</li>
-                <li><strong>Photos + written report</strong> included</li>
+                <li><strong>Dedicated owner priority contact</strong> (VIP queue)</li>
+                <li><strong>Annual home risk review summary</strong> (structured written overview)</li>
+                <li><strong>1 complimentary minor fix per year</strong> (clearly limited; materials excluded)</li>
+                <li><strong>Photos + insurance-ready written report</strong> included</li>
+                <li><strong>Gutter cleaning 1×/year</strong> (scheduled; safe access rules apply)</li>
+                <li><strong>Chimney inspection &amp; cleaning</strong> included (repairs quoted separately)</li>
                 <li>
-                  <strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)
+                  <strong>Electrical leak / fault detection report</strong> (diagnostic only — any repair must be completed by a certified electrician)
                 </li>
               </ul>
 
@@ -591,203 +617,230 @@ export default function HomePage() {
                   </span>
                 ) : (
                   <span>
-                    ⚠️ During <strong>RED</strong> warnings: safety first — access may be unsafe and call-out is paid.
+                    ⚠️ During <strong>RED</strong> warnings: owner-only attendance, and travel may be delayed if roads are closed/impassable.
                   </span>
                 )}
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToMembership("Diamond")}>
+                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
                   Apply
                 </button>
               </div>
             </div>
           </div>
+{/* Membership application */}
+          <section id="membership-application">
+            <div className="form-card membership-form" style={{ marginTop: 22 }}>
+              <h2>Membership application</h2>
+              <p className="form-sub">
+                Apply in 60 seconds. We’ll confirm coverage &amp; availability by phone / email.
+              </p>
 
-          {/* Membership form */}
-          <div className="form-card membership-form" style={{ marginTop: 22 }}>
-            <h2>Membership application</h2>
-            <p className="form-sub">
-              Apply in 60 seconds. We’ll confirm coverage &amp; availability by phone / email.
-            </p>
+              <form onSubmit={onMembershipSubmit}>
+                <input
+                  type="text"
+                  name="website"
+                  style={{ display: "none" }}
+                  autoComplete="off"
+                  tabIndex={-1}
+                />
 
-            <form onSubmit={onMembershipSubmit}>
-              <input
-                type="text"
-                name="website"
-                style={{ display: "none" }}
-                autoComplete="off"
-                tabIndex={-1}
-              />
-
-              <div className="form-grid two-col">
-                <div className="field">
-                  <label htmlFor="m_name">Your name</label>
-                  <input id="m_name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
-                </div>
-
-                <div className="field">
-                  <label htmlFor="m_phone">Phone number</label>
-                  <input
-                    id="m_phone"
-                    name="Phone"
-                    type="tel"
-                    placeholder="+353"
-                    required
-                    autoComplete="tel"
-                    inputMode="tel"
-                  />
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="field">
-                  <label htmlFor="m_email">Email</label>
-                  <input
-                    id="m_email"
-                    name="Email"
-                    type="email"
-                    placeholder="you@email.com"
-                    required
-                    autoComplete="email"
-                    inputMode="email"
-                  />
-                </div>
-              </div>
-
-              <div className="form-grid two-col">
-                <div className="field">
-                  <label htmlFor="m_eircode">Eircode</label>
-                  <input
-                    id="m_eircode"
-                    name="Eircode"
-                    type="text"
-                    placeholder="e.g. C15 XXXX"
-                    required
-                    autoComplete="postal-code"
-                  />
-                </div>
-
-                <div className="field">
-                  <label htmlFor="m_town">Town / County</label>
-                  <input
-                    id="m_town"
-                    name="Town/County"
-                    type="text"
-                    placeholder="e.g. Navan, Co. Meath"
-                    required
-                    autoComplete="address-level2"
-                  />
-                </div>
-              </div>
-
-              <div className="form-grid two-col">
-                <div className="field">
-                  <label htmlFor="m_plan">Plan</label>
-                  <select
-                    id="m_plan"
-                    name="Plan"
-                    value={selectedPlan}
-                    onChange={(e) => setSelectedPlan(e.target.value)}
-                    autoComplete="off"
-                  >
-                    <option>Bronze</option>
-                    <option>Silver</option>
-                    <option>Gold</option>
-                    <option>Diamond</option>
-                  </select>
-                </div>
-
-                <div className="field">
-                  <label htmlFor="m_billing">Billing</label>
-                  <select
-                    id="m_billing"
-                    name="Billing"
-                    value={selectedBilling}
-                    onChange={(e) => setSelectedBilling(e.target.value)}
-                    autoComplete="off"
-                  >
-                    <option>Yearly</option>
-                    <option>Monthly</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="field">
-                  <label htmlFor="m_address">Address (optional)</label>
-                  <input
-                    id="m_address"
-                    name="Address"
-                    type="text"
-                    placeholder="Street / Estate / House number"
-                    autoComplete="street-address"
-                  />
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="field">
-                  <label htmlFor="m_notes">Anything we should know?</label>
-                  <textarea
-                    id="m_notes"
-                    name="Member notes"
-                    placeholder="Roof type, recurring leak, rental property, access, pets, etc."
-                  />
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="field" style={{ gap: 8 }}>
-                  <label style={{ marginBottom: 0 }}>Important membership terms</label>
-
-                  <div className="terms-box">
-                    <p style={{ marginBottom: 10 }}>
-                      <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
-                    </p>
-
-                    <p style={{ marginBottom: 10 }}>
-                      <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
-                      misuse, or abusive behaviour may lead to suspension/cancellation without refund.
-                    </p>
-
-                    <p style={{ marginBottom: 10 }}>
-                      <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to stop immediate damage (e.g. tarping, temporary sealing,
-                      isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
-                    </p>
-
-                    <p style={{ marginBottom: 0 }}>
-                      <strong>Diamond gutter cleaning:</strong> Included once per year, scheduled in normal conditions. Service depends on safe access
-                      (e.g. no unsafe roof climbing). If scaffolding, MEWP, or specialist access is required, that is quoted separately.
-                    </p>
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_name">Your name</label>
+                    <input
+                      id="m_name"
+                      name="Name"
+                      type="text"
+                      placeholder="Full name"
+                      required
+                      autoComplete="name"
+                    />
                   </div>
 
-                  <label className="agree-row">
+                  <div className="field">
+                    <label htmlFor="m_phone">Phone number</label>
                     <input
-                      type="checkbox"
-                      checked={agreeMembership}
-                      onChange={(e) => setAgreeMembership(e.target.checked)}
-                      aria-label="Agree to membership terms"
+                      id="m_phone"
+                      name="Phone"
+                      type="tel"
+                      placeholder="+353"
+                      required
+                      autoComplete="tel"
+                      inputMode="tel"
                     />
-                    I understand and agree to the membership terms above.
-                  </label>
+                  </div>
                 </div>
-              </div>
 
-              <div className="form-actions">
-                <button type="submit" className="btn btn-storm" disabled={membershipSubmitting}>
-                  {membershipSubmitting ? "Sending…" : "Send membership application"}
-                </button>
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_email">Email</label>
+                    <input
+                      id="m_email"
+                      name="Email"
+                      type="email"
+                      placeholder="you@email.com"
+                      required
+                      autoComplete="email"
+                      inputMode="email"
+                    />
+                  </div>
+                </div>
 
-                <p className="submit-tip">
-                  Once approved, we’ll confirm your plan and activation by phone/email. Emergency line:{" "}
-                  <strong>083 176 2475</strong>.
-                </p>
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_eircode">Eircode</label>
+                    <input
+                      id="m_eircode"
+                      name="Eircode"
+                      type="text"
+                      placeholder="e.g. C15 XXXX"
+                      required
+                      autoComplete="postal-code"
+                    />
+                  </div>
 
-                {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
-              </div>
-            </form>
-          </div>
+                  <div className="field">
+                    <label htmlFor="m_town">Town / County</label>
+                    <input
+                      id="m_town"
+                      name="Town/County"
+                      type="text"
+                      placeholder="e.g. Navan, Co. Meath"
+                      required
+                      autoComplete="address-level2"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_plan">Plan</label>
+                    <select
+                      id="m_plan"
+                      name="Plan"
+                      value={selectedPlan}
+                      onChange={(e) => setSelectedPlan(e.target.value)}
+                      autoComplete="off"
+                    >
+                      <option>Bronze</option>
+                      <option>Silver</option>
+                      <option>Gold</option>
+                      <option>Diamond</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label htmlFor="m_billing">Billing</label>
+                    <select
+                      id="m_billing"
+                      name="Billing"
+                      value={selectedBilling}
+                      onChange={(e) => setSelectedBilling(e.target.value)}
+                      autoComplete="off"
+                    >
+                      <option>Yearly</option>
+                      <option>Monthly</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_address">Address (optional)</label>
+                    <input
+                      id="m_address"
+                      name="Address"
+                      type="text"
+                      placeholder="Street / Estate / House number"
+                      autoComplete="street-address"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_notes">Anything we should know?</label>
+                    <textarea
+                      id="m_notes"
+                      name="Member notes"
+                      placeholder="Roof type, recurring leak, rental property, access, pets, etc."
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field" style={{ gap: 8 }}>
+                    <label style={{ marginBottom: 0 }}>Important membership terms</label>
+
+                    <div className="terms-box">
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Non-refundable:</strong> Membership payments are non-refundable once activated,
+                        unless required by law.
+                      </p>
+
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe.
+                        Repeated non-urgent call-outs, misuse, or abusive behaviour may lead to suspension/cancellation
+                        without refund.
+                      </p>
+
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to reduce immediate damage
+                        (e.g. tarping, temporary sealing, isolating hazards). <strong>Materials, scaffolding, skips,
+                        specialist hire</strong> and permanent repairs are quoted separately.
+                      </p>
+
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Access &amp; safety:</strong> Some services depend on safe access. Where scaffolding, MEWP,
+                        traffic management, or specialist access is required, it is quoted separately.
+                      </p>
+
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Gold chimney:</strong> Chimney inspection &amp; cleaning is included once per year (scheduled).
+                        Rebuilds/repairs are quoted separately.
+                      </p>
+
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Diamond extras:</strong> Owner priority contact, annual home risk review summary and 1 complimentary
+                        minor fix per year are subject to fair use and safety. Minor fix is limited in time/scope; materials excluded.
+                      </p>
+
+                      <p style={{ marginBottom: 0 }}>
+                        <strong>Diamond diagnostics:</strong> Electrical leak/fault detection is a diagnostic report only.
+                        Any electrical repair must be completed by a certified electrician (not included).
+                      </p>
+                    </div>
+
+                    <label className="agree-row">
+                      <input
+                        type="checkbox"
+                        checked={agreeMembership}
+                        onChange={(e) => setAgreeMembership(e.target.checked)}
+                        aria-label="Agree to membership terms"
+                      />
+                      I understand and agree to the membership terms above.
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-actions">
+                  {/* ✅ Green button */}
+                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
+                    {membershipSubmitting ? "Sending…" : "Send membership application"}
+                  </button>
+
+                  <p className="submit-tip">
+                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency line:{" "}
+                    <strong>083 176 2475</strong>.
+                  </p>
+
+                  {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
+                </div>
+              </form>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -796,7 +849,9 @@ export default function HomePage() {
         <div className="container grid-2">
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
-            <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
+            <p className="muted">
+              Red warning, heavy rain or leaking roof – we respond fast, day or night.
+            </p>
 
             <a href="tel:0831762475" className="btn btn-storm">
               🚨 24/7 STORM EMERGENCY LINE
@@ -1128,7 +1183,7 @@ export default function HomePage() {
                     multiple
                     accept="image/*,.pdf,.doc,.docx,.heic"
                     onChange={(e) => {
-                      const list = Array.from(e.target.files || []);
+                      const list = Array.from((e.target as HTMLInputElement).files || []);
                       setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
                     }}
                   />
