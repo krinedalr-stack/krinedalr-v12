@@ -28,12 +28,18 @@ export async function GET() {
     }
 
     // Try to normalize
-    const list = Array.isArray(data) ? data : (data.warnings || data.Warnings || data.data || []);
+    const list = Array.isArray(data)
+      ? data
+      : data.warnings || data.Warnings || data.data || [];
     const warnings = Array.isArray(list) ? list : [];
 
     // Determine highest severity
     const levels = warnings
-      .map((w) => (w.level || w.Level || w.severity || w.Severity || "").toString().toLowerCase())
+      .map((w) =>
+        (w.level || w.Level || w.severity || w.Severity || "")
+          .toString()
+          .toLowerCase()
+      )
       .filter(Boolean);
 
     const hasRed = levels.some((x) => x.includes("red"));
