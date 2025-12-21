@@ -1,11 +1,11 @@
-// app/api/weather-status/route.js
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
   const fetchedAt = new Date().toISOString();
 
   try {
-    // Met endpoints sometimes change. We try a few, but NEVER crash the build.
     const candidates = [
       "https://www.met.ie/Open_Data/json/warnings.json",
       "https://www.met.ie/Open_Data/json/warnings/warnings.json",
@@ -17,24 +17,31 @@ export async function GET() {
       try {
         const r = await fetch(url, { cache: "no-store" });
         if (!r.ok) continue;
-        const j = await r.json();
-        data = j;
+        data = await r.json();
         break;
       } catch {}
     }
 
     if (!data) {
-      // fallback: safe green
-      return Response.json({ ok: true, status: "green", warnings: [], fetchedAt });
+      return new Response(
+        JSON.stringify({ ok: true, status: "green", warnings: [], fetchedAt }),
+        {
+          headers: {
+            "content-type": "application/json",
+            "cache-control":
+              "no-store, no-cache, must-revalidate, proxy-revalidate",
+            pragma: "no-cache",
+            expires: "0",
+          },
+        }
+      );
     }
 
-    // Try to normalize
     const list = Array.isArray(data)
       ? data
       : data.warnings || data.Warnings || data.data || [];
     const warnings = Array.isArray(list) ? list : [];
 
-    // Determine highest severity
     const levels = warnings
       .map((w) =>
         (w.level || w.Level || w.severity || w.Severity || "")
@@ -47,7 +54,13 @@ export async function GET() {
     const hasOrange = levels.some((x) => x.includes("orange"));
     const hasYellow = levels.some((x) => x.includes("yellow"));
 
-    const status = hasRed ? "red" : hasOrange ? "orange" : hasYellow ? "yellow" : "green";
+    const status = hasRed
+      ? "red"
+      : hasOrange
+      ? "orange"
+      : hasYellow
+      ? "yellow"
+      : "green";
 
     const cleaned = warnings.slice(0, 10).map((w) => ({
       id: w.id || w.ID || w.identifier || null,
@@ -55,8 +68,30 @@ export async function GET() {
       headline: (w.headline || w.Headline || w.title || w.Title || "").toString(),
     }));
 
-    return Response.json({ ok: true, status, warnings: cleaned, fetchedAt });
+    return new Response(
+      JSON.stringify({ ok: true, status, warnings: cleaned, fetchedAt }),
+      {
+        headers: {
+          "content-type": "application/json",
+          "cache-control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          pragma: "no-cache",
+          expires: "0",
+        },
+      }
+    );
   } catch {
-    return Response.json({ ok: true, status: "green", warnings: [], fetchedAt });
+    return new Response(
+      JSON.stringify({ ok: true, status: "green", warnings: [], fetchedAt }),
+      {
+        headers: {
+          "content-type": "application/json",
+          "cache-control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          pragma: "no-cache",
+          expires: "0",
+        },
+      }
+    );
   }
 }
