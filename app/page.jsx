@@ -878,8 +878,7 @@ export default function HomePage() {
           </section>
         </div>
       </section>
-
-      {/* STORM + WEATHER */}
+{/* STORM + WEATHER */}
       <section className="section section-alt">
         <div className="container grid-2">
           <div className="card">
@@ -1103,7 +1102,7 @@ export default function HomePage() {
             </p>
 
             <p className="muted smallest">
-              Flooring labour often ranges <strong>€18–€45 per m²</strong>. This calculator uses <strong>€26 per m²</strong>.
+              Flooring labour often ranges <strong>€18–€45</strong> per m². This calculator uses <strong>€26</strong> per m².
             </p>
           </div>
         </div>
