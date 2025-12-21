@@ -29,13 +29,7 @@ function IrelandFlag({ className = "" }) {
   );
 }
 
-function PeopleCultureModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
+function PeopleCultureModal({ open, onClose }) {
   if (!open) return null;
   return (
     <div
@@ -113,7 +107,10 @@ function PeopleCultureModal({
 
         <div className="k-block">
           <div className="k-title">8. Long-term thinking</div>
-          <p>We build stable work, better living standards and pride in workmanship.</p>
+          <p>
+            We build stable work, better living standards and pride in
+            workmanship.
+          </p>
         </div>
 
         <hr />
@@ -161,7 +158,7 @@ export default function HomePage() {
 
   // ===== Weather status =====
   const [weatherStatus, setWeatherStatus] = useState("green");
-  const [weatherWarnings, setWeatherWarnings] = useState<any[]>([]);
+  const [weatherWarnings, setWeatherWarnings] = useState([]);
   const [weatherLoaded, setWeatherLoaded] = useState(false);
   const [weatherError, setWeatherError] = useState("");
   const [fetchedAt, setFetchedAt] = useState("");
@@ -170,7 +167,7 @@ export default function HomePage() {
   const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
 
   const weatherUI = useMemo(() => {
-    const map: any = {
+    const map = {
       green: {
         label: "GREEN – normal conditions",
         textClass: "green-text",
@@ -232,7 +229,9 @@ export default function HomePage() {
       const tooLong = lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000;
       if (tooLong) {
         setWeatherStatus("green");
-        setWeatherError("Weather feed delayed — showing safe default (GREEN) until refreshed.");
+        setWeatherError(
+          "Weather feed delayed — showing safe default (GREEN) until refreshed."
+        );
       }
     }, 60 * 1000);
     return () => clearInterval(id);
@@ -243,7 +242,7 @@ export default function HomePage() {
   const [submitMsg, setSubmitMsg] = useState("");
   const [filesLabel, setFilesLabel] = useState("");
 
-  async function onSubmit(e: any) {
+  async function onSubmit(e) {
     e.preventDefault();
     setSubmitting(true);
     setSubmitMsg("");
@@ -277,23 +276,14 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
-  const PLAN_PRICE: Record<string, string> = {
+  const PLAN_PRICE = {
     Bronze: "€199 / year",
     Silver: "€399 / year",
-    Gold: "€599 / year",
-    Diamond: "€899 / year",
+    Gold: "€549 / year",
+    Diamond: "€799 / year",
   };
 
-  // Membership menu button: show plans
-  function scrollToMembershipSection() {
-    setMembershipMsg("");
-    setTimeout(() => {
-      const el = document.getElementById("membership");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-  }
-
-  // Apply buttons: go to application + select plan
+  // ✅ FIXED: scroll to the APPLICATION (not just the memberships section)
   function scrollToMembershipApplication(plan = "Diamond") {
     setSelectedPlan(plan);
     setSelectedBilling("Yearly");
@@ -304,7 +294,7 @@ export default function HomePage() {
     }, 80);
   }
 
-  async function onMembershipSubmit(e: any) {
+  async function onMembershipSubmit(e) {
     e.preventDefault();
     setMembershipSubmitting(true);
     setMembershipMsg("");
@@ -339,7 +329,7 @@ export default function HomePage() {
     }
   }
 
-  // Diamond rule: €0 call-out on Green/Yellow/Orange
+  // ✅ Diamond rule: €0 call-out only on Green/Yellow/Orange. Red = paid (access-dependent).
   const diamondNoCallout =
     weatherStatus === "green" || weatherStatus === "yellow" || weatherStatus === "orange";
 
@@ -353,8 +343,7 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </div>
             <small className="topbar-sub">
-              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ —
-              Built on standards • Run by systems • Powered by people
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
             </small>
           </div>
 
@@ -379,7 +368,7 @@ export default function HomePage() {
             <button
               type="button"
               className="btn btn-outline"
-              onClick={scrollToMembershipSection}
+              onClick={() => scrollToMembershipApplication("Diamond")}
               title="Membership plans"
             >
               Memberships
@@ -456,7 +445,11 @@ export default function HomePage() {
               >
                 Instagram
               </a>
-              <button type="button" className="btn btn-outline" onClick={scrollToMembershipSection}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => scrollToMembershipApplication("Diamond")}
+              >
                 View memberships
               </button>
             </div>
@@ -478,7 +471,7 @@ export default function HomePage() {
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
-              <p>✓ Photos before &amp; after each job</p>
+              <p>✓ Photos + written reports (on request / membership)</p>
               <p>✓ Clear pricing and written scope</p>
             </div>
           </aside>
@@ -496,12 +489,8 @@ export default function HomePage() {
                 Memberships are approved based on area coverage and current workload.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                Note: Membership covers <strong>priority + planning + make-safe</strong> (fair use).
+                Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use).
                 Permanent repairs/materials are quoted separately.
-              </p>
-              <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                ✅ All memberships include a <strong>photo report</strong> and an{" "}
-                <strong>insurance-ready written report</strong>.
               </p>
             </div>
 
@@ -521,7 +510,7 @@ export default function HomePage() {
               <ul>
                 <li><strong>Priority booking</strong> for non-emergency jobs</li>
                 <li><strong>1 discounted inspection</strong> / check-up per year</li>
-                <li><strong>Photo report</strong> + <strong>insurance-ready written report</strong></li>
+                <li><strong>Photos + written report</strong> (scope &amp; recommendations)</li>
                 <li><strong>Member pricing</strong> on small repairs (quoted)</li>
               </ul>
 
@@ -530,7 +519,11 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Bronze")}
+                >
                   Apply
                 </button>
               </div>
@@ -546,7 +539,7 @@ export default function HomePage() {
                 <li><strong>Higher priority queue</strong> than Bronze</li>
                 <li><strong>Emergency make-safe</strong> supported (fair use)</li>
                 <li><strong>Discounted call-out</strong> on GREEN/YELLOW/ORANGE</li>
-                <li><strong>Photo report</strong> + <strong>insurance-ready written report</strong></li>
+                <li><strong>Photos + written report</strong> after visit</li>
               </ul>
 
               <div className="plan-foot">
@@ -554,7 +547,11 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Silver")}
+                >
                   Apply
                 </button>
               </div>
@@ -569,9 +566,9 @@ export default function HomePage() {
               <ul>
                 <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
                 <li><strong>Out-of-hours support</strong> when safe &amp; possible</li>
-                <li><strong>Insurance-ready report</strong> + photo evidence</li>
+                <li><strong>Written emergency report</strong> (useful for insurance)</li>
                 <li><strong>Annual inspection</strong> included (scheduled)</li>
-                <li><strong>Chimney inspection &amp; cleaning 1×/year</strong> (repairs quoted separately)</li>
+                <li><strong>Chimney safety check (visual)</strong> included (scheduled)</li>
               </ul>
 
               <div className="plan-foot">
@@ -579,7 +576,11 @@ export default function HomePage() {
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Gold")}
+                >
                   Apply
                 </button>
               </div>
@@ -588,24 +589,32 @@ export default function HomePage() {
             {/* DIAMOND */}
             <div className="plan plan-highlight">
               <div className="plan-kicker">DIAMOND</div>
-              <div className="plan-name">Diamond — owner-level coverage</div>
+              <div className="plan-name">Diamond — owner priority cover</div>
               <div className="plan-price">{PLAN_PRICE.Diamond}</div>
 
               <ul>
-                <li><strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE</strong></li>
                 <li>
-                  <strong>RED warning:</strong> call-out is <strong>paid</strong>. Delay only if{" "}
-                  <strong>roads are closed / impassable</strong> or restricted by emergency services (owner attends — no staff on RED).
+                  <strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE</strong>
                 </li>
-                <li><strong>Emergency make-safe</strong> included (fair use)</li>
-                <li><strong>Dedicated owner priority contact</strong> (VIP queue)</li>
-                <li><strong>Annual home risk review summary</strong> (structured written overview)</li>
-                <li><strong>1 complimentary minor fix per year</strong> (clearly limited; materials excluded)</li>
-                <li><strong>Photos + insurance-ready written report</strong> included</li>
-                <li><strong>Gutter cleaning 1×/year</strong> (scheduled; safe access rules apply)</li>
-                <li><strong>Chimney inspection &amp; cleaning</strong> included (repairs quoted separately)</li>
                 <li>
-                  <strong>Electrical leak / fault detection report</strong> (diagnostic only — any repair must be completed by a certified electrician)
+                  <strong>RED warning:</strong> call-out is <strong>paid</strong>{" "}
+                  (delay only if <strong>roads/access are not possible</strong>)
+                </li>
+
+                <li><strong>Dedicated owner priority contact</strong></li>
+                <li><strong>Annual home risk review summary</strong> (photos + key issues)</li>
+                <li><strong>1 complimentary minor fix per year</strong> (clearly limited)</li>
+
+                <li><strong>Emergency make-safe</strong> included (fair use)</li>
+                <li><strong>Priority queue</strong> + fastest scheduling</li>
+                <li><strong>Photos + written report</strong> included (insurance-ready)</li>
+
+                <li><strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
+                <li><strong>Chimney cleaning + check 1× per year</strong> (scheduled, safe access rules apply)</li>
+
+                <li>
+                  <strong>Electrical leak check report</strong> (non-invasive detection for water/leak paths;
+                  any electrical work by a certified electrician)
                 </li>
               </ul>
 
@@ -617,20 +626,26 @@ export default function HomePage() {
                   </span>
                 ) : (
                   <span>
-                    ⚠️ During <strong>RED</strong> warnings: owner-only attendance, and travel may be delayed if roads are closed/impassable.
+                    ⚠️ During <strong>RED</strong> warnings: call-out is paid. Attendance depends on
+                    access (roads safe/possible). Owner attends — employees are not placed in danger.
                   </span>
                 )}
               </div>
 
               <div className="plan-actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Diamond")}
+                >
                   Apply
                 </button>
               </div>
             </div>
           </div>
-{/* Membership application */}
-          <section id="membership-application">
+
+          {/* ✅ Membership APPLICATION (scroll target) */}
+          <section id="membership-application" style={{ scrollMarginTop: 92 }}>
             <div className="form-card membership-form" style={{ marginTop: 22 }}>
               <h2>Membership application</h2>
               <p className="form-sub">
@@ -772,7 +787,9 @@ export default function HomePage() {
 
                 <div className="form-grid">
                   <div className="field" style={{ gap: 8 }}>
-                    <label style={{ marginBottom: 0 }}>Important membership terms</label>
+                    <label style={{ marginBottom: 0 }}>
+                      Important membership terms
+                    </label>
 
                     <div className="terms-box">
                       <p style={{ marginBottom: 10 }}>
@@ -787,29 +804,19 @@ export default function HomePage() {
                       </p>
 
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to reduce immediate damage
-                        (e.g. tarping, temporary sealing, isolating hazards). <strong>Materials, scaffolding, skips,
-                        specialist hire</strong> and permanent repairs are quoted separately.
+                        <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to stop immediate damage
+                        (e.g. tarping, temporary sealing, isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong>{" "}
+                        and permanent repairs are quoted separately.
                       </p>
 
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Access &amp; safety:</strong> Some services depend on safe access. Where scaffolding, MEWP,
-                        traffic management, or specialist access is required, it is quoted separately.
-                      </p>
-
-                      <p style={{ marginBottom: 10 }}>
-                        <strong>Gold chimney:</strong> Chimney inspection &amp; cleaning is included once per year (scheduled).
-                        Rebuilds/repairs are quoted separately.
-                      </p>
-
-                      <p style={{ marginBottom: 10 }}>
-                        <strong>Diamond extras:</strong> Owner priority contact, annual home risk review summary and 1 complimentary
-                        minor fix per year are subject to fair use and safety. Minor fix is limited in time/scope; materials excluded.
+                        <strong>Access &amp; safety:</strong> Services depend on safe access and travel. During severe conditions, delays may occur
+                        only where <strong>roads/access are not possible</strong>.
                       </p>
 
                       <p style={{ marginBottom: 0 }}>
-                        <strong>Diamond diagnostics:</strong> Electrical leak/fault detection is a diagnostic report only.
-                        Any electrical repair must be completed by a certified electrician (not included).
+                        <strong>Included annual services:</strong> Gutter/chimney services are scheduled in normal conditions
+                        and depend on safe access. If scaffolding, MEWP, or specialist access is required, that is quoted separately.
                       </p>
                     </div>
 
@@ -826,8 +833,12 @@ export default function HomePage() {
                 </div>
 
                 <div className="form-actions">
-                  {/* ✅ Green button */}
-                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
+                  {/* ✅ GREEN TRUST BUTTON */}
+                  <button
+                    type="submit"
+                    className="btn btn-emerald"
+                    disabled={membershipSubmitting}
+                  >
                     {membershipSubmitting ? "Sending…" : "Send membership application"}
                   </button>
 
@@ -863,8 +874,9 @@ export default function HomePage() {
               </p>
 
               <p className="muted small" style={{ lineHeight: 1.55 }}>
-                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
-                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage, unsafe roof), we offer:
+                We help where we can — especially during storms. If you are{" "}
+                <strong>elderly</strong> or a <strong>single parent</strong> and you are dealing with an urgent emergency
+                (leaks, storm damage, unsafe roof), we offer:
               </p>
 
               <ul className="list" style={{ marginTop: 10 }}>
@@ -1183,12 +1195,18 @@ export default function HomePage() {
                     multiple
                     accept="image/*,.pdf,.doc,.docx,.heic"
                     onChange={(e) => {
-                      const list = Array.from((e.target as HTMLInputElement).files || []);
+                      const list = Array.from(e.target.files || []);
                       setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
                     }}
                   />
-                  {filesLabel && <p className="muted smallest" style={{ marginTop: 6 }}>{filesLabel}</p>}
-                  <p className="muted smallest" style={{ marginTop: 6 }}>Tip: You can also send photos by WhatsApp if easier.</p>
+                  {filesLabel && (
+                    <p className="muted smallest" style={{ marginTop: 6 }}>
+                      {filesLabel}
+                    </p>
+                  )}
+                  <p className="muted smallest" style={{ marginTop: 6 }}>
+                    Tip: You can also send photos by WhatsApp if easier.
+                  </p>
                 </div>
               </div>
 
@@ -1209,7 +1227,11 @@ export default function HomePage() {
                   <strong>083 176 2475</strong>.
                 </p>
 
-                {submitMsg && <p className="membership-msg" style={{ marginTop: 10 }}>{submitMsg}</p>}
+                {submitMsg && (
+                  <p className="membership-msg" style={{ marginTop: 10 }}>
+                    {submitMsg}
+                  </p>
+                )}
               </div>
             </form>
           </div>
@@ -1239,12 +1261,18 @@ export default function HomePage() {
               <span className="footer-name">
                 KRINEDAL-<span className="hero-r">R</span>
               </span>
-              <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
-              <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
+              <p className="muted footer-line">
+                Premium property care, storm or sunshine – Ireland-wide.
+              </p>
+              <p className="footer-dna">
+                Built on standards • Run by systems • Powered by people
+              </p>
             </div>
 
             <div className="footer-contact">
-              <p>Phone: <strong>083 176 2475</strong></p>
+              <p>
+                Phone: <strong>083 176 2475</strong>
+              </p>
               <p>
                 Email:{" "}
                 <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
@@ -1266,14 +1294,25 @@ export default function HomePage() {
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
-                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.instagram.com/krinedalr/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   @krinedalr
                 </a>
               </p>
 
               <div className="footer-buttons">
-                <a href="tel:0831762475" className="btn footer-call">Call</a>
-                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">
+                <a href="tel:0831762475" className="btn footer-call">
+                  Call
+                </a>
+                <a
+                  href="https://wa.me/353831762475"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn footer-whatsapp"
+                >
                   WhatsApp
                 </a>
                 <button className="btn footer-call" onClick={() => setPcOpen(true)}>
@@ -1286,16 +1325,42 @@ export default function HomePage() {
 
         {/* FLOATING BUTTONS */}
         <div className="float-stack">
-          <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="float-btn float-wa" aria-label="WhatsApp" title="WhatsApp">
+          <a
+            href="https://wa.me/353831762475"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-wa"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
             💬
           </a>
-          <a href="https://m.me/61581354904730" target="_blank" rel="noreferrer" className="float-btn float-msgr" aria-label="Messenger" title="Messenger">
+          <a
+            href="https://m.me/61581354904730"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-msgr"
+            aria-label="Messenger"
+            title="Messenger"
+          >
             📘
           </a>
-          <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="float-btn float-ig" aria-label="Instagram" title="Instagram">
+          <a
+            href="https://www.instagram.com/krinedalr/"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-ig"
+            aria-label="Instagram"
+            title="Instagram"
+          >
             📸
           </a>
-          <a href="mailto:krinedalr@outlook.com" className="float-btn float-mail" aria-label="Email" title="Email">
+          <a
+            href="mailto:krinedalr@outlook.com"
+            className="float-btn float-mail"
+            aria-label="Email"
+            title="Email"
+          >
             ✉️
           </a>
         </div>
