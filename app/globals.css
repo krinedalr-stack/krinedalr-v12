@@ -290,7 +290,7 @@ a:hover{ text-decoration: underline; }
   box-shadow:0 14px 34px rgba(255,45,45,0.55);
 }
 
-/* ✅ Membership submit (green) — upgraded so it ALWAYS matches form buttons */
+/* ✅ Membership submit (green) */
 .btn-emerald{
   width:100%;
   min-height:56px;
@@ -301,8 +301,6 @@ a:hover{ text-decoration: underline; }
   color:#064e3b;
   box-shadow:0 14px 34px rgba(34,197,94,0.35);
 }
-.btn-emerald:hover{ transform:translateY(-1px); }
-.btn-emerald:active{ transform:translateY(0); }
 
 /* small refresh weather button */
 .btn-weather{
@@ -479,7 +477,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 }
 
 /* =========================
-   MEMBERSHIPS (THE FIX)
+   MEMBERSHIPS
 ========================= */
 .section-memberships{
   background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%);
@@ -496,6 +494,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   flex-wrap:wrap;
   margin-bottom:18px;
 }
+
 .plans-title{
   font-size:1.35rem;
   font-weight:950;
@@ -520,16 +519,23 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   padding:18px;
   display:flex;
   flex-direction:column;
-  min-height: 290px;
+  min-height: 300px;
   color:#111827;
 }
 
 .plan-kicker{
+  display:flex;
+  align-items:center;
+  gap:10px;
   font-size:0.78rem;
   letter-spacing:0.12em;
   font-weight:950;
   color:#16a34a;
   margin-bottom:6px;
+}
+.plan-icon{
+  font-size: 1.05rem;
+  line-height: 1;
 }
 
 .plan-name{
@@ -541,7 +547,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 
 .plan-price{
   font-weight:950;
-  font-size:1.35rem;
+  font-size:1.05rem;
   margin-bottom:10px;
   color:#f97316;
 }
@@ -573,6 +579,35 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   flex-wrap:wrap;
 }
 
+/* Status badge next to "Current status" */
+.status-pill{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 12px;
+  border-radius: 999px;
+}
+.status-label{
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: rgba(249,250,251,0.88);
+}
+.status-badge{
+  font-size: 0.85rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #0b1120;
+  background: #e5e7eb;
+}
+.status-badge.green{ background: #22c55e; }
+.status-badge.yellow{ background: #facc15; }
+.status-badge.orange{ background: #fb923c; }
+.status-badge.red{ background: #ef4444; color:#fff; }
+
 /* Membership form inside memberships section */
 .section-memberships .form-card{
   background: rgba(255,255,255,0.04);
@@ -600,6 +635,72 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 .agree-row input{
   margin-top:4px;
   transform: scale(1.12);
+}
+
+/* Savings block */
+.member-savings{
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.member-savings-title{
+  font-weight: 950;
+  font-size: 1.05rem;
+  color: #f9fafb;
+}
+.member-savings-sub{
+  margin-top: 6px;
+  color: rgba(249,250,251,0.85);
+  max-width: 860px;
+}
+
+.savings-grid{
+  margin-top: 14px;
+  display:grid;
+  gap:12px;
+}
+@media (min-width:900px){
+  .savings-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.savings-item{
+  background:#ffffff;
+  color:#111827;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+}
+.savings-name{ font-weight: 950; margin-bottom: 8px; }
+.savings-row{ display:flex; justify-content:space-between; gap:10px; font-size:0.92rem; }
+
+/* Legal card */
+.legal-card{
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.legal-grid{
+  margin-top: 14px;
+  display:grid;
+  gap:12px;
+}
+@media (min-width:900px){
+  .legal-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.legal-block{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 14px;
+}
+.legal-title{
+  font-weight: 950;
+  margin-bottom: 6px;
+  color: #4ade80;
 }
 
 /* =========================
