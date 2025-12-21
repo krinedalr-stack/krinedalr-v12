@@ -1,4 +1,3 @@
-// app/page.jsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -70,8 +69,8 @@ function PeopleCultureModal({ open, onClose }) {
         <div className="k-block">
           <div className="k-title">4. Training &amp; development</div>
           <p>
-            We invest in training, safety certs, and workmanship. Mistakes are handled through
-            improvement, not humiliation.
+            We invest in training, safety certs, and workmanship. Mistakes are handled
+            through improvement, not humiliation.
           </p>
         </div>
 
@@ -99,7 +98,9 @@ function PeopleCultureModal({ open, onClose }) {
         </div>
 
         <hr />
-        <p><strong>Built on standards. Run by systems. Powered by people.</strong></p>
+        <p>
+          <strong>Built on standards. Run by systems. Powered by people.</strong>
+        </p>
 
         <div className="close-row">
           <button className="btn" onClick={onClose}>Close</button>
@@ -163,7 +164,7 @@ export default function HomePage() {
       setWeatherError("");
 
       const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
-      const json = await res.json();
+      const json = await res.json().catch(() => ({}));
 
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
 
@@ -213,6 +214,7 @@ export default function HomePage() {
     try {
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
+
       if (fd.get("website")) return;
 
       fd.set("FormType", "Estimate");
@@ -281,6 +283,7 @@ export default function HomePage() {
 
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
+
       if (fd.get("website")) return;
 
       fd.set("FormType", "Membership");
@@ -308,7 +311,7 @@ export default function HomePage() {
     }
   }
 
-  // ✅ LOCKED POLICY (shown consistently everywhere)
+  // ✅ Strict RED policy (insurer-friendly)
   const RED_POLICY_LINE =
     "During RED warnings: we operate, but KRINEDAL-R does not deploy employees/subcontractors. The company owner attends where access is possible. Delays only when access is blocked (fallen trees, flooding, Garda/ambulance/emergency road closures, severe hazards).";
 
@@ -377,6 +380,7 @@ export default function HomePage() {
                 {weatherLoaded ? weatherUI.label : "Loading weather…"}
               </span>
               <span className="hero-weather-shamrock">☘️</span>
+
               <button
                 type="button"
                 className="btn btn-weather"
@@ -412,7 +416,8 @@ export default function HomePage() {
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
-              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe, dry and beautifully finished.
+              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe,
+              dry and beautifully finished.
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
@@ -448,9 +453,7 @@ export default function HomePage() {
           <div className="plans-grid">
             {/* BRONZE */}
             <div className="plan">
-              <div className="plan-kicker">
-                <span className="plan-icon">🥉</span> BRONZE
-              </div>
+              <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
               <div className="plan-name">Bronze — planned support</div>
               <div className="plan-price">{planPriceLabel("Bronze")}</div>
 
@@ -472,9 +475,7 @@ export default function HomePage() {
 
             {/* SILVER */}
             <div className="plan">
-              <div className="plan-kicker">
-                <span className="plan-icon">🥈</span> SILVER
-              </div>
+              <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
               <div className="plan-name">Silver — faster response</div>
               <div className="plan-price">{planPriceLabel("Silver")}</div>
 
@@ -496,9 +497,7 @@ export default function HomePage() {
 
             {/* GOLD */}
             <div className="plan">
-              <div className="plan-kicker">
-                <span className="plan-icon">🥇</span> GOLD
-              </div>
+              <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
               <div className="plan-name">Gold — priority + reporting</div>
               <div className="plan-price">{planPriceLabel("Gold")}</div>
 
@@ -520,9 +519,7 @@ export default function HomePage() {
 
             {/* DIAMOND */}
             <div className="plan plan-highlight">
-              <div className="plan-kicker">
-                <span className="plan-icon">💎</span> DIAMOND
-              </div>
+              <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
               <div className="plan-name">Diamond — owner priority cover</div>
               <div className="plan-price">{planPriceLabel("Diamond")}</div>
 
@@ -538,9 +535,7 @@ export default function HomePage() {
               <div className="plan-foot">
                 ✅ Under Diamond, call-out fee is <strong>€0</strong> in all warning levels.
                 <br />
-                <span className="muted smallest" style={{ color: "#4b5563" }}>
-                  {RED_POLICY_LINE}
-                </span>
+                <span className="muted smallest" style={{ color: "#4b5563" }}>{RED_POLICY_LINE}</span>
               </div>
 
               <div className="plan-actions">
@@ -605,6 +600,7 @@ export default function HomePage() {
                     <label htmlFor="m_name">Your name</label>
                     <input id="m_name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
                   </div>
+
                   <div className="field">
                     <label htmlFor="m_phone">Phone number</label>
                     <input id="m_phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
@@ -623,6 +619,7 @@ export default function HomePage() {
                     <label htmlFor="m_eircode">Eircode</label>
                     <input id="m_eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
                   </div>
+
                   <div className="field">
                     <label htmlFor="m_town">Town / County</label>
                     <input id="m_town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
@@ -802,7 +799,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* WEBSITE / COMPANY TERMS & CONDITIONS (SEPARATE BUTTON TARGET) */}
+            {/* WEBSITE / COMPANY TERMS & CONDITIONS */}
             <div id="site-terms" className="legal-card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
               <h2>Website &amp; Company Terms &amp; Conditions</h2>
               <p className="muted small" style={{ marginTop: 8 }}>
@@ -897,8 +894,9 @@ export default function HomePage() {
               </p>
 
               <p className="muted small" style={{ lineHeight: 1.55 }}>
-                We help where we can — especially during storms. If you are <strong>elderly</strong> or a <strong>single parent</strong> and you are dealing
-                with an urgent emergency (leaks, storm damage, unsafe roof), we offer:
+                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
+                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage, unsafe roof),
+                we offer:
               </p>
 
               <ul className="list" style={{ marginTop: 10 }}>
@@ -907,8 +905,9 @@ export default function HomePage() {
               </ul>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
-                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended for genuine emergency make-safe visits.
-                Materials, skips, scaffolding, specialist hire and additional works are charged separately. Availability depends on weather, travel distance and workload.
+                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended for genuine
+                emergency make-safe visits. Materials, skips, scaffolding, specialist hire and additional works are charged separately.
+                Availability depends on weather, travel distance and workload.
               </p>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
@@ -947,11 +946,17 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <p className="muted small" style={{ marginTop: 8 }}>
-              Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
+              Current:{" "}
+              <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
             </p>
 
             <div style={{ marginTop: 10 }}>
-              <button type="button" className="btn btn-weather" onClick={() => loadWeather({ manual: true })} disabled={refreshingWeather}>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+              >
                 {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
               </button>
             </div>
@@ -1001,15 +1006,17 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal. Clean, fast and extremely professional. Couldn&apos;t be happier.”
+              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal.
+              Clean, fast and extremely professional. Couldn&apos;t be happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, rain and storm didn&apos;t stop him.
-              Trust 100% saved number - completed, insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe.
+              Snow, rain and storm didn&apos;t stop him. Trust 100% saved number - completed, insurance claim report was
+              issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
@@ -1025,14 +1032,25 @@ export default function HomePage() {
 
             <label className="field-label">
               Roof area (m²)
-              <input type="number" value={roofArea} onChange={(e) => setRoofArea(e.target.value)} className="field-input" min="0" inputMode="decimal" />
+              <input
+                type="number"
+                value={roofArea}
+                onChange={(e) => setRoofArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
 
-            <p className="calc-result">Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}</p>
+            <p className="calc-result">
+              Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+            </p>
 
-            <p className="muted smallest">Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.</p>
+            <p className="muted smallest">
+              Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.
+            </p>
           </div>
 
           <div className="card">
@@ -1041,14 +1059,25 @@ export default function HomePage() {
 
             <label className="field-label">
               Tiled area (m²)
-              <input type="number" value={tileArea} onChange={(e) => setTileArea(e.target.value)} className="field-input" min="0" inputMode="decimal" />
+              <input
+                type="number"
+                value={tileArea}
+                onChange={(e) => setTileArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
 
-            <p className="calc-result">Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}</p>
+            <p className="calc-result">
+              Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
+            </p>
 
-            <p className="muted smallest">Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.</p>
+            <p className="muted smallest">
+              Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
+            </p>
           </div>
 
           <div className="card">
@@ -1057,14 +1086,25 @@ export default function HomePage() {
 
             <label className="field-label">
               Floor area (m²)
-              <input type="number" value={floorArea} onChange={(e) => setFloorArea(e.target.value)} className="field-input" min="0" inputMode="decimal" />
+              <input
+                type="number"
+                value={floorArea}
+                onChange={(e) => setFloorArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
 
-            <p className="calc-result">Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}</p>
+            <p className="calc-result">
+              Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
+            </p>
 
-            <p className="muted smallest">Flooring labour often ranges <strong>€18–€45 per m²</strong>. This calculator uses <strong>€26 per m²</strong>.</p>
+            <p className="muted smallest">
+              Flooring labour often ranges <strong>€18–€45 per m²</strong>. This calculator uses <strong>€26 per m²</strong>.
+            </p>
           </div>
         </div>
       </section>
@@ -1074,7 +1114,9 @@ export default function HomePage() {
         <div className="container">
           <div className="form-card">
             <h2>Request a Free Estimate</h2>
-            <p className="form-sub">Tell us a bit about your project and we&apos;ll come back with options and a rough budget.</p>
+            <p className="form-sub">
+              Tell us a bit about your project and we&apos;ll come back with options and a rough budget.
+            </p>
 
             <form onSubmit={onSubmit}>
               <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
@@ -1084,6 +1126,7 @@ export default function HomePage() {
                   <label htmlFor="name">Your name</label>
                   <input id="name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
                 </div>
+
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
                   <input id="phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
@@ -1102,6 +1145,7 @@ export default function HomePage() {
                   <label htmlFor="eircode">Eircode</label>
                   <input id="eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
                 </div>
+
                 <div className="field">
                   <label htmlFor="town">Town / County</label>
                   <input id="town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
@@ -1135,6 +1179,7 @@ export default function HomePage() {
                   <label htmlFor="date">Preferred date</label>
                   <input id="date" name="Preferred date" type="date" required />
                 </div>
+
                 <div className="field">
                   <label htmlFor="time">Preferred time</label>
                   <input id="time" name="Preferred time" type="time" required />
@@ -1207,9 +1252,7 @@ export default function HomePage() {
 
           <footer className="footer">
             <div className="footer-brand">
-              <span className="footer-name">
-                KRINEDAL-<span className="hero-r">R</span>
-              </span>
+              <span className="footer-name">KRINEDAL-<span className="hero-r">R</span></span>
               <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
               <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
             </div>
@@ -1227,7 +1270,11 @@ export default function HomePage() {
               </p>
               <p>
                 Facebook:{" "}
-                <a href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user" target="_blank" rel="noreferrer">
+                <a
+                  href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
