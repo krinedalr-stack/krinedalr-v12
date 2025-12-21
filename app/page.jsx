@@ -197,7 +197,9 @@ export default function HomePage() {
       if (manual) setRefreshingWeather(true);
       setWeatherError("");
 
-      const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
+      const res = await fetch(`/api/weather-status?_=${Date.now()}`, {
+        cache: "no-store",
+      });
       const json = await res.json();
 
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
@@ -276,14 +278,27 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
-  const PLAN_PRICE = {
-    Bronze: "€199 / year",
-    Silver: "€399 / year",
-    Gold: "€549 / year",
-    Diamond: "€799 / year",
+  const PLAN_PRICING = {
+    Bronze: { yearly: 199, monthly: 19 },
+    Silver: { yearly: 399, monthly: 39 },
+    Gold: { yearly: 549, monthly: 55 },
+    Diamond: { yearly: 799, monthly: 79 },
   };
 
-  // ✅ FIXED: scroll to the APPLICATION (not just the memberships section)
+  const PLAN_DISPLAY = {
+    Bronze: { icon: "🥉", name: "Bronze — planned support" },
+    Silver: { icon: "🥈", name: "Silver — faster response" },
+    Gold: { icon: "🥇", name: "Gold — priority + reporting" },
+    Diamond: { icon: "💎", name: "Diamond — owner priority cover" },
+  };
+
+  const planPriceLabel = (plan) => {
+    const p = PLAN_PRICING[plan];
+    if (!p) return "";
+    return `€${p.yearly} / year • €${p.monthly} / month`;
+  };
+
+  // ✅ FIXED: scroll to the APPLICATION (not just memberships section)
   function scrollToMembershipApplication(plan = "Diamond") {
     setSelectedPlan(plan);
     setSelectedBilling("Yearly");
@@ -314,6 +329,12 @@ export default function HomePage() {
       fd.set("Plan", selectedPlan);
       fd.set("Billing", selectedBilling);
       fd.set("AgreedToTerms", "YES");
+
+      const p = PLAN_PRICING[selectedPlan];
+      if (p) {
+        fd.set("PlanPriceYearly", `€${p.yearly}`);
+        fd.set("PlanPriceMonthly", `€${p.monthly}`);
+      }
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
@@ -392,8 +413,7 @@ export default function HomePage() {
             </h1>
 
             <p className="hero-tag">
-              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND{" "}
-              <span>☘️</span>
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
 
             <p className="hero-subline">
@@ -460,7 +480,9 @@ export default function HomePage() {
               ))}
             </ul>
 
-            <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
+            <p className="hero-note">
+              *Response time depends on location &amp; weather conditions.
+            </p>
           </div>
 
           <aside className="hero-side-card">
@@ -494,28 +516,32 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="plans-sub small" style={{ fontWeight: 900 }}>
-              Current status:{" "}
-              <span className={weatherUI.textClass}>{weatherStatus.toUpperCase()}</span>
+            <div className="status-pill">
+              <span className="status-label">Current status</span>
+              <span className={`status-badge ${weatherStatus}`}>
+                {weatherStatus.toUpperCase()}
+              </span>
             </div>
           </div>
 
           <div className="plans-grid">
             {/* BRONZE */}
             <div className="plan">
-              <div className="plan-kicker">BRONZE</div>
-              <div className="plan-name">Bronze — planned support</div>
-              <div className="plan-price">{PLAN_PRICE.Bronze}</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥉</span> BRONZE
+              </div>
+              <div className="plan-name">{PLAN_DISPLAY.Bronze.name}</div>
+              <div className="plan-price">{planPriceLabel("Bronze")}</div>
 
               <ul>
                 <li><strong>Priority booking</strong> for non-emergency jobs</li>
-                <li><strong>1 discounted inspection</strong> / check-up per year</li>
-                <li><strong>Photos + written report</strong> (scope &amp; recommendations)</li>
-                <li><strong>Member pricing</strong> on small repairs (quoted)</li>
+                <li><strong>Member schedule slot</strong> (faster than non-members)</li>
+                <li><strong>Discounted inspection</strong> (1× per year, scheduled)</li>
+                <li><strong>Written scope</strong> before work starts</li>
               </ul>
 
               <div className="plan-foot">
-                Best for homeowners who want regular maintenance &amp; reliable scheduling.
+                Best for homeowners who want organised maintenance and reliable scheduling.
               </div>
 
               <div className="plan-actions">
@@ -531,19 +557,21 @@ export default function HomePage() {
 
             {/* SILVER */}
             <div className="plan">
-              <div className="plan-kicker">SILVER</div>
-              <div className="plan-name">Silver — faster response</div>
-              <div className="plan-price">{PLAN_PRICE.Silver}</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥈</span> SILVER
+              </div>
+              <div className="plan-name">{PLAN_DISPLAY.Silver.name}</div>
+              <div className="plan-price">{planPriceLabel("Silver")}</div>
 
               <ul>
                 <li><strong>Higher priority queue</strong> than Bronze</li>
-                <li><strong>Emergency make-safe</strong> supported (fair use)</li>
+                <li><strong>Emergency make-safe support</strong> (fair use)</li>
                 <li><strong>Discounted call-out</strong> on GREEN/YELLOW/ORANGE</li>
-                <li><strong>Photos + written report</strong> after visit</li>
+                <li><strong>Photos after visit</strong> (basic report)</li>
               </ul>
 
               <div className="plan-foot">
-                Great for families &amp; rentals needing faster support when problems appear.
+                Great for families &amp; rentals that need faster support when problems appear.
               </div>
 
               <div className="plan-actions">
@@ -559,20 +587,21 @@ export default function HomePage() {
 
             {/* GOLD */}
             <div className="plan">
-              <div className="plan-kicker">GOLD</div>
-              <div className="plan-name">Gold — priority + documentation</div>
-              <div className="plan-price">{PLAN_PRICE.Gold}</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥇</span> GOLD
+              </div>
+              <div className="plan-name">{PLAN_DISPLAY.Gold.name}</div>
+              <div className="plan-price">{planPriceLabel("Gold")}</div>
 
               <ul>
                 <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
                 <li><strong>Out-of-hours support</strong> when safe &amp; possible</li>
                 <li><strong>Written emergency report</strong> (useful for insurance)</li>
                 <li><strong>Annual inspection</strong> included (scheduled)</li>
-                <li><strong>Chimney safety check (visual)</strong> included (scheduled)</li>
               </ul>
 
               <div className="plan-foot">
-                Ideal for landlords / multi-property owners who need proper reporting &amp; reliability.
+                Ideal for landlords / multi-property owners who need documentation and reliability.
               </div>
 
               <div className="plan-actions">
@@ -588,46 +617,37 @@ export default function HomePage() {
 
             {/* DIAMOND */}
             <div className="plan plan-highlight">
-              <div className="plan-kicker">DIAMOND</div>
-              <div className="plan-name">Diamond — owner priority cover</div>
-              <div className="plan-price">{PLAN_PRICE.Diamond}</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">💎</span> DIAMOND
+              </div>
+              <div className="plan-name">{PLAN_DISPLAY.Diamond.name}</div>
+              <div className="plan-price">{planPriceLabel("Diamond")}</div>
 
               <ul>
                 <li>
                   <strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE</strong>
                 </li>
                 <li>
-                  <strong>RED warning:</strong> call-out is <strong>paid</strong>{" "}
-                  (delay only if <strong>roads/access are not possible</strong>)
+                  <strong>RED warning:</strong> call-out is <strong>paid</strong> (owner attends where access is possible)
                 </li>
-
                 <li><strong>Dedicated owner priority contact</strong></li>
-                <li><strong>Annual home risk review summary</strong> (photos + key issues)</li>
-                <li><strong>1 complimentary minor fix per year</strong> (clearly limited)</li>
-
+                <li><strong>Photos + written report</strong> included (insurance-ready)</li>
                 <li><strong>Emergency make-safe</strong> included (fair use)</li>
                 <li><strong>Priority queue</strong> + fastest scheduling</li>
-                <li><strong>Photos + written report</strong> included (insurance-ready)</li>
-
                 <li><strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
-                <li><strong>Chimney cleaning + check 1× per year</strong> (scheduled, safe access rules apply)</li>
-
-                <li>
-                  <strong>Electrical leak check report</strong> (non-invasive detection for water/leak paths;
-                  any electrical work by a certified electrician)
-                </li>
+                <li><strong>Chimney cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
               </ul>
 
               <div className="plan-foot">
                 {diamondNoCallout ? (
                   <span>
-                    ✅ Right now your call-out fee would be <strong>€0</strong> under Diamond
-                    (status: <strong>{weatherStatus.toUpperCase()}</strong>).
+                    ✅ Right now your call-out fee would be <strong>€0</strong> under Diamond (status:{" "}
+                    <strong>{weatherStatus.toUpperCase()}</strong>).
                   </span>
                 ) : (
                   <span>
-                    ⚠️ During <strong>RED</strong> warnings: call-out is paid. Attendance depends on
-                    access (roads safe/possible). Owner attends — employees are not placed in danger.
+                    ⚠️ During <strong>RED</strong> warnings: owner attends where access is possible.
+                    Delays only when roads/access are blocked.
                   </span>
                 )}
               </div>
@@ -644,7 +664,71 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ✅ Membership APPLICATION (scroll target) */}
+          {/* SAVINGS / EXTRA SERVICES */}
+          <div className="member-savings" style={{ marginTop: 22 }}>
+            <div className="member-savings-title">Extra savings with memberships</div>
+            <p className="member-savings-sub">
+              Many customers pay separate companies for these jobs. With KRINEDAL-R memberships,
+              you can save money and keep everything under one trusted contact.
+            </p>
+
+            <div className="savings-grid">
+              <div className="savings-item">
+                <div className="savings-name">Chimney cleaning</div>
+                <div className="savings-row">
+                  <span>Typical market</span>
+                  <strong>€120–€220</strong>
+                </div>
+                <div className="savings-row">
+                  <span>With Diamond</span>
+                  <strong>Included 1× / year*</strong>
+                </div>
+              </div>
+
+              <div className="savings-item">
+                <div className="savings-name">Gutter cleaning</div>
+                <div className="savings-row">
+                  <span>Typical market</span>
+                  <strong>€90–€180</strong>
+                </div>
+                <div className="savings-row">
+                  <span>With Diamond</span>
+                  <strong>Included 1× / year*</strong>
+                </div>
+              </div>
+
+              <div className="savings-item">
+                <div className="savings-name">Drain / pipe cleaning (basic)</div>
+                <div className="savings-row">
+                  <span>Typical market</span>
+                  <strong>€120–€260</strong>
+                </div>
+                <div className="savings-row">
+                  <span>Members</span>
+                  <strong>Discounted / quoted</strong>
+                </div>
+              </div>
+
+              <div className="savings-item">
+                <div className="savings-name">Annual inspection report</div>
+                <div className="savings-row">
+                  <span>Typical market</span>
+                  <strong>€120–€250</strong>
+                </div>
+                <div className="savings-row">
+                  <span>With Gold</span>
+                  <strong>Included 1× / year*</strong>
+                </div>
+              </div>
+            </div>
+
+            <p className="muted smallest" style={{ marginTop: 10 }}>
+              *Included/discounted services depend on safe access and the specific property setup. If scaffolding, MEWP,
+              specialist access, heavy blockages, or extra labour is required, that is quoted separately.
+            </p>
+          </div>
+
+          {/* MEMBERSHIP APPLICATION */}
           <section id="membership-application" style={{ scrollMarginTop: 92 }}>
             <div className="form-card membership-form" style={{ marginTop: 22 }}>
               <h2>Membership application</h2>
@@ -785,38 +869,35 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                {/* TERMS (short) + link to full */}
                 <div className="form-grid">
                   <div className="field" style={{ gap: 8 }}>
                     <label style={{ marginBottom: 0 }}>
-                      Important membership terms
+                      Important membership terms (summary)
                     </label>
 
                     <div className="terms-box">
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Non-refundable:</strong> Membership payments are non-refundable once activated,
-                        unless required by law.
+                        <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
                       </p>
 
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe.
-                        Repeated non-urgent call-outs, misuse, or abusive behaviour may lead to suspension/cancellation
-                        without refund.
+                        <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
+                        misuse, or abusive behaviour may lead to suspension/cancellation without refund.
                       </p>
 
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to stop immediate damage
-                        (e.g. tarping, temporary sealing, isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong>{" "}
-                        and permanent repairs are quoted separately.
+                        <strong>Emergency scope:</strong> “Make-safe” includes temporary actions to reduce immediate damage (e.g. tarping, temporary sealing,
+                        isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
                       </p>
 
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Access &amp; safety:</strong> Services depend on safe access and travel. During severe conditions, delays may occur
-                        only where <strong>roads/access are not possible</strong>.
+                        <strong>RED warnings:</strong> We operate. During RED warnings, the <strong>company owner attends where access is possible</strong>.
+                        Delays only when access is blocked (fallen trees, road closures by Garda/ambulance/emergency services, severe flooding, etc.).
                       </p>
 
                       <p style={{ marginBottom: 0 }}>
-                        <strong>Included annual services:</strong> Gutter/chimney services are scheduled in normal conditions
-                        and depend on safe access. If scaffolding, MEWP, or specialist access is required, that is quoted separately.
+                        Read the full Terms &amp; Conditions below (scroll) — they apply to all memberships.
                       </p>
                     </div>
 
@@ -827,13 +908,12 @@ export default function HomePage() {
                         onChange={(e) => setAgreeMembership(e.target.checked)}
                         aria-label="Agree to membership terms"
                       />
-                      I understand and agree to the membership terms above.
+                      I understand and agree to the membership terms above and the full Terms &amp; Conditions below.
                     </label>
                   </div>
                 </div>
 
                 <div className="form-actions">
-                  {/* ✅ GREEN TRUST BUTTON */}
                   <button
                     type="submit"
                     className="btn btn-emerald"
@@ -850,6 +930,100 @@ export default function HomePage() {
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
                 </div>
               </form>
+            </div>
+
+            {/* FULL TERMS & CONDITIONS */}
+            <div className="legal-card" style={{ marginTop: 18 }}>
+              <h2>Membership Terms &amp; Conditions</h2>
+              <p className="muted small" style={{ marginTop: 8 }}>
+                These terms apply to all KRINEDAL-R memberships (Bronze/Silver/Gold/Diamond).
+                Membership is a service agreement — not an insurance policy.
+              </p>
+
+              <div className="legal-grid">
+                <div className="legal-block">
+                  <div className="legal-title">1) Definitions</div>
+                  <ul className="k-list">
+                    <li><strong>Make-safe</strong>: temporary steps to reduce immediate damage or hazard.</li>
+                    <li><strong>Permanent repair</strong>: full fix using materials/labour — always quoted separately.</li>
+                    <li><strong>Fair use</strong>: reasonable use for genuine property issues (not repeated non-urgent call-outs).</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">2) Coverage &amp; approval</div>
+                  <ul className="k-list">
+                    <li>Memberships are approved based on coverage area and current workload.</li>
+                    <li>We may decline or delay activation if we cannot maintain standards.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">3) Emergency response &amp; weather</div>
+                  <ul className="k-list">
+                    <li>
+                      We operate during storms. <strong>During RED warnings, the company owner attends where access is possible.</strong>
+                    </li>
+                    <li>
+                      Delays may occur only where access is blocked (examples: <strong>fallen trees</strong>, <strong>flooded roads</strong>,
+                      <strong> Garda/ambulance/emergency service road blocks</strong>, major collisions, severe hazards).
+                    </li>
+                    <li>
+                      If a delay occurs, we communicate the reason and the next possible arrival window.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">4) What is included</div>
+                  <ul className="k-list">
+                    <li>Priority planning/booking according to your plan.</li>
+                    <li>Emergency make-safe actions within fair use.</li>
+                    <li>Reports/photos where your plan includes them.</li>
+                    <li>Included annual services (if your plan includes them) are scheduled and subject to safe access.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">5) What is not included</div>
+                  <ul className="k-list">
+                    <li>Materials (tiles, timber, membranes, fixings, etc.).</li>
+                    <li>Skips, scaffolding, MEWP, specialist hire, engineer reports.</li>
+                    <li>Full permanent repairs — these are quoted separately.</li>
+                    <li>Gas/electrical works that require certified specialists.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">6) Payments &amp; refunds</div>
+                  <ul className="k-list">
+                    <li>Membership payments are <strong>non-refundable</strong> once activated, unless required by law.</li>
+                    <li>Monthly or yearly billing options may be available as shown.</li>
+                    <li>Missed payments may pause membership benefits until resolved.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">7) Fair use &amp; behaviour</div>
+                  <ul className="k-list">
+                    <li>Misuse, repeated non-urgent call-outs, or abusive behaviour may lead to suspension/cancellation without refund.</li>
+                    <li>Access must be safe and reasonable (dogs secured, hazards disclosed, etc.).</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">8) Liability &amp; limits</div>
+                  <ul className="k-list">
+                    <li>We work to high standards, but we cannot guarantee outcomes where hidden defects exist.</li>
+                    <li>Make-safe actions reduce damage risk but cannot eliminate all risk during extreme weather.</li>
+                    <li>Any liability is limited to the work we carried out (subject to Irish law).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p className="muted smallest" style={{ marginTop: 10 }}>
+                If you want solicitor-style wording later, we can upgrade this into a full legal page and add a checkbox link.
+              </p>
             </div>
           </section>
         </div>
@@ -1118,7 +1292,13 @@ export default function HomePage() {
             </p>
 
             <form onSubmit={onSubmit}>
-              <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
+              <input
+                type="text"
+                name="website"
+                style={{ display: "none" }}
+                autoComplete="off"
+                tabIndex={-1}
+              />
 
               <div className="form-grid two-col">
                 <div className="field">
@@ -1199,11 +1379,7 @@ export default function HomePage() {
                       setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
                     }}
                   />
-                  {filesLabel && (
-                    <p className="muted smallest" style={{ marginTop: 6 }}>
-                      {filesLabel}
-                    </p>
-                  )}
+                  {filesLabel && <p className="muted smallest" style={{ marginTop: 6 }}>{filesLabel}</p>}
                   <p className="muted smallest" style={{ marginTop: 6 }}>
                     Tip: You can also send photos by WhatsApp if easier.
                   </p>
@@ -1227,11 +1403,7 @@ export default function HomePage() {
                   <strong>083 176 2475</strong>.
                 </p>
 
-                {submitMsg && (
-                  <p className="membership-msg" style={{ marginTop: 10 }}>
-                    {submitMsg}
-                  </p>
-                )}
+                {submitMsg && <p className="membership-msg" style={{ marginTop: 10 }}>{submitMsg}</p>}
               </div>
             </form>
           </div>
@@ -1261,18 +1433,12 @@ export default function HomePage() {
               <span className="footer-name">
                 KRINEDAL-<span className="hero-r">R</span>
               </span>
-              <p className="muted footer-line">
-                Premium property care, storm or sunshine – Ireland-wide.
-              </p>
-              <p className="footer-dna">
-                Built on standards • Run by systems • Powered by people
-              </p>
+              <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
+              <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
             </div>
 
             <div className="footer-contact">
-              <p>
-                Phone: <strong>083 176 2475</strong>
-              </p>
+              <p>Phone: <strong>083 176 2475</strong></p>
               <p>
                 Email:{" "}
                 <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
@@ -1294,25 +1460,14 @@ export default function HomePage() {
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
-                <a
-                  href="https://www.instagram.com/krinedalr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
                   @krinedalr
                 </a>
               </p>
 
               <div className="footer-buttons">
-                <a href="tel:0831762475" className="btn footer-call">
-                  Call
-                </a>
-                <a
-                  href="https://wa.me/353831762475"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn footer-whatsapp"
-                >
+                <a href="tel:0831762475" className="btn footer-call">Call</a>
+                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">
                   WhatsApp
                 </a>
                 <button className="btn footer-call" onClick={() => setPcOpen(true)}>
