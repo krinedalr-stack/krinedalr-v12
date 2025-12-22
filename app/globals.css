@@ -540,6 +540,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%);
   color:#f9fafb;
 }
+
 .section-memberships .plans-title{ color:#f9fafb; }
 .section-memberships .plans-sub{ color: rgba(249,250,251,0.85); }
 
@@ -551,6 +552,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   flex-wrap:wrap;
   margin-bottom:18px;
 }
+
 .plans-title{
   font-size:1.35rem;
   font-weight:950;
@@ -563,6 +565,8 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   gap:14px;
   align-items: stretch;
 }
+
+/* Desktop 4 columns */
 @media (min-width:900px){
   .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
 }
@@ -627,7 +631,11 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   flex-wrap:wrap;
 }
 
-/* Status badge next to "Current status" */
+/* ✅ Membership form spacing (fixes “white empty spot” feel) */
+.membership-form{ margin-top: 22px; }
+.section-memberships section#membership-application{ margin-top: 0; }
+
+/* Status badge */
 .status-pill{
   display:flex;
   align-items:center;
@@ -977,26 +985,4 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   background:#fff;
   border-color:#e5e7eb;
   color:#111827;
-}
-
-/* =========================
-   FINAL MOBILE SPACING FIX (kills empty gaps)
-========================= */
-@media (max-width: 520px){
-  .section{ padding: 44px 0; }
-  .section-form{ padding: 56px 0; }
-
-  .hero{ padding: 44px 0 28px; }
-  .hero-inner{ gap: 22px; }
-
-  .card{ padding: 16px; border-radius: 18px; }
-
-  .plans-head{ margin-bottom: 12px; }
-  .member-savings{ margin-top: 16px; padding: 16px; }
-
-  .form-card{ padding: 22px; border-radius: 20px; }
-  .form-card .form-sub{ margin-bottom: 16px; }
-
-  .legal-card{ padding: 16px; }
-  .legal-grid{ margin-top: 12px; }
 }
