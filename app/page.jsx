@@ -69,8 +69,8 @@ function PeopleCultureModal({ open, onClose }) {
         <div className="k-block">
           <div className="k-title">4. Training &amp; development</div>
           <p>
-            We invest in training, safety certs, and workmanship. Mistakes are handled
-            through improvement, not humiliation.
+            We invest in training, safety certs, and workmanship. Mistakes are handled through
+            improvement, not humiliation.
           </p>
         </div>
 
@@ -84,7 +84,10 @@ function PeopleCultureModal({ open, onClose }) {
 
         <div className="k-block">
           <div className="k-title">6. Accountability both ways</div>
-          <p>People are accountable fairly — and leadership is accountable for planning, support and decisions.</p>
+          <p>
+            People are accountable fairly — and leadership is accountable for planning, support
+            and decisions.
+          </p>
         </div>
 
         <div className="k-block">
@@ -144,7 +147,6 @@ export default function HomePage() {
   const [weatherLoaded, setWeatherLoaded] = useState(false);
   const [weatherError, setWeatherError] = useState("");
   const [fetchedAt, setFetchedAt] = useState("");
-
   const [refreshingWeather, setRefreshingWeather] = useState(false);
   const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
 
@@ -173,7 +175,6 @@ export default function HomePage() {
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
-
       if (json?.ok) setLastWeatherOkAt(Date.now());
     } catch {
       setWeatherError("Weather unavailable");
@@ -221,6 +222,7 @@ export default function HomePage() {
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
+
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
 
       setSubmitMsg("Sent ✅ We’ll get back to you shortly.");
@@ -240,6 +242,7 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
+  // (Tomorrow we switch Monthly -> Quarterly)
   const PLAN_PRICING = {
     Bronze: { yearly: 199, monthly: 19 },
     Silver: { yearly: 399, monthly: 39 },
@@ -268,6 +271,11 @@ export default function HomePage() {
       const el = document.getElementById("site-terms");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
+  }
+
+  // helper for tomorrow (terms into modal)
+  function openSiteTerms() {
+    scrollToSiteTerms();
   }
 
   async function onMembershipSubmit(e) {
@@ -299,6 +307,7 @@ export default function HomePage() {
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
+
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
 
       setMembershipMsg("Application sent ✅ We’ll confirm coverage & availability shortly.");
@@ -333,15 +342,25 @@ export default function HomePage() {
             <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
               People &amp; Culture
             </button>
+
             <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               WhatsApp
             </a>
+
             <a href="#estimate" className="btn btn-outline">Get Quote</a>
+
             <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>
               Memberships
             </button>
-            <button type="button" className="btn btn-outline" onClick={scrollToSiteTerms}>
+
+            <button type="button" className="btn btn-outline" onClick={openSiteTerms}>
               Website Terms
             </button>
           </div>
@@ -375,10 +394,12 @@ export default function HomePage() {
             </p>
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
+
             <div className="hero-weather-row">
               <span className={weatherUI.chipClass}>
                 {weatherLoaded ? weatherUI.label : "Loading weather…"}
               </span>
+
               <span className="hero-weather-shamrock">☘️</span>
 
               <button
@@ -395,12 +416,25 @@ export default function HomePage() {
 
             <div className="hero-actions">
               <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
-              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+
+              <a
+                href="https://wa.me/353831762475"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
                 WhatsApp us now
               </a>
-              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">
+
+              <a
+                href="https://www.instagram.com/krinedalr/"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
                 Instagram
               </a>
+
               <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>
                 View memberships
               </button>
@@ -456,16 +490,13 @@ export default function HomePage() {
               <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
               <div className="plan-name">Bronze — planned support</div>
               <div className="plan-price">{planPriceLabel("Bronze")}</div>
-
               <ul>
                 <li><strong>Priority booking</strong> for non-emergency jobs</li>
                 <li><strong>Member schedule slot</strong> (faster than non-members)</li>
                 <li><strong>Discounted inspection</strong> (1× per year, scheduled)</li>
                 <li><strong>FREE call-out on GREEN</strong> warnings (make-safe / fair use)</li>
               </ul>
-
               <div className="plan-foot">Best for organised maintenance and reliable scheduling.</div>
-
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
                   Apply
@@ -478,16 +509,13 @@ export default function HomePage() {
               <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
               <div className="plan-name">Silver — faster response</div>
               <div className="plan-price">{planPriceLabel("Silver")}</div>
-
               <ul>
                 <li><strong>Higher priority queue</strong> than Bronze</li>
                 <li><strong>Emergency make-safe support</strong> (fair use)</li>
                 <li><strong>FREE call-out on GREEN</strong> warnings</li>
                 <li><strong>Discounted call-out</strong> on YELLOW / ORANGE</li>
               </ul>
-
               <div className="plan-foot">Great for families &amp; rentals that need faster support.</div>
-
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
                   Apply
@@ -500,16 +528,13 @@ export default function HomePage() {
               <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
               <div className="plan-name">Gold — priority + reporting</div>
               <div className="plan-price">{planPriceLabel("Gold")}</div>
-
               <ul>
                 <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
                 <li><strong>FREE call-out on GREEN + YELLOW</strong> warnings</li>
                 <li><strong>Discounted call-out</strong> on ORANGE</li>
                 <li><strong>Annual inspection</strong> included (scheduled)</li>
               </ul>
-
               <div className="plan-foot">Ideal for landlords / multi-property owners who need documentation.</div>
-
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
                   Apply
@@ -522,7 +547,6 @@ export default function HomePage() {
               <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
               <div className="plan-name">Diamond — owner priority cover</div>
               <div className="plan-price">{planPriceLabel("Diamond")}</div>
-
               <ul>
                 <li><strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE / RED</strong></li>
                 <li><strong>Owner priority contact</strong> + fastest scheduling</li>
@@ -531,13 +555,11 @@ export default function HomePage() {
                 <li><strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
                 <li><strong>Chimney cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
               </ul>
-
               <div className="plan-foot">
                 ✅ Under Diamond, call-out fee is <strong>€0</strong> in all warning levels.
                 <br />
                 <span className="muted smallest" style={{ color: "#4b5563" }}>{RED_POLICY_LINE}</span>
               </div>
-
               <div className="plan-actions">
                 <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
                   Apply
@@ -798,8 +820,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
-            {/* WEBSITE / COMPANY TERMS & CONDITIONS */}
+{/* WEBSITE / COMPANY TERMS & CONDITIONS */}
             <div id="site-terms" className="legal-card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
               <h2>Website &amp; Company Terms &amp; Conditions</h2>
               <p className="muted small" style={{ marginTop: 8 }}>
@@ -843,10 +864,17 @@ export default function HomePage() {
                 </div>
 
                 <div className="legal-block">
-                  <div className="legal-title">5) Cancellations</div>
+                  <div className="legal-title">5) Cancellations (strict policy)</div>
                   <ul className="k-list">
-                    <li>If you cancel a booked visit last minute, a call-out/booking fee may still apply (time and travel reserved).</li>
-                    <li>We may reschedule due to severe weather or safety risk.</li>
+                    <li>
+                      If a booked visit is cancelled after a technician has already been dispatched, the full call-out/booking fee applies.
+                    </li>
+                    <li>
+                      This covers time, travel, fuel, scheduling, and resources already committed — including planning completed before leaving base.
+                    </li>
+                    <li>
+                      Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be rescheduled without penalty.
+                    </li>
                   </ul>
                 </div>
 
@@ -878,13 +906,13 @@ export default function HomePage() {
           </section>
         </div>
       </section>
-{/* STORM + WEATHER */}
+
+      {/* STORM + WEATHER */}
       <section className="section section-alt">
         <div className="container grid-2">
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
-
             <a href="tel:0831762475" className="btn btn-storm">🚨 24/7 STORM EMERGENCY LINE</a>
 
             <div style={{ marginTop: 14 }}>
@@ -945,8 +973,7 @@ export default function HomePage() {
             <h2>Ireland Weather Status</h2>
 
             <p className="muted small" style={{ marginTop: 8 }}>
-              Current:{" "}
-              <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
+              Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
             </p>
 
             <div style={{ marginTop: 10 }}>
@@ -986,7 +1013,7 @@ export default function HomePage() {
             <p className="muted small" style={{ marginTop: 12 }}>
               Follow{" "}
               <a
-                href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                href="https://m.facebook.com/profile.php?id=61581354904730"
                 target="_blank"
                 rel="noreferrer"
                 className="brand-inline"
@@ -1251,40 +1278,58 @@ export default function HomePage() {
 
           <footer className="footer">
             <div className="footer-brand">
-              <span className="footer-name">KRINEDAL-<span className="hero-r">R</span></span>
+              <span className="footer-name">
+                KRINEDAL-<span className="hero-r">R</span>
+              </span>
               <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
               <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
             </div>
 
             <div className="footer-contact">
               <p>Phone: <strong>083 176 2475</strong></p>
+
               <p>
                 Email:{" "}
                 <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
               </p>
+
               <p>
                 Web:{" "}
-                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">www.krinedalr.ie</a>
+                <a href="https://www.krinedalr.ie" target="_blank" rel="noreferrer">
+                  www.krinedalr.ie
+                </a>
               </p>
+
               <p>
                 Facebook:{" "}
                 <a
-                  href="https://m.facebook.com/profile.php?id=61581354904730&name=xhp_nt__fb__action__open_user"
+                  href="https://m.facebook.com/profile.php?id=61581354904730"
                   target="_blank"
                   rel="noreferrer"
                 >
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
-                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">@krinedalr</a>
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
+                  @krinedalr
+                </a>
               </p>
 
               <div className="footer-buttons">
                 <a href="tel:0831762475" className="btn footer-call">Call</a>
-                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">WhatsApp</a>
+
+                <a
+                  href="https://wa.me/353831762475"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn footer-whatsapp"
+                >
+                  WhatsApp
+                </a>
+
                 <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-                <button className="btn footer-call" onClick={scrollToSiteTerms}>Website Terms</button>
+                <button className="btn footer-call" onClick={openSiteTerms}>Website Terms</button>
               </div>
             </div>
           </footer>
