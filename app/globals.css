@@ -782,8 +782,8 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   .plans-grid::-webkit-scrollbar{ display:none; }
 }
 
-/* Tablet: 2 columns */
-@media (max-width: 1100px){
+/* ✅ Tablet: 2 columns — ONLY above mobile */
+@media (min-width: 521px) and (max-width: 1100px){
   .plans-grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -919,7 +919,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 }
 
 /* =========================
-   MODALS (People & Culture + Terms)
+   MODALS (People & Culture + Terms + Community)
 ========================= */
 .modal-backdrop{
   position:fixed;
