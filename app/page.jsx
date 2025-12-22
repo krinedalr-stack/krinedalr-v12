@@ -37,6 +37,7 @@ function PeopleCultureModal({ open, onClose }) {
         <h2>KRINEDAL-R — Our People &amp; Culture Policy</h2>
         <p className="muted">Built on standards • Run by systems • Powered by people</p>
         <hr />
+
         <div className="k-block">
           <div className="k-title">1. Leadership philosophy</div>
           <p>Leadership is service. We remove obstacles and protect dignity.</p>
@@ -47,6 +48,7 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Support growth</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">2. Respect is non-negotiable</div>
           <ul className="k-list">
@@ -54,6 +56,7 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Skill can be taught. Character is required.</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">3. Clear pay • clear hours • clear rules</div>
           <ul className="k-list">
@@ -62,6 +65,7 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Honest communication</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">4. Training &amp; development</div>
           <p>
@@ -69,6 +73,7 @@ function PeopleCultureModal({ open, onClose }) {
             improvement, not humiliation.
           </p>
         </div>
+
         <div className="k-block">
           <div className="k-title">5. Safety before speed</div>
           <ul className="k-list">
@@ -76,6 +81,7 @@ function PeopleCultureModal({ open, onClose }) {
             <li>Right to stop unsafe work — without fear</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">6. Accountability both ways</div>
           <p>
@@ -83,22 +89,24 @@ function PeopleCultureModal({ open, onClose }) {
             decisions.
           </p>
         </div>
+
         <div className="k-block">
           <div className="k-title">7. No-ego culture</div>
           <p>Titles don’t impress us. Work ethic, attitude and consistency do.</p>
         </div>
+
         <div className="k-block">
           <div className="k-title">8. Long-term thinking</div>
           <p>We build stable work, better living standards and pride in workmanship.</p>
         </div>
+
         <hr />
         <p>
           <strong>Built on standards. Run by systems. Powered by people.</strong>
         </p>
+
         <div className="close-row">
-          <button className="btn" onClick={onClose}>
-            Close
-          </button>
+          <button className="btn" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
@@ -116,6 +124,7 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
           bookings, communication).
         </p>
         <hr />
+
         <div className="k-block">
           <div className="k-title">Insurer-safe note</div>
           <p>
@@ -123,73 +132,58 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
             Reports/photos can support claims where requested, but insurers decide outcomes.
           </p>
         </div>
+
         <div className="k-block">
           <div className="k-title">1) Quotes &amp; pricing</div>
           <ul className="k-list">
-            <li>
-              Website calculators are <strong>rough guides</strong> only and not binding quotations.
-            </li>
+            <li>Website calculators are <strong>rough guides</strong> only and not binding quotations.</li>
             <li>Final prices are confirmed after inspection / scope agreement.</li>
             <li>Emergency call-out fees depend on distance, access and conditions.</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">2) Safety &amp; duty of care (RED policy)</div>
           <ul className="k-list">
-            <li>
-              <strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors
-              during RED warnings.
-            </li>
-            <li>
-              <strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and
-              their families.
-            </li>
-            <li>
-              <strong>Owner response:</strong> the company owner attends where access is possible.
-            </li>
-            <li>
-              <strong>Safety note:</strong> {RED_POLICY_LINE}
-            </li>
+            <li><strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors during RED warnings.</li>
+            <li><strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and their families.</li>
+            <li><strong>Owner response:</strong> the company owner attends where access is possible.</li>
+            <li><strong>Safety note:</strong> {RED_POLICY_LINE}</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">3) Delays outside our control</div>
           <ul className="k-list">
             <li>Delays may occur where access is blocked or unsafe.</li>
-            <li>
-              Examples: fallen trees, flooded roads, Garda/ambulance/emergency service road blocks,
-              major incidents.
-            </li>
+            <li>Examples: fallen trees, flooded roads, Garda/ambulance/emergency service road blocks, major incidents.</li>
             <li>We communicate the reason and next possible arrival window.</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">4) Materials &amp; staged payments</div>
           <ul className="k-list">
-            <li>
-              For most projects, customers pay materials up front (tiles, timber, membranes, fixings,
-              skips, etc.).
-            </li>
+            <li>For most projects, customers pay materials up front (tiles, timber, membranes, fixings, skips, etc.).</li>
             <li>Labour is paid after completion unless staged payments are agreed in writing.</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">5) Cancellations (strict policy)</div>
           <ul className="k-list">
             <li>
               <strong>
-                If a booked visit is cancelled after planning has been completed and a technician has
-                already been dispatched (left base and is travelling), the full call-out/booking fee
-                applies.
+                If a booked visit is cancelled after planning has been completed and a technician has already been dispatched (left base and is travelling), the full call-out/booking fee applies.
               </strong>
             </li>
             <li>This covers time, travel, fuel, scheduling, and resources already committed.</li>
             <li>
-              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be
-              rescheduled without penalty.
+              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be rescheduled without penalty.
             </li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">6) Photos, reports &amp; communication</div>
           <ul className="k-list">
@@ -197,6 +191,7 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
             <li>We may use photos internally for quality and records (not public marketing without permission).</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">7) Privacy</div>
           <ul className="k-list">
@@ -204,6 +199,7 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
             <li>We do not sell your data.</li>
           </ul>
         </div>
+
         <div className="k-block">
           <div className="k-title">8) General limitation</div>
           <ul className="k-list">
@@ -211,54 +207,73 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
             <li>Any liability is limited to the work we carried out, subject to Irish law.</li>
           </ul>
         </div>
+
         <div className="close-row">
-          <button className="btn" onClick={onClose}>
-            Close
-          </button>
+          <button className="btn" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
   );
 }
 
-/** ✅ Community Support Policy modal (requested) */
+/** ✅ NEW: Community Support modal (locked plan) */
 function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
   if (!open) return null;
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>KRINEDAL-R — Community Support Policy</h2>
-        <p className="muted small" style={{ marginTop: 8 }}>
-          We help where we can — especially during storms. These discounts are intended for genuine emergency
-          make-safe visits.
+        <p className="muted">
+          We help where we can during storms — especially when urgent damage puts people at risk.
         </p>
         <hr />
+
         <div className="k-block">
-          <div className="k-title">Discounts (call-out fee only)</div>
-          <ul className="k-list">
-            <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
-            <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
-          </ul>
-          <p className="muted smallest" style={{ marginTop: 10 }}>
-            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong>. Materials, skips,
-            scaffolding, specialist hire and additional works are charged separately.
+          <div className="k-title">Why we offer support</div>
+          <p>
+            Severe weather can cause sudden leaks, unsafe roofs and flooding. For some households,
+            a call-out fee is the barrier to getting help quickly. This policy exists so we can
+            support vulnerable customers in genuine emergencies — while still keeping the business
+            sustainable and fair.
           </p>
         </div>
+
         <div className="k-block">
-          <div className="k-title">Eligibility &amp; fair use</div>
+          <div className="k-title">Discounts</div>
           <ul className="k-list">
-            <li>Emergency = leaks, storm damage, unsafe roof, immediate risk to property/people.</li>
-            <li>We may ask for basic confirmation where appropriate (e.g. ID / household details) — respectfully.</li>
+            <li><strong>50% OFF</strong> the emergency call-out fee for <strong>elderly customers</strong>.</li>
+            <li><strong>35% OFF</strong> the emergency call-out fee for <strong>single parents</strong>.</li>
+          </ul>
+        </div>
+
+        <div className="k-block">
+          <div className="k-title">Single parent definition</div>
+          <p>
+            A <strong>single parent</strong> means a parent/guardian who is the primary carer for a child/children
+            and is managing the home without a co-parent living in the household.
+          </p>
+        </div>
+
+        <div className="k-block">
+          <div className="k-title">Important conditions</div>
+          <ul className="k-list">
+            <li>Discounts apply to the <strong>call-out fee only</strong> (make-safe visit).</li>
+            <li>
+              Materials, skips, scaffolding, specialist hire and additional works are charged separately
+              and quoted before work.
+            </li>
             <li>Availability depends on weather, travel distance and workload.</li>
-            <li>Discounts are not transferable and can be refused in cases of misuse/abuse.</li>
+            <li>
+              This support is intended for <strong>genuine emergencies</strong> (leaks, storm damage, unsafe roof).
+            </li>
           </ul>
         </div>
+
         <div className="k-block">
-          <div className="k-title">Safety first</div>
-          <p className="muted small" style={{ marginTop: 6 }}>
-            {RED_POLICY_LINE}
-          </p>
+          <div className="k-title">Safety (RED warning)</div>
+          <p>{RED_POLICY_LINE}</p>
         </div>
+
         <div className="close-row">
           <button className="btn" onClick={onClose}>Close</button>
         </div>
@@ -284,14 +299,17 @@ export default function HomePage() {
     setSavingsOpen(!isMobile);
   }, []);
 
-  // ✅ stable close for More (avoid touch/click double-fire)
   useEffect(() => {
-    function onDocPointerDown(e) {
+    function onDocClick(e) {
       if (!moreRef.current) return;
       if (!moreRef.current.contains(e.target)) setMoreOpen(false);
     }
-    document.addEventListener("pointerdown", onDocPointerDown);
-    return () => document.removeEventListener("pointerdown", onDocPointerDown);
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("touchstart", onDocClick, { passive: true });
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("touchstart", onDocClick);
+    };
   }, []);
 
   const SERVICES = [
@@ -308,8 +326,10 @@ export default function HomePage() {
   // ===== Calculators (locked rates) =====
   const [roofArea, setRoofArea] = useState("");
   const roofRate = 45;
+
   const [tileArea, setTileArea] = useState("");
   const tileRate = 48;
+
   const [floorArea, setFloorArea] = useState("");
   const floorRate = 26;
 
@@ -343,11 +363,13 @@ export default function HomePage() {
       const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
       const json = await res.json().catch(() => ({}));
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
+
       const nextStatus = json?.status || "green";
       setWeatherStatus(nextStatus);
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
       setWeatherLoaded(true);
+
       if (json?.ok) setLastWeatherOkAt(Date.now());
     } catch {
       setWeatherError("Weather unavailable");
@@ -384,10 +406,12 @@ export default function HomePage() {
     e.preventDefault();
     setSubmitting(true);
     setSubmitMsg("");
+
     try {
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
-      if (fd.get("website")) return;
+
+      if (fd.get("website")) return; // honeypot
       fd.set("FormType", "Estimate");
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
@@ -411,7 +435,7 @@ export default function HomePage() {
   const [selectedBilling, setSelectedBilling] = useState("Yearly");
   const [agreeMembership, setAgreeMembership] = useState(false);
 
-  // ✅ Quarterly / Yearly (PLAN LOCKED)
+  // ✅ Quarterly / Yearly pricing
   const PLAN_PRICING = {
     Bronze: { yearly: 199, quarterly: 59 },
     Silver: { yearly: 399, quarterly: 119 },
@@ -430,20 +454,18 @@ export default function HomePage() {
     setSelectedBilling("Yearly");
     setMembershipMsg("");
     setMoreOpen(false);
+
     setTimeout(() => {
       const el = document.getElementById("membership-application");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
   }
 
-  // ✅ Strict RED policy (insurer-friendly)
-  const RED_POLICY_LINE =
-    "During RED warnings: we operate, but KRINEDAL-R does not deploy employees/subcontractors. The company owner attends where access is possible. Delays only when access is blocked (fallen trees, flooding, Garda/ambulance/emergency road closures, severe hazards).";
-
   function openTermsModal() {
     setTermsOpen(true);
     setMoreOpen(false);
   }
+
   function openCommunityModal() {
     setCommunityOpen(true);
     setMoreOpen(false);
@@ -453,15 +475,17 @@ export default function HomePage() {
     e.preventDefault();
     setMembershipSubmitting(true);
     setMembershipMsg("");
+
     try {
       if (!agreeMembership) {
         setMembershipMsg("Please tick the agreement box to submit.");
         return;
       }
+
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
-      if (fd.get("website")) return;
 
+      if (fd.get("website")) return; // honeypot
       fd.set("FormType", "Membership");
       fd.set("Plan", selectedPlan);
       fd.set("Billing", selectedBilling);
@@ -487,6 +511,10 @@ export default function HomePage() {
     }
   }
 
+  // ✅ Strict RED policy (insurer-friendly)
+  const RED_POLICY_LINE =
+    "During RED warnings: we operate, but KRINEDAL-R does not deploy employees/subcontractors. The company owner attends where access is possible. Delays only when access is blocked (fallen trees, flooding, Garda/ambulance/emergency road closures, severe hazards).";
+
   return (
     <main>
       {/* TOP BAR */}
@@ -510,7 +538,9 @@ export default function HomePage() {
               Community Support
             </button>
             <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
+            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+              WhatsApp
+            </a>
             <a href="#estimate" className="btn btn-outline">Get Quote</a>
             <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>
               Memberships
@@ -520,44 +550,48 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* Mobile actions */}
+          {/* Mobile actions: Call / WhatsApp / More dropdown */}
           <div className="topbar-actions-mobile">
             <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
-
+            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+              WhatsApp
+            </a>
             <div className="more-wrap" ref={moreRef}>
               <button
                 type="button"
                 className="btn btn-outline"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setMoreOpen((v) => !v);
-                }}
+                onClick={() => setMoreOpen((v) => !v)}
                 aria-expanded={moreOpen}
               >
                 ☰ More
               </button>
 
               {moreOpen && (
-                <div className="more-menu" onClick={(e) => e.stopPropagation()}>
+                <div className="more-menu">
                   <button className="more-item" onClick={() => { setPcOpen(true); setMoreOpen(false); }}>
                     👥 People &amp; Culture
                   </button>
-                  <button className="more-item" onClick={openCommunityModal}>
-                    ❤️ Community Support
+
+                  <button className="more-item" onClick={() => { setCommunityOpen(true); setMoreOpen(false); }}>
+                    🤝 Community Support
                   </button>
+
                   <a className="more-item" href="#estimate" onClick={() => setMoreOpen(false)}>
                     🧾 Get Quote
                   </a>
+
                   <button className="more-item" onClick={() => scrollToMembershipApplication(selectedPlan || "Diamond")}>
                     💎 Memberships
                   </button>
+
                   <button className="more-item" onClick={openTermsModal}>
                     📄 Website Terms
                   </button>
+
                   <a className="more-item" href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>
                     📸 Instagram
                   </a>
+
                   <a className="more-item" href="https://m.me/61581354904730" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>
                     📘 Messenger
                   </a>
@@ -597,7 +631,6 @@ export default function HomePage() {
             </p>
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
-
             <div className="hero-weather-row">
               <span className={weatherUI.chipClass}>
                 {weatherLoaded ? weatherUI.label : "Loading weather…"}
@@ -617,16 +650,25 @@ export default function HomePage() {
 
             <div className="hero-actions">
               <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
-              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp us now</a>
-              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">Instagram</a>
-              <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>View memberships</button>
-              <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>Website terms</button>
+              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+                WhatsApp us now
+              </a>
+              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">
+                Instagram
+              </a>
+              <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>
+                View memberships
+              </button>
+              <button type="button" className="btn btn-outline" onClick={() => setCommunityOpen(true)}>
+                Community support
+              </button>
+              <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>
+                Website terms
+              </button>
             </div>
 
             <ul className="hero-bullets">
-              {SERVICES.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
+              {SERVICES.map((s) => <li key={s}>{s}</li>)}
             </ul>
 
             <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
@@ -654,10 +696,12 @@ export default function HomePage() {
             <div>
               <div className="plans-title">Customer memberships</div>
               <p className="plans-sub">
-                Designed for customers who want priority support and clear rules. Memberships are approved based on area coverage and current workload.
+                Designed for customers who want priority support and clear rules.
+                Memberships are approved based on area coverage and current workload.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use). Permanent repairs/materials are quoted separately.
+                Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use).
+                Permanent repairs/materials are quoted separately.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
                 <strong>Insurer-safe:</strong> Membership is a service agreement — <strong>not insurance</strong>.
@@ -684,7 +728,9 @@ export default function HomePage() {
               </ul>
               <div className="plan-foot">Best for organised maintenance and reliable scheduling.</div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>Apply</button>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
+                  Apply
+                </button>
               </div>
             </div>
 
@@ -701,7 +747,9 @@ export default function HomePage() {
               </ul>
               <div className="plan-foot">Great for families &amp; rentals that need faster support.</div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>Apply</button>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
+                  Apply
+                </button>
               </div>
             </div>
 
@@ -718,7 +766,9 @@ export default function HomePage() {
               </ul>
               <div className="plan-foot">Ideal for landlords / multi-property owners who need documentation.</div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>Apply</button>
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
+                  Apply
+                </button>
               </div>
             </div>
 
@@ -741,7 +791,9 @@ export default function HomePage() {
                 <span className="muted smallest" style={{ color: "#4b5563" }}>{RED_POLICY_LINE}</span>
               </div>
               <div className="plan-actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>Apply</button>
+                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
+                  Apply
+                </button>
               </div>
             </div>
           </div>
@@ -881,17 +933,21 @@ export default function HomePage() {
                       <p style={{ marginBottom: 10 }}>
                         <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
                         <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
                         misuse, or abusive behaviour may lead to suspension/cancellation without refund.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
                         <strong>Emergency scope:</strong> “Make-safe” includes temporary steps to reduce immediate damage (e.g. tarping, temporary sealing,
                         isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
                         <strong>RED warning safety policy (strict):</strong> {RED_POLICY_LINE}
                       </p>
+
                       <p style={{ marginBottom: 0 }}>
                         Full Website &amp; Company Terms are available via the <strong>Website Terms</strong> button (top bar).
                       </p>
@@ -913,9 +969,11 @@ export default function HomePage() {
                   <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
                     {membershipSubmitting ? "Sending…" : "Send membership application"}
                   </button>
+
                   <p className="submit-tip">
                     Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
                   </p>
+
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
                 </div>
               </form>
@@ -1014,6 +1072,7 @@ export default function HomePage() {
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
+
             <a href="tel:0831762475" className="btn btn-storm">🚨 24/7 STORM EMERGENCY LINE</a>
 
             <div style={{ marginTop: 14 }}>
@@ -1042,44 +1101,54 @@ export default function HomePage() {
                 <strong>Safety note:</strong> {RED_POLICY_LINE}
               </p>
 
-              <p className="muted smallest" style={{ marginTop: 10 }}>
-                Want full details?{" "}
-                <button type="button" className="btn btn-weather" onClick={openCommunityModal}>
-                  View Community Support Policy
+              <div style={{ marginTop: 10 }}>
+                <button type="button" className="btn btn-outline" onClick={() => setCommunityOpen(true)}>
+                  Read Community Support Policy
                 </button>
-              </p>
+              </div>
             </div>
 
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
+
               <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
                 <span className="left">GREEN</span>
                 <span className="right">€250 – €350</span>
               </div>
+
               <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
                 <span className="left">YELLOW</span>
                 <span className="right">€350 – €450</span>
               </div>
+
               <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
                 <span className="left">ORANGE</span>
                 <span className="right">€450 – €550</span>
               </div>
+
               <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
                 <span className="left">RED</span>
                 <span className="right">€550 – €1000</span>
               </div>
+
               <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
             </div>
           </div>
 
           <div className="card">
             <h2>Ireland Weather Status</h2>
+
             <p className="muted small" style={{ marginTop: 8 }}>
               Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
             </p>
 
             <div style={{ marginTop: 10 }}>
-              <button type="button" className="btn btn-weather" onClick={() => loadWeather({ manual: true })} disabled={refreshingWeather}>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+              >
                 {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
               </button>
             </div>
@@ -1098,7 +1167,7 @@ export default function HomePage() {
                 <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>Latest warnings:</p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w, idx) => (
-                    <li key={w?.id || w?.headline || idx}>
+                    <li key={w.id || w.headline || idx}>
                       <strong style={{ textTransform: "uppercase" }}>{w.level}</strong>
                       {w.headline ? ` – ${w.headline}` : ""}
                     </li>
@@ -1130,7 +1199,7 @@ export default function HomePage() {
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
               “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal.
-              Clean, fast and extremely professional. Couldn&apos;t be happier.”
+              Clean, fast and extremely professional. Couldn't be happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
@@ -1138,7 +1207,7 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-text">
               “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe.
-              Snow, rain and storm didn&apos;t stop him. Trust 100% saved number - completed, insurance claim report was
+              Snow, rain and storm didn't stop him. Trust 100% saved number - completed, insurance claim report was
               issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
@@ -1166,6 +1235,7 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
+
             <p className="calc-result">
               Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
@@ -1192,6 +1262,7 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
+
             <p className="calc-result">
               Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
@@ -1218,6 +1289,7 @@ export default function HomePage() {
             </label>
 
             <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
+
             <p className="calc-result">
               Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
@@ -1333,9 +1405,12 @@ export default function HomePage() {
                 <button type="submit" className="btn btn-storm" disabled={submitting}>
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
+
                 <p className="submit-tip">
-                  Thank you for contacting us — our team member will be in touch shortly. In case of emergency call <strong>083 176 2475</strong>.
+                  Thank you for contacting us — our team member will be in touch shortly.
+                  In case of emergency call <strong>083 176 2475</strong>.
                 </p>
+
                 {submitMsg && <p className="membership-msg" style={{ marginTop: 10 }}>{submitMsg}</p>}
               </div>
             </form>
@@ -1385,11 +1460,7 @@ export default function HomePage() {
               </p>
               <p>
                 Facebook:{" "}
-                <a
-                  href="https://m.facebook.com/profile.php?id=61581354904730"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://m.facebook.com/profile.php?id=61581354904730" target="_blank" rel="noreferrer">
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
@@ -1400,7 +1471,7 @@ export default function HomePage() {
                 <a href="tel:0831762475" className="btn footer-call">Call</a>
                 <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">WhatsApp</a>
                 <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-                <button className="btn footer-call" onClick={openCommunityModal}>Community Support</button>
+                <button className="btn footer-call" onClick={() => setCommunityOpen(true)}>Community Support</button>
                 <button className="btn footer-call" onClick={() => setTermsOpen(true)}>Website Terms</button>
               </div>
             </div>
