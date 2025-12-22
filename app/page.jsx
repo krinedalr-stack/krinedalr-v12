@@ -1,980 +1,1420 @@
-/* app/globals.css */
-/* =========================
-   RESET
-========================= */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+"use client";
 
-:root{
-  --bg0:#020617;
-  --bg1:#0b1120;
-  --text:#e5e7eb;
-  --text2:rgba(229,231,235,0.85);
-  --muted:#4b5563;
-  --card:#ffffff;
-  --ink:#111827;
-  --brand:#f97316;
-  --green:#16a34a;
-  --yellow:#facc15;
-  --orange:#fb923c;
-  --red:#dc2626;
+import { useEffect, useMemo, useRef, useState } from "react";
+
+/** Inline SVG flag so desktop never shows "IE" */
+function IrelandFlag({ className = "" }) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="14"
+      viewBox="0 0 60 42"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Ireland flag"
+      role="img"
+    >
+      <rect width="60" height="42" fill="#fff" />
+      <rect width="20" height="42" x="0" fill="#169B62" />
+      <rect width="20" height="42" x="40" fill="#FF883E" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width="59"
+        height="41"
+        fill="none"
+        stroke="rgba(0,0,0,0.15)"
+      />
+    </svg>
+  );
 }
 
-body{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--bg1);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+function PeopleCultureModal({ open, onClose }) {
+  if (!open) return null;
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2>KRINEDAL-R — Our People &amp; Culture Policy</h2>
+        <p className="muted">Built on standards • Run by systems • Powered by people</p>
+        <hr />
+        <div className="k-block">
+          <div className="k-title">1. Leadership philosophy</div>
+          <p>Leadership is service. We remove obstacles and protect dignity.</p>
+          <ul className="k-list">
+            <li>Clear systems, calm decisions</li>
+            <li>Respect always</li>
+            <li>Standards lived daily</li>
+            <li>Support growth</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">2. Respect is non-negotiable</div>
+          <ul className="k-list">
+            <li>Zero tolerance: bullying, intimidation, discrimination, abuse of authority</li>
+            <li>Skill can be taught. Character is required.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">3. Clear pay • clear hours • clear rules</div>
+          <ul className="k-list">
+            <li>Transparent rates and working hours</li>
+            <li>No unpaid labour</li>
+            <li>Honest communication</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">4. Training &amp; development</div>
+          <p>
+            We invest in training, safety certs, and workmanship. Mistakes are handled through
+            improvement, not humiliation.
+          </p>
+        </div>
+        <div className="k-block">
+          <div className="k-title">5. Safety before speed</div>
+          <ul className="k-list">
+            <li>Risk assessments, planning, correct equipment</li>
+            <li>Right to stop unsafe work — without fear</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">6. Accountability both ways</div>
+          <p>
+            People are accountable fairly — and leadership is accountable for planning, support and
+            decisions.
+          </p>
+        </div>
+        <div className="k-block">
+          <div className="k-title">7. No-ego culture</div>
+          <p>Titles don’t impress us. Work ethic, attitude and consistency do.</p>
+        </div>
+        <div className="k-block">
+          <div className="k-title">8. Long-term thinking</div>
+          <p>We build stable work, better living standards and pride in workmanship.</p>
+        </div>
+        <hr />
+        <p>
+          <strong>Built on standards. Run by systems. Powered by people.</strong>
+        </p>
+        <div className="close-row">
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-/* ✅ stable offset for fixed topbar */
-main{
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #111827 0, #020617 55%, #020617 100%);
-  padding-top: 72px;
+function TermsModal({ open, onClose, RED_POLICY_LINE }) {
+  if (!open) return null;
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2>Website &amp; Company Terms &amp; Conditions</h2>
+        <p className="muted small" style={{ marginTop: 8 }}>
+          These terms apply to general use of the KRINEDAL-R website and services (quotes, call-outs,
+          bookings, communication).
+        </p>
+        <hr />
+        <div className="k-block">
+          <div className="k-title">Insurer-safe note</div>
+          <p>
+            Memberships and call-outs are a service agreement — <strong>not an insurance policy</strong>.
+            Reports/photos can support claims where requested, but insurers decide outcomes.
+          </p>
+        </div>
+        <div className="k-block">
+          <div className="k-title">1) Quotes &amp; pricing</div>
+          <ul className="k-list">
+            <li>
+              Website calculators are <strong>rough guides</strong> only and not binding quotations.
+            </li>
+            <li>Final prices are confirmed after inspection / scope agreement.</li>
+            <li>Emergency call-out fees depend on distance, access and conditions.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">2) Safety &amp; duty of care (RED policy)</div>
+          <ul className="k-list">
+            <li>
+              <strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors
+              during RED warnings.
+            </li>
+            <li>
+              <strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and
+              their families.
+            </li>
+            <li>
+              <strong>Owner response:</strong> the company owner attends where access is possible.
+            </li>
+            <li>
+              <strong>Safety note:</strong> {RED_POLICY_LINE}
+            </li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">3) Delays outside our control</div>
+          <ul className="k-list">
+            <li>Delays may occur where access is blocked or unsafe.</li>
+            <li>
+              Examples: fallen trees, flooded roads, Garda/ambulance/emergency service road blocks,
+              major incidents.
+            </li>
+            <li>We communicate the reason and next possible arrival window.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">4) Materials &amp; staged payments</div>
+          <ul className="k-list">
+            <li>
+              For most projects, customers pay materials up front (tiles, timber, membranes, fixings,
+              skips, etc.).
+            </li>
+            <li>Labour is paid after completion unless staged payments are agreed in writing.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">5) Cancellations (strict policy)</div>
+          <ul className="k-list">
+            <li>
+              <strong>
+                If a booked visit is cancelled after planning has been completed and a technician has
+                already been dispatched (left base and is travelling), the full call-out/booking fee
+                applies.
+              </strong>
+            </li>
+            <li>This covers time, travel, fuel, scheduling, and resources already committed.</li>
+            <li>
+              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be
+              rescheduled without penalty.
+            </li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">6) Photos, reports &amp; communication</div>
+          <ul className="k-list">
+            <li>Photos/reports are provided where agreed or where included in your membership level.</li>
+            <li>We may use photos internally for quality and records (not public marketing without permission).</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">7) Privacy</div>
+          <ul className="k-list">
+            <li>Form submissions are used only to respond to your request and manage service delivery.</li>
+            <li>We do not sell your data.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">8) General limitation</div>
+          <ul className="k-list">
+            <li>We are not responsible for hidden defects or pre-existing structural issues outside the visible scope.</li>
+            <li>Any liability is limited to the work we carried out, subject to Irish law.</li>
+          </ul>
+        </div>
+        <div className="close-row">
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-a{ color: inherit; text-decoration: none; }
-a:hover{ text-decoration: underline; }
-
-/* small inline SVG flag */
-.flag{ vertical-align: -2px; margin-right: 6px; }
-
-/* =========================
-   FIXED TOP BAR
-========================= */
-.topbar{
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 80;
-  background: rgba(2, 6, 23, 0.72);
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding-top: env(safe-area-inset-top);
+/** ✅ Community Support Policy modal (requested) */
+function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
+  if (!open) return null;
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2>KRINEDAL-R — Community Support Policy</h2>
+        <p className="muted small" style={{ marginTop: 8 }}>
+          We help where we can — especially during storms. These discounts are intended for genuine emergency
+          make-safe visits.
+        </p>
+        <hr />
+        <div className="k-block">
+          <div className="k-title">Discounts (call-out fee only)</div>
+          <ul className="k-list">
+            <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
+            <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
+          </ul>
+          <p className="muted smallest" style={{ marginTop: 10 }}>
+            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong>. Materials, skips,
+            scaffolding, specialist hire and additional works are charged separately.
+          </p>
+        </div>
+        <div className="k-block">
+          <div className="k-title">Eligibility &amp; fair use</div>
+          <ul className="k-list">
+            <li>Emergency = leaks, storm damage, unsafe roof, immediate risk to property/people.</li>
+            <li>We may ask for basic confirmation where appropriate (e.g. ID / household details) — respectfully.</li>
+            <li>Availability depends on weather, travel distance and workload.</li>
+            <li>Discounts are not transferable and can be refused in cases of misuse/abuse.</li>
+          </ul>
+        </div>
+        <div className="k-block">
+          <div className="k-title">Safety first</div>
+          <p className="muted small" style={{ marginTop: 6 }}>
+            {RED_POLICY_LINE}
+          </p>
+        </div>
+        <div className="close-row">
+          <button className="btn" onClick={onClose}>Close</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-.topbar-inner{
-  height: auto;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap: 12px;
-  padding: 12px 0;
-}
+export default function HomePage() {
+  const [pcOpen, setPcOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
+  const [communityOpen, setCommunityOpen] = useState(false);
 
-.topbar-brand{
-  color:#f9fafb;
-  font-weight: 950;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-  font-size: 1.05rem;
-}
+  // ✅ Mobile "More" dropdown
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef(null);
 
-.topbar-sub{
-  display:block;
-  margin-top:4px;
-  color: rgba(249,250,251,0.80);
-  font-size: 0.78rem;
-  max-width: 560px;
-  line-height: 1.25;
-}
+  // ✅ Savings collapse: open desktop, collapsed mobile
+  const [savingsOpen, setSavingsOpen] = useState(true);
 
-/* Desktop actions */
-.topbar-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
+  useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 520;
+    setSavingsOpen(!isMobile);
+  }, []);
 
-.topbar .btn{
-  padding: 9px 14px;
-  font-size: 0.92rem;
-}
+  // ✅ stable close for More (avoid touch/click double-fire)
+  useEffect(() => {
+    function onDocPointerDown(e) {
+      if (!moreRef.current) return;
+      if (!moreRef.current.contains(e.target)) setMoreOpen(false);
+    }
+    document.addEventListener("pointerdown", onDocPointerDown);
+    return () => document.removeEventListener("pointerdown", onDocPointerDown);
+  }, []);
 
-/* ✅ Mobile: NO scroll bar, use "More" dropdown */
-.topbar-actions-mobile{
-  display:none;
-  align-items:center;
-  justify-content:flex-end;
-  gap:10px;
-}
+  const SERVICES = [
+    "Emergency storm make-safe within hours*",
+    "Full roof change & leak tracing",
+    "Luxury bathroom & kitchen tiling",
+    "Flooring installation (laminate, vinyl & engineered wood)",
+    "Garage flooring systems (rubber / PVC tiles / resin-coated floors)",
+    "Marble-look & decorative floor coatings",
+    "Outdoor concrete stairs & entrance upgrades (integrated lighting)",
+    "Landlord-ready refresh between tenants",
+  ];
 
-@media (max-width: 520px){
-  main{ padding-top: 86px; }
-  .topbar-sub{ display:none; }
-  .topbar-actions{ display:none; }
-  .topbar-actions-mobile{ display:flex; }
-  .topbar-brand{ font-size: 0.95rem; }
-  .topbar .btn{
-    white-space: nowrap;
-    padding: 8px 12px;
-    font-size: 0.88rem;
+  // ===== Calculators (locked rates) =====
+  const [roofArea, setRoofArea] = useState("");
+  const roofRate = 45;
+  const [tileArea, setTileArea] = useState("");
+  const tileRate = 48;
+  const [floorArea, setFloorArea] = useState("");
+  const floorRate = 26;
+
+  const roofTotal = roofArea ? (Number(roofArea) * roofRate).toFixed(0) : "";
+  const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
+  const floorTotal = floorArea ? (Number(floorArea) * floorRate).toFixed(0) : "";
+
+  // ===== Weather status =====
+  const [weatherStatus, setWeatherStatus] = useState("green");
+  const [weatherWarnings, setWeatherWarnings] = useState([]);
+  const [weatherLoaded, setWeatherLoaded] = useState(false);
+  const [weatherError, setWeatherError] = useState("");
+  const [fetchedAt, setFetchedAt] = useState("");
+  const [refreshingWeather, setRefreshingWeather] = useState(false);
+  const [lastWeatherOkAt, setLastWeatherOkAt] = useState(0);
+
+  const weatherUI = useMemo(() => {
+    const map = {
+      green: { label: "GREEN – normal conditions", textClass: "green-text", chipClass: "weather-chip weather-chip-green" },
+      yellow: { label: "YELLOW – be aware", textClass: "yellow-text", chipClass: "weather-chip weather-chip-yellow" },
+      orange: { label: "ORANGE – take action", textClass: "orange-text", chipClass: "weather-chip weather-chip-orange" },
+      red: { label: "RED – danger to life", textClass: "red-text", chipClass: "weather-chip weather-chip-red" },
+    };
+    return map[weatherStatus] || map.green;
+  }, [weatherStatus]);
+
+  async function loadWeather({ manual = false } = {}) {
+    try {
+      if (manual) setRefreshingWeather(true);
+      setWeatherError("");
+      const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
+      const json = await res.json().catch(() => ({}));
+      if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
+      const nextStatus = json?.status || "green";
+      setWeatherStatus(nextStatus);
+      setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
+      setFetchedAt(json?.fetchedAt || "");
+      setWeatherLoaded(true);
+      if (json?.ok) setLastWeatherOkAt(Date.now());
+    } catch {
+      setWeatherError("Weather unavailable");
+      setWeatherLoaded(true);
+    } finally {
+      if (manual) setRefreshingWeather(false);
+    }
   }
-}
 
-/* Dropdown */
-.more-wrap{ position: relative; }
-.more-menu{
-  position:absolute;
-  right:0;
-  top: 46px;
-  width: min(320px, 86vw);
-  background: rgba(2, 6, 23, 0.98);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 16px;
-  box-shadow: 0 22px 70px rgba(0,0,0,0.65);
-  padding: 10px;
-  z-index: 200;
-}
+  useEffect(() => {
+    loadWeather();
+    const id = setInterval(loadWeather, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []);
 
-.more-item{
-  width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.04);
-  color:#f9fafb;
-  font-weight: 850;
-  cursor:pointer;
-  user-select:none;
-  text-decoration:none;
-}
+  useEffect(() => {
+    if (!weatherLoaded) return;
+    const id = setInterval(() => {
+      const tooLong = lastWeatherOkAt && Date.now() - lastWeatherOkAt > 20 * 60 * 1000;
+      if (tooLong) {
+        setWeatherStatus("green");
+        setWeatherError("Weather feed delayed — showing safe default (GREEN) until refreshed.");
+      }
+    }, 60 * 1000);
+    return () => clearInterval(id);
+  }, [weatherLoaded, lastWeatherOkAt]);
 
-.more-item + .more-item{ margin-top: 8px; }
-.more-item:active{ transform: translateY(1px); }
+  // ===== Secure Contact Form (Estimate) =====
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMsg, setSubmitMsg] = useState("");
+  const [filesLabel, setFilesLabel] = useState("");
 
-/* =========================
-   LAYOUT
-========================= */
-.container{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
-.section{ padding:64px 0; }
+  async function onSubmit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitMsg("");
+    try {
+      const formEl = e.currentTarget;
+      const fd = new FormData(formEl);
+      if (fd.get("website")) return;
+      fd.set("FormType", "Estimate");
 
-/* Light sections */
-.section-alt{ background:#fffdf7; color: var(--ink); }
-/* Dark sections */
-.section-dark{ background:#020617; color:#f9fafb; }
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
 
-.grid-2{ display:grid; gap:24px; }
-@media (min-width:900px){ .grid-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
-
-.grid-3{ display:grid; gap:24px; }
-@media (min-width:900px){ .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
-
-/* =========================
-   HERO
-========================= */
-.hero{
-  position:relative;
-  background-image:url("/hero.jpg");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  padding:56px 0 40px;
-}
-
-.shamrock{
-  position:absolute;
-  top:18px;
-  font-size:1.7rem;
-  animation: floatY 12s ease-in-out infinite;
-  z-index:1;
-}
-.shamrock-left{ left:16px; }
-.shamrock-right{ right:16px; animation-delay:3s; }
-
-@keyframes floatY{
-  0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(12px); }
-}
-
-.hero-inner{
-  position:relative;
-  z-index:2;
-  display:grid;
-  gap:32px;
-  color:#f9fafb;
-  align-items: start;
-}
-@media (min-width:900px){
-  .hero-inner{ grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); }
-}
-
-.hero-text{ max-width:640px; text-shadow:none; }
-
-.hero-title{
-  font-size:2.8rem;
-  line-height:1.05;
-  margin-bottom:6px;
-  text-rendering: geometricPrecision;
-}
-.hero-r{
-  color:#ff2d2d;
-  text-shadow: 0 0 14px rgba(255,45,45,0.55);
-}
-.hero-tag{
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  font-size:0.78rem;
-  font-weight:800;
-  color:#4ade80;
-  margin-bottom:14px;
-}
-.hero-subline{
-  color: rgba(249,250,251,0.90);
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-.hero-lead{
-  font-size:1.05rem;
-  color:#f9fafb;
-  margin-bottom:16px;
-}
-.hero-weather-label{
-  font-size:0.9rem;
-  margin-bottom:4px;
-  color:#e5e7eb;
-}
-.hero-weather-row{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
-}
-.hero-weather-shamrock{ font-size:1.3rem; }
-.hero-strong{ font-weight:800; }
-
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:14px;
-}
-
-.hero-bullets{
-  list-style: disc;
-  margin-left:18px;
-  font-size:0.95rem;
-  color:#f9fafb;
-}
-.hero-bullets li + li{ margin-top:4px; }
-
-.hero-note{
-  font-size:0.9rem;
-  color:#ff3b3b;
-  font-weight:700;
-  letter-spacing:0.2px;
-  margin-top:8px;
-}
-
-.hero-side-card{
-  background: rgba(15, 23, 42, 0.88);
-  color:#f9fafb;
-  padding:18px;
-  border-radius:18px;
-  box-shadow:0 18px 40px rgba(0,0,0,0.7);
-  align-self: start;
-}
-.hero-side-card h2{ font-size:1.1rem; margin-bottom:6px; }
-.hero-side-list{ margin-top:10px; font-size:0.9rem; }
-
-@media (max-width:600px){
-  .hero-title{ font-size:2.2rem; }
-}
-
-/* =========================
-   WEATHER CHIP
-========================= */
-.weather-chip{
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:0.86rem;
-  font-weight:700;
-}
-.weather-chip-green{ background:#16a34a; color:#ecfdf5; }
-.weather-chip-yellow{ background:#facc15; color:#78350f; }
-.weather-chip-orange{ background:#fb923c; color:#7c2d12; }
-.weather-chip-red{ background:#dc2626; color:#f9fafb; }
-
-/* =========================
-   BUTTONS
-========================= */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 20px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:0.96rem;
-  cursor:pointer;
-  border:2px solid transparent;
-  transition: transform 0.08s ease, box-shadow 0.12s ease;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-.btn:hover{ transform:translateY(-1px); }
-.btn:active{ transform:translateY(0); }
-
-.btn-primary{
-  background:#f97316;
-  color:#111827;
-  box-shadow:0 12px 30px rgba(249,115,22,0.45);
-}
-.btn-outline{
-  background:#fff;
-  border-color:#f97316;
-  color:#c2410c;
-}
-
-.btn-storm{
-  width:100%;
-  background:#ff2d2d;
-  color:#fff;
-  box-shadow:0 14px 34px rgba(255,45,45,0.55);
-}
-
-/* ✅ Membership submit (green) */
-.btn-emerald{
-  width:100%;
-  min-height:56px;
-  border-radius:16px;
-  font-weight:900;
-  letter-spacing:0.2px;
-  background:#22c55e;
-  color:#064e3b;
-  box-shadow:0 14px 34px rgba(34,197,94,0.35);
-}
-
-/* small refresh weather button */
-.btn-weather{
-  background:#fff;
-  border:2px solid rgba(15,23,42,0.10);
-  color:#111827;
-  padding:8px 14px;
-  font-size:0.92rem;
-}
-
-/* =========================
-   TEXT UTILITIES
-========================= */
-.muted{ color:#4b5563; }
-.small{ font-size:0.9rem; }
-.smallest{ font-size:0.82rem; }
-.green-text{ color:#16a34a; }
-.yellow-text{ color:#facc15; }
-.orange-text{ color:#fb923c; }
-.red-text{ color:#ef4444; }
-.brand-inline{ color:#16a34a; font-weight:800; }
-
-/* =========================
-   CARDS
-========================= */
-.card{
-  background:#fff;
-  color:#111827;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 16px 40px rgba(15,23,42,0.08);
-}
-.card-dark{ background:#020617; color:#f9fafb; }
-
-/* =========================
-   LISTS
-========================= */
-.list{ margin-top:10px; padding-left:18px; }
-.list li + li{ margin-top:6px; }
-
-/* =========================
-   FORM SECTION
-========================= */
-.section-form{
-  background: radial-gradient(circle at top, #020617 0, #020617 100%);
-  padding:72px 0;
-}
-.form-card{
-  max-width:820px;
-  margin:0 auto;
-  padding:28px;
-  border-radius:22px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
-  backdrop-filter: blur(10px);
-}
-.form-card h1, .form-card h2{ color:#f9fafb; margin-bottom:8px; }
-.form-card .form-sub{
-  color: rgba(249,250,251,0.85);
-  margin-bottom:22px;
-  line-height:1.6;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:18px;
-}
-@media (min-width:900px){
-  .form-grid.two-col{ grid-template-columns:1fr 1fr; }
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.field label{
-  color: rgba(249,250,251,0.92);
-  font-weight:700;
-  letter-spacing:0.2px;
-}
-
-.field input, .field select, .field textarea{
-  width:100%;
-  padding:14px 16px;
-  border-radius:14px;
-  border: 1px solid rgba(226,232,240,0.22);
-  background: rgba(255,255,255,0.04);
-  color:#f9fafb;
-  outline:none;
-  font-size:16px;
-}
-.field input, .field select{ min-height:52px; }
-.field textarea{ min-height:150px; resize: vertical; }
-
-.field input::placeholder,.field textarea::placeholder{
-  color: rgba(229,231,235,0.65);
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color: rgba(249,115,22,0.55);
-  box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
-}
-
-/* dropdown readability */
-.field select { color:#f9fafb; background: rgba(255,255,255,0.04); }
-.field select option { background:#0b1120; color:#f9fafb; }
-
-/* File input button styling */
-.field input[type="file"]{ padding:12px 14px; }
-.field input[type="file"]::file-selector-button{
-  margin-right:12px;
-  padding:10px 14px;
-  border-radius:12px;
-  border: 1px solid rgba(226,232,240,0.25);
-  background: rgba(255,255,255,0.06);
-  color:#f9fafb;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.form-actions{ margin-top:26px; }
-.form-actions .btn{
-  width:100%;
-  min-height:56px;
-  border-radius:16px;
-  font-weight:900;
-  letter-spacing:0.2px;
-}
-
-/* White text under submit button */
-.submit-tip{
-  margin-top:10px;
-  color:#ffffff;
-  font-weight:700;
-  line-height: 1.5;
-}
-
-/* Better visibility for form messages */
-.membership-msg{
-  margin-top: 10px;
-  color: rgba(249,250,251,0.92);
-  font-weight: 800;
-  line-height: 1.45;
-}
-
-/* iOS/Safari autofill fix (white background bug) */
-input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
-  -webkit-text-fill-color:#f9fafb !important;
-  box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
-  transition: background-color 9999s ease-in-out 0s;
-}
-
-/* =========================
-   CALCULATOR INPUTS (LIGHT CARDS)
-========================= */
-.field-label{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:12px;
-  font-weight:700;
-  color:#111827;
-}
-.field-input{
-  margin-top:8px;
-  padding:12px 14px;
-  border-radius:14px;
-  border:1px solid #e5e7eb;
-  background:#fff;
-  color:#111827;
-}
-.calc-result{
-  margin-top:12px;
-  font-size:1.05rem;
-  font-weight:750;
-}
-
-/* =========================
-   MEMBERSHIPS
-========================= */
-.section-memberships{
-  background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%);
-  color:#f9fafb;
-}
-.section-memberships .plans-title{ color:#f9fafb; }
-.section-memberships .plans-sub{ color: rgba(249,250,251,0.85); }
-
-.plans-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:16px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-}
-.plans-title{
-  font-size:1.35rem;
-  font-weight:950;
-  letter-spacing:0.2px;
-}
-.plans-sub{ max-width:720px; }
-
-.plans-grid{
-  display:grid;
-  gap:14px;
-  align-items: stretch;
-}
-@media (min-width:900px){
-  .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
-}
-
-/* Plan cards stay light (readable) */
-.plan{
-  border-radius:20px;
-  background:#ffffff;
-  border:1px solid rgba(15,23,42,0.10);
-  box-shadow:0 16px 40px rgba(15,23,42,0.08);
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  min-height: 260px;
-  height: 100%;
-  color:#111827;
-}
-.plan-kicker{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:0.78rem;
-  letter-spacing:0.12em;
-  font-weight:950;
-  color:#16a34a;
-  margin-bottom:6px;
-}
-.plan-icon{ font-size: 1.05rem; line-height: 1; }
-.plan-name{
-  font-size:1.05rem;
-  font-weight:950;
-  margin-bottom:6px;
-  color:#111827;
-}
-.plan-price{
-  font-weight:950;
-  font-size:1.05rem;
-  margin-bottom:10px;
-  color:#f97316;
-}
-.plan ul{
-  padding-left:18px;
-  margin-top:4px;
-  color:#111827;
-}
-.plan ul li + li{ margin-top:6px; }
-.plan-foot{
-  margin-top:auto;
-  font-size:0.82rem;
-  color:#4b5563;
-  line-height:1.45;
-  padding-top:10px;
-}
-.plan-highlight{
-  border:2px solid rgba(249,115,22,0.45);
-  box-shadow:0 18px 55px rgba(249,115,22,0.18);
-}
-.plan-actions{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-/* Status badge next to "Current status" */
-.status-pill{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 10px 12px;
-  border-radius: 999px;
-}
-.status-label{
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: rgba(249,250,251,0.88);
-}
-.status-badge{
-  font-size: 0.85rem;
-  font-weight: 950;
-  letter-spacing: 0.08em;
-  padding: 6px 10px;
-  border-radius: 999px;
-  color: #0b1120;
-  background: #e5e7eb;
-}
-.status-badge.green{ background: #22c55e; }
-.status-badge.yellow{ background: #facc15; }
-.status-badge.orange{ background: #fb923c; }
-.status-badge.red{ background: #ef4444; color:#fff; }
-
-/* Membership form inside memberships section */
-.section-memberships .form-card{ background: rgba(255,255,255,0.04); }
-
-/* Terms box + agreement row */
-.terms-box{
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  padding: 14px;
-  background: rgba(255,255,255,0.03);
-  color: rgba(249,250,251,0.90);
-  line-height: 1.55;
-  font-size: 14px;
-}
-.agree-row{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  margin-top:10px;
-  color: rgba(249,250,251,0.92);
-  font-weight: 800;
-}
-.agree-row input{
-  margin-top:4px;
-  transform: scale(1.12);
-}
-
-/* Savings block (collapsible) */
-.member-savings{
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.member-savings-title{
-  font-weight: 950;
-  font-size: 1.05rem;
-  color: #f9fafb;
-}
-.member-savings-sub{
-  margin-top: 6px;
-  color: rgba(249,250,251,0.85);
-  max-width: 860px;
-}
-
-/* Collapsible header row */
-.savings-toggle{
-  margin-top: 12px;
-  width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  color:#f9fafb;
-  font-weight: 950;
-  cursor:pointer;
-  user-select:none;
-}
-.savings-toggle:active{ transform: translateY(1px); }
-.savings-caret{ opacity: 0.9; font-size: 1rem; }
-
-.savings-grid{
-  margin-top: 14px;
-  display:grid;
-  gap:12px;
-}
-@media (min-width:900px){
-  .savings-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-.savings-item{
-  background:#ffffff;
-  color:#111827;
-  border-radius: 16px;
-  padding: 14px;
-  border: 1px solid rgba(15,23,42,0.08);
-  box-shadow: 0 12px 30px rgba(15,23,42,0.08);
-}
-.savings-name{ font-weight: 950; margin-bottom: 8px; }
-.savings-row{ display:flex; justify-content:space-between; gap:10px; font-size:0.92rem; }
-
-/* Legal cards */
-.legal-card{
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.legal-grid{
-  margin-top: 14px;
-  display:grid;
-  gap:12px;
-}
-@media (min-width:900px){
-  .legal-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.legal-block{
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 14px;
-}
-.legal-title{
-  font-weight: 950;
-  margin-bottom: 6px;
-  color: #4ade80;
-}
-
-/* ✅ MEMBERSHIPS: mobile swipe look (polish) */
-@media (max-width: 520px){
-  .plans-grid{
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(260px, 82%);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-    scroll-snap-type: x mandatory;
+      setSubmitMsg("Sent ✅ We’ll get back to you shortly.");
+      setFilesLabel("");
+      formEl.reset();
+    } catch {
+      setSubmitMsg("Could not send right now. Please call 083 176 2475 or WhatsApp.");
+    } finally {
+      setSubmitting(false);
+    }
   }
-  .plan{ scroll-snap-align: start; }
-  .plans-grid::-webkit-scrollbar{ display:none; }
-}
 
-/* ✅ Tablet: 2 columns — ONLY above mobile */
-@media (min-width: 521px) and (max-width: 1100px){
-  .plans-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  // ===== Membership form =====
+  const [membershipSubmitting, setMembershipSubmitting] = useState(false);
+  const [membershipMsg, setMembershipMsg] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("Diamond");
+  const [selectedBilling, setSelectedBilling] = useState("Yearly");
+  const [agreeMembership, setAgreeMembership] = useState(false);
+
+  // ✅ Quarterly / Yearly (PLAN LOCKED)
+  const PLAN_PRICING = {
+    Bronze: { yearly: 199, quarterly: 59 },
+    Silver: { yearly: 399, quarterly: 119 },
+    Gold: { yearly: 549, quarterly: 165 },
+    Diamond: { yearly: 799, quarterly: 239 },
+  };
+
+  const planPriceLabel = (plan) => {
+    const p = PLAN_PRICING[plan];
+    if (!p) return "";
+    return `€${p.yearly} / year • €${p.quarterly} / quarter`;
+  };
+
+  function scrollToMembershipApplication(plan = "Diamond") {
+    setSelectedPlan(plan);
+    setSelectedBilling("Yearly");
+    setMembershipMsg("");
+    setMoreOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById("membership-application");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
   }
-}
 
-/* =========================
-   CALL-OUT PRICING BLOCK
-========================= */
-.callout-pricing{
-  margin-top:14px;
-  padding:14px;
-  border-radius:16px;
-  background: rgba(2, 6, 23, 0.06);
-  border: 1px solid rgba(15,23,42,0.12);
-}
-.callout-title{
-  font-weight:900;
-  letter-spacing:0.2px;
-  margin-bottom:10px;
-  color:#111827;
-}
-.callout-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 12px;
-  border-radius:12px;
-  margin-top:8px;
-  font-weight:800;
-}
-.callout-row .left{ letter-spacing:0.08em; }
-.callout-row .right{ font-weight:900; }
-.callout-row.green{ background: rgba(22,163,74,0.12); }
-.callout-row.yellow{ background: rgba(250,204,21,0.18); }
-.callout-row.orange{ background: rgba(251,146,60,0.18); }
-.callout-row.red{ background: rgba(220,38,38,0.16); }
-.callout-row.active{
-  outline: 2px solid rgba(249,115,22,0.45);
-  box-shadow: 0 0 0 4px rgba(249,115,22,0.10);
-}
-.callout-foot{
-  margin-top:10px;
-  font-size:0.82rem;
-  color:#4b5563;
-  font-weight:650;
-  line-height:1.4;
-}
+  // ✅ Strict RED policy (insurer-friendly)
+  const RED_POLICY_LINE =
+    "During RED warnings: we operate, but KRINEDAL-R does not deploy employees/subcontractors. The company owner attends where access is possible. Delays only when access is blocked (fallen trees, flooding, Garda/ambulance/emergency road closures, severe hazards).";
 
-/* =========================
-   REVIEWS
-========================= */
-.reviews-grid{ display:grid; gap:18px; }
-@media (min-width:900px){
-  .reviews-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
-}
-.review-label{
-  font-size:0.78rem;
-  letter-spacing:0.12em;
-  font-weight:900;
-  color:#16a34a;
-  margin-bottom:8px;
-}
-.review-text{ font-size:1rem; }
-.review-author{ margin-top:10px; font-weight:900; }
+  function openTermsModal() {
+    setTermsOpen(true);
+    setMoreOpen(false);
+  }
+  function openCommunityModal() {
+    setCommunityOpen(true);
+    setMoreOpen(false);
+  }
 
-/* =========================
-   FOOTER
-========================= */
-.footer{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  margin-top:32px;
-}
-.footer-name{ font-size:1.25rem; font-weight:900; }
-.footer-line{ margin-top:6px; }
-.footer-dna{ margin-top:6px; color: rgba(249,250,251,0.80); }
-.footer-buttons{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-  flex-wrap:wrap;
-}
-.footer-call{
-  background:#fff;
-  border:2px solid #e5e7eb;
-  color:#111827;
-}
-.footer-whatsapp{
-  background:#22c55e;
-  color:#064e3b;
-}
+  async function onMembershipSubmit(e) {
+    e.preventDefault();
+    setMembershipSubmitting(true);
+    setMembershipMsg("");
+    try {
+      if (!agreeMembership) {
+        setMembershipMsg("Please tick the agreement box to submit.");
+        return;
+      }
+      const formEl = e.currentTarget;
+      const fd = new FormData(formEl);
+      if (fd.get("website")) return;
 
-/* =========================
-   FLOATING BUTTONS
-========================= */
-.float-stack{
-  position:fixed;
-  right:18px;
-  bottom:24px;
-  z-index:60;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  animation: floatY 10s ease-in-out infinite;
-}
-.float-btn{
-  width:60px;
-  height:60px;
-  border-radius:999px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.6rem;
-  text-decoration:none;
-  box-shadow:0 18px 40px rgba(0,0,0,0.35);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter: blur(6px);
-  transition: transform 0.1s ease, box-shadow 0.15s ease;
-}
-.float-btn:hover{
-  transform: translateY(-2px);
-  box-shadow:0 22px 55px rgba(0,0,0,0.45);
-}
-.float-wa{ background: radial-gradient(circle at 30% 20%, #bbf7d0 0, #22c55e 35%, #15803d 100%); }
-.float-msgr{ background: radial-gradient(circle at 30% 20%, #dbeafe 0, #3b82f6 40%, #1d4ed8 100%); }
-.float-ig{ background: radial-gradient(circle at 30% 20%, #fbcfe8 0, #ec4899 40%, #7c3aed 100%); }
-.float-mail{ background: radial-gradient(circle at 30% 20%, #fde68a 0, #f97316 45%, #c2410c 100%); }
+      fd.set("FormType", "Membership");
+      fd.set("Plan", selectedPlan);
+      fd.set("Billing", selectedBilling);
+      fd.set("AgreedToTerms", "YES");
 
-@media (max-width:420px){
-  .float-btn{ width:56px; height:56px; font-size:1.5rem; }
-  .float-stack{ right:14px; bottom:18px; gap:10px; }
-}
+      const p = PLAN_PRICING[selectedPlan];
+      if (p) {
+        fd.set("PlanPriceYearly", `€${p.yearly}`);
+        fd.set("PlanPriceQuarterly", `€${p.quarterly}`);
+      }
 
-/* =========================
-   MODALS (People & Culture + Terms + Community)
-========================= */
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  z-index:999;
-  background: rgba(0,0,0,0.65);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-.modal{
-  width: min(920px, 100%);
-  max-height: 86vh;
-  overflow:auto;
-  background: #0b1120;
-  color:#f9fafb;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 30px 90px rgba(0,0,0,0.65);
-  padding: 18px;
-}
-.modal h2{ font-size: 1.2rem; margin-bottom: 6px; }
-.modal hr{
-  border:none;
-  height:1px;
-  background: rgba(255,255,255,0.12);
-  margin: 14px 0;
-}
-.k-block{
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 14px;
-  margin: 10px 0;
-}
-.k-title{
-  font-weight: 900;
-  letter-spacing: 0.2px;
-  margin-bottom: 6px;
-  color: #4ade80;
-}
-.k-list{
-  margin-top: 8px;
-  padding-left: 18px;
-}
-.k-list li + li{ margin-top: 6px; }
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
 
-.close-row{
-  display:flex;
-  justify-content:flex-end;
-  margin-top: 10px;
-}
-.modal .btn{
-  background:#fff;
-  border-color:#e5e7eb;
-  color:#111827;
+      setMembershipMsg("Application sent ✅ We’ll confirm coverage & availability shortly.");
+      setAgreeMembership(false);
+      formEl.reset();
+    } catch {
+      setMembershipMsg("Could not send right now. Please call 083 176 2475 or WhatsApp.");
+    } finally {
+      setMembershipSubmitting(false);
+    }
+  }
+
+  return (
+    <main>
+      {/* TOP BAR */}
+      <header className="topbar">
+        <div className="container topbar-inner">
+          <div>
+            <div className="topbar-brand">
+              KRINEDAL-<span className="hero-r">R</span>
+            </div>
+            <small className="topbar-sub">
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
+            </small>
+          </div>
+
+          {/* Desktop actions */}
+          <div className="topbar-actions">
+            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
+              People &amp; Culture
+            </button>
+            <button className="btn btn-outline" onClick={openCommunityModal}>
+              Community Support
+            </button>
+            <a href="tel:0831762475" className="btn btn-primary">Call</a>
+            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
+            <a href="#estimate" className="btn btn-outline">Get Quote</a>
+            <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>
+              Memberships
+            </button>
+            <button type="button" className="btn btn-outline" onClick={openTermsModal}>
+              Website Terms
+            </button>
+          </div>
+
+          {/* Mobile actions */}
+          <div className="topbar-actions-mobile">
+            <a href="tel:0831762475" className="btn btn-primary">Call</a>
+            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
+
+            <div className="more-wrap" ref={moreRef}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setMoreOpen((v) => !v);
+                }}
+                aria-expanded={moreOpen}
+              >
+                ☰ More
+              </button>
+
+              {moreOpen && (
+                <div className="more-menu" onClick={(e) => e.stopPropagation()}>
+                  <button className="more-item" onClick={() => { setPcOpen(true); setMoreOpen(false); }}>
+                    👥 People &amp; Culture
+                  </button>
+                  <button className="more-item" onClick={openCommunityModal}>
+                    ❤️ Community Support
+                  </button>
+                  <a className="more-item" href="#estimate" onClick={() => setMoreOpen(false)}>
+                    🧾 Get Quote
+                  </a>
+                  <button className="more-item" onClick={() => scrollToMembershipApplication(selectedPlan || "Diamond")}>
+                    💎 Memberships
+                  </button>
+                  <button className="more-item" onClick={openTermsModal}>
+                    📄 Website Terms
+                  </button>
+                  <a className="more-item" href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>
+                    📸 Instagram
+                  </a>
+                  <a className="more-item" href="https://m.me/61581354904730" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>
+                    📘 Messenger
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* MODALS */}
+      <PeopleCultureModal open={pcOpen} onClose={() => setPcOpen(false)} />
+      <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
+      <CommunitySupportModal open={communityOpen} onClose={() => setCommunityOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
+
+      {/* HERO */}
+      <section className="hero">
+        <span className="shamrock shamrock-left">☘️</span>
+        <span className="shamrock shamrock-right">☘️</span>
+
+        <div className="container hero-inner">
+          <div className="hero-text">
+            <h1 className="hero-title">
+              KRINEDAL-<span className="hero-r">R</span>
+            </h1>
+
+            <p className="hero-tag">
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
+            </p>
+
+            <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
+
+            <p className="hero-lead">
+              24/7 storm damage call-out, full roof renewals and{" "}
+              <span className="hero-strong">luxury tiling</span> for homes and rental properties.
+              Snow, rain or storm won&apos;t stop us.
+            </p>
+
+            <p className="hero-weather-label">Current Ireland weather status:</p>
+
+            <div className="hero-weather-row">
+              <span className={weatherUI.chipClass}>
+                {weatherLoaded ? weatherUI.label : "Loading weather…"}
+              </span>
+              <span className="hero-weather-shamrock">☘️</span>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+                aria-label="Refresh weather"
+                title="Refresh weather"
+              >
+                {refreshingWeather ? "Refreshing…" : "↻ Refresh"}
+              </button>
+            </div>
+
+            <div className="hero-actions">
+              <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
+              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp us now</a>
+              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">Instagram</a>
+              <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>View memberships</button>
+              <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>Website terms</button>
+            </div>
+
+            <ul className="hero-bullets">
+              {SERVICES.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
+
+            <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
+          </div>
+
+          <aside className="hero-side-card">
+            <h2>Fast, respectful property care</h2>
+            <p>
+              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe,
+              dry and beautifully finished.
+            </p>
+            <div className="hero-side-list">
+              <p>✓ 24/7 emergency line</p>
+              <p>✓ Photos + written reports (on request / membership)</p>
+              <p>✓ Clear pricing and written scope</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* MEMBERSHIPS */}
+      <section id="membership" className="section section-memberships">
+        <div className="container">
+          <div className="plans-head">
+            <div>
+              <div className="plans-title">Customer memberships</div>
+              <p className="plans-sub">
+                Designed for customers who want priority support and clear rules. Memberships are approved based on area coverage and current workload.
+              </p>
+              <p className="plans-sub smallest" style={{ marginTop: 6 }}>
+                Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use). Permanent repairs/materials are quoted separately.
+              </p>
+              <p className="plans-sub smallest" style={{ marginTop: 6 }}>
+                <strong>Insurer-safe:</strong> Membership is a service agreement — <strong>not insurance</strong>.
+              </p>
+            </div>
+
+            <div className="status-pill">
+              <span className="status-label">Current status</span>
+              <span className={`status-badge ${weatherStatus}`}>{weatherStatus.toUpperCase()}</span>
+            </div>
+          </div>
+
+          <div className="plans-grid">
+            {/* BRONZE */}
+            <div className="plan">
+              <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
+              <div className="plan-name">Bronze — planned support</div>
+              <div className="plan-price">{planPriceLabel("Bronze")}</div>
+              <ul>
+                <li><strong>Priority booking</strong> for non-emergency jobs</li>
+                <li><strong>Member schedule slot</strong> (faster than non-members)</li>
+                <li><strong>Discounted inspection</strong> (1× per year, scheduled)</li>
+                <li><strong>FREE call-out on GREEN</strong> warnings (make-safe / fair use)</li>
+              </ul>
+              <div className="plan-foot">Best for organised maintenance and reliable scheduling.</div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>Apply</button>
+              </div>
+            </div>
+
+            {/* SILVER */}
+            <div className="plan">
+              <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
+              <div className="plan-name">Silver — faster response</div>
+              <div className="plan-price">{planPriceLabel("Silver")}</div>
+              <ul>
+                <li><strong>Higher priority queue</strong> than Bronze</li>
+                <li><strong>Emergency make-safe support</strong> (fair use)</li>
+                <li><strong>FREE call-out on GREEN</strong> warnings</li>
+                <li><strong>Discounted call-out</strong> on YELLOW / ORANGE</li>
+              </ul>
+              <div className="plan-foot">Great for families &amp; rentals that need faster support.</div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>Apply</button>
+              </div>
+            </div>
+
+            {/* GOLD */}
+            <div className="plan">
+              <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
+              <div className="plan-name">Gold — priority + reporting</div>
+              <div className="plan-price">{planPriceLabel("Gold")}</div>
+              <ul>
+                <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
+                <li><strong>FREE call-out on GREEN + YELLOW</strong> warnings</li>
+                <li><strong>Discounted call-out</strong> on ORANGE</li>
+                <li><strong>Annual inspection</strong> included (scheduled)</li>
+              </ul>
+              <div className="plan-foot">Ideal for landlords / multi-property owners who need documentation.</div>
+              <div className="plan-actions">
+                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>Apply</button>
+              </div>
+            </div>
+
+            {/* DIAMOND */}
+            <div className="plan plan-highlight">
+              <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
+              <div className="plan-name">Diamond — owner priority cover</div>
+              <div className="plan-price">{planPriceLabel("Diamond")}</div>
+              <ul>
+                <li><strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE / RED</strong></li>
+                <li><strong>Owner priority contact</strong> + fastest scheduling</li>
+                <li><strong>Emergency make-safe</strong> included (fair use)</li>
+                <li><strong>Photos + written report</strong> included (insurance-ready)</li>
+                <li><strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
+                <li><strong>Chimney cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
+              </ul>
+              <div className="plan-foot">
+                ✅ Under Diamond, call-out fee is <strong>€0</strong> in all warning levels.
+                <br />
+                <span className="muted smallest" style={{ color: "#4b5563" }}>{RED_POLICY_LINE}</span>
+              </div>
+              <div className="plan-actions">
+                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>Apply</button>
+              </div>
+            </div>
+          </div>
+
+          {/* SAVINGS / EXTRA SERVICES — Collapsible */}
+          <div className="member-savings" style={{ marginTop: 22 }}>
+            <div className="member-savings-title">Extra savings with memberships</div>
+            <p className="member-savings-sub">
+              Many customers pay separate companies for these jobs. With KRINEDAL-R memberships,
+              you can save money and keep everything under one trusted contact.
+            </p>
+
+            <button
+              type="button"
+              className="savings-toggle"
+              onClick={() => setSavingsOpen((v) => !v)}
+              aria-expanded={savingsOpen}
+            >
+              <span>{savingsOpen ? "Hide extra savings" : "Show extra savings"}</span>
+              <span className="savings-caret">{savingsOpen ? "▾" : "▸"}</span>
+            </button>
+
+            {savingsOpen && (
+              <>
+                <div className="savings-grid">
+                  <div className="savings-item">
+                    <div className="savings-name">Chimney cleaning</div>
+                    <div className="savings-row"><span>Typical market</span><strong>€120–€220</strong></div>
+                    <div className="savings-row"><span>With Diamond</span><strong>Included 1× / year*</strong></div>
+                  </div>
+
+                  <div className="savings-item">
+                    <div className="savings-name">Gutter cleaning</div>
+                    <div className="savings-row"><span>Typical market</span><strong>€90–€180</strong></div>
+                    <div className="savings-row"><span>With Diamond</span><strong>Included 1× / year*</strong></div>
+                  </div>
+
+                  <div className="savings-item">
+                    <div className="savings-name">Drain / pipe cleaning (basic)</div>
+                    <div className="savings-row"><span>Typical market</span><strong>€120–€260</strong></div>
+                    <div className="savings-row"><span>Members</span><strong>Discounted / quoted</strong></div>
+                  </div>
+
+                  <div className="savings-item">
+                    <div className="savings-name">Annual inspection report</div>
+                    <div className="savings-row"><span>Typical market</span><strong>€120–€250</strong></div>
+                    <div className="savings-row"><span>With Gold</span><strong>Included 1× / year*</strong></div>
+                  </div>
+                </div>
+
+                <p className="muted smallest" style={{ marginTop: 10 }}>
+                  *Included/discounted services depend on safe access and the specific property setup. If scaffolding, MEWP,
+                  specialist access, heavy blockages, or extra labour is required, that is quoted separately.
+                </p>
+              </>
+            )}
+          </div>
+
+          {/* MEMBERSHIP APPLICATION */}
+          <section id="membership-application" style={{ scrollMarginTop: 92 }}>
+            <div className="form-card membership-form" style={{ marginTop: 22 }}>
+              <h2>Membership application</h2>
+              <p className="form-sub">Apply in 60 seconds. We’ll confirm coverage &amp; availability by phone / email.</p>
+
+              <form onSubmit={onMembershipSubmit}>
+                <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
+
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_name">Your name</label>
+                    <input id="m_name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="m_phone">Phone number</label>
+                    <input id="m_phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_email">Email</label>
+                    <input id="m_email" name="Email" type="email" placeholder="you@email.com" required autoComplete="email" inputMode="email" />
+                  </div>
+                </div>
+
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_eircode">Eircode</label>
+                    <input id="m_eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="m_town">Town / County</label>
+                    <input id="m_town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                  </div>
+                </div>
+
+                <div className="form-grid two-col">
+                  <div className="field">
+                    <label htmlFor="m_plan">Plan</label>
+                    <select id="m_plan" name="Plan" value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)} autoComplete="off">
+                      <option>Bronze</option>
+                      <option>Silver</option>
+                      <option>Gold</option>
+                      <option>Diamond</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label htmlFor="m_billing">Billing</label>
+                    <select id="m_billing" name="Billing" value={selectedBilling} onChange={(e) => setSelectedBilling(e.target.value)} autoComplete="off">
+                      <option>Yearly</option>
+                      <option>Quarterly</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_address">Address (optional)</label>
+                    <input id="m_address" name="Address" type="text" placeholder="Street / Estate / House number" autoComplete="street-address" />
+                  </div>
+                </div>
+
+                <div className="form-grid">
+                  <div className="field">
+                    <label htmlFor="m_notes">Anything we should know?</label>
+                    <textarea id="m_notes" name="Member notes" placeholder="Roof type, recurring leak, rental property, access, pets, etc." />
+                  </div>
+                </div>
+
+                {/* TERMS (summary) */}
+                <div className="form-grid">
+                  <div className="field" style={{ gap: 8 }}>
+                    <label style={{ marginBottom: 0 }}>Important membership terms (summary)</label>
+
+                    <div className="terms-box">
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
+                      </p>
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
+                        misuse, or abusive behaviour may lead to suspension/cancellation without refund.
+                      </p>
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>Emergency scope:</strong> “Make-safe” includes temporary steps to reduce immediate damage (e.g. tarping, temporary sealing,
+                        isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
+                      </p>
+                      <p style={{ marginBottom: 10 }}>
+                        <strong>RED warning safety policy (strict):</strong> {RED_POLICY_LINE}
+                      </p>
+                      <p style={{ marginBottom: 0 }}>
+                        Full Website &amp; Company Terms are available via the <strong>Website Terms</strong> button (top bar).
+                      </p>
+                    </div>
+
+                    <label className="agree-row">
+                      <input
+                        type="checkbox"
+                        checked={agreeMembership}
+                        onChange={(e) => setAgreeMembership(e.target.checked)}
+                        aria-label="Agree to membership terms"
+                      />
+                      I understand and agree to the membership terms above and the Website &amp; Company Terms.
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-actions">
+                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
+                    {membershipSubmitting ? "Sending…" : "Send membership application"}
+                  </button>
+                  <p className="submit-tip">
+                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
+                  </p>
+                  {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
+                </div>
+              </form>
+            </div>
+
+            {/* Membership Terms & Conditions card left as you had (not deleting) */}
+            <div className="legal-card" style={{ marginTop: 18 }}>
+              <h2>Membership Terms &amp; Conditions</h2>
+              <p className="muted small" style={{ marginTop: 8 }}>
+                These terms apply to all KRINEDAL-R memberships (Bronze/Silver/Gold/Diamond). Membership is a service agreement — not an insurance policy.
+              </p>
+
+              <div className="legal-grid">
+                <div className="legal-block">
+                  <div className="legal-title">1) Definitions</div>
+                  <ul className="k-list">
+                    <li><strong>Make-safe</strong>: temporary steps to reduce immediate damage or hazard.</li>
+                    <li><strong>Permanent repair</strong>: full fix using materials/labour — always quoted separately.</li>
+                    <li><strong>Fair use</strong>: reasonable use for genuine property issues (not repeated non-urgent call-outs).</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">2) Coverage &amp; approval</div>
+                  <ul className="k-list">
+                    <li>Memberships are approved based on coverage area and current workload.</li>
+                    <li>We may decline or delay activation if we cannot maintain standards.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">3) Emergency response &amp; weather</div>
+                  <ul className="k-list">
+                    <li><strong>GREEN call-out fee:</strong> FREE for all active members (make-safe / fair use).</li>
+                    <li><strong>Gold:</strong> free call-out on GREEN + YELLOW (fair use).</li>
+                    <li><strong>Diamond:</strong> free call-out on GREEN/YELLOW/ORANGE/RED (fair use).</li>
+                    <li><strong>RED warning safety policy (strict):</strong> {RED_POLICY_LINE}</li>
+                    <li>If a delay occurs, we communicate the reason and the next possible arrival window.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">4) What is included</div>
+                  <ul className="k-list">
+                    <li>Priority planning/booking according to your plan.</li>
+                    <li>Emergency make-safe actions within fair use.</li>
+                    <li>Reports/photos where your plan includes them.</li>
+                    <li>Included annual services (if your plan includes them) are scheduled and subject to safe access.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">5) What is not included</div>
+                  <ul className="k-list">
+                    <li>Materials (tiles, timber, membranes, fixings, etc.).</li>
+                    <li>Skips, scaffolding, MEWP, specialist hire, engineer reports.</li>
+                    <li>Full permanent repairs — quoted separately.</li>
+                    <li>Gas/electrical works that require certified specialists.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">6) Payments &amp; refunds</div>
+                  <ul className="k-list">
+                    <li>Membership payments are <strong>non-refundable</strong> once activated, unless required by law.</li>
+                    <li>Quarterly or yearly billing options may be available as shown.</li>
+                    <li>Missed payments may pause membership benefits until resolved.</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">7) Fair use &amp; behaviour</div>
+                  <ul className="k-list">
+                    <li>Misuse, repeated non-urgent call-outs, or abusive behaviour may lead to suspension/cancellation without refund.</li>
+                    <li>Access must be safe and reasonable (dogs secured, hazards disclosed, etc.).</li>
+                  </ul>
+                </div>
+
+                <div className="legal-block">
+                  <div className="legal-title">8) Liability &amp; limits</div>
+                  <ul className="k-list">
+                    <li>We work to high standards, but we cannot guarantee outcomes where hidden defects exist.</li>
+                    <li>Make-safe actions reduce damage risk but cannot eliminate all risk during extreme weather.</li>
+                    <li>Any liability is limited to the work we carried out (subject to Irish law).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      {/* STORM + WEATHER */}
+      <section className="section section-alt">
+        <div className="container grid-2">
+          <div className="card">
+            <h2>24/7 Storm Call-Out</h2>
+            <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
+            <a href="tel:0831762475" className="btn btn-storm">🚨 24/7 STORM EMERGENCY LINE</a>
+
+            <div style={{ marginTop: 14 }}>
+              <p className="muted small" style={{ fontWeight: 800, marginBottom: 6 }}>
+                Community support discounts
+              </p>
+
+              <p className="muted small" style={{ lineHeight: 1.55 }}>
+                We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
+                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage, unsafe roof),
+                we offer:
+              </p>
+
+              <ul className="list" style={{ marginTop: 10 }}>
+                <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
+                <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
+              </ul>
+
+              <p className="muted smallest" style={{ marginTop: 10 }}>
+                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended for genuine
+                emergency make-safe visits. Materials, skips, scaffolding, specialist hire and additional works are charged separately.
+                Availability depends on weather, travel distance and workload.
+              </p>
+
+              <p className="muted smallest" style={{ marginTop: 10 }}>
+                <strong>Safety note:</strong> {RED_POLICY_LINE}
+              </p>
+
+              <p className="muted smallest" style={{ marginTop: 10 }}>
+                Want full details?{" "}
+                <button type="button" className="btn btn-weather" onClick={openCommunityModal}>
+                  View Community Support Policy
+                </button>
+              </p>
+            </div>
+
+            <div className="callout-pricing">
+              <div className="callout-title">Emergency call-out fee guide</div>
+              <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
+                <span className="left">GREEN</span>
+                <span className="right">€250 – €350</span>
+              </div>
+              <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
+                <span className="left">YELLOW</span>
+                <span className="right">€350 – €450</span>
+              </div>
+              <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
+                <span className="left">ORANGE</span>
+                <span className="right">€450 – €550</span>
+              </div>
+              <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
+                <span className="left">RED</span>
+                <span className="right">€550 – €1000</span>
+              </div>
+              <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
+            </div>
+          </div>
+
+          <div className="card">
+            <h2>Ireland Weather Status</h2>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
+            </p>
+
+            <div style={{ marginTop: 10 }}>
+              <button type="button" className="btn btn-weather" onClick={() => loadWeather({ manual: true })} disabled={refreshingWeather}>
+                {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
+              </button>
+            </div>
+
+            {weatherError ? (
+              <p className="muted smallest" style={{ marginTop: 8 }}>⚠️ {weatherError}</p>
+            ) : (
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                Auto-updated from Met Éireann warnings
+                {fetchedAt && <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span>}
+              </p>
+            )}
+
+            {weatherWarnings.length > 0 && (
+              <div style={{ marginTop: 12 }}>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>Latest warnings:</p>
+                <ul className="list" style={{ marginTop: 0 }}>
+                  {weatherWarnings.slice(0, 3).map((w, idx) => (
+                    <li key={w?.id || w?.headline || idx}>
+                      <strong style={{ textTransform: "uppercase" }}>{w.level}</strong>
+                      {w.headline ? ` – ${w.headline}` : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <p className="muted small" style={{ marginTop: 12 }}>
+              Follow{" "}
+              <a
+                href="https://m.facebook.com/profile.php?id=61581354904730"
+                target="_blank"
+                rel="noreferrer"
+                className="brand-inline"
+              >
+                Krinedal-R on Facebook
+              </a>{" "}
+              for live updates.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section className="section">
+        <div className="container reviews-grid">
+          <article className="card review-card">
+            <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
+            <p className="review-text">
+              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal.
+              Clean, fast and extremely professional. Couldn&apos;t be happier.”
+            </p>
+            <p className="review-author">— Aoife, Navan</p>
+          </article>
+
+          <article className="card review-card">
+            <p className="review-text">
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe.
+              Snow, rain and storm didn&apos;t stop him. Trust 100% saved number - completed, insurance claim report was
+              issued within couple hours. Can’t imagine better service. Thank you Chris.”
+            </p>
+            <p className="review-author">— Patrick, Dublin</p>
+          </article>
+        </div>
+      </section>
+
+      {/* CALCULATORS */}
+      <section className="section section-alt">
+        <div className="container grid-3">
+          <div className="card">
+            <h2>Roofing cost idea (rough guide)</h2>
+            <p className="muted small">Handy calculator to get a feel for budget. Final prices always confirmed after inspection.</p>
+
+            <label className="field-label">
+              Roof area (m²)
+              <input
+                type="number"
+                value={roofArea}
+                onChange={(e) => setRoofArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
+            </label>
+
+            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
+            <p className="calc-result">
+              Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.
+            </p>
+          </div>
+
+          <div className="card">
+            <h2>Luxury tiling cost idea</h2>
+            <p className="muted small">For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.</p>
+
+            <label className="field-label">
+              Tiled area (m²)
+              <input
+                type="number"
+                value={tileArea}
+                onChange={(e) => setTileArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
+            </label>
+
+            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
+            <p className="calc-result">
+              Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
+            </p>
+          </div>
+
+          <div className="card">
+            <h2>Flooring cost idea</h2>
+            <p className="muted small">Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.</p>
+
+            <label className="field-label">
+              Floor area (m²)
+              <input
+                type="number"
+                value={floorArea}
+                onChange={(e) => setFloorArea(e.target.value)}
+                className="field-input"
+                min="0"
+                inputMode="decimal"
+              />
+            </label>
+
+            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
+            <p className="calc-result">
+              Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
+            </p>
+
+            <p className="muted smallest">
+              Flooring labour often ranges <strong>€18–€45</strong> per m². This calculator uses <strong>€26</strong> per m².
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ESTIMATE FORM */}
+      <section id="estimate" className="section section-form">
+        <div className="container">
+          <div className="form-card">
+            <h2>Request a Free Estimate</h2>
+            <p className="form-sub">
+              Tell us a bit about your project and we&apos;ll come back with options and a rough budget.
+            </p>
+
+            <form onSubmit={onSubmit}>
+              <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="name">Your name</label>
+                  <input id="name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
+                </div>
+                <div className="field">
+                  <label htmlFor="phone">Phone number</label>
+                  <input id="phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="email">Email</label>
+                  <input id="email" name="Email" type="email" placeholder="you@email.com" required autoComplete="email" inputMode="email" />
+                </div>
+              </div>
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="eircode">Eircode</label>
+                  <input id="eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                </div>
+                <div className="field">
+                  <label htmlFor="town">Town / County</label>
+                  <input id="town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="service">Type of work</label>
+                  <select id="service" name="Service" autoComplete="off">
+                    <option>Storm / leak emergency</option>
+                    <option>Full roof renewal</option>
+                    <option>Roof repair</option>
+                    <option>Luxury bathroom tiling</option>
+                    <option>Kitchen tiling</option>
+                    <option>Flooring installation (laminate / vinyl / engineered wood)</option>
+                    <option>Garage flooring systems (rubber / tiles / resin-coated)</option>
+                    <option>Marble-look &amp; decorative floor coatings</option>
+                    <option>Outdoor concrete stairs</option>
+                    <option>Front entrance upgrade</option>
+                    <option>Exterior lighting installation</option>
+                    <option>Painting &amp; fresh-up</option>
+                    <option>Landlord end-of-tenancy</option>
+                    <option>Other (describe below)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-grid two-col">
+                <div className="field">
+                  <label htmlFor="date">Preferred date</label>
+                  <input id="date" name="Preferred date" type="date" required />
+                </div>
+                <div className="field">
+                  <label htmlFor="time">Preferred time</label>
+                  <input id="time" name="Preferred time" type="time" required />
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="files">Upload photos / files (optional)</label>
+                  <input
+                    id="files"
+                    name="files"
+                    type="file"
+                    multiple
+                    accept="image/*,.pdf,.doc,.docx,.heic"
+                    onChange={(e) => {
+                      const list = Array.from(e.target.files || []);
+                      setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
+                    }}
+                  />
+                  {filesLabel && <p className="muted smallest" style={{ marginTop: 6 }}>{filesLabel}</p>}
+                  <p className="muted smallest" style={{ marginTop: 6 }}>Tip: You can also send photos by WhatsApp if easier.</p>
+                </div>
+              </div>
+
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="details">Tell us a bit about the job</label>
+                  <textarea id="details" name="Details" placeholder="Size of area, issues, photos available, access, etc." />
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button type="submit" className="btn btn-storm" disabled={submitting}>
+                  {submitting ? "Sending…" : "Send estimate request"}
+                </button>
+                <p className="submit-tip">
+                  Thank you for contacting us — our team member will be in touch shortly. In case of emergency call <strong>083 176 2475</strong>.
+                </p>
+                {submitMsg && <p className="membership-msg" style={{ marginTop: 10 }}>{submitMsg}</p>}
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <section className="section section-dark">
+        <div className="container">
+          <div className="card card-dark">
+            <h2>Booking &amp; Payment</h2>
+            <ul className="list">
+              <li>Clear written scope agreed before starting</li>
+              <li>Digital invoice &amp; payment by bank transfer</li>
+              <li>Photos provided for your records on request</li>
+            </ul>
+
+            <p className="muted small" style={{ marginTop: 12 }}>
+              <strong>Materials &amp; Payment:</strong> For most projects, the customer pays for all necessary materials up front
+              (tiles, flooring, timber, concrete, lighting, membranes, fixings, skips, etc.). Labour is paid after the job is completed.
+              For larger jobs, staged payments may apply and will be agreed in writing before we start.
+            </p>
+
+            <p className="muted smallest" style={{ marginTop: 10 }}>
+              <strong>Safety policy:</strong> {RED_POLICY_LINE}
+            </p>
+          </div>
+
+          <footer className="footer">
+            <div className="footer-brand">
+              <span className="footer-name">KRINEDAL-<span className="hero-r">R</span></span>
+              <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
+              <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
+            </div>
+
+            <div className="footer-contact">
+              <p>Phone: <strong>083 176 2475</strong></p>
+              <p>
+                Email:{" "}
+                <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
+                <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
+              </p>
+              <p>
+                Web:{" "}
+                <a href="https://www.krinedalr.ie/" target="_blank" rel="noreferrer">www.krinedalr.ie</a>
+              </p>
+              <p>
+                Facebook:{" "}
+                <a
+                  href="https://m.facebook.com/profile.php?id=61581354904730"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Visit our page
+                </a>{" "}
+                • Instagram:{" "}
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">@krinedalr</a>
+              </p>
+
+              <div className="footer-buttons">
+                <a href="tel:0831762475" className="btn footer-call">Call</a>
+                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">WhatsApp</a>
+                <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
+                <button className="btn footer-call" onClick={openCommunityModal}>Community Support</button>
+                <button className="btn footer-call" onClick={() => setTermsOpen(true)}>Website Terms</button>
+              </div>
+            </div>
+          </footer>
+        </div>
+
+        {/* FLOATING BUTTONS */}
+        <div className="float-stack">
+          <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="float-btn float-wa" aria-label="WhatsApp" title="WhatsApp">💬</a>
+          <a href="https://m.me/61581354904730" target="_blank" rel="noreferrer" className="float-btn float-msgr" aria-label="Messenger" title="Messenger">📘</a>
+          <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="float-btn float-ig" aria-label="Instagram" title="Instagram">📸</a>
+          <a href="mailto:krinedalr@outlook.com" className="float-btn float-mail" aria-label="Email" title="Email">✉️</a>
+        </div>
+      </section>
+    </main>
+  );
 }
