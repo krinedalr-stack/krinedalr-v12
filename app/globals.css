@@ -1,5 +1,4 @@
 /* app/globals.css */
-
 /* =========================
    RESET
 ========================= */
@@ -57,7 +56,6 @@ a:hover{ text-decoration: underline; }
   padding-top: env(safe-area-inset-top);
 }
 
-/* allow bar to grow if needed */
 .topbar-inner{
   height: auto;
   display:flex;
@@ -96,22 +94,35 @@ a:hover{ text-decoration: underline; }
   font-size: 0.92rem;
 }
 
-/* ✅ MOBILE FIX: keep actions in ONE ROW (horizontal scroll), so topbar doesn’t explode */
+/* ✅ MOBILE NAV: show Call + WhatsApp + More (no scrolling bar) */
 @media (max-width: 520px){
   main{ padding-top: 86px; }
-
   .topbar-sub{ display:none; }
 
   .topbar-actions{
     width:100%;
     justify-content:flex-start;
-    flex-wrap: nowrap; /* ✅ one line */
-    overflow-x: auto; /* ✅ scroll */
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
+    flex-wrap: nowrap;
+    overflow: visible; /* ✅ dropdown can open */
   }
 
-  .topbar-actions::-webkit-scrollbar{ display:none; }
+  /* hide extra desktop buttons on mobile */
+  .topbar-actions > button.btn.btn-outline:first-child{ display:none; } /* People & Culture */
+  .topbar-actions > a.btn.btn-outline:last-of-type{ display:none; } /* (safety) */
+  /* if you ever add extra buttons, hide them by default on mobile */
+  .topbar-actions > a.btn.btn-outline,
+  .topbar-actions > button.btn.btn-outline{
+    display:none;
+  }
+
+  /* but keep More button visible */
+  .topbar-actions .more-wrap{ display:block; }
+
+  /* keep Call + WhatsApp visible */
+  .topbar-actions > a.btn.btn-primary,
+  .topbar-actions > a.btn.btn-outline{
+    display:inline-flex;
+  }
 
   .topbar .btn{
     white-space: nowrap;
@@ -136,10 +147,14 @@ a:hover{ text-decoration: underline; }
 .section-dark{ background:#020617; color:#f9fafb; }
 
 .grid-2{ display:grid; gap:24px; }
-@media (min-width:900px){ .grid-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+@media (min-width:900px){
+  .grid-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
 
 .grid-3{ display:grid; gap:24px; }
-@media (min-width:900px){ .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+@media (min-width:900px){
+  .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+}
 
 /* =========================
    HERO
@@ -302,6 +317,7 @@ a:hover{ text-decoration: underline; }
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
+
 .btn:hover{ transform:translateY(-1px); }
 .btn:active{ transform:translateY(0); }
 
@@ -310,11 +326,13 @@ a:hover{ text-decoration: underline; }
   color:#111827;
   box-shadow:0 12px 30px rgba(249,115,22,0.45);
 }
+
 .btn-outline{
   background:#fff;
   border-color:#f97316;
   color:#c2410c;
 }
+
 .btn-storm{
   width:100%;
   background:#ff2d2d;
@@ -343,18 +361,23 @@ a:hover{ text-decoration: underline; }
   font-size:0.92rem;
 }
 
+/* ✅ dropdown menu buttons inside More menu */
+.more-wrap .btn{
+  border-radius:14px;
+  padding:10px 14px;
+  font-weight:900;
+}
+
 /* =========================
    TEXT UTILITIES
 ========================= */
 .muted{ color:#4b5563; }
 .small{ font-size:0.9rem; }
 .smallest{ font-size:0.82rem; }
-
 .green-text{ color:#16a34a; }
 .yellow-text{ color:#facc15; }
 .orange-text{ color:#fb923c; }
 .red-text{ color:#ef4444; }
-
 .brand-inline{ color:#16a34a; font-weight:800; }
 
 /* =========================
@@ -437,11 +460,11 @@ a:hover{ text-decoration: underline; }
 .field input, .field select{ min-height:52px; }
 .field textarea{ min-height:150px; resize: vertical; }
 
-.field input::placeholder,.field textarea::placeholder{
+.field input::placeholder, .field textarea::placeholder{
   color: rgba(229,231,235,0.65);
 }
 
-.field input:focus,.field select:focus,.field textarea:focus{
+.field input:focus, .field select:focus, .field textarea:focus{
   border-color: rgba(249,115,22,0.55);
   box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
 }
@@ -452,6 +475,7 @@ a:hover{ text-decoration: underline; }
 
 /* File input button styling */
 .field input[type="file"]{ padding:12px 14px; }
+
 .field input[type="file"]::file-selector-button{
   margin-right:12px;
   padding:10px 14px;
@@ -464,6 +488,7 @@ a:hover{ text-decoration: underline; }
 }
 
 .form-actions{ margin-top:26px; }
+
 .form-actions .btn{
   width:100%;
   min-height:56px;
@@ -489,7 +514,7 @@ a:hover{ text-decoration: underline; }
 }
 
 /* iOS/Safari autofill fix (white background bug) */
-input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
   -webkit-text-fill-color:#f9fafb !important;
   box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
   transition: background-color 9999s ease-in-out 0s;
@@ -554,6 +579,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   display:grid;
   gap:14px;
 }
+
 @media (min-width:900px){
   .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
 }
@@ -603,7 +629,6 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   margin-top:4px;
   color:#111827;
 }
-
 .plan ul li + li{ margin-top:6px; }
 
 .plan-foot{
@@ -680,7 +705,6 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   color: rgba(249,250,251,0.92);
   font-weight: 800;
 }
-
 .agree-row input{
   margin-top:4px;
   transform: scale(1.12);
@@ -712,6 +736,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   display:grid;
   gap:12px;
 }
+
 @media (min-width:900px){
   .savings-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
@@ -742,6 +767,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   display:grid;
   gap:12px;
 }
+
 @media (min-width:900px){
   .legal-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
