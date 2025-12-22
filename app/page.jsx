@@ -106,7 +106,9 @@ function PeopleCultureModal({ open, onClose }) {
           <strong>Built on standards. Run by systems. Powered by people.</strong>
         </p>
         <div className="close-row">
-          <button className="btn" onClick={onClose}>Close</button>
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -120,7 +122,8 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Website &amp; Company Terms &amp; Conditions</h2>
         <p className="muted small" style={{ marginTop: 8 }}>
-          These terms apply to general use of the KRINEDAL-R website and services (quotes, call-outs, bookings, communication).
+          These terms apply to general use of the KRINEDAL-R website and services (quotes, call-outs,
+          bookings, communication).
         </p>
         <hr />
 
@@ -135,7 +138,9 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">1) Quotes &amp; pricing</div>
           <ul className="k-list">
-            <li>Website calculators are <strong>rough guides</strong> only and not binding quotations.</li>
+            <li>
+              Website calculators are <strong>rough guides</strong> only and not binding quotations.
+            </li>
             <li>Final prices are confirmed after inspection / scope agreement.</li>
             <li>Emergency call-out fees depend on distance, access and conditions.</li>
           </ul>
@@ -144,10 +149,20 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">2) Safety &amp; duty of care (RED policy)</div>
           <ul className="k-list">
-            <li><strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors during RED warnings.</li>
-            <li><strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and their families.</li>
-            <li><strong>Owner response:</strong> the company owner attends where access is possible.</li>
-            <li><strong>Safety note:</strong> {RED_POLICY_LINE}</li>
+            <li>
+              <strong>Strict safety policy:</strong> KRINEDAL-R does not send
+              employees/subcontractors during RED warnings.
+            </li>
+            <li>
+              <strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and
+              their families.
+            </li>
+            <li>
+              <strong>Owner response:</strong> the company owner attends where access is possible.
+            </li>
+            <li>
+              <strong>Safety note:</strong> {RED_POLICY_LINE}
+            </li>
           </ul>
         </div>
 
@@ -155,7 +170,10 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
           <div className="k-title">3) Delays outside our control</div>
           <ul className="k-list">
             <li>Delays may occur where access is blocked or unsafe.</li>
-            <li>Examples: fallen trees, flooded roads, Garda/ambulance/emergency service road blocks, major incidents.</li>
+            <li>
+              Examples: fallen trees, flooded roads, Garda/ambulance/emergency service road blocks,
+              major incidents.
+            </li>
             <li>We communicate the reason and next possible arrival window.</li>
           </ul>
         </div>
@@ -163,7 +181,10 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">4) Materials &amp; staged payments</div>
           <ul className="k-list">
-            <li>For most projects, customers pay materials up front (tiles, timber, membranes, fixings, skips, etc.).</li>
+            <li>
+              For most projects, customers pay materials up front (tiles, timber, membranes, fixings,
+              skips, etc.).
+            </li>
             <li>Labour is paid after completion unless staged payments are agreed in writing.</li>
           </ul>
         </div>
@@ -173,12 +194,16 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
           <ul className="k-list">
             <li>
               <strong>
-                If a booked visit is cancelled after planning has been completed and a technician has already been dispatched
-                (left base and is travelling), the full call-out/booking fee applies.
+                If a booked visit is cancelled after planning has been completed and a technician
+                has already been dispatched (left base and is travelling), the full call-out/booking
+                fee applies.
               </strong>
             </li>
             <li>This covers time, travel, fuel, scheduling, and resources already committed.</li>
-            <li>Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be rescheduled without penalty.</li>
+            <li>
+              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may
+              be rescheduled without penalty.
+            </li>
           </ul>
         </div>
 
@@ -207,17 +232,18 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
         </div>
 
         <div className="close-row">
-          <button className="btn" onClick={onClose}>Close</button>
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-/** ✅ Community Support modal (this is the missing “why we do it” + policy) */
+/** ✅ Community Support modal */
 function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
   if (!open) return null;
-
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -228,29 +254,33 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">Discounts offered</div>
           <ul className="k-list">
-            <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
-            <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
+            <li>
+              <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+            </li>
+            <li>
+              <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+            </li>
           </ul>
           <p className="muted smallest" style={{ marginTop: 10 }}>
-            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended for genuine emergency make-safe visits.
-            Materials, skips, scaffolding, specialist hire and additional works are charged separately.
+            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
+            for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist hire and
+            additional works are charged separately.
           </p>
         </div>
 
-        {/* ✅ LOCKED EXPLANATION (as requested) */}
+        {/* ✅ YOUR TEXT — EXACT, NO EXTRA */}
         <div className="k-block">
           <div className="k-title">Why we do this</div>
           <p>
-            We help where we can — especially during storms — because some people carry heavier pressure than others.
+            Many elderly people built this country through decades of hard work and contribution.
+            When severe weather hits, they are often the most vulnerable.
+            We believe they deserve respect, safety, and fast help when their home is at risk.
           </p>
-          <ul className="k-list">
-            <li>
-              <strong>Elderly customers:</strong> many built this country and deserve respect, safety and fast help when bad weather hits.
-            </li>
-            <li>
-              <strong>Single parents:</strong> when an emergency happens, it’s often one person handling everything — we reduce pressure and help keep the home safe.
-            </li>
-          </ul>
+          <p>
+            Single parents often carry full responsibility for their household alone.
+            During emergencies there is no second person to share the pressure or cost.
+            We reduce the call-out fee to help keep the home safe during difficult moments
+          </p>
         </div>
 
         <div className="k-block">
@@ -261,7 +291,9 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
         </div>
 
         <div className="close-row">
-          <button className="btn" onClick={onClose}>Close</button>
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -279,7 +311,6 @@ export default function HomePage() {
 
   // ✅ Savings collapse: open desktop, collapsed mobile
   const [savingsOpen, setSavingsOpen] = useState(true);
-
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth <= 520;
     setSavingsOpen(!isMobile);
@@ -312,8 +343,10 @@ export default function HomePage() {
   // ===== Calculators (locked rates) =====
   const [roofArea, setRoofArea] = useState("");
   const roofRate = 45;
+
   const [tileArea, setTileArea] = useState("");
   const tileRate = 48;
+
   const [floorArea, setFloorArea] = useState("");
   const floorRate = 26;
 
@@ -332,10 +365,26 @@ export default function HomePage() {
 
   const weatherUI = useMemo(() => {
     const map = {
-      green: { label: "GREEN – normal conditions", textClass: "green-text", chipClass: "weather-chip weather-chip-green" },
-      yellow: { label: "YELLOW – be aware", textClass: "yellow-text", chipClass: "weather-chip weather-chip-yellow" },
-      orange: { label: "ORANGE – take action", textClass: "orange-text", chipClass: "weather-chip weather-chip-orange" },
-      red: { label: "RED – danger to life", textClass: "red-text", chipClass: "weather-chip weather-chip-red" },
+      green: {
+        label: "GREEN – normal conditions",
+        textClass: "green-text",
+        chipClass: "weather-chip weather-chip-green",
+      },
+      yellow: {
+        label: "YELLOW – be aware",
+        textClass: "yellow-text",
+        chipClass: "weather-chip weather-chip-yellow",
+      },
+      orange: {
+        label: "ORANGE – take action",
+        textClass: "orange-text",
+        chipClass: "weather-chip weather-chip-orange",
+      },
+      red: {
+        label: "RED – danger to life",
+        textClass: "red-text",
+        chipClass: "weather-chip weather-chip-red",
+      },
     };
     return map[weatherStatus] || map.green;
   }, [weatherStatus]);
@@ -346,10 +395,9 @@ export default function HomePage() {
       setWeatherError("");
       const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
       const json = await res.json().catch(() => ({}));
-
       if (!json?.ok) setWeatherError(json?.error || "Weather unavailable");
-      const nextStatus = json?.status || "green";
 
+      const nextStatus = json?.status || "green";
       setWeatherStatus(nextStatus);
       setWeatherWarnings(Array.isArray(json?.warnings) ? json.warnings : []);
       setFetchedAt(json?.fetchedAt || "");
@@ -437,6 +485,7 @@ export default function HomePage() {
     setSelectedBilling("Yearly");
     setMembershipMsg("");
     setMoreOpen(false);
+
     setTimeout(() => {
       const el = document.getElementById("membership-application");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -510,25 +559,58 @@ export default function HomePage() {
               KRINEDAL-<span className="hero-r">R</span>
             </div>
             <small className="topbar-sub">
-              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on standards • Run by systems • Powered by people
+              <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND ☘️ — Built on
+              standards • Run by systems • Powered by people
             </small>
           </div>
 
           {/* Desktop actions */}
           <div className="topbar-actions">
-            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-            <button className="btn btn-outline" onClick={openCommunityModal}>Community Support</button>
-            <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
-            <a href="#estimate" className="btn btn-outline">Get Quote</a>
-            <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>Memberships</button>
-            <button type="button" className="btn btn-outline" onClick={openTermsModal}>Website Terms</button>
+            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
+              People &amp; Culture
+            </button>
+            <button className="btn btn-outline" onClick={openCommunityModal}>
+              Community Support
+            </button>
+            <a href="tel:0831762475" className="btn btn-primary">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
+              WhatsApp
+            </a>
+            <a href="#estimate" className="btn btn-outline">
+              Get Quote
+            </a>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => scrollToMembershipApplication("Diamond")}
+            >
+              Memberships
+            </button>
+            <button type="button" className="btn btn-outline" onClick={openTermsModal}>
+              Website Terms
+            </button>
           </div>
 
           {/* Mobile actions */}
           <div className="topbar-actions-mobile">
-            <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp</a>
+            <a href="tel:0831762475" className="btn btn-primary">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
+              WhatsApp
+            </a>
 
             <div className="more-wrap" ref={moreRef}>
               <button
@@ -542,13 +624,48 @@ export default function HomePage() {
 
               {moreOpen && (
                 <div className="more-menu">
-                  <button className="more-item" onClick={() => { setPcOpen(true); setMoreOpen(false); }}>👥 People &amp; Culture</button>
-                  <button className="more-item" onClick={openCommunityModal}>🤝 Community Support</button>
-                  <a className="more-item" href="#estimate" onClick={() => setMoreOpen(false)}>🧾 Get Quote</a>
-                  <button className="more-item" onClick={() => scrollToMembershipApplication(selectedPlan || "Diamond")}>💎 Memberships</button>
-                  <button className="more-item" onClick={openTermsModal}>📄 Website Terms</button>
-                  <a className="more-item" href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>📸 Instagram</a>
-                  <a className="more-item" href="https://m.me/61581354904730" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>📘 Messenger</a>
+                  <button
+                    className="more-item"
+                    onClick={() => {
+                      setPcOpen(true);
+                      setMoreOpen(false);
+                    }}
+                  >
+                    👥 People &amp; Culture
+                  </button>
+                  <button className="more-item" onClick={openCommunityModal}>
+                    🤝 Community Support
+                  </button>
+                  <a className="more-item" href="#estimate" onClick={() => setMoreOpen(false)}>
+                    🧾 Get Quote
+                  </a>
+                  <button
+                    className="more-item"
+                    onClick={() => scrollToMembershipApplication(selectedPlan || "Diamond")}
+                  >
+                    💎 Memberships
+                  </button>
+                  <button className="more-item" onClick={openTermsModal}>
+                    📄 Website Terms
+                  </button>
+                  <a
+                    className="more-item"
+                    href="https://www.instagram.com/krinedalr/"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setMoreOpen(false)}
+                  >
+                    📸 Instagram
+                  </a>
+                  <a
+                    className="more-item"
+                    href="https://m.me/61581354904730"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setMoreOpen(false)}
+                  >
+                    📘 Messenger
+                  </a>
                 </div>
               )}
             </div>
@@ -558,8 +675,16 @@ export default function HomePage() {
 
       {/* MODALS */}
       <PeopleCultureModal open={pcOpen} onClose={() => setPcOpen(false)} />
-      <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
-      <CommunitySupportModal open={communityOpen} onClose={() => setCommunityOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
+      <TermsModal
+        open={termsOpen}
+        onClose={() => setTermsOpen(false)}
+        RED_POLICY_LINE={RED_POLICY_LINE}
+      />
+      <CommunitySupportModal
+        open={communityOpen}
+        onClose={() => setCommunityOpen(false)}
+        RED_POLICY_LINE={RED_POLICY_LINE}
+      />
 
       {/* HERO */}
       <section className="hero">
@@ -579,11 +704,13 @@ export default function HomePage() {
             <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
 
             <p className="hero-lead">
-              24/7 storm damage call-out, full roof renewals and <span className="hero-strong">luxury tiling</span> for homes and rental properties.
+              24/7 storm damage call-out, full roof renewals and{" "}
+              <span className="hero-strong">luxury tiling</span> for homes and rental properties.
               Snow, rain or storm won&apos;t stop us.
             </p>
 
             <p className="hero-weather-label">Current Ireland weather status:</p>
+
             <div className="hero-weather-row">
               <span className={weatherUI.chipClass}>
                 {weatherLoaded ? weatherUI.label : "Loading weather…"}
@@ -602,25 +729,46 @@ export default function HomePage() {
             </div>
 
             <div className="hero-actions">
-              <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
-              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">WhatsApp us now</a>
-              <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="btn btn-outline">Instagram</a>
-              <button type="button" className="btn btn-outline" onClick={() => scrollToMembershipApplication("Diamond")}>View memberships</button>
-              <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>Website terms</button>
+              <a href="tel:0831762475" className="btn btn-primary">
+                Call 24/7 Storm Line
+              </a>
+              <a
+                href="https://wa.me/353831762475"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
+                WhatsApp us now
+              </a>
+              <a
+                href="https://www.instagram.com/krinedalr/"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
+                Instagram
+              </a>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => scrollToMembershipApplication("Diamond")}
+              >
+                View memberships
+              </button>
+              <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>
+                Website terms
+              </button>
             </div>
 
-            <ul className="hero-bullets">
-              {SERVICES.map((s) => <li key={s}>{s}</li>)}
-            </ul>
-
+            <ul className="hero-bullets">{SERVICES.map((s) => <li key={s}>{s}</li>)}</ul>
             <p className="hero-note">*Response time depends on location &amp; weather conditions.</p>
           </div>
 
           <aside className="hero-side-card">
             <h2>Fast, respectful property care</h2>
             <p>
-              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we keep your home safe,
-              dry and beautifully finished.
+              From emergency leaks at midnight to full bathroom tiling that looks like a hotel – we
+              keep your home safe, dry and beautifully finished.
             </p>
             <div className="hero-side-list">
               <p>✓ 24/7 emergency line</p>
@@ -638,15 +786,16 @@ export default function HomePage() {
             <div>
               <div className="plans-title">Customer memberships</div>
               <p className="plans-sub">
-                Designed for customers who want priority support and clear rules.
-                Memberships are approved based on area coverage and current workload.
+                Designed for customers who want priority support and clear rules. Memberships are
+                approved based on area coverage and current workload.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
                 Note: Membership covers <strong>planning + priority + make-safe</strong> (fair use).
                 Permanent repairs/materials are quoted separately.
               </p>
               <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                <strong>Insurer-safe:</strong> Membership is a service agreement — <strong>not insurance</strong>.
+                <strong>Insurer-safe:</strong> Membership is a service agreement —{" "}
+                <strong>not insurance</strong>.
               </p>
             </div>
 
@@ -659,75 +808,147 @@ export default function HomePage() {
           <div className="plans-grid">
             {/* BRONZE */}
             <div className="plan">
-              <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥉</span> BRONZE
+              </div>
               <div className="plan-name">Bronze — planned support</div>
               <div className="plan-price">{planPriceLabel("Bronze")}</div>
               <ul>
-                <li><strong>Priority booking</strong> for non-emergency jobs</li>
-                <li><strong>Member schedule slot</strong> (faster than non-members)</li>
-                <li><strong>Discounted inspection</strong> (1× per year, scheduled)</li>
-                <li><strong>FREE call-out on GREEN</strong> warnings (make-safe / fair use)</li>
+                <li>
+                  <strong>Priority booking</strong> for non-emergency jobs
+                </li>
+                <li>
+                  <strong>Member schedule slot</strong> (faster than non-members)
+                </li>
+                <li>
+                  <strong>Discounted inspection</strong> (1× per year, scheduled)
+                </li>
+                <li>
+                  <strong>FREE call-out on GREEN</strong> warnings (make-safe / fair use)
+                </li>
               </ul>
               <div className="plan-foot">Best for organised maintenance and reliable scheduling.</div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>Apply</button>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Bronze")}
+                >
+                  Apply
+                </button>
               </div>
             </div>
 
             {/* SILVER */}
             <div className="plan">
-              <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥈</span> SILVER
+              </div>
               <div className="plan-name">Silver — faster response</div>
               <div className="plan-price">{planPriceLabel("Silver")}</div>
               <ul>
-                <li><strong>Higher priority queue</strong> than Bronze</li>
-                <li><strong>Emergency make-safe support</strong> (fair use)</li>
-                <li><strong>FREE call-out on GREEN</strong> warnings</li>
-                <li><strong>Discounted call-out</strong> on YELLOW / ORANGE</li>
+                <li>
+                  <strong>Higher priority queue</strong> than Bronze
+                </li>
+                <li>
+                  <strong>Emergency make-safe support</strong> (fair use)
+                </li>
+                <li>
+                  <strong>FREE call-out on GREEN</strong> warnings
+                </li>
+                <li>
+                  <strong>Discounted call-out</strong> on YELLOW / ORANGE
+                </li>
               </ul>
               <div className="plan-foot">Great for families &amp; rentals that need faster support.</div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>Apply</button>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Silver")}
+                >
+                  Apply
+                </button>
               </div>
             </div>
 
             {/* GOLD */}
             <div className="plan">
-              <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥇</span> GOLD
+              </div>
               <div className="plan-name">Gold — priority + reporting</div>
               <div className="plan-price">{planPriceLabel("Gold")}</div>
               <ul>
-                <li><strong>Top priority queue</strong> (before Bronze/Silver)</li>
-                <li><strong>FREE call-out on GREEN + YELLOW</strong> warnings</li>
-                <li><strong>Discounted call-out</strong> on ORANGE</li>
-                <li><strong>Annual inspection</strong> included (scheduled)</li>
+                <li>
+                  <strong>Top priority queue</strong> (before Bronze/Silver)
+                </li>
+                <li>
+                  <strong>FREE call-out on GREEN + YELLOW</strong> warnings
+                </li>
+                <li>
+                  <strong>Discounted call-out</strong> on ORANGE
+                </li>
+                <li>
+                  <strong>Annual inspection</strong> included (scheduled)
+                </li>
               </ul>
-              <div className="plan-foot">Ideal for landlords / multi-property owners who need documentation.</div>
+              <div className="plan-foot">
+                Ideal for landlords / multi-property owners who need documentation.
+              </div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>Apply</button>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Gold")}
+                >
+                  Apply
+                </button>
               </div>
             </div>
 
             {/* DIAMOND */}
             <div className="plan plan-highlight">
-              <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">💎</span> DIAMOND
+              </div>
               <div className="plan-name">Diamond — owner priority cover</div>
               <div className="plan-price">{planPriceLabel("Diamond")}</div>
               <ul>
-                <li><strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE / RED</strong></li>
-                <li><strong>Owner priority contact</strong> + fastest scheduling</li>
-                <li><strong>Emergency make-safe</strong> included (fair use)</li>
-                <li><strong>Photos + written report</strong> included (insurance-ready)</li>
-                <li><strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
-                <li><strong>Chimney cleaning 1× per year</strong> (scheduled, safe access rules apply)</li>
+                <li>
+                  <strong>€0 call-out fee</strong> on <strong>GREEN / YELLOW / ORANGE / RED</strong>
+                </li>
+                <li>
+                  <strong>Owner priority contact</strong> + fastest scheduling
+                </li>
+                <li>
+                  <strong>Emergency make-safe</strong> included (fair use)
+                </li>
+                <li>
+                  <strong>Photos + written report</strong> included (insurance-ready)
+                </li>
+                <li>
+                  <strong>Gutter cleaning 1× per year</strong> (scheduled, safe access rules apply)
+                </li>
+                <li>
+                  <strong>Chimney cleaning 1× per year</strong> (scheduled, safe access rules apply)
+                </li>
               </ul>
               <div className="plan-foot">
                 ✅ Under Diamond, call-out fee is <strong>€0</strong> in all warning levels.
                 <br />
-                <span className="muted smallest" style={{ color: "#4b5563" }}>{RED_POLICY_LINE}</span>
+                <span className="muted smallest" style={{ color: "#4b5563" }}>
+                  {RED_POLICY_LINE}
+                </span>
               </div>
               <div className="plan-actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>Apply</button>
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => scrollToMembershipApplication("Diamond")}
+                >
+                  Apply
+                </button>
               </div>
             </div>
           </div>
@@ -736,8 +957,8 @@ export default function HomePage() {
           <div className="member-savings" style={{ marginTop: 22 }}>
             <div className="member-savings-title">Extra savings with memberships</div>
             <p className="member-savings-sub">
-              Many customers pay separate companies for these jobs. With KRINEDAL-R memberships,
-              you can save money and keep everything under one trusted contact.
+              Many customers pay separate companies for these jobs. With KRINEDAL-R memberships, you
+              can save money and keep everything under one trusted contact.
             </p>
 
             <button
@@ -755,29 +976,57 @@ export default function HomePage() {
                 <div className="savings-grid">
                   <div className="savings-item">
                     <div className="savings-name">Chimney cleaning</div>
-                    <div className="savings-row"><span>Typical market</span><strong>€120–€220</strong></div>
-                    <div className="savings-row"><span>With Diamond</span><strong>Included 1× / year*</strong></div>
+                    <div className="savings-row">
+                      <span>Typical market</span>
+                      <strong>€120–€220</strong>
+                    </div>
+                    <div className="savings-row">
+                      <span>With Diamond</span>
+                      <strong>Included 1× / year*</strong>
+                    </div>
                   </div>
+
                   <div className="savings-item">
                     <div className="savings-name">Gutter cleaning</div>
-                    <div className="savings-row"><span>Typical market</span><strong>€90–€180</strong></div>
-                    <div className="savings-row"><span>With Diamond</span><strong>Included 1× / year*</strong></div>
+                    <div className="savings-row">
+                      <span>Typical market</span>
+                      <strong>€90–€180</strong>
+                    </div>
+                    <div className="savings-row">
+                      <span>With Diamond</span>
+                      <strong>Included 1× / year*</strong>
+                    </div>
                   </div>
+
                   <div className="savings-item">
                     <div className="savings-name">Drain / pipe cleaning (basic)</div>
-                    <div className="savings-row"><span>Typical market</span><strong>€120–€260</strong></div>
-                    <div className="savings-row"><span>Members</span><strong>Discounted / quoted</strong></div>
+                    <div className="savings-row">
+                      <span>Typical market</span>
+                      <strong>€120–€260</strong>
+                    </div>
+                    <div className="savings-row">
+                      <span>Members</span>
+                      <strong>Discounted / quoted</strong>
+                    </div>
                   </div>
+
                   <div className="savings-item">
                     <div className="savings-name">Annual inspection report</div>
-                    <div className="savings-row"><span>Typical market</span><strong>€120–€250</strong></div>
-                    <div className="savings-row"><span>With Gold</span><strong>Included 1× / year*</strong></div>
+                    <div className="savings-row">
+                      <span>Typical market</span>
+                      <strong>€120–€250</strong>
+                    </div>
+                    <div className="savings-row">
+                      <span>With Gold</span>
+                      <strong>Included 1× / year*</strong>
+                    </div>
                   </div>
                 </div>
 
                 <p className="muted smallest" style={{ marginTop: 10 }}>
-                  *Included/discounted services depend on safe access and the specific property setup. If scaffolding, MEWP,
-                  specialist access, heavy blockages, or extra labour is required, that is quoted separately.
+                  *Included/discounted services depend on safe access and the specific property
+                  setup. If scaffolding, MEWP, specialist access, heavy blockages, or extra labour
+                  is required, that is quoted separately.
                 </p>
               </>
             )}
@@ -787,53 +1036,111 @@ export default function HomePage() {
           <section id="membership-application" style={{ scrollMarginTop: 92 }}>
             <div className="form-card membership-form">
               <h2>Membership application</h2>
-              <p className="form-sub">Apply in 60 seconds. We’ll confirm coverage &amp; availability by phone / email.</p>
+              <p className="form-sub">
+                Apply in 60 seconds. We’ll confirm coverage &amp; availability by phone / email.
+              </p>
 
               <form onSubmit={onMembershipSubmit}>
-                <input type="text" name="website" style={{ display: "none" }} autoComplete="off" tabIndex={-1} />
+                <input
+                  type="text"
+                  name="website"
+                  style={{ display: "none" }}
+                  autoComplete="off"
+                  tabIndex={-1}
+                />
 
                 <div className="form-grid two-col">
                   <div className="field">
                     <label htmlFor="m_name">Your name</label>
-                    <input id="m_name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
+                    <input
+                      id="m_name"
+                      name="Name"
+                      type="text"
+                      placeholder="Full name"
+                      required
+                      autoComplete="name"
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="m_phone">Phone number</label>
-                    <input id="m_phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
+                    <input
+                      id="m_phone"
+                      name="Phone"
+                      type="tel"
+                      placeholder="+353"
+                      required
+                      autoComplete="tel"
+                      inputMode="tel"
+                    />
                   </div>
                 </div>
 
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="m_email">Email</label>
-                    <input id="m_email" name="Email" type="email" placeholder="you@email.com" required autoComplete="email" inputMode="email" />
+                    <input
+                      id="m_email"
+                      name="Email"
+                      type="email"
+                      placeholder="you@email.com"
+                      required
+                      autoComplete="email"
+                      inputMode="email"
+                    />
                   </div>
                 </div>
 
                 <div className="form-grid two-col">
                   <div className="field">
                     <label htmlFor="m_eircode">Eircode</label>
-                    <input id="m_eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                    <input
+                      id="m_eircode"
+                      name="Eircode"
+                      type="text"
+                      placeholder="e.g. C15 XXXX"
+                      required
+                      autoComplete="postal-code"
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="m_town">Town / County</label>
-                    <input id="m_town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                    <input
+                      id="m_town"
+                      name="Town/County"
+                      type="text"
+                      placeholder="e.g. Navan, Co. Meath"
+                      required
+                      autoComplete="address-level2"
+                    />
                   </div>
                 </div>
 
                 <div className="form-grid two-col">
                   <div className="field">
                     <label htmlFor="m_plan">Plan</label>
-                    <select id="m_plan" name="Plan" value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)} autoComplete="off">
+                    <select
+                      id="m_plan"
+                      name="Plan"
+                      value={selectedPlan}
+                      onChange={(e) => setSelectedPlan(e.target.value)}
+                      autoComplete="off"
+                    >
                       <option>Bronze</option>
                       <option>Silver</option>
                       <option>Gold</option>
                       <option>Diamond</option>
                     </select>
                   </div>
+
                   <div className="field">
                     <label htmlFor="m_billing">Billing</label>
-                    <select id="m_billing" name="Billing" value={selectedBilling} onChange={(e) => setSelectedBilling(e.target.value)} autoComplete="off">
+                    <select
+                      id="m_billing"
+                      name="Billing"
+                      value={selectedBilling}
+                      onChange={(e) => setSelectedBilling(e.target.value)}
+                      autoComplete="off"
+                    >
                       <option>Yearly</option>
                       <option>Quarterly</option>
                     </select>
@@ -843,14 +1150,24 @@ export default function HomePage() {
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="m_address">Address (optional)</label>
-                    <input id="m_address" name="Address" type="text" placeholder="Street / Estate / House number" autoComplete="street-address" />
+                    <input
+                      id="m_address"
+                      name="Address"
+                      type="text"
+                      placeholder="Street / Estate / House number"
+                      autoComplete="street-address"
+                    />
                   </div>
                 </div>
 
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="m_notes">Anything we should know?</label>
-                    <textarea id="m_notes" name="Member notes" placeholder="Roof type, recurring leak, rental property, access, pets, etc." />
+                    <textarea
+                      id="m_notes"
+                      name="Member notes"
+                      placeholder="Roof type, recurring leak, rental property, access, pets, etc."
+                    />
                   </div>
                 </div>
 
@@ -858,23 +1175,33 @@ export default function HomePage() {
                 <div className="form-grid">
                   <div className="field" style={{ gap: 8 }}>
                     <label style={{ marginBottom: 0 }}>Important membership terms (summary)</label>
+
                     <div className="terms-box">
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Non-refundable:</strong> Membership payments are non-refundable once activated, unless required by law.
+                        <strong>Non-refundable:</strong> Membership payments are non-refundable once
+                        activated, unless required by law.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Fair use:</strong> Membership is for genuine property issues and emergency make-safe. Repeated non-urgent call-outs,
-                        misuse, or abusive behaviour may lead to suspension/cancellation without refund.
+                        <strong>Fair use:</strong> Membership is for genuine property issues and
+                        emergency make-safe. Repeated non-urgent call-outs, misuse, or abusive
+                        behaviour may lead to suspension/cancellation without refund.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
-                        <strong>Emergency scope:</strong> “Make-safe” includes temporary steps to reduce immediate damage (e.g. tarping, temporary sealing,
-                        isolating hazards). <strong>Materials, scaffolding, skips, specialist hire</strong> and permanent repairs are quoted separately.
+                        <strong>Emergency scope:</strong> “Make-safe” includes temporary steps to
+                        reduce immediate damage (e.g. tarping, temporary sealing, isolating hazards).{" "}
+                        <strong>Materials, scaffolding, skips, specialist hire</strong> and
+                        permanent repairs are quoted separately.
                       </p>
+
                       <p style={{ marginBottom: 10 }}>
                         <strong>RED warning safety policy (strict):</strong> {RED_POLICY_LINE}
                       </p>
+
                       <p style={{ marginBottom: 0 }}>
-                        Full Website &amp; Company Terms are available via the <strong>Website Terms</strong> button (top bar).
+                        Full Website &amp; Company Terms are available via the{" "}
+                        <strong>Website Terms</strong> button (top bar).
                       </p>
                     </div>
 
@@ -885,18 +1212,26 @@ export default function HomePage() {
                         onChange={(e) => setAgreeMembership(e.target.checked)}
                         aria-label="Agree to membership terms"
                       />
-                      I understand and agree to the membership terms above and the Website &amp; Company Terms.
+                      I understand and agree to the membership terms above and the Website &amp;
+                      Company Terms.
                     </label>
                   </div>
                 </div>
 
                 <div className="form-actions">
-                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
+                  <button
+                    type="submit"
+                    className="btn btn-emerald"
+                    disabled={membershipSubmitting}
+                  >
                     {membershipSubmitting ? "Sending…" : "Send membership application"}
                   </button>
+
                   <p className="submit-tip">
-                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
+                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency
+                    line: <strong>083 176 2475</strong>.
                   </p>
+
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
                 </div>
               </form>
@@ -914,7 +1249,10 @@ export default function HomePage() {
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
             <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
-            <a href="tel:0831762475" className="btn btn-storm">🚨 24/7 STORM EMERGENCY LINE</a>
+
+            <a href="tel:0831762475" className="btn btn-storm">
+              🚨 24/7 STORM EMERGENCY LINE
+            </a>
 
             <div style={{ marginTop: 14 }}>
               <p className="muted small" style={{ fontWeight: 800, marginBottom: 6 }}>
@@ -923,19 +1261,24 @@ export default function HomePage() {
 
               <p className="muted small" style={{ lineHeight: 1.55 }}>
                 We help where we can — especially during storms. If you are <strong>elderly</strong> or a{" "}
-                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks, storm damage, unsafe roof),
-                we offer:
+                <strong>single parent</strong> and you are dealing with an urgent emergency (leaks,
+                storm damage, unsafe roof), we offer:
               </p>
 
               <ul className="list" style={{ marginTop: 10 }}>
-                <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
-                <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
+                <li>
+                  <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+                </li>
+                <li>
+                  <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+                </li>
               </ul>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
-                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended for genuine
-                emergency make-safe visits. Materials, skips, scaffolding, specialist hire and additional works are charged separately.
-                Availability depends on weather, travel distance and workload.
+                <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and
+                are intended for genuine emergency make-safe visits. Materials, skips, scaffolding,
+                specialist hire and additional works are charged separately. Availability depends on
+                weather, travel distance and workload.
               </p>
 
               <p className="muted smallest" style={{ marginTop: 10 }}>
@@ -951,29 +1294,35 @@ export default function HomePage() {
 
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
+
               <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
                 <span className="left">GREEN</span>
                 <span className="right">€250 – €350</span>
               </div>
+
               <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
                 <span className="left">YELLOW</span>
                 <span className="right">€350 – €450</span>
               </div>
+
               <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
                 <span className="left">ORANGE</span>
                 <span className="right">€450 – €550</span>
               </div>
+
               <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
                 <span className="left">RED</span>
                 <span className="right">€550 – €1000</span>
               </div>
-              <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
+
+              <div className="callout-foot">
+                Includes call-out + make-safe only. Final price confirmed before work.
+              </div>
             </div>
           </div>
 
           <div className="card">
             <h2>Ireland Weather Status</h2>
-
             <p className="muted small" style={{ marginTop: 8 }}>
               Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
             </p>
@@ -988,18 +1337,15 @@ export default function HomePage() {
                 {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
               </button>
 
-              <a
-                className="btn btn-outline"
-                href={WIND_MAP_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn btn-outline" href={WIND_MAP_URL} target="_blank" rel="noreferrer">
                 🌬️ Live Wind Map
               </a>
             </div>
 
             {weatherError ? (
-              <p className="muted smallest" style={{ marginTop: 8 }}>⚠️ {weatherError}</p>
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                ⚠️ {weatherError}
+              </p>
             ) : (
               <p className="muted smallest" style={{ marginTop: 8 }}>
                 Auto-updated from Met Éireann warnings
@@ -1009,7 +1355,9 @@ export default function HomePage() {
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>Latest warnings:</p>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                  Latest warnings:
+                </p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 3).map((w, idx) => (
                     <li key={w?.id || w?.headline || idx}>
@@ -1043,17 +1391,14 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal.
-              Clean, fast and extremely professional. Couldn't be happier.”
+              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal. Clean, fast and extremely professional. Couldn't be happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe.
-              Snow, rain and storm didn't stop him. Trust 100% saved number - completed, insurance claim report was
-              issued within couple hours. Can’t imagine better service. Thank you Chris.”
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, rain and storm didn't stop him. Trust 100% saved number - completed, insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
@@ -1065,7 +1410,9 @@ export default function HomePage() {
         <div className="container grid-3">
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
-            <p className="muted small">Handy calculator to get a feel for budget. Final prices always confirmed after inspection.</p>
+            <p className="muted small">
+              Handy calculator to get a feel for budget. Final prices always confirmed after inspection.
+            </p>
 
             <label className="field-label">
               Roof area (m²)
@@ -1079,10 +1426,14 @@ export default function HomePage() {
               />
             </label>
 
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{roofRate}</strong>
+            </p>
+
             <p className="calc-result">
               Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
+
             <p className="muted smallest">
               Typical full roof renewal often falls between <strong>€5,800–€10,000</strong> depending on size, materials and access.
             </p>
@@ -1090,7 +1441,9 @@ export default function HomePage() {
 
           <div className="card">
             <h2>Luxury tiling cost idea</h2>
-            <p className="muted small">For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.</p>
+            <p className="muted small">
+              For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.
+            </p>
 
             <label className="field-label">
               Tiled area (m²)
@@ -1104,10 +1457,14 @@ export default function HomePage() {
               />
             </label>
 
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{tileRate}</strong>
+            </p>
+
             <p className="calc-result">
               Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
+
             <p className="muted smallest">
               Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
             </p>
@@ -1115,7 +1472,9 @@ export default function HomePage() {
 
           <div className="card">
             <h2>Flooring cost idea</h2>
-            <p className="muted small">Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.</p>
+            <p className="muted small">
+              Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.
+            </p>
 
             <label className="field-label">
               Floor area (m²)
@@ -1129,10 +1488,14 @@ export default function HomePage() {
               />
             </label>
 
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{floorRate}</strong>
+            </p>
+
             <p className="calc-result">
               Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
+
             <p className="muted smallest">
               Flooring labour often ranges <strong>€18–€45</strong> per m². This calculator uses <strong>€26</strong> per m².
             </p>
@@ -1157,27 +1520,59 @@ export default function HomePage() {
                   <label htmlFor="name">Your name</label>
                   <input id="name" name="Name" type="text" placeholder="Full name" required autoComplete="name" />
                 </div>
+
                 <div className="field">
                   <label htmlFor="phone">Phone number</label>
-                  <input id="phone" name="Phone" type="tel" placeholder="+353" required autoComplete="tel" inputMode="tel" />
+                  <input
+                    id="phone"
+                    name="Phone"
+                    type="tel"
+                    placeholder="+353"
+                    required
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
                 </div>
               </div>
 
               <div className="form-grid">
                 <div className="field">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="Email" type="email" placeholder="you@email.com" required autoComplete="email" inputMode="email" />
+                  <input
+                    id="email"
+                    name="Email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                    autoComplete="email"
+                    inputMode="email"
+                  />
                 </div>
               </div>
 
               <div className="form-grid two-col">
                 <div className="field">
                   <label htmlFor="eircode">Eircode</label>
-                  <input id="eircode" name="Eircode" type="text" placeholder="e.g. C15 XXXX" required autoComplete="postal-code" />
+                  <input
+                    id="eircode"
+                    name="Eircode"
+                    type="text"
+                    placeholder="e.g. C15 XXXX"
+                    required
+                    autoComplete="postal-code"
+                  />
                 </div>
+
                 <div className="field">
                   <label htmlFor="town">Town / County</label>
-                  <input id="town" name="Town/County" type="text" placeholder="e.g. Navan, Co. Meath" required autoComplete="address-level2" />
+                  <input
+                    id="town"
+                    name="Town/County"
+                    type="text"
+                    placeholder="e.g. Navan, Co. Meath"
+                    required
+                    autoComplete="address-level2"
+                  />
                 </div>
               </div>
 
@@ -1208,6 +1603,7 @@ export default function HomePage() {
                   <label htmlFor="date">Preferred date</label>
                   <input id="date" name="Preferred date" type="date" required />
                 </div>
+
                 <div className="field">
                   <label htmlFor="time">Preferred time</label>
                   <input id="time" name="Preferred time" type="time" required />
@@ -1228,8 +1624,14 @@ export default function HomePage() {
                       setFilesLabel(list.length ? `${list.length} file(s) selected` : "");
                     }}
                   />
-                  {filesLabel && <p className="muted smallest" style={{ marginTop: 6 }}>{filesLabel}</p>}
-                  <p className="muted smallest" style={{ marginTop: 6 }}>Tip: You can also send photos by WhatsApp if easier.</p>
+                  {filesLabel && (
+                    <p className="muted smallest" style={{ marginTop: 6 }}>
+                      {filesLabel}
+                    </p>
+                  )}
+                  <p className="muted smallest" style={{ marginTop: 6 }}>
+                    Tip: You can also send photos by WhatsApp if easier.
+                  </p>
                 </div>
               </div>
 
@@ -1244,10 +1646,17 @@ export default function HomePage() {
                 <button type="submit" className="btn btn-storm" disabled={submitting}>
                   {submitting ? "Sending…" : "Send estimate request"}
                 </button>
+
                 <p className="submit-tip">
-                  Thank you for contacting us — our team member will be in touch shortly. In case of emergency call <strong>083 176 2475</strong>.
+                  Thank you for contacting us — our team member will be in touch shortly. In case of emergency call{" "}
+                  <strong>083 176 2475</strong>.
                 </p>
-                {submitMsg && <p className="membership-msg" style={{ marginTop: 10 }}>{submitMsg}</p>}
+
+                {submitMsg && (
+                  <p className="membership-msg" style={{ marginTop: 10 }}>
+                    {submitMsg}
+                  </p>
+                )}
               </div>
             </form>
           </div>
@@ -1278,13 +1687,17 @@ export default function HomePage() {
 
           <footer className="footer">
             <div className="footer-brand">
-              <span className="footer-name">KRINEDAL-<span className="hero-r">R</span></span>
+              <span className="footer-name">
+                KRINEDAL-<span className="hero-r">R</span>
+              </span>
               <p className="muted footer-line">Premium property care, storm or sunshine – Ireland-wide.</p>
               <p className="footer-dna">Built on standards • Run by systems • Powered by people</p>
             </div>
 
             <div className="footer-contact">
-              <p>Phone: <strong>083 176 2475</strong></p>
+              <p>
+                Phone: <strong>083 176 2475</strong>
+              </p>
               <p>
                 Email:{" "}
                 <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
@@ -1292,27 +1705,42 @@ export default function HomePage() {
               </p>
               <p>
                 Web:{" "}
-                <a href="https://www.krinedalr.ie/" target="_blank" rel="noreferrer">www.krinedalr.ie</a>
+                <a href="https://www.krinedalr.ie/" target="_blank" rel="noreferrer">
+                  www.krinedalr.ie
+                </a>
               </p>
               <p>
                 Facebook:{" "}
-                <a
-                  href="https://m.facebook.com/profile.php?id=61581354904730"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://m.facebook.com/profile.php?id=61581354904730" target="_blank" rel="noreferrer">
                   Visit our page
                 </a>{" "}
                 • Instagram:{" "}
-                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">@krinedalr</a>
+                <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer">
+                  @krinedalr
+                </a>
               </p>
 
               <div className="footer-buttons">
-                <a href="tel:0831762475" className="btn footer-call">Call</a>
-                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">WhatsApp</a>
-                <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-                <button className="btn footer-call" onClick={() => setTermsOpen(true)}>Website Terms</button>
-                <button className="btn footer-call" onClick={openCommunityModal}>Community Support</button>
+                <a href="tel:0831762475" className="btn footer-call">
+                  Call
+                </a>
+                <a
+                  href="https://wa.me/353831762475"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn footer-whatsapp"
+                >
+                  WhatsApp
+                </a>
+                <button className="btn footer-call" onClick={() => setPcOpen(true)}>
+                  People &amp; Culture
+                </button>
+                <button className="btn footer-call" onClick={() => setTermsOpen(true)}>
+                  Website Terms
+                </button>
+                <button className="btn footer-call" onClick={openCommunityModal}>
+                  Community Support
+                </button>
               </div>
             </div>
           </footer>
@@ -1320,10 +1748,44 @@ export default function HomePage() {
 
         {/* FLOATING BUTTONS */}
         <div className="float-stack">
-          <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="float-btn float-wa" aria-label="WhatsApp" title="WhatsApp">💬</a>
-          <a href="https://m.me/61581354904730" target="_blank" rel="noreferrer" className="float-btn float-msgr" aria-label="Messenger" title="Messenger">📘</a>
-          <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="float-btn float-ig" aria-label="Instagram" title="Instagram">📸</a>
-          <a href="mailto:krinedalr@outlook.com" className="float-btn float-mail" aria-label="Email" title="Email">✉️</a>
+          <a
+            href="https://wa.me/353831762475"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-wa"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            💬
+          </a>
+          <a
+            href="https://m.me/61581354904730"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-msgr"
+            aria-label="Messenger"
+            title="Messenger"
+          >
+            📘
+          </a>
+          <a
+            href="https://www.instagram.com/krinedalr/"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-ig"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            📸
+          </a>
+          <a
+            href="mailto:krinedalr@outlook.com"
+            className="float-btn float-mail"
+            aria-label="Email"
+            title="Email"
+          >
+            ✉️
+          </a>
         </div>
       </section>
     </main>
