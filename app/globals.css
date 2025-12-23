@@ -1026,89 +1026,32 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   border-color:#e5e7eb;
   color:#111827;
 }
+
 /* =========================
    HOTFIX 1: MOBILE TOPBAR HEIGHT (PC unchanged)
+   + FINAL: Mobile hero black ends behind KRINEDAL-R block
 ========================= */
 @media (max-width: 520px){
-  /* reduce the forced offset */
+  /* reduce the forced offset (removes the big dark slab above hero on mobile) */
   main{ padding-top: 56px !important; }
 
   /* tighten the fixed bar */
   .topbar-inner{ padding: 8px 0 !important; }
   .topbar .btn{ padding: 7px 10px !important; }
-}
-/* =========================
-   HOTFIX 2: MEMBERSHIPS MOBILE STACK (NO SIDE SCROLL)
-========================= */
-@media (max-width: 520px){
-  .plans-grid{
-    /* kill carousel */
-    grid-auto-flow: unset !important;
-    grid-auto-columns: unset !important;
-    overflow-x: hidden !important;
-    scroll-snap-type: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-
-    /* stack */
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-
-  .plan{
-    width: 100% !important;
-    scroll-snap-align: unset !important;
-  }
-}
-/* =========================================
-   MOBILE TOPBAR + HERO FIX
-   Desktop untouched
-========================================= */
-@media (max-width: 520px) {
-
-  main {
-    padding-top: 74px;
-  }
-
-  .hero {
-    padding-top: 18px;
-    padding-bottom: 34px;
-  }
-
-  .hero-inner {
-    gap: 18px;
-  }
-
-  .topbar-inner {
-    padding: 6px 0;
-  }
-/* =========================================
-   FINAL: Mobile uses 3-button bar + Hero top black ends at logo
-   Desktop untouched
-========================================= */
-@media (max-width: 520px){
 
   /* 1) MOBILE TOPBAR: force 3-button bar only */
-  .topbar-actions{ display: none !important; }
-  .topbar-actions-mobile{ display: flex !important; }
+  .topbar-actions{ display:none !important; }
+  .topbar-actions-mobile{ display:flex !important; }
 
-  /* Make sure the fixed bar height is stable on mobile */
-  .topbar-inner{ padding: 6px 0 !important; }
-  .topbar .btn{ padding: 6px 10px !important; }
+  /* 2) HERO: controlled top dark that ends behind KRINEDAL-R block */
+  .hero{ position:relative; overflow:hidden; }
 
-  /* 2) HERO: end the black background behind the KRINEDAL-R block */
-  .hero{
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Top fade: keeps the black behind the logo, then blends into hero image */
+  /* Dark top overlay ONLY (doesn't add height; no desktop impact) */
   .hero::before{
     content:"";
     position:absolute;
     left:0; right:0; top:0;
-    height: 240px; /* adjust only this if needed */
+    height:240px; /* if you ever need micro-tune: change ONLY this number */
     background: linear-gradient(
       to bottom,
       rgba(2,6,23,0.95) 0%,
@@ -1120,11 +1063,6 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
     pointer-events:none;
   }
 
-  /* Ensure hero content stays above the overlay */
-  .hero-inner{ position: relative; z-index: 2; }
-}
-  .topbar .btn {
-    padding: 6px 10px;
-  }
-
+  /* Ensure hero content sits above overlay */
+  .hero-inner{ position:relative; z-index:2; }
 }
