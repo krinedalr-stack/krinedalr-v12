@@ -1026,3 +1026,38 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   border-color:#e5e7eb;
   color:#111827;
 }
+/* =========================
+   HOTFIX 1: MOBILE TOPBAR HEIGHT (PC unchanged)
+========================= */
+@media (max-width: 520px){
+  /* reduce the forced offset */
+  main{ padding-top: 68px !important; }
+
+  /* tighten the fixed bar */
+  .topbar-inner{ padding: 8px 0 !important; }
+  .topbar .btn{ padding: 7px 10px !important; }
+}
+/* =========================
+   HOTFIX 2: MEMBERSHIPS MOBILE STACK (NO SIDE SCROLL)
+========================= */
+@media (max-width: 520px){
+  .plans-grid{
+    /* kill carousel */
+    grid-auto-flow: unset !important;
+    grid-auto-columns: unset !important;
+    overflow-x: hidden !important;
+    scroll-snap-type: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    /* stack */
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .plan{
+    width: 100% !important;
+    scroll-snap-align: unset !important;
+  }
+}
