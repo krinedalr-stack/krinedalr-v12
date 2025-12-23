@@ -5,7 +5,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 
-/* ✅ FIX: prevent “white gaps” caused by viewport height quirks + ensure dark base always */
+/* ✅ FIX: stop “white windows” caused by browser viewport math + ensure dark base always */
 html, body { background: #0b1120; }
 body { overflow-x: hidden; }
 
@@ -35,15 +35,15 @@ body{
 
 /* ✅ stable offset for fixed topbar */
 main{
-  /* ✅ FIX: svh prevents mobile address-bar “math gaps” (keeps desktop same) */
+  /* ✅ FIX: svh prevents mobile address-bar “math gaps”, keeps desktop same */
   min-height: 100vh;
   min-height: 100svh;
 
   background: radial-gradient(circle at top, #111827 0, #020617 55%, #020617 100%);
   padding-top: 72px;
 
-  /* ✅ FIX: prevents tiny overflow gaps between stacked sections on some devices */
-  display: block;
+  /* ✅ FIX: avoid tiny seams/overflow gaps */
+  display:block;
 }
 
 a{ color: inherit; text-decoration: none; }
@@ -166,9 +166,9 @@ a:hover{ text-decoration: underline; }
 ========================= */
 .container{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
 
-/* ✅ FIX: prevent “between-sections” rendering seams on some devices */
-.section{ padding:64px 0; position: relative; }
-.section::before, .section::after{ content:""; display: table; }
+/* ✅ FIX: prevent between-section “seams” & margin-collapse weirdness */
+.section{ padding:64px 0; position:relative; }
+.section::before, .section::after{ content:""; display:table; }
 
 /* Light sections */
 .section-alt{ background:#fffdf7; color: var(--ink); }
@@ -184,25 +184,24 @@ a:hover{ text-decoration: underline; }
 /* =========================
    HERO
 ========================= */
-/* ✅ FIX: single source of truth for hero background (base + scoped overrides only) */
+/* ✅ single source of truth for hero background (base + scoped overrides only) */
 .hero{
-  /* background */
+  position:relative;
+
   background-image:url("/hero.jpg");
   background-repeat:no-repeat;
 
-  /* ✅ desktop default */
+  /* desktop default */
   --hero-bg-size: cover;
   --hero-bg-pos: center;
 
   background-size: var(--hero-bg-size);
   background-position: var(--hero-bg-pos);
 
-  /* layout */
-  position:relative;
   padding:56px 0 40px;
 
-  /* ✅ prevents tiny seams at top/bottom edges on some browsers */
-  background-color: #020617;
+  /* prevents any “transparent seam” showing behind */
+  background-color:#020617;
 }
 
 .shamrock{
@@ -226,7 +225,7 @@ a:hover{ text-decoration: underline; }
   display:grid;
   gap:32px;
   color:#f9fafb;
-  align-items: start;
+  align-items:start;
 }
 @media (min-width:900px){
   .hero-inner{ grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); }
@@ -306,7 +305,7 @@ a:hover{ text-decoration: underline; }
   padding:18px;
   border-radius:18px;
   box-shadow:0 18px 40px rgba(0,0,0,0.7);
-  align-self: start;
+  align-self:start;
 }
 .hero-side-card h2{ font-size:1.1rem; margin-bottom:6px; }
 .hero-side-list{ margin-top:10px; font-size:0.9rem; }
@@ -315,10 +314,9 @@ a:hover{ text-decoration: underline; }
   .hero-title{ font-size:2.2rem; }
 }
 
-/* ✅ MOBILE HERO BACKGROUND VIEW FIX (MOBILE ONLY) */
+/* ✅ Mobile hero framing only (isolated) */
 @media (max-width: 600px) {
   .hero {
-    /* ✅ scoped overrides only (no competing rules elsewhere) */
     --hero-bg-size: 115%;
     --hero-bg-pos: 50% 22%;
   }
@@ -810,15 +808,23 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   color: #4ade80;
 }
 
-/* ✅ MEMBERSHIPS: mobile swipe look (polish) */
+/* ✅ MEMBERSHIPS: mobile swipe look — FIXED so it doesn’t feel like a “big empty window” */
 @media (max-width: 520px){
   .plans-grid{
     grid-auto-flow: column;
-    grid-auto-columns: minmax(260px, 82%);
+    grid-auto-columns: minmax(260px, 86%);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+
+    /* ✅ key fix: align scroll area with container edges */
+    padding: 0 16px 8px;
+    margin: 0 -16px;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: 16px;
+    scroll-padding-right: 16px;
+
+    /* ✅ prevents bounce from showing odd gaps */
+    overscroll-behavior-x: contain;
   }
   .plan{ scroll-snap-align: start; }
   .plans-grid::-webkit-scrollbar{ display:none; }
