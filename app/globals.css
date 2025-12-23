@@ -1028,3 +1028,46 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 
   .plan{ max-width: 92vw; } /* prevents any card forcing extra width */
 }
+/* ===== FIX: HERO IMAGE STARTS TOO LOW ON MOBILE ===== */
+@media (max-width: 600px){
+  .hero{
+    position: relative;
+    padding-top: 36px;                 /* keeps spacing nice under topbar */
+    min-height: calc(100vh - 86px);    /* hero fills visible area */
+    background-image: none !important; /* disable old background */
+    overflow: hidden;
+  }
+
+  /* Put the photo as a real layer starting from the top */
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:url("/hero.jpg");
+    background-repeat:no-repeat;
+    background-size: 145%;
+    background-position: 50% 50%;      /* center it */
+    z-index:0;
+    transform: translateY(-18%);       /* pull image UP so it starts behind logo */
+  }
+
+  /* Dark overlay so text stays readable (same look as now) */
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(
+      180deg,
+      rgba(2,6,23,0.78) 0%,
+      rgba(2,6,23,0.55) 45%,
+      rgba(2,6,23,0.35) 100%
+    );
+    z-index:1;
+  }
+
+  /* Make sure hero content sits above layers */
+  .hero-inner{
+    position: relative;
+    z-index:2;
+  }
+}
