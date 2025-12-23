@@ -1071,3 +1071,19 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
     z-index:2;
   }
 }
+/* === HERO OVERLAY VISIBILITY FIX (OVERRIDE) === */
+/* Makes background image visible without breaking text */
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(2,6,23,0.55) 0%,
+    rgba(2,6,23,0.35) 45%,
+    rgba(2,6,23,0.55) 100%
+  );
+  z-index:1;
+  pointer-events:none;
+}
