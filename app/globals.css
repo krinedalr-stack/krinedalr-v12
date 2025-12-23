@@ -1099,3 +1099,19 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   /* optional: slightly tighten vertical spacing inside hero */
   .hero-inner{ gap: 18px !important; }
 }
+/* =========================================
+   FINAL MOBILE TOP + HERO FIX
+   Desktop untouched
+========================================= */
+@media (max-width: 520px){
+
+  /* Reserve correct space for fixed topbar */
+  main{
+    padding-top: 74px !important;
+  }
+
+  /* Hero spacing: no fat black band, no clipping */
+  .hero{
+    padding-top: 18px !important;
+    padding-bottom: 34px !important;
+  }
