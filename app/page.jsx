@@ -30,6 +30,61 @@ function IrelandFlag({ className = "" }) {
   );
 }
 
+/** SVG icons for floating buttons (real icons, no emojis) */
+function IconWhatsApp() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path
+        fill="#0b1120"
+        d="M16 3C9.39 3 4 8.39 4 15c0 2.1.55 4.15 1.6 5.96L4 29l8.2-1.55A11.88 11.88 0 0 0 16 27c6.61 0 12-5.39 12-12S22.61 3 16 3z"
+        opacity="0.15"
+      />
+      <path
+        fill="#ffffff"
+        d="M16 5.2c-5.39 0-9.8 4.41-9.8 9.8 0 1.92.56 3.79 1.62 5.4l-1.06 5.66 5.78-1.08A9.76 9.76 0 0 0 16 24.8c5.39 0 9.8-4.41 9.8-9.8S21.39 5.2 16 5.2zm5.55 13.43c-.24.68-1.37 1.3-1.9 1.38-.5.07-1.14.1-1.84-.12-.42-.13-.95-.31-1.64-.61-2.87-1.24-4.75-4.14-4.9-4.33-.14-.2-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.28.56-.35.75-.35h.54c.17 0 .4-.06.63.48.24.57.82 1.97.89 2.12.07.15.12.34.02.54-.1.2-.15.34-.29.52-.14.18-.3.4-.43.54-.14.14-.28.29-.12.56.16.27.72 1.19 1.55 1.93 1.07.95 1.97 1.24 2.24 1.38.27.14.43.12.59-.07.16-.2.68-.79.87-1.06.18-.27.37-.22.61-.13.24.09 1.55.73 1.82.86.27.13.45.2.52.31.07.11.07.66-.17 1.34z"
+      />
+    </svg>
+  );
+}
+
+function IconMessenger() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path
+        fill="#ffffff"
+        d="M16 4.5C9.37 4.5 4 9.44 4 15.54c0 3.48 1.75 6.59 4.49 8.62V27.5l3.25-1.79c1.33.38 2.76.59 4.26.59 6.63 0 12-4.94 12-10.96S22.63 4.5 16 4.5zm1.19 14.72-3.05-3.25-5.97 3.25 6.57-7.02 3.12 3.25 5.9-3.25-6.57 7.02z"
+      />
+    </svg>
+  );
+}
+
+function IconInstagram() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path
+        fill="#ffffff"
+        d="M20.4 6h-8.8A5.6 5.6 0 0 0 6 11.6v8.8A5.6 5.6 0 0 0 11.6 26h8.8A5.6 5.6 0 0 0 26 20.4v-8.8A5.6 5.6 0 0 0 20.4 6zm3.6 14.4a3.6 3.6 0 0 1-3.6 3.6h-8.8A3.6 3.6 0 0 1 8 20.4v-8.8A3.6 3.6 0 0 1 11.6 8h8.8A3.6 3.6 0 0 1 24 11.6v8.8z"
+      />
+      <path
+        fill="#ffffff"
+        d="M16 11.2A4.8 4.8 0 1 0 20.8 16 4.81 4.81 0 0 0 16 11.2zm0 7.6A2.8 2.8 0 1 1 18.8 16 2.81 2.81 0 0 1 16 18.8z"
+      />
+      <circle cx="21.2" cy="10.8" r="1.1" fill="#ffffff" />
+    </svg>
+  );
+}
+
+function IconMail() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path
+        fill="#ffffff"
+        d="M6.5 9.5h19A2.5 2.5 0 0 1 28 12v8A2.5 2.5 0 0 1 25.5 22h-19A2.5 2.5 0 0 1 4 20v-8A2.5 2.5 0 0 1 6.5 9.5zm0 2 9.5 6 9.5-6v-.2h-19v.2zm19 2.3-9.1 5.7a1 1 0 0 1-1.1 0L6.5 13.8V20a.5.5 0 0 0 .5.5h18a.5.5 0 0 0 .5-.5v-6.2z"
+      />
+    </svg>
+  );
+}
+
 function PeopleCultureModal({ open, onClose }) {
   if (!open) return null;
   return (
@@ -260,6 +315,10 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
             <li>
               <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
             </li>
+            <li>
+              <strong>35% OFF</strong> emergency call-out fee for{" "}
+              <strong>families caring for children with severe disabilities</strong>
+            </li>
           </ul>
           <p className="muted smallest" style={{ marginTop: 10 }}>
             <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
@@ -280,6 +339,12 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
             Single parents often carry full responsibility for their household alone.
             During emergencies there is no second person to share the pressure or cost.
             We reduce the call-out fee to help keep the home safe during difficult moments
+          </p>
+          <p>
+            Families caring for children with severe disabilities often face constant pressure, emotional strain, and unexpected emergencies.
+            During severe weather or urgent home safety issues, these families have little flexibility and fewer options to respond quickly.
+            Parents cannot leave children unattended in dangerous conditions while also trying to make the home safe.
+            We believe these families deserve understanding, dignity, and practical support when their home environment becomes unsafe.
           </p>
         </div>
 
@@ -342,13 +407,13 @@ export default function HomePage() {
 
   // ===== Calculators (locked rates) =====
   const [roofArea, setRoofArea] = useState("");
-  const roofRate = 45;
+  const roofRate = 70;
 
   const [tileArea, setTileArea] = useState("");
-  const tileRate = 48;
+  const tileRate = 75;
 
   const [floorArea, setFloorArea] = useState("");
-  const floorRate = 26;
+  const floorRate = 40;
 
   const roofTotal = roofArea ? (Number(roofArea) * roofRate).toFixed(0) : "";
   const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
@@ -479,6 +544,14 @@ export default function HomePage() {
     if (!p) return "";
     return `€${p.yearly} / year • €${p.quarterly} / quarter`;
   };
+
+  function scrollToId(id) {
+    setMoreOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
 
   function scrollToMembershipApplication(plan = "Diamond") {
     setSelectedPlan(plan);
@@ -633,21 +706,34 @@ export default function HomePage() {
                   >
                     👥 People &amp; Culture
                   </button>
+
                   <button className="more-item" onClick={openCommunityModal}>
                     🤝 Community Support
                   </button>
+
+                  <button className="more-item" onClick={() => scrollToId("live-weather")}>
+                    🌦 Live Weather Status
+                  </button>
+
+                  <button className="more-item" onClick={() => scrollToId("wind-weather")}>
+                    🌬️ Wind / Weather Reader
+                  </button>
+
                   <a className="more-item" href="#estimate" onClick={() => setMoreOpen(false)}>
                     🧾 Get Quote
                   </a>
+
                   <button
                     className="more-item"
                     onClick={() => scrollToMembershipApplication(selectedPlan || "Diamond")}
                   >
                     💎 Memberships
                   </button>
+
                   <button className="more-item" onClick={openTermsModal}>
                     📄 Website Terms
                   </button>
+
                   <a
                     className="more-item"
                     href="https://www.instagram.com/krinedalr/"
@@ -657,6 +743,7 @@ export default function HomePage() {
                   >
                     📸 Instagram
                   </a>
+
                   <a
                     className="more-item"
                     href="https://m.me/61581354904730"
@@ -732,6 +819,7 @@ export default function HomePage() {
               <a href="tel:0831762475" className="btn btn-primary">
                 Call 24/7 Storm Line
               </a>
+
               <a
                 href="https://wa.me/353831762475"
                 target="_blank"
@@ -740,6 +828,11 @@ export default function HomePage() {
               >
                 WhatsApp us now
               </a>
+
+              <button type="button" className="btn btn-outline" onClick={() => scrollToId("live-weather")}>
+                Live weather status
+              </button>
+
               <a
                 href="https://www.instagram.com/krinedalr/"
                 target="_blank"
@@ -748,6 +841,7 @@ export default function HomePage() {
               >
                 Instagram
               </a>
+
               <button
                 type="button"
                 className="btn btn-outline"
@@ -755,6 +849,7 @@ export default function HomePage() {
               >
                 View memberships
               </button>
+
               <button type="button" className="btn btn-outline" onClick={() => setTermsOpen(true)}>
                 Website terms
               </button>
@@ -1236,15 +1331,12 @@ export default function HomePage() {
                 </div>
               </form>
             </div>
-
-            {/* Membership Terms & Conditions card left as you had */}
-            {/* (Keep your original block here if you had it — I’m not deleting it.) */}
           </section>
         </div>
       </section>
 
       {/* STORM + WEATHER */}
-      <section className="section section-alt">
+      <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: 92 }}>
         <div className="container grid-2">
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
@@ -1271,6 +1363,10 @@ export default function HomePage() {
                 </li>
                 <li>
                   <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+                </li>
+                <li>
+                  <strong>35% OFF</strong> emergency call-out fee for{" "}
+                  <strong>families caring for children with severe disabilities</strong>
                 </li>
               </ul>
 
@@ -1321,7 +1417,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="card">
+          <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
             <h2>Ireland Weather Status</h2>
             <p className="muted small" style={{ marginTop: 8 }}>
               Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()} warning</strong>
@@ -1466,7 +1562,7 @@ export default function HomePage() {
             </p>
 
             <p className="muted smallest">
-              Premium luxury tiling often ranges <strong>€42–€58 per m²</strong>; this calculator uses <strong>€48 per m²</strong>.
+              Premium luxury tiling often ranges <strong>€60–€85 per m²</strong>; this calculator uses <strong>€75 per m²</strong>.
             </p>
           </div>
 
@@ -1497,7 +1593,7 @@ export default function HomePage() {
             </p>
 
             <p className="muted smallest">
-              Flooring labour often ranges <strong>€18–€45</strong> per m². This calculator uses <strong>€26</strong> per m².
+              Flooring labour often ranges <strong>€40–€45</strong> per m². This calculator uses <strong>€40</strong> per m².
             </p>
           </div>
         </div>
@@ -1742,6 +1838,8 @@ export default function HomePage() {
                   Community Support
                 </button>
               </div>
+
+              <div className="copyright-line">© KRINEDAL-R. All rights reserved.</div>
             </div>
           </footer>
         </div>
@@ -1756,7 +1854,7 @@ export default function HomePage() {
             aria-label="WhatsApp"
             title="WhatsApp"
           >
-            💬
+            <IconWhatsApp />
           </a>
           <a
             href="https://m.me/61581354904730"
@@ -1766,7 +1864,7 @@ export default function HomePage() {
             aria-label="Messenger"
             title="Messenger"
           >
-            📘
+            <IconMessenger />
           </a>
           <a
             href="https://www.instagram.com/krinedalr/"
@@ -1776,7 +1874,7 @@ export default function HomePage() {
             aria-label="Instagram"
             title="Instagram"
           >
-            📸
+            <IconInstagram />
           </a>
           <a
             href="mailto:krinedalr@outlook.com"
@@ -1784,7 +1882,7 @@ export default function HomePage() {
             aria-label="Email"
             title="Email"
           >
-            ✉️
+            <IconMail />
           </a>
         </div>
       </section>
