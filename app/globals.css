@@ -1126,3 +1126,50 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   position: relative;
   z-index: 2;
 }
+/* ===== FIX: MOBILE ONLY hero tweaks, desktop back to normal ===== */
+
+/* Desktop / laptop: go back to clean default */
+@media (min-width: 601px){
+  .hero{
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: unset !important;
+  }
+  .hero::after{
+    background: linear-gradient(
+      to bottom,
+      rgba(2,6,23,0.55) 0%,
+      rgba(2,6,23,0.35) 55%,
+      rgba(2,6,23,0.65) 100%
+    ) !important;
+  }
+}
+
+/* Mobile: keep the bright photo + good framing */
+@media (max-width: 600px){
+  .hero{
+    background-image: url("/hero.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: 50% 28% !important;
+    min-height: 720px !important;
+  }
+  .hero::after{
+    content:"" !important;
+    position:absolute !important;
+    inset:0 !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(2,6,23,0.20) 0%,
+      rgba(2,6,23,0.10) 45%,
+      rgba(2,6,23,0.28) 100%
+    ) !important;
+    pointer-events:none !important;
+    z-index: 1 !important;
+  }
+  .hero-inner,
+  .hero *{
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
