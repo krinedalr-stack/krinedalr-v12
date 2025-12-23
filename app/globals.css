@@ -1046,9 +1046,9 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
     background-image:url("/hero.jpg");
     background-repeat:no-repeat;
     background-size: 145%;
-    background-position: 50% 50%;      /* center it */
+    background-position: 50% 0%;      /* center it */
     z-index:0;
-    transform: translateY(-18%);       /* pull image UP so it starts behind logo */
+    transform:none      /* no trasform property */
   }
 
   /* Dark overlay so text stays readable (same look as now) */
