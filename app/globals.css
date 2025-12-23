@@ -1061,57 +1061,31 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
     scroll-snap-align: unset !important;
   }
 }
-/* =========================
-   FINAL MOBILE TOP FIX
-   (PC untouched)
-========================= */
-@media (max-width: 520px){
-
-  /* Reduce reserved space below fixed topbar */
-  main{
-    padding-top: 10px !important;
-  }
-
-  /* Tighten the topbar itself */
-  .topbar-inner{
-    padding: 6px 0 !important;
-  }
-
-  /* Reduce button height slightly */
-  .topbar .btn{
-    padding: 6px 10px !important;
-  }
-
-  /* Ensure hero starts immediately after topbar */
-  .hero{
-    margin-top: 0 !important;
-  }
-}
-/* =========================
-   REAL FIX: HERO TOP GAP (MOBILE ONLY)
-========================= */
-@media (max-width: 520px){
-  .hero{
-    padding-top: 32px !important; /* was 56px */
-    padding-bottom: 34px !important;
-  }
-
-  /* optional: slightly tighten vertical spacing inside hero */
-  .hero-inner{ gap: 18px !important; }
-}
 /* =========================================
-   FINAL MOBILE TOP + HERO FIX
+   MOBILE TOPBAR + HERO FIX
    Desktop untouched
 ========================================= */
-@media (max-width: 520px){
+@media (max-width: 520px) {
 
-  /* Reserve correct space for fixed topbar */
-  main{
-    padding-top: 74px !important;
+  main {
+    padding-top: 74px;
   }
 
-  /* Hero spacing: no fat black band, no clipping */
-  .hero{
-    padding-top: 18px !important;
-    padding-bottom: 34px !important;
+  .hero {
+    padding-top: 18px;
+    padding-bottom: 34px;
   }
+
+  .hero-inner {
+    gap: 18px;
+  }
+
+  .topbar-inner {
+    padding: 6px 0;
+  }
+
+  .topbar .btn {
+    padding: 6px 10px;
+  }
+
+}
