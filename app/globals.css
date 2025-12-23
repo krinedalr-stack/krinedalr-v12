@@ -1087,3 +1087,15 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
     margin-top: 0 !important;
   }
 }
+/* =========================
+   REAL FIX: HERO TOP GAP (MOBILE ONLY)
+========================= */
+@media (max-width: 520px){
+  .hero{
+    padding-top: 14px !important; /* was 56px */
+    padding-bottom: 34px !important;
+  }
+
+  /* optional: slightly tighten vertical spacing inside hero */
+  .hero-inner{ gap: 18px !important; }
+}
