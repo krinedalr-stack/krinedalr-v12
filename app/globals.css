@@ -5,7 +5,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 
-/* ✅ FIX: stop “white windows” caused by browser viewport math + ensure dark base always */
+/* stop “white windows” caused by viewport math */
 html, body { background: #0b1120; }
 body { overflow-x: hidden; }
 
@@ -33,16 +33,12 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ✅ stable offset for fixed topbar */
+/* stable offset for fixed topbar */
 main{
-  /* ✅ FIX: svh prevents mobile address-bar “math gaps”, keeps desktop same */
   min-height: 100vh;
   min-height: 100svh;
-
   background: radial-gradient(circle at top, #111827 0, #020617 55%, #020617 100%);
   padding-top: 72px;
-
-  /* ✅ FIX: avoid tiny seams/overflow gaps */
   display:block;
 }
 
@@ -67,7 +63,6 @@ a:hover{ text-decoration: underline; }
 }
 
 .topbar-inner{
-  height: auto;
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
@@ -83,16 +78,9 @@ a:hover{ text-decoration: underline; }
   font-size: 1.05rem;
 }
 
-.topbar-sub{
-  display:block;
-  margin-top:4px;
-  color: rgba(249,250,251,0.80);
-  font-size: 0.78rem;
-  max-width: 560px;
-  line-height: 1.25;
-}
+/* ✅ Layout-only: hide long line so first screen stays calm */
+.topbar-sub{ display:none; }
 
-/* Desktop actions */
 .topbar-actions{
   display:flex;
   gap:10px;
@@ -105,7 +93,7 @@ a:hover{ text-decoration: underline; }
   font-size: 0.92rem;
 }
 
-/* ✅ Mobile: NO scroll bar, use "More" dropdown */
+/* ✅ Mobile: use Call / WhatsApp / More */
 .topbar-actions-mobile{
   display:none;
   align-items:center;
@@ -114,14 +102,14 @@ a:hover{ text-decoration: underline; }
 }
 
 @media (max-width: 520px){
-  main{ padding-top: 86px; }
-  .topbar-sub{ display:none; }
+  main{ padding-top: 74px; }
   .topbar-actions{ display:none; }
   .topbar-actions-mobile{ display:flex; }
   .topbar-brand{ font-size: 0.95rem; }
+  .topbar-inner{ padding: 6px 0; }
   .topbar .btn{
     white-space: nowrap;
-    padding: 8px 12px;
+    padding: 6px 10px;
     font-size: 0.88rem;
   }
 }
@@ -157,7 +145,6 @@ a:hover{ text-decoration: underline; }
   user-select:none;
   text-decoration:none;
 }
-
 .more-item + .more-item{ margin-top: 8px; }
 .more-item:active{ transform: translateY(1px); }
 
@@ -165,14 +152,10 @@ a:hover{ text-decoration: underline; }
    LAYOUT
 ========================= */
 .container{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
-
-/* ✅ FIX: prevent between-section “seams” & margin-collapse weirdness */
 .section{ padding:64px 0; position:relative; }
 .section::before, .section::after{ content:""; display:table; }
 
-/* Light sections */
 .section-alt{ background:#fffdf7; color: var(--ink); }
-/* Dark sections */
 .section-dark{ background:#020617; color:#f9fafb; }
 
 .grid-2{ display:grid; gap:24px; }
@@ -182,37 +165,31 @@ a:hover{ text-decoration: underline; }
 @media (min-width:900px){ .grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
 
 /* =========================
-   HERO
+   HERO (LOCKED: image clear, minimal content)
 ========================= */
-/* ✅ single source of truth for hero background (base + scoped overrides only) */
 .hero{
   position:relative;
-
   background-image:url("/hero.jpg");
   background-repeat:no-repeat;
-
-  /* desktop default */
-  --hero-bg-size: cover;
-  --hero-bg-pos: center;
-
-  background-size: var(--hero-bg-size);
-  background-position: var(--hero-bg-pos);
-
-  padding:56px 0 40px;
-
-  /* prevents any “transparent seam” showing behind */
-  background-color:#020617;
+  background-size: cover;
+  background-position: center;
+  padding:56px 0 48px;
+  background-color:#020617; /* safety fallback behind image */
 }
 
+/* ✅ 4 floating clovers (kept) */
 .shamrock{
   position:absolute;
-  top:18px;
-  font-size:1.7rem;
+  font-size:1.6rem;
   animation: floatY 12s ease-in-out infinite;
   z-index:1;
+  user-select:none;
+  pointer-events:none;
 }
-.shamrock-left{ left:16px; }
-.shamrock-right{ right:16px; animation-delay:3s; }
+.shamrock-1{ top:18px; left:16px; }
+.shamrock-2{ top:22px; right:16px; animation-delay:3s; }
+.shamrock-3{ bottom:18px; left:22px; animation-delay:5s; }
+.shamrock-4{ bottom:18px; right:22px; animation-delay:7s; }
 
 @keyframes floatY{
   0%,100%{ transform:translateY(0); }
@@ -223,16 +200,16 @@ a:hover{ text-decoration: underline; }
   position:relative;
   z-index:2;
   display:grid;
-  gap:32px;
+  gap:18px;
   color:#f9fafb;
   align-items:start;
 }
-@media (min-width:900px){
-  .hero-inner{ grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); }
+
+.hero-min{
+  max-width: 720px;
 }
 
-.hero-text{ max-width:640px; text-shadow:none; }
-
+/* Minimal hero typography */
 .hero-title{
   font-size:2.8rem;
   line-height:1.05;
@@ -249,77 +226,40 @@ a:hover{ text-decoration: underline; }
   font-size:0.78rem;
   font-weight:800;
   color:#4ade80;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 .hero-subline{
-  color: rgba(249,250,251,0.90);
-  font-weight: 700;
-  margin-bottom: 14px;
+  color: rgba(249,250,251,0.92);
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 .hero-lead{
-  font-size:1.05rem;
+  font-size:1.02rem;
   color:#f9fafb;
-  margin-bottom:16px;
+  font-weight:700;
+  margin-bottom:14px;
+  max-width: 620px;
 }
-.hero-weather-label{
-  font-size:0.9rem;
-  margin-bottom:4px;
-  color:#e5e7eb;
-}
-.hero-weather-row{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
-}
-.hero-weather-shamrock{ font-size:1.3rem; }
-.hero-strong{ font-weight:800; }
 
+/* CTAs only */
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
-  margin-bottom:14px;
 }
 
-.hero-bullets{
-  list-style: disc;
-  margin-left:18px;
-  font-size:0.95rem;
-  color:#f9fafb;
-}
-.hero-bullets li + li{ margin-top:4px; }
-
-.hero-note{
-  font-size:0.9rem;
-  color:#ff3b3b;
-  font-weight:700;
-  letter-spacing:0.2px;
-  margin-top:8px;
+/* Optional small weather chip line (not heavy) */
+.hero-weather-row{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.hero-side-card{
-  background: rgba(15, 23, 42, 0.88);
-  color:#f9fafb;
-  padding:18px;
-  border-radius:18px;
-  box-shadow:0 18px 40px rgba(0,0,0,0.7);
-  align-self:start;
-}
-.hero-side-card h2{ font-size:1.1rem; margin-bottom:6px; }
-.hero-side-list{ margin-top:10px; font-size:0.9rem; }
-
+/* Mobile hero framing only */
 @media (max-width:600px){
   .hero-title{ font-size:2.2rem; }
-}
-
-/* ✅ Mobile hero framing only (isolated) */
-@media (max-width: 600px) {
-  .hero {
-    --hero-bg-size: 115%;
-    --hero-bg-pos: 50% 22%;
-  }
+  .hero{ padding:18px 0 34px; background-position: 50% 22%; background-size: 115%; }
 }
 
 /* =========================
@@ -374,7 +314,6 @@ a:hover{ text-decoration: underline; }
   box-shadow:0 14px 34px rgba(255,45,45,0.55);
 }
 
-/* ✅ Membership submit (green) */
 .btn-emerald{
   width:100%;
   min-height:56px;
@@ -386,7 +325,6 @@ a:hover{ text-decoration: underline; }
   box-shadow:0 14px 34px rgba(34,197,94,0.35);
 }
 
-/* small refresh weather button */
 .btn-weather{
   background:#fff;
   border:2px solid rgba(15,23,42,0.10);
@@ -491,11 +429,9 @@ a:hover{ text-decoration: underline; }
   box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
 }
 
-/* dropdown readability */
 .field select { color:#f9fafb; background: rgba(255,255,255,0.04); }
 .field select option { background:#0b1120; color:#f9fafb; }
 
-/* File input button styling */
 .field input[type="file"]{ padding:12px 14px; }
 .field input[type="file"]::file-selector-button{
   margin-right:12px;
@@ -517,7 +453,6 @@ a:hover{ text-decoration: underline; }
   letter-spacing:0.2px;
 }
 
-/* White text under submit button */
 .submit-tip{
   margin-top:10px;
   color:#ffffff;
@@ -525,7 +460,6 @@ a:hover{ text-decoration: underline; }
   line-height: 1.5;
 }
 
-/* Better visibility for form messages */
 .membership-msg{
   margin-top: 10px;
   color: rgba(249,250,251,0.92);
@@ -533,7 +467,6 @@ a:hover{ text-decoration: underline; }
   line-height: 1.45;
 }
 
-/* iOS/Safari autofill fix (white background bug) */
 input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   -webkit-text-fill-color:#f9fafb !important;
   box-shadow: 0 0 0px 1000px rgba(11,17,32,0.92) inset !important;
@@ -566,13 +499,12 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 }
 
 /* =========================
-   MEMBERSHIPS
+   MEMBERSHIPS (LOCKED prices + clear tiers)
 ========================= */
 .section-memberships{
   background: radial-gradient(circle at top, #111827 0, #020617 70%, #020617 100%);
   color:#f9fafb;
 }
-
 .section-memberships .plans-title{ color:#f9fafb; }
 .section-memberships .plans-sub{ color: rgba(249,250,251,0.85); }
 
@@ -597,13 +529,10 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   gap:14px;
   align-items: stretch;
 }
-
-/* Desktop 4 columns */
 @media (min-width:900px){
   .plans-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
 }
 
-/* Plan cards stay light (readable) */
 .plan{
   border-radius:20px;
   background:#ffffff;
@@ -612,10 +541,11 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   padding:16px;
   display:flex;
   flex-direction:column;
-  min-height: 260px;
+  min-height: 280px;
   height: 100%;
   color:#111827;
 }
+
 .plan-kicker{
   display:flex;
   align-items:center;
@@ -627,24 +557,28 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   margin-bottom:6px;
 }
 .plan-icon{ font-size: 1.05rem; line-height: 1; }
+
 .plan-name{
   font-size:1.05rem;
   font-weight:950;
   margin-bottom:6px;
   color:#111827;
 }
+
 .plan-price{
   font-weight:950;
   font-size:1.05rem;
   margin-bottom:10px;
   color:#f97316;
 }
+
 .plan ul{
   padding-left:18px;
   margin-top:4px;
   color:#111827;
 }
 .plan ul li + li{ margin-top:6px; }
+
 .plan-foot{
   margin-top:auto;
   font-size:0.82rem;
@@ -652,10 +586,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   line-height:1.45;
   padding-top:10px;
 }
-.plan-highlight{
-  border:2px solid rgba(249,115,22,0.45);
-  box-shadow:0 18px 55px rgba(249,115,22,0.18);
-}
+
 .plan-actions{
   margin-top:12px;
   display:flex;
@@ -663,11 +594,39 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   flex-wrap:wrap;
 }
 
-/* ✅ Membership form spacing (fixes “white empty spot” feel) */
+.plan-most-popular{
+  border:2px solid rgba(34,197,94,0.55);
+  box-shadow:0 18px 55px rgba(34,197,94,0.18);
+}
+
+.plan-best-value{
+  border:2px solid rgba(249,115,22,0.55);
+  box-shadow:0 18px 55px rgba(249,115,22,0.18);
+}
+
+.plan-limited{
+  border:2px solid rgba(239,68,68,0.55);
+  box-shadow:0 18px 55px rgba(239,68,68,0.18);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:0.78rem;
+  font-weight:950;
+  margin-bottom:10px;
+  border:1px solid rgba(15,23,42,0.12);
+}
+.badge-popular{ background: rgba(34,197,94,0.12); color:#065f46; }
+.badge-value{ background: rgba(249,115,22,0.14); color:#7c2d12; }
+.badge-limited{ background: rgba(239,68,68,0.14); color:#7f1d1d; }
+
 .membership-form{ margin-top: 22px; }
 .section-memberships section#membership-application{ margin-top: 0; }
 
-/* Status badge */
 .status-pill{
   display:flex;
   align-items:center;
@@ -696,10 +655,8 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 .status-badge.orange{ background: #fb923c; }
 .status-badge.red{ background: #ef4444; color:#fff; }
 
-/* Membership form inside memberships section */
 .section-memberships .form-card{ background: rgba(255,255,255,0.04); }
 
-/* Terms box + agreement row */
 .terms-box{
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 14px;
@@ -722,7 +679,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   transform: scale(1.12);
 }
 
-/* Savings block (collapsible) */
+/* Savings block */
 .member-savings{
   margin-top: 20px;
   padding: 18px;
@@ -741,7 +698,6 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   max-width: 860px;
 }
 
-/* Collapsible header row */
 .savings-toggle{
   margin-top: 12px;
   width: 100%;
@@ -780,61 +736,14 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 .savings-name{ font-weight: 950; margin-bottom: 8px; }
 .savings-row{ display:flex; justify-content:space-between; gap:10px; font-size:0.92rem; }
 
-/* Legal cards */
-.legal-card{
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
-}
-.legal-grid{
-  margin-top: 14px;
-  display:grid;
-  gap:12px;
-}
-@media (min-width:900px){
-  .legal-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.legal-block{
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 14px;
-}
-.legal-title{
-  font-weight: 950;
-  margin-bottom: 6px;
-  color: #4ade80;
-}
-
-/* ✅ MEMBERSHIPS: mobile swipe look — FIXED so it doesn’t feel like a “big empty window” */
+/* Memberships mobile: stacked, no side-scroll */
 @media (max-width: 520px){
   .plans-grid{
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(260px, 86%);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-
-    /* ✅ key fix: align scroll area with container edges */
-    padding: 0 16px 8px;
-    margin: 0 -16px;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 16px;
-    scroll-padding-right: 16px;
-
-    /* ✅ prevents bounce from showing odd gaps */
-    overscroll-behavior-x: contain;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
-  .plan{ scroll-snap-align: start; }
-  .plans-grid::-webkit-scrollbar{ display:none; }
-}
-
-/* ✅ Tablet: 2 columns — ONLY above mobile */
-@media (min-width: 521px) and (max-width: 1100px){
-  .plans-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .plan{ width:100%; }
 }
 
 /* =========================
@@ -926,7 +835,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 }
 
 /* =========================
-   FLOATING BUTTONS
+   FLOATING BUTTONS (KEPT)
 ========================= */
 .float-stack{
   position:fixed;
@@ -952,6 +861,7 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   backdrop-filter: blur(6px);
   transition: transform 0.1s ease, box-shadow 0.15s ease;
 }
+.float-btn svg{ width:28px; height:28px; }
 .float-btn:hover{
   transform: translateY(-2px);
   box-shadow:0 22px 55px rgba(0,0,0,0.45);
@@ -962,12 +872,13 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
 .float-mail{ background: radial-gradient(circle at 30% 20%, #fde68a 0, #f97316 45%, #c2410c 100%); }
 
 @media (max-width:420px){
-  .float-btn{ width:56px; height:56px; font-size:1.5rem; }
+  .float-btn{ width:56px; height:56px; }
+  .float-btn svg{ width:26px; height:26px; }
   .float-stack{ right:14px; bottom:18px; gap:10px; }
 }
 
 /* =========================
-   MODALS (People & Culture + Terms + Community)
+   MODALS
 ========================= */
 .modal-backdrop{
   position:fixed;
@@ -1025,106 +936,4 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   background:#fff;
   border-color:#e5e7eb;
   color:#111827;
-}
-/* =========================
-   HOTFIX 1: MOBILE TOPBAR HEIGHT (PC unchanged)
-========================= */
-@media (max-width: 520px){
-  /* reduce the forced offset */
-  main{ padding-top: 56px !important; }
-
-  /* tighten the fixed bar */
-  .topbar-inner{ padding: 8px 0 !important; }
-  .topbar .btn{ padding: 7px 10px !important; }
-}
-/* =========================
-   HOTFIX 2: MEMBERSHIPS MOBILE STACK (NO SIDE SCROLL)
-========================= */
-@media (max-width: 520px){
-  .plans-grid{
-    /* kill carousel */
-    grid-auto-flow: unset !important;
-    grid-auto-columns: unset !important;
-    overflow-x: hidden !important;
-    scroll-snap-type: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-
-    /* stack */
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-
-  .plan{
-    width: 100% !important;
-    scroll-snap-align: unset !important;
-  }
-}
-/* =========================================
-   MOBILE TOPBAR + HERO FIX
-   Desktop untouched
-========================================= */
-@media (max-width: 520px) {
-
-  main {
-    padding-top: 74px;
-  }
-
-  .hero {
-    padding-top: 18px;
-    padding-bottom: 34px;
-  }
-
-  .hero-inner {
-    gap: 18px;
-  }
-
-  .topbar-inner {
-    padding: 6px 0;
-  }
-/* =========================================
-   FINAL: Mobile uses 3-button bar + Hero top black ends at logo
-   Desktop untouched
-========================================= */
-@media (max-width: 520px){
-
-  /* 1) MOBILE TOPBAR: force 3-button bar only */
-  .topbar-actions{ display: none !important; }
-  .topbar-actions-mobile{ display: flex !important; }
-
-  /* Make sure the fixed bar height is stable on mobile */
-  .topbar-inner{ padding: 6px 0 !important; }
-  .topbar .btn{ padding: 6px 10px !important; }
-
-  /* 2) HERO: end the black background behind the KRINEDAL-R block */
-  .hero{
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Top fade: keeps the black behind the logo, then blends into hero image */
-  .hero::before{
-    content:"";
-    position:absolute;
-    left:0; right:0; top:0;
-    height: 240px; /* adjust only this if needed */
-    background: linear-gradient(
-      to bottom,
-      rgba(2,6,23,0.95) 0%,
-      rgba(2,6,23,0.85) 45%,
-      rgba(2,6,23,0.35) 75%,
-      rgba(2,6,23,0.00) 100%
-    );
-    z-index:1;
-    pointer-events:none;
-  }
-
-  /* Ensure hero content stays above the overlay */
-  .hero-inner{ position: relative; z-index: 2; }
-}
-  .topbar .btn {
-    padding: 6px 10px;
-  }
-
 }
