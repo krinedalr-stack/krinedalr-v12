@@ -741,17 +741,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* MEMBERSHIPS (LOCKED TIERS) */}
+      {/* MEMBERSHIPS (UPDATED: clear scope, real work only) */}
       <section id="membership" className="section section-memberships">
         <div className="container">
           <div className="plans-head">
             <div>
-              <div className="plans-title">Memberships</div>
-              <p className="plans-sub">
-                Preventative care + priority support. Materials, scaffolding and skips are charged separately.
+              <div className="plans-title">KRINEDAL-R — Property Care Memberships</div>
+
+              <p className="plans-sub" style={{ maxWidth: 920 }}>
+                <strong>Locked — clear scope, real work only.</strong> Each membership includes clearly defined works.
+                No vague promises. No hidden exclusions. Members always receive priority over non-members.
               </p>
-              <p className="plans-sub smallest" style={{ marginTop: 6 }}>
-                All memberships include: <strong>Free annual inspection</strong>, <strong>Priority booking</strong>, and <strong>Respect &amp; recognition</strong>.
+
+              <p className="plans-sub smallest" style={{ marginTop: 8 }}>
+                Memberships are preventative maintenance plans — <strong>not insurance</strong>, and not unlimited repairs.
+                Materials (tiles/silicone/etc.), scaffolding/MEWP, skips and specialist hire are charged separately where required.
               </p>
             </div>
 
@@ -765,14 +769,18 @@ export default function HomePage() {
             {/* BRONZE */}
             <div className="plan">
               <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
-              <div className="plan-name">Bronze</div>
+              <div className="plan-name">Bronze — essential property check</div>
               <div className="plan-price">{planPriceLabel("Bronze")}</div>
               <ul>
-                <li>Free annual inspection (scheduled)</li>
-                <li>Priority booking</li>
-                <li>Preventative maintenance visit (light duty)</li>
+                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+                <li><strong>External silicone inspection</strong> (bathrooms, kitchens, external seals — inspection only)</li>
+                <li><strong>Written inspection notes</strong> provided if issues are found</li>
+                <li><strong>Priority booking</strong> over non-members</li>
               </ul>
-              <div className="plan-foot">Entry preventative care for organised homeowners.</div>
+              <div className="plan-foot">
+                Best for homeowners who want early detection before problems become expensive.
+              </div>
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>Apply</button>
               </div>
@@ -782,14 +790,18 @@ export default function HomePage() {
             <div className="plan plan-most-popular">
               <div className="badge badge-popular">⭐ Most popular</div>
               <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
-              <div className="plan-name">Silver</div>
+              <div className="plan-name">Silver — preventative maintenance</div>
               <div className="plan-price">{planPriceLabel("Silver")}</div>
               <ul>
-                <li>Everything in Bronze</li>
-                <li>Extra preventative work allowance (physical work)</li>
-                <li>Higher priority scheduling</li>
+                <li><strong>Annual roof inspection</strong> + <strong>annual gutter inspection</strong></li>
+                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+                <li><strong>Minor roof repairs</strong> (slipped tiles / broken tiles — materials charged if required)</li>
+                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+                <li><strong>Priority response</strong> during <strong>Yellow</strong> weather warnings</li>
               </ul>
-              <div className="plan-foot">Perfect balance of value and priority.</div>
+              <div className="plan-foot">
+                Best for landlords and homeowners who want maintenance, not just inspections.
+              </div>
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>Apply</button>
               </div>
@@ -799,14 +811,18 @@ export default function HomePage() {
             <div className="plan plan-best-value">
               <div className="badge badge-value">🏆 Best value / priority</div>
               <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
-              <div className="plan-name">Gold</div>
+              <div className="plan-name">Gold — active property care</div>
               <div className="plan-price">{planPriceLabel("Gold")}</div>
               <ul>
-                <li>Everything in Silver</li>
-                <li>Priority + emergency labour value (fair use)</li>
-                <li>Documentation support (photos/report as agreed)</li>
+                <li><strong>Annual roof inspection</strong> + <strong>gutter inspection</strong> + <strong>gutter cleaning</strong></li>
+                <li><strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)</li>
+                <li><strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)</li>
+                <li><strong>Emergency make-safe</strong> during <strong>Orange</strong> weather warnings (temporary repairs only, where safe)</li>
+                <li><strong>Priority scheduling</strong> over Bronze/Silver + <strong>discounted labour</strong> on additional works</li>
               </ul>
-              <div className="plan-foot">Built for landlords &amp; customers who want priority.</div>
+              <div className="plan-foot">
+                Best for high-value homes and clients who want problems fixed, not just found.
+              </div>
               <div className="plan-actions">
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>Apply</button>
               </div>
@@ -816,20 +832,37 @@ export default function HomePage() {
             <div className="plan plan-limited">
               <div className="badge badge-limited">💎 Limited</div>
               <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
-              <div className="plan-name">Diamond</div>
+              <div className="plan-name">Diamond — full professional coverage</div>
               <div className="plan-price">{planPriceLabel("Diamond")}</div>
               <ul>
-                <li>Everything in Gold</li>
-                <li>Highest priority and director-level handling</li>
-                <li>Emergency labour value (fair use)</li>
+                <li><strong>Annual roof inspection</strong> + <strong>gutter inspection</strong> + <strong>gutter cleaning</strong></li>
+                <li><strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)</li>
+                <li><strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)</li>
+                <li><strong>Annual written condition report</strong> stored and referenced for future works</li>
+                <li><strong>Direct priority contact channel</strong> + best available pricing on additional works</li>
               </ul>
               <div className="plan-foot">
-                {RED_POLICY_LINE}
+                Best for clients who want full oversight, priority service, and long-term protection.
+                <br />
+                <span className="muted smallest" style={{ display: "block", marginTop: 8 }}>
+                  {RED_POLICY_LINE}
+                </span>
               </div>
               <div className="plan-actions">
                 <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>Apply</button>
               </div>
             </div>
+          </div>
+
+          {/* MEMBERSHIP RULES (clear & fair) */}
+          <div className="card" style={{ marginTop: 18 }}>
+            <h3 style={{ margin: 0 }}>Membership rules (clear &amp; fair)</h3>
+            <ul className="list" style={{ marginTop: 10 }}>
+              <li>Memberships are preventative maintenance plans (property-specific).</li>
+              <li>Not insurance contracts and not unlimited repairs.</li>
+              <li>Safety always overrides speed; severe weather limits apply.</li>
+              <li>Where parts/materials are required, they are charged separately unless stated as included.</li>
+            </ul>
           </div>
 
           {/* SAVINGS (Collapsible) */}
