@@ -1,8 +1,8 @@
 // app/api/contact/route.js
 export const runtime = "nodejs";
 
-function toBase64(buf) {
-  return Buffer.from(buf).toString("base64");
+function toBase64(arrayBuffer) {
+  return Buffer.from(new Uint8Array(arrayBuffer)).toString("base64");
 }
 
 export async function POST(req) {
@@ -22,7 +22,7 @@ export async function POST(req) {
     if (honey) return Response.json({ ok: true });
 
     // common fields
-    const FormType = String(form.get("FormType") || "Estimate").trim(); // "Estimate" | "Membership"
+    const FormType = String(form.get("FormType") || "Estimate").trim();
     const Name = String(form.get("Name") || "").trim();
     const Phone = String(form.get("Phone") || "").trim();
     const Email = String(form.get("Email") || "").trim();
@@ -36,11 +36,11 @@ export async function POST(req) {
     const Details = String(form.get("Details") || "").trim();
 
     // membership fields
-    const Plan = String(form.get("Plan") || "").trim(); // Silver/Bronze/Gold/Diamond
-    const Billing = String(form.get("Billing") || "").trim(); // Monthly/Yearly
+    const Plan = String(form.get("Plan") || "").trim();
+    const Billing = String(form.get("Billing") || "").trim();
     const Address = String(form.get("Address") || "").trim();
     const MemberNotes = String(form.get("Member notes") || "").trim();
-    const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim(); // "YES"
+    const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
 
     const toList = (process.env.CONTACT_TO ||
       "krinedalr@outlook.com,krinedalr@gmail.com")
@@ -48,9 +48,10 @@ export async function POST(req) {
       .map((s) => s.trim())
       .filter(Boolean);
 
-    const from = process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
+    const from =
+      process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
-    // attachments (estimate only — still harmless if none)
+    // attachments (estimate only)
     const raw = form.getAll("files");
     const attachments = [];
     for (const f of raw) {
@@ -131,7 +132,7 @@ export async function POST(req) {
       to: toList,
       subject,
       html,
-      reply_to: Email || undefined,
+      replyTo: Email || undefined, // ✅ FIXED (was reply_to)
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -153,8 +154,11 @@ export async function POST(req) {
     }
 
     return Response.json({ ok: true });
-  } catch {
-    return Response.json({ ok: false, error: "Server error" }, { status: 500 });
+  } catch (err) {
+    return Response.json(
+      { ok: false, error: "Server error", details: String(err?.message || err || "") },
+      { status: 500 }
+    );
   }
 }
 
