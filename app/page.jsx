@@ -1416,3 +1416,82 @@ export default function HomePage() {
     </main>
   );
 }
+/* ===============================
+   HOTFIX – FORM SUBMIT OVERRIDE
+   Safe to paste at END of file
+   =============================== */
+
+/* ESTIMATE FORM */
+async function onSubmit(e) {
+  e.preventDefault();
+  if (window.__estimateSending) return;
+  window.__estimateSending = true;
+
+  try {
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+
+    // Honeypot
+    if (fd.get("website")) return;
+
+    fd.set("FormType", "Estimate");
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: fd,
+    });
+
+    const json = await res.json().catch(() => ({}));
+
+    if (!res.ok || !json.ok) {
+      throw new Error(json?.error || "Send failed");
+    }
+
+    alert("✅ Request sent successfully. We’ll contact you shortly.");
+    formEl.reset();
+  } catch {
+    alert(
+      "❌ Message could not be sent right now.\nPlease call 083 176 2475 or WhatsApp."
+    );
+  } finally {
+    window.__estimateSending = false;
+  }
+}
+
+/* MEMBERSHIP FORM */
+async function onMembershipSubmit(e) {
+  e.preventDefault();
+  if (window.__membershipSending) return;
+  window.__membershipSending = true;
+
+  try {
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+
+    // Honeypot
+    if (fd.get("website")) return;
+
+    fd.set("FormType", "Membership");
+    fd.set("AgreedToTerms", "YES");
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: fd,
+    });
+
+    const json = await res.json().catch(() => ({}));
+
+    if (!res.ok || !json.ok) {
+      throw new Error(json?.error || "Send failed");
+    }
+
+    alert("✅ Membership application sent. We’ll confirm shortly.");
+    formEl.reset();
+  } catch {
+    alert(
+      "❌ Application could not be sent right now.\nPlease call 083 176 2475 or WhatsApp."
+    );
+  } finally {
+    window.__membershipSending = false;
+  }
+}
