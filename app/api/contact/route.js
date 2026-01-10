@@ -5,6 +5,15 @@ function toBase64(arrayBuffer) {
   return Buffer.from(new Uint8Array(arrayBuffer)).toString("base64");
 }
 
+function escapeHtml(s) {
+  return String(s || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -41,6 +50,7 @@ export async function POST(req) {
     const Address = String(form.get("Address") || "").trim();
     const MemberNotes = String(form.get("Member notes") || "").trim();
     const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
+    const PlanPrice = String(form.get("PlanPrice") || "").trim(); // optional
 
     const toList = (process.env.CONTACT_TO ||
       "krinedalr@outlook.com,krinedalr@gmail.com")
@@ -48,6 +58,9 @@ export async function POST(req) {
       .map((s) => s.trim())
       .filter(Boolean);
 
+    // IMPORTANT:
+    // If your domain is NOT verified in Resend, keep onboarding@resend.dev here.
+    // Once verified, set CONTACT_FROM to your domain sender.
     const from =
       process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
@@ -79,9 +92,9 @@ export async function POST(req) {
           <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse or abusive behaviour may lead to suspension/cancellation without refund.</li>
           <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Materials/scaffolding/skips/specialist hire and permanent repairs are quoted separately. During RED warnings, access may be unsafe and extra fees may apply.</li>
         </ul>
-        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${
-          escapeHtml(AgreedToTerms || "NO")
-        }</p>
+        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px">
+          <b>Customer confirmed terms:</b> ${escapeHtml(AgreedToTerms || "NO")}
+        </p>
       </div>
     `;
 
@@ -92,6 +105,7 @@ export async function POST(req) {
           <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
           <hr/>
           <p><b>Plan:</b> ${escapeHtml(Plan || "—")}</p>
+          <p><b>Plan price:</b> ${escapeHtml(PlanPrice || "—")}</p>
           <p><b>Billing:</b> ${escapeHtml(Billing || "—")}</p>
           <hr/>
           <p><b>Name:</b> ${escapeHtml(Name)}</p>
@@ -132,7 +146,11 @@ export async function POST(req) {
       to: toList,
       subject,
       html,
-      replyTo: Email || undefined, // ✅ FIXED (was reply_to)
+
+      // safest: send BOTH key styles (Resend/SDK differences)
+      reply_to: Email || undefined,
+      replyTo: Email || undefined,
+
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -145,28 +163,26 @@ export async function POST(req) {
       body: JSON.stringify(payload),
     });
 
+    const text = await r.text().catch(() => "");
+
     if (!r.ok) {
-      const text = await r.text().catch(() => "");
+      console.error("RESEND FAILED", r.status, text);
       return Response.json(
         { ok: false, error: "Resend failed", details: text },
         { status: 500 }
       );
     }
 
+    console.log("RESEND OK", r.status, text);
     return Response.json({ ok: true });
   } catch (err) {
     return Response.json(
-      { ok: false, error: "Server error", details: String(err?.message || err || "") },
+      {
+        ok: false,
+        error: "Server error",
+        details: String(err?.message || err || ""),
+      },
       { status: 500 }
     );
   }
-}
-
-function escapeHtml(s) {
-  return String(s || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
 }
