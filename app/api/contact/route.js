@@ -14,17 +14,21 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
+// Optional: allow quick "open in browser" check without 405.
+// This does NOT send email. It just confirms the route exists.
+export async function GET() {
+  return Response.json({ ok: true, route: "/api/contact", method: "POST" });
+}
+
 export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
-    // Defaults (can be overridden in Vercel env vars)
+    // Admin recipients (where YOU receive the form)
     const CONTACT_TO =
       process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
 
-    // IMPORTANT:
-    // This "from" must be allowed by Resend (verified domain/sender).
-    // Keep default if you haven't verified a domain yet.
+    // IMPORTANT: keep onboarding@resend.dev until you verify a sending domain again
     const CONTACT_FROM =
       process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
@@ -37,12 +41,12 @@ export async function POST(req) {
 
     const form = await req.formData();
 
-    // Honeypot bot trap
+    // Honeypot bot trap (your form must include input name="website")
     const honey = form.get("website");
     if (honey) return Response.json({ ok: true });
 
     // Common fields
-    const FormType = String(form.get("FormType") || "Estimate").trim(); // "Estimate" | "Membership"
+    const FormType = String(form.get("FormType") || "Estimate").trim();
     const Name = String(form.get("Name") || "").trim();
     const Phone = String(form.get("Phone") || "").trim();
     const Email = String(form.get("Email") || "").trim();
@@ -66,7 +70,7 @@ export async function POST(req) {
       .map((s) => s.trim())
       .filter(Boolean);
 
-    const from = CONTACT_FROM;
+    const isMembership = FormType.toLowerCase().includes("member");
 
     // Attachments (estimate only)
     const raw = form.getAll("files");
@@ -82,8 +86,6 @@ export async function POST(req) {
       if (attachments.length >= 5) break;
     }
 
-    const isMembership = FormType.toLowerCase().includes("member");
-
     const subject = isMembership
       ? `New membership application — ${Plan || "Plan not selected"} (${Name || "No name"})`
       : `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
@@ -93,10 +95,12 @@ export async function POST(req) {
         <p style="margin:0 0 8px 0"><b>Membership protection wording:</b></p>
         <ul style="margin:0;padding-left:18px;line-height:1.5">
           <li><b>Non-refundable:</b> membership payments are non-refundable once activated (unless required by law).</li>
-          <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse or abusive behaviour may lead to suspension/cancellation without refund.</li>
-          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Materials/scaffolding/skips/specialist hire and permanent repairs are quoted separately.</li>
+          <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse/abusive behaviour may lead to suspension/cancellation.</li>
+          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Permanent repairs/materials are quoted separately.</li>
         </ul>
-        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${escapeHtml(AgreedToTerms || "NO")}</p>
+        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${escapeHtml(
+          AgreedToTerms || "NO"
+        )}</p>
       </div>
     `;
 
@@ -142,13 +146,12 @@ export async function POST(req) {
         </div>
       `;
 
-    // ✅ IMPORTANT: HTTP API uses reply_to (snake_case)
     const payload = {
-      from,
+      from: CONTACT_FROM,
       to: toList,
       subject,
       html,
-      reply_to: Email || undefined,
+      replyTo: Email || undefined,
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -161,7 +164,6 @@ export async function POST(req) {
       body: JSON.stringify(payload),
     });
 
-    // Always read body (so Vercel logs show the REAL reason)
     const text = await r.text().catch(() => "");
 
     if (!r.ok) {
@@ -175,7 +177,6 @@ export async function POST(req) {
     console.log("RESEND OK", r.status, text);
     return Response.json({ ok: true });
   } catch (err) {
-    console.error("CONTACT ROUTE ERROR", err);
     return Response.json(
       {
         ok: false,
