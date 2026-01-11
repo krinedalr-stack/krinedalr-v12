@@ -18,12 +18,21 @@ export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
-    // Optional: helps avoid silent misconfig
-    const CONTACT_TO = process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
-    const CONTACT_FROM = process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
+    // Defaults (can be overridden in Vercel env vars)
+    const CONTACT_TO =
+      process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
+
+    // IMPORTANT:
+    // This "from" must be allowed by Resend (verified domain/sender).
+    // Keep default if you haven't verified a domain yet.
+    const CONTACT_FROM =
+      process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
     if (!RESEND_API_KEY) {
-      return Response.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
+      return Response.json(
+        { ok: false, error: "Missing RESEND_API_KEY" },
+        { status: 500 }
+      );
     }
 
     const form = await req.formData();
@@ -53,7 +62,10 @@ export async function POST(req) {
     const MemberNotes = String(form.get("Member notes") || "").trim();
     const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
 
-    const toList = CONTACT_TO.split(",").map((s) => s.trim()).filter(Boolean);
+    const toList = CONTACT_TO.split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     const from = CONTACT_FROM;
 
     // Attachments (estimate only)
@@ -130,12 +142,13 @@ export async function POST(req) {
         </div>
       `;
 
+    // ✅ IMPORTANT: HTTP API uses reply_to (snake_case)
     const payload = {
       from,
       to: toList,
       subject,
       html,
-      replyTo: Email || undefined, // ✅ correct Resend field
+      reply_to: Email || undefined,
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -148,7 +161,7 @@ export async function POST(req) {
       body: JSON.stringify(payload),
     });
 
-    // Always read body (helps debugging in Vercel logs)
+    // Always read body (so Vercel logs show the REAL reason)
     const text = await r.text().catch(() => "");
 
     if (!r.ok) {
@@ -162,8 +175,13 @@ export async function POST(req) {
     console.log("RESEND OK", r.status, text);
     return Response.json({ ok: true });
   } catch (err) {
+    console.error("CONTACT ROUTE ERROR", err);
     return Response.json(
-      { ok: false, error: "Server error", details: String(err?.message || err || "") },
+      {
+        ok: false,
+        error: "Server error",
+        details: String(err?.message || err || ""),
+      },
       { status: 500 }
     );
   }
