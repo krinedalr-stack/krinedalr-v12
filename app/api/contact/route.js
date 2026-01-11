@@ -17,54 +17,46 @@ function escapeHtml(s) {
 export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+    // Optional: helps avoid silent misconfig
+    const CONTACT_TO = process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
+    const CONTACT_FROM = process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
+
     if (!RESEND_API_KEY) {
-      return Response.json(
-        { ok: false, error: "Missing RESEND_API_KEY" },
-        { status: 500 }
-      );
+      return Response.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
     }
 
     const form = await req.formData();
 
-    // bot trap
+    // Honeypot bot trap
     const honey = form.get("website");
     if (honey) return Response.json({ ok: true });
 
-    // common fields
-    const FormType = String(form.get("FormType") || "Estimate").trim();
+    // Common fields
+    const FormType = String(form.get("FormType") || "Estimate").trim(); // "Estimate" | "Membership"
     const Name = String(form.get("Name") || "").trim();
     const Phone = String(form.get("Phone") || "").trim();
     const Email = String(form.get("Email") || "").trim();
     const Eircode = String(form.get("Eircode") || "").trim();
     const Town = String(form.get("Town/County") || "").trim();
 
-    // estimate fields
+    // Estimate fields
     const Service = String(form.get("Service") || "").trim();
     const PrefDate = String(form.get("Preferred date") || "").trim();
     const PrefTime = String(form.get("Preferred time") || "").trim();
     const Details = String(form.get("Details") || "").trim();
 
-    // membership fields
+    // Membership fields
     const Plan = String(form.get("Plan") || "").trim();
     const Billing = String(form.get("Billing") || "").trim();
     const Address = String(form.get("Address") || "").trim();
     const MemberNotes = String(form.get("Member notes") || "").trim();
     const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
-    const PlanPrice = String(form.get("PlanPrice") || "").trim(); // optional
 
-    const toList = (process.env.CONTACT_TO ||
-      "krinedalr@outlook.com,krinedalr@gmail.com")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const toList = CONTACT_TO.split(",").map((s) => s.trim()).filter(Boolean);
+    const from = CONTACT_FROM;
 
-    // IMPORTANT:
-    // If your domain is NOT verified in Resend, keep onboarding@resend.dev here.
-    // Once verified, set CONTACT_FROM to your domain sender.
-    const from =
-      process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
-
-    // attachments (estimate only)
+    // Attachments (estimate only)
     const raw = form.getAll("files");
     const attachments = [];
     for (const f of raw) {
@@ -90,11 +82,9 @@ export async function POST(req) {
         <ul style="margin:0;padding-left:18px;line-height:1.5">
           <li><b>Non-refundable:</b> membership payments are non-refundable once activated (unless required by law).</li>
           <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse or abusive behaviour may lead to suspension/cancellation without refund.</li>
-          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Materials/scaffolding/skips/specialist hire and permanent repairs are quoted separately. During RED warnings, access may be unsafe and extra fees may apply.</li>
+          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Materials/scaffolding/skips/specialist hire and permanent repairs are quoted separately.</li>
         </ul>
-        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px">
-          <b>Customer confirmed terms:</b> ${escapeHtml(AgreedToTerms || "NO")}
-        </p>
+        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${escapeHtml(AgreedToTerms || "NO")}</p>
       </div>
     `;
 
@@ -105,7 +95,6 @@ export async function POST(req) {
           <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
           <hr/>
           <p><b>Plan:</b> ${escapeHtml(Plan || "—")}</p>
-          <p><b>Plan price:</b> ${escapeHtml(PlanPrice || "—")}</p>
           <p><b>Billing:</b> ${escapeHtml(Billing || "—")}</p>
           <hr/>
           <p><b>Name:</b> ${escapeHtml(Name)}</p>
@@ -146,11 +135,7 @@ export async function POST(req) {
       to: toList,
       subject,
       html,
-
-      // safest: send BOTH key styles (Resend/SDK differences)
-      reply_to: Email || undefined,
-      replyTo: Email || undefined,
-
+      replyTo: Email || undefined, // ✅ correct Resend field
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -163,6 +148,7 @@ export async function POST(req) {
       body: JSON.stringify(payload),
     });
 
+    // Always read body (helps debugging in Vercel logs)
     const text = await r.text().catch(() => "");
 
     if (!r.ok) {
@@ -177,11 +163,7 @@ export async function POST(req) {
     return Response.json({ ok: true });
   } catch (err) {
     return Response.json(
-      {
-        ok: false,
-        error: "Server error",
-        details: String(err?.message || err || ""),
-      },
+      { ok: false, error: "Server error", details: String(err?.message || err || "") },
       { status: 500 }
     );
   }
