@@ -1,4 +1,6 @@
 // app/api/contact/route.js
+import { Buffer } from "buffer";
+
 export const runtime = "nodejs";
 
 function toBase64(arrayBuffer) {
@@ -14,21 +16,19 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
-// Optional: allow quick "open in browser" check without 405.
-// This does NOT send email. It just confirms the route exists.
+// Simple GET check (does NOT send email)
 export async function GET() {
-  return Response.json({ ok: true, route: "/api/contact", method: "POST" });
+  return new Response(
+    JSON.stringify({ ok: true, route: "/api/contact", method: "POST" }),
+    { headers: { "Content-Type": "application/json" } }
+  );
 }
 
 export async function POST(req) {
   try {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
-    // Admin recipients (where YOU receive the form)
     const CONTACT_TO =
       process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
-
-    // IMPORTANT: keep onboarding@resend.dev until you verify a sending domain again
     const CONTACT_FROM =
       process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
 
@@ -41,11 +41,11 @@ export async function POST(req) {
 
     const form = await req.formData();
 
-    // Honeypot bot trap (your form must include input name="website")
-    const honey = form.get("website");
-    if (honey) return Response.json({ ok: true });
+    // Honeypot
+    if (form.get("website")) {
+      return Response.json({ ok: true });
+    }
 
-    // Common fields
     const FormType = String(form.get("FormType") || "Estimate").trim();
     const Name = String(form.get("Name") || "").trim();
     const Phone = String(form.get("Phone") || "").trim();
@@ -53,86 +53,58 @@ export async function POST(req) {
     const Eircode = String(form.get("Eircode") || "").trim();
     const Town = String(form.get("Town/County") || "").trim();
 
-    // Estimate fields
     const Service = String(form.get("Service") || "").trim();
     const PrefDate = String(form.get("Preferred date") || "").trim();
     const PrefTime = String(form.get("Preferred time") || "").trim();
     const Details = String(form.get("Details") || "").trim();
 
-    // Membership fields
     const Plan = String(form.get("Plan") || "").trim();
-    const Billing = String(form.get("Billing") || "").trim();
     const Address = String(form.get("Address") || "").trim();
     const MemberNotes = String(form.get("Member notes") || "").trim();
     const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
 
-    const toList = CONTACT_TO.split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
     const isMembership = FormType.toLowerCase().includes("member");
 
     // Attachments (estimate only)
-    const raw = form.getAll("files");
     const attachments = [];
-    for (const f of raw) {
-      if (!f || typeof f === "string") continue;
-      if (f.size > 6 * 1024 * 1024) continue; // 6MB per file
-      const ab = await f.arrayBuffer();
-      attachments.push({
-        filename: f.name || "file",
-        content: toBase64(ab),
-      });
-      if (attachments.length >= 5) break;
+    if (!isMembership) {
+      const raw = form.getAll("files");
+      for (const f of raw) {
+        if (!f || typeof f === "string") continue;
+        if (f.size > 6 * 1024 * 1024) continue;
+        const ab = await f.arrayBuffer();
+        attachments.push({
+          filename: f.name || "file",
+          content: toBase64(ab),
+        });
+        if (attachments.length >= 5) break;
+      }
     }
 
     const subject = isMembership
       ? `New membership application — ${Plan || "Plan not selected"} (${Name || "No name"})`
       : `New estimate request — ${Service || "Website"} (${Name || "No name"})`;
 
-    const membershipLegal = `
-      <div style="margin-top:12px;padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #e5e7eb">
-        <p style="margin:0 0 8px 0"><b>Membership protection wording:</b></p>
-        <ul style="margin:0;padding-left:18px;line-height:1.5">
-          <li><b>Non-refundable:</b> membership payments are non-refundable once activated (unless required by law).</li>
-          <li><b>Fair use:</b> for genuine property issues and emergency make-safe only. Misuse/abusive behaviour may lead to suspension/cancellation.</li>
-          <li><b>Emergency scope:</b> make-safe is temporary damage prevention. Permanent repairs/materials are quoted separately.</li>
-        </ul>
-        <p style="margin:10px 0 0 0;color:#6b7280;font-size:12px"><b>Customer confirmed terms:</b> ${escapeHtml(
-          AgreedToTerms || "NO"
-        )}</p>
-      </div>
-    `;
-
     const html = isMembership
       ? `
-        <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
-          <h2>KRINEDAL-R — New membership application</h2>
-          <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
-          <hr/>
-          <p><b>Plan:</b> ${escapeHtml(Plan || "—")}</p>
-          <p><b>Billing:</b> ${escapeHtml(Billing || "—")}</p>
-          <hr/>
+        <div style="font-family:system-ui,Arial">
+          <h2>KRINEDAL-R — New Membership Application</h2>
           <p><b>Name:</b> ${escapeHtml(Name)}</p>
           <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
           <p><b>Email:</b> ${escapeHtml(Email)}</p>
           <p><b>Eircode:</b> ${escapeHtml(Eircode)}</p>
           <p><b>Town/County:</b> ${escapeHtml(Town)}</p>
-          <p><b>Address (optional):</b> ${escapeHtml(Address)}</p>
           <hr/>
+          <p><b>Plan:</b> ${escapeHtml(Plan)}</p>
+          <p><b>Address:</b> ${escapeHtml(Address)}</p>
           <p><b>Notes:</b><br/>${escapeHtml(MemberNotes).replace(/\n/g, "<br/>")}</p>
-          ${membershipLegal}
           <hr/>
-          <p style="color:#6b7280;font-size:12px">
-            Admin note: Membership is subject to confirmation (area coverage, workload, and availability).
-          </p>
+          <p><b>Agreed to terms:</b> ${escapeHtml(AgreedToTerms || "NO")}</p>
         </div>
       `
       : `
-        <div style="font-family:system-ui,Segoe UI,Arial;line-height:1.5">
-          <h2>KRINEDAL-R — New estimate request</h2>
-          <p style="color:#6b7280;margin-top:-6px">Sent from krinedalr.ie</p>
-          <hr/>
+        <div style="font-family:system-ui,Arial">
+          <h2>KRINEDAL-R — New Estimate Request</h2>
           <p><b>Name:</b> ${escapeHtml(Name)}</p>
           <p><b>Phone:</b> ${escapeHtml(Phone)}</p>
           <p><b>Email:</b> ${escapeHtml(Email)}</p>
@@ -146,43 +118,36 @@ export async function POST(req) {
         </div>
       `;
 
-    const payload = {
-      from: CONTACT_FROM,
-      to: toList,
-      subject,
-      html,
-      replyTo: Email || undefined,
-      attachments: !isMembership && attachments.length ? attachments : undefined,
-    };
-
-    const r = await fetch("https://api.resend.com/emails", {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        from: CONTACT_FROM,
+        to: CONTACT_TO.split(",").map((e) => e.trim()),
+        subject,
+        html,
+        reply_to: Email || undefined,
+        attachments: attachments.length ? attachments : undefined,
+      }),
     });
 
-    const text = await r.text().catch(() => "");
-
-    if (!r.ok) {
-      console.error("RESEND FAILED", r.status, text);
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("RESEND ERROR:", text);
       return Response.json(
-        { ok: false, error: "Resend failed", details: text },
+        { ok: false, error: "Email send failed", details: text },
         { status: 500 }
       );
     }
 
-    console.log("RESEND OK", r.status, text);
     return Response.json({ ok: true });
   } catch (err) {
+    console.error("CONTACT API ERROR:", err);
     return Response.json(
-      {
-        ok: false,
-        error: "Server error",
-        details: String(err?.message || err || ""),
-      },
+      { ok: false, error: String(err.message || err) },
       { status: 500 }
     );
   }
