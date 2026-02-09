@@ -187,10 +187,12 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
           <div className="k-title">2) Safety &amp; duty of care (RED policy)</div>
           <ul className="k-list">
             <li>
-              <strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors during RED warnings.
+              <strong>Strict safety policy:</strong> KRINEDAL-R does not send employees/subcontractors
+              during RED warnings.
             </li>
             <li>
-              <strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and their families.
+              <strong>Reason:</strong> risk assessment, high hazards, duty of care to our staff and their
+              families.
             </li>
             <li>
               <strong>Owner response:</strong> the company owner attends where access is possible.
@@ -226,15 +228,15 @@ function TermsModal({ open, onClose, RED_POLICY_LINE }) {
           <ul className="k-list">
             <li>
               <strong>
-                If a booked visit is cancelled after planning has been completed and a technician
-                has already been dispatched (left base and is travelling), the full call-out/booking
-                fee applies.
+                If a booked visit is cancelled after planning has been completed and a technician has
+                already been dispatched (left base and is travelling), the full call-out/booking fee
+                applies.
               </strong>
             </li>
             <li>This covers time, travel, fuel, scheduling, and resources already committed.</li>
             <li>
-              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may
-              be rescheduled without penalty.
+              Cancellations due to severe weather or safety risk, as determined by KRINEDAL-R, may be
+              rescheduled without penalty.
             </li>
           </ul>
         </div>
@@ -281,33 +283,42 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">Discounts offered</div>
           <ul className="k-list">
-            <li><strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong></li>
-            <li><strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong></li>
-            <li><strong>35% OFF</strong> emergency call-out fee for <strong>families caring for children with severe disabilities</strong></li>
+            <li>
+              <strong>50% OFF</strong> emergency call-out fee for <strong>elderly customers</strong>
+            </li>
+            <li>
+              <strong>35% OFF</strong> emergency call-out fee for <strong>single parents</strong>
+            </li>
+            <li>
+              <strong>35% OFF</strong> emergency call-out fee for{" "}
+              <strong>families caring for children with severe disabilities</strong>
+            </li>
           </ul>
           <p className="muted smallest" style={{ marginTop: 10 }}>
-            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are intended
-            for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist hire and
-            additional works are charged separately.
+            <strong>Important:</strong> Discounts apply to the <strong>call-out fee only</strong> and are
+            intended for genuine emergency make-safe visits. Materials, skips, scaffolding, specialist
+            hire and additional works are charged separately.
           </p>
         </div>
         <div className="k-block">
           <div className="k-title">Why we do this</div>
           <p>
-            Many elderly people built this country through decades of hard work and contribution.
-            When severe weather hits, they are often the most vulnerable.
-            We believe they deserve respect, safety, and fast help when their home is at risk.
+            Many elderly people built this country through decades of hard work and contribution. When
+            severe weather hits, they are often the most vulnerable. We believe they deserve respect,
+            safety, and fast help when their home is at risk.
           </p>
           <p>
-            Single parents often carry full responsibility for their household alone.
-            During emergencies there is no second person to share the pressure or cost.
-            We reduce the call-out fee to help keep the home safe during difficult moments
+            Single parents often carry full responsibility for their household alone. During emergencies
+            there is no second person to share the pressure or cost. We reduce the call-out fee to help
+            keep the home safe during difficult moments
           </p>
           <p>
-            Families caring for children with severe disabilities often face constant pressure, emotional strain, and unexpected emergencies.
-            During severe weather or urgent home safety issues, these families have little flexibility and fewer options to respond quickly.
-            Parents cannot leave children unattended in dangerous conditions while also trying to make the home safe.
-            We believe these families deserve understanding, dignity, and practical support when their home environment becomes unsafe.
+            Families caring for children with severe disabilities often face constant pressure, emotional
+            strain, and unexpected emergencies. During severe weather or urgent home safety issues, these
+            families have little flexibility and fewer options to respond quickly. Parents cannot leave
+            children unattended in dangerous conditions while also trying to make the home safe. We
+            believe these families deserve understanding, dignity, and practical support when their home
+            environment becomes unsafe.
           </p>
         </div>
         <div className="k-block">
@@ -316,6 +327,64 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
             {RED_POLICY_LINE}
           </p>
         </div>
+        <div className="close-row">
+          <button className="btn" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** NEW: H&S Walk-Through modal */
+function HsWalkthroughModal({ open, onClose }) {
+  if (!open) return null;
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2>Commercial H&amp;S Walk-Through (Site Risk Notes)</h2>
+        <p className="muted" style={{ marginTop: 8 }}>
+          A structured visual site walk-through designed to identify practical hazards, reduce liability
+          exposure, and create clean records for internal reviews and audits.
+        </p>
+        <hr />
+
+        <div className="k-block">
+          <div className="k-title">What you get</div>
+          <ul className="k-list">
+            <li>Site walk-through with hazard observations (non-invasive, visual only)</li>
+            <li>
+              Risk grading per item: <strong>Immediate</strong> / <strong>Monitor</strong> /{" "}
+              <strong>Planned</strong>
+            </li>
+            <li>Photo evidence where safe and appropriate</li>
+            <li>Simple action notes (what to fix + why it matters)</li>
+            <li>Defect / hazard log (recorded and dated)</li>
+            <li>Executive summary suitable for directors / facilities / auditors</li>
+          </ul>
+        </div>
+
+        <div className="k-block">
+          <div className="k-title">Important note (scope)</div>
+          <ul className="k-list">
+            <li>This is <strong>not</strong> a statutory certification or engineering survey.</li>
+            <li>
+              We provide <strong>evidence + practical risk notes</strong> to support site management
+              decisions.
+            </li>
+            <li>Any remedial works are quoted separately if requested.</li>
+          </ul>
+        </div>
+
+        <div className="k-block">
+          <div className="k-title">Pricing guide</div>
+          <p style={{ margin: 0 }}>
+            <strong>€1,200 – €3,000 per site</strong> (size, complexity, access, reporting level).
+          </p>
+        </div>
+
         <div className="close-row">
           <button className="btn" onClick={onClose}>
             Close
@@ -337,6 +406,9 @@ export default function HomePage() {
 
   // Commercial Read more
   const [commercialMoreOpen, setCommercialMoreOpen] = useState(false);
+
+  // NEW: H&S modal
+  const [hsOpen, setHsOpen] = useState(false);
 
   useEffect(() => {
     function onDocClick(e) {
@@ -370,7 +442,6 @@ export default function HomePage() {
   const tileRate = 75;
   const [floorArea, setFloorArea] = useState("");
   const floorRate = 40;
-
   const roofTotal = roofArea ? (Number(roofArea) * roofRate).toFixed(0) : "";
   const tileTotal = tileArea ? (Number(tileArea) * tileRate).toFixed(0) : "";
   const floorTotal = floorArea ? (Number(floorArea) * floorRate).toFixed(0) : "";
@@ -386,10 +457,26 @@ export default function HomePage() {
 
   const weatherUI = useMemo(() => {
     const map = {
-      green: { label: "GREEN – normal conditions", textClass: "green-text", chipClass: "weather-chip weather-chip-green" },
-      yellow: { label: "YELLOW – weather warning issued", textClass: "yellow-text", chipClass: "weather-chip weather-chip-yellow" },
-      orange: { label: "ORANGE – severe weather", textClass: "orange-text", chipClass: "weather-chip weather-chip-orange" },
-      red: { label: "RED – extreme / emergency", textClass: "red-text", chipClass: "weather-chip weather-chip-red" },
+      green: {
+        label: "GREEN – normal conditions",
+        textClass: "green-text",
+        chipClass: "weather-chip weather-chip-green",
+      },
+      yellow: {
+        label: "YELLOW – weather warning issued",
+        textClass: "yellow-text",
+        chipClass: "weather-chip weather-chip-yellow",
+      },
+      orange: {
+        label: "ORANGE – severe weather",
+        textClass: "orange-text",
+        chipClass: "weather-chip weather-chip-orange",
+      },
+      red: {
+        label: "RED – extreme / emergency",
+        textClass: "red-text",
+        chipClass: "weather-chip weather-chip-red",
+      },
     };
     return map[weatherStatus] || map.green;
   }, [weatherStatus]);
@@ -400,7 +487,6 @@ export default function HomePage() {
       setWeatherError("");
       const res = await fetch(`/api/weather-status?_=${Date.now()}`, { cache: "no-store" });
       const json = await res.json().catch(() => ({}));
-
       // Mirror-only: update status ONLY if feed ok
       if (!json?.ok) {
         setWeatherError(json?.error || "Weather feed unavailable — keeping last known status.");
@@ -438,18 +524,14 @@ export default function HomePage() {
     try {
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
-
       if (fd.get("website")) {
         setSubmitting(false);
         return;
       }
-
       fd.set("FormType", "Estimate");
-
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
-
       setSubmitMsg("Sent ✅ We’ll get back to you shortly.");
       setFilesLabel("");
       formEl.reset();
@@ -472,6 +554,7 @@ export default function HomePage() {
     Gold: 799,
     Diamond: 1199,
   };
+
   const planPriceLabel = (plan) => (PLAN_PRICING[plan] ? `€${PLAN_PRICING[plan]}` : "");
 
   function scrollToId(id) {
@@ -496,6 +579,7 @@ export default function HomePage() {
     setTermsOpen(true);
     setMoreOpen(false);
   }
+
   function openCommunityModal() {
     setCommunityOpen(true);
     setMoreOpen(false);
@@ -510,24 +594,19 @@ export default function HomePage() {
         setMembershipMsg("Please tick the agreement box to submit.");
         return;
       }
-
       const formEl = e.currentTarget;
       const fd = new FormData(formEl);
-
       if (fd.get("website")) {
         setMembershipSubmitting(false);
         return;
       }
-
       fd.set("FormType", "Membership");
       fd.set("Plan", selectedPlan);
       fd.set("AgreedToTerms", "YES");
       fd.set("PlanPrice", `€${PLAN_PRICING[selectedPlan] || ""}`);
-
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
-
       setMembershipMsg("Application sent ✅ We’ll confirm coverage & availability shortly.");
       setAgreeMembership(false);
       formEl.reset();
@@ -570,21 +649,45 @@ export default function HomePage() {
 
           {/* Desktop actions (kept in file, hidden by CSS) */}
           <div className="topbar-actions">
-            <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+            <a href="tel:0831762475" className="btn btn-primary">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               WhatsApp
             </a>
-            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-            <button className="btn btn-outline" onClick={openCommunityModal}>Community Support</button>
-            <button className="btn btn-outline" onClick={() => scrollToId("membership")}>Memberships</button>
-            <button className="btn btn-outline" onClick={() => scrollToId("live-weather")}>Live Weather Status</button>
-            <button className="btn btn-outline" onClick={openTermsModal}>Website Terms</button>
+            <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
+              People &amp; Culture
+            </button>
+            <button className="btn btn-outline" onClick={openCommunityModal}>
+              Community Support
+            </button>
+            <button className="btn btn-outline" onClick={() => scrollToId("membership")}>
+              Memberships
+            </button>
+            <button className="btn btn-outline" onClick={() => scrollToId("live-weather")}>
+              Live Weather Status
+            </button>
+            <button className="btn btn-outline" onClick={openTermsModal}>
+              Website Terms
+            </button>
           </div>
 
           {/* Unified actions (desktop + mobile look the same) */}
           <div className="topbar-actions-mobile">
-            <a href="tel:0831762475" className="btn btn-primary">Call</a>
-            <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+            <a href="tel:0831762475" className="btn btn-primary">
+              Call
+            </a>
+            <a
+              href="https://wa.me/353831762475"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
               WhatsApp
             </a>
 
@@ -600,21 +703,54 @@ export default function HomePage() {
 
               {moreOpen && (
                 <div className="more-menu">
-                  <button className="more-item" onClick={() => { setPcOpen(true); setMoreOpen(false); }}>
+                  <button
+                    className="more-item"
+                    onClick={() => {
+                      setPcOpen(true);
+                      setMoreOpen(false);
+                    }}
+                  >
                     People &amp; Culture
                   </button>
-                  <button className="more-item" onClick={openCommunityModal}>Community Support</button>
-                  <button className="more-item" onClick={() => scrollToId("membership")}>Memberships</button>
-                  <button className="more-item" onClick={() => scrollToId("commercial-membership")}>Commercial membership</button>
-                  <button className="more-item" onClick={() => scrollToId("landlord-services")}>Landlord services</button>
-                  <button className="more-item" onClick={() => scrollToId("vacant-property")}>Vacant property care</button>
-                  <button className="more-item" onClick={() => scrollToId("documentation")}>Documentation &amp; reporting</button>
-                  <button className="more-item" onClick={() => scrollToId("live-weather")}>Live Weather Status</button>
-                  <a className="more-item" href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" onClick={() => setMoreOpen(false)}>
+                  <button className="more-item" onClick={openCommunityModal}>
+                    Community Support
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("membership")}>
+                    Memberships
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("commercial-membership")}>
+                    Commercial membership
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("hs-walkthrough")}>
+                    H&amp;S walk-through
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("landlord-services")}>
+                    Landlord services
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("vacant-property")}>
+                    Vacant property care
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("documentation")}>
+                    Documentation &amp; reporting
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("live-weather")}>
+                    Live Weather Status
+                  </button>
+                  <a
+                    className="more-item"
+                    href="https://www.instagram.com/krinedalr/"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setMoreOpen(false)}
+                  >
                     Instagram
                   </a>
-                  <button className="more-item" onClick={openTermsModal}>Website Terms</button>
-                  <button className="more-item" onClick={() => scrollToId("estimate")}>Contact</button>
+                  <button className="more-item" onClick={openTermsModal}>
+                    Website Terms
+                  </button>
+                  <button className="more-item" onClick={() => scrollToId("estimate")}>
+                    Contact
+                  </button>
                 </div>
               )}
             </div>
@@ -626,6 +762,7 @@ export default function HomePage() {
       <PeopleCultureModal open={pcOpen} onClose={() => setPcOpen(false)} />
       <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
       <CommunitySupportModal open={communityOpen} onClose={() => setCommunityOpen(false)} RED_POLICY_LINE={RED_POLICY_LINE} />
+      <HsWalkthroughModal open={hsOpen} onClose={() => setHsOpen(false)} />
 
       {/* HERO (LOCKED: minimal) */}
       <section className="hero">
@@ -639,17 +776,27 @@ export default function HomePage() {
             <h1 className="hero-title">
               KRINEDAL-<span className="hero-r">R</span>
             </h1>
+
             <p className="hero-tag">
               <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
+
             <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
+
             <p className="hero-lead">
               24/7 storm damage call-outs, roof renewals and luxury tiling across Ireland.
             </p>
 
             <div className="hero-actions">
-              <a href="tel:0831762475" className="btn btn-primary">Call 24/7 Storm Line</a>
-              <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn btn-outline">
+              <a href="tel:0831762475" className="btn btn-primary">
+                Call 24/7 Storm Line
+              </a>
+              <a
+                href="https://wa.me/353831762475"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-outline"
+              >
                 WhatsApp Now
               </a>
             </div>
@@ -681,6 +828,7 @@ export default function HomePage() {
                   Affected: <strong>{affectedCounties.join(", ")}</strong>
                 </p>
               )}
+
               {weatherError && (
                 <p className="muted smallest" style={{ marginTop: 6 }}>
                   ⚠️ {weatherError}
@@ -700,7 +848,9 @@ export default function HomePage() {
               From emergency leaks to premium finishes — we keep your home safe, dry and beautifully finished.
             </p>
             <ul className="list" style={{ marginTop: 12 }}>
-              {SERVICES.map((s) => <li key={s}>{s}</li>)}
+              {SERVICES.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
             </ul>
             <p className="muted smallest" style={{ marginTop: 10 }}>
               *Response time depends on location &amp; weather conditions.
@@ -716,9 +866,15 @@ export default function HomePage() {
               We compete on standards, systems, and accountability.
             </p>
             <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button className="btn btn-outline" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-              <button className="btn btn-outline" onClick={openCommunityModal}>Community Support</button>
-              <button className="btn btn-outline" onClick={openTermsModal}>Website Terms</button>
+              <button className="btn btn-outline" onClick={() => setPcOpen(true)}>
+                People &amp; Culture
+              </button>
+              <button className="btn btn-outline" onClick={openCommunityModal}>
+                Community Support
+              </button>
+              <button className="btn btn-outline" onClick={openTermsModal}>
+                Website Terms
+              </button>
             </div>
           </div>
         </div>
@@ -738,7 +894,6 @@ export default function HomePage() {
                 Materials (tiles/silicone/etc.), scaffolding/MEWP, skips and specialist hire are charged separately where required.
               </p>
             </div>
-
             <div className="status-pill">
               <span className="status-label">Current status</span>
               <span className={`status-badge ${weatherStatus}`}>{weatherStatus.toUpperCase()}</span>
@@ -748,16 +903,30 @@ export default function HomePage() {
           <div className="plans-grid">
             {/* BRONZE */}
             <div className="plan">
-              <div className="plan-kicker"><span className="plan-icon">🥉</span> BRONZE</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥉</span> BRONZE
+              </div>
               <div className="plan-name">Bronze — essential property check</div>
               <div className="plan-price">{planPriceLabel("Bronze")}</div>
               <ul>
-                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                <li><strong>Priority booking</strong> over non-members</li>
+                <li>
+                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
+                </li>
+                <li>
+                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
+                </li>
+                <li>
+                  <strong>External silicone inspection</strong> (external seals — inspection only)
+                </li>
+                <li>
+                  <strong>Written inspection notes</strong> provided if issues are found
+                </li>
+                <li>
+                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
+                </li>
+                <li>
+                  <strong>Priority booking</strong> over non-members
+                </li>
               </ul>
               <div className="plan-foot">
                 Best for homeowners who want early detection before problems become expensive.
@@ -772,20 +941,39 @@ export default function HomePage() {
             {/* SILVER */}
             <div className="plan plan-most-popular">
               <div className="badge badge-popular">⭐ Most popular</div>
-              <div className="plan-kicker"><span className="plan-icon">🥈</span> SILVER</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥈</span> SILVER
+              </div>
               <div className="plan-name">Silver — preventative maintenance</div>
               <div className="plan-price">{planPriceLabel("Silver")}</div>
               <ul>
-                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                <li><strong>Priority booking</strong> over non-members</li>
-
-                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+                <li>
+                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
+                </li>
+                <li>
+                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
+                </li>
+                <li>
+                  <strong>External silicone inspection</strong> (external seals — inspection only)
+                </li>
+                <li>
+                  <strong>Written inspection notes</strong> provided if issues are found
+                </li>
+                <li>
+                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
+                </li>
+                <li>
+                  <strong>Priority booking</strong> over non-members
+                </li>
+                <li>
+                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
+                </li>
+                <li>
+                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
+                </li>
+                <li>
+                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
+                </li>
               </ul>
               <div className="plan-foot">
                 Best for landlords and homeowners who want maintenance, not just inspections.
@@ -800,27 +988,53 @@ export default function HomePage() {
             {/* GOLD */}
             <div className="plan plan-best-value">
               <div className="badge badge-value">🏆 Best value / priority</div>
-              <div className="plan-kicker"><span className="plan-icon">🥇</span> GOLD</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">🥇</span> GOLD
+              </div>
               <div className="plan-name">Gold — active property care</div>
               <div className="plan-price">{planPriceLabel("Gold")}</div>
               <ul>
-                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                <li><strong>Priority booking</strong> over non-members</li>
-
-                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
-
-                <li><strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)</li>
-                <li><strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)</li>
-                <li><strong>Discounted labour</strong> on additional works</li>
+                <li>
+                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
+                </li>
+                <li>
+                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
+                </li>
+                <li>
+                  <strong>External silicone inspection</strong> (external seals — inspection only)
+                </li>
+                <li>
+                  <strong>Written inspection notes</strong> provided if issues are found
+                </li>
+                <li>
+                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
+                </li>
+                <li>
+                  <strong>Priority booking</strong> over non-members
+                </li>
+                <li>
+                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
+                </li>
+                <li>
+                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
+                </li>
+                <li>
+                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
+                </li>
+                <li>
+                  <strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)
+                </li>
+                <li>
+                  <strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)
+                </li>
+                <li>
+                  <strong>Discounted labour</strong> on additional works
+                </li>
                 <li>
                   <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                  <span className="muted smallest">(e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).</span>
+                  <span className="muted smallest">
+                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+                  </span>
                 </li>
               </ul>
               <div className="plan-foot">
@@ -836,28 +1050,56 @@ export default function HomePage() {
             {/* DIAMOND */}
             <div className="plan plan-limited">
               <div className="badge badge-limited">💎 Limited</div>
-              <div className="plan-kicker"><span className="plan-icon">💎</span> DIAMOND</div>
+              <div className="plan-kicker">
+                <span className="plan-icon">💎</span> DIAMOND
+              </div>
               <div className="plan-name">Diamond — full professional coverage</div>
               <div className="plan-price">{planPriceLabel("Diamond")}</div>
               <ul>
-                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                <li><strong>Priority booking</strong> over non-members</li>
-
-                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
-
-                <li><strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)</li>
-                <li><strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)</li>
-                <li><strong>Annual written condition report</strong> stored and referenced for future works</li>
-                <li><strong>Direct priority contact channel</strong> + best available pricing on additional works</li>
+                <li>
+                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
+                </li>
+                <li>
+                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
+                </li>
+                <li>
+                  <strong>External silicone inspection</strong> (external seals — inspection only)
+                </li>
+                <li>
+                  <strong>Written inspection notes</strong> provided if issues are found
+                </li>
+                <li>
+                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
+                </li>
+                <li>
+                  <strong>Priority booking</strong> over non-members
+                </li>
+                <li>
+                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
+                </li>
+                <li>
+                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
+                </li>
+                <li>
+                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
+                </li>
+                <li>
+                  <strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)
+                </li>
+                <li>
+                  <strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)
+                </li>
+                <li>
+                  <strong>Annual written condition report</strong> stored and referenced for future works
+                </li>
+                <li>
+                  <strong>Direct priority contact channel</strong> + best available pricing on additional works
+                </li>
                 <li>
                   <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                  <span className="muted smallest">(e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).</span>
+                  <span className="muted smallest">
+                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+                  </span>
                 </li>
               </ul>
               <div className="plan-foot">
@@ -893,7 +1135,6 @@ export default function HomePage() {
               Designed for health &amp; safety managers and budget decision-makers who need predictable site support, reduced risk, and clean records.
               Services are designed to support health &amp; safety obligations, reduce site risk, and provide clear records suitable for internal reviews and external audits.
             </p>
-
             <p className="muted smallest" style={{ marginTop: 10 }}>
               <strong>Pricing:</strong> <strong>€3,850 per site</strong> • <strong>€6,750 for 2 sites</strong>
             </p>
@@ -945,13 +1186,32 @@ export default function HomePage() {
                   <li>Maintenance history tracking</li>
                   <li>Notes suitable for insurers / property managers</li>
                 </ul>
-
                 <p className="muted smallest" style={{ marginTop: 10 }}>
                   <strong>Important:</strong> Where materials are required, they are charged separately.
                   Site clean-up and general housekeeping excluded only after our work.
                 </p>
               </div>
             )}
+          </div>
+
+          {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
+          <div id="hs-walkthrough" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
+            <h3 style={{ margin: 0 }}>✅ H&amp;S Walk-Through + Hazard Notes (Commercial Add-On)</h3>
+            <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
+              A structured site walk-through with hazard observations, photo evidence and a clean defect log —
+              designed to support audits, reduce liability exposure, and protect the people responsible for the site.
+            </p>
+            <p className="muted smallest" style={{ marginTop: 10 }}>
+              <strong>Pricing guide:</strong> <strong>€1,200 – €3,000 per site</strong> (depending on site size and reporting level).
+            </p>
+            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <button type="button" className="btn btn-outline" onClick={() => setHsOpen(true)}>
+                Read full scope
+              </button>
+              <button type="button" className="btn btn-outline" onClick={() => scrollToId("estimate")}>
+                Enquire
+              </button>
+            </div>
           </div>
 
           {/* LANDLORD SERVICES */}
@@ -1121,16 +1381,20 @@ export default function HomePage() {
             <div className="callout-pricing">
               <div className="callout-title">Emergency call-out fee guide</div>
               <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
-                <span className="left">GREEN</span><span className="right">€250 – €350</span>
+                <span className="left">GREEN</span>
+                <span className="right">€250 – €350</span>
               </div>
               <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
-                <span className="left">YELLOW</span><span className="right">€350 – €450</span>
+                <span className="left">YELLOW</span>
+                <span className="right">€350 – €450</span>
               </div>
               <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
-                <span className="left">ORANGE</span><span className="right">€450 – €550</span>
+                <span className="left">ORANGE</span>
+                <span className="right">€450 – €550</span>
               </div>
               <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
-                <span className="left">RED</span><span className="right">€550 – €1000</span>
+                <span className="left">RED</span>
+                <span className="right">€550 – €1000</span>
               </div>
               <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
             </div>
@@ -1138,11 +1402,9 @@ export default function HomePage() {
 
           <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
             <h2>Live Weather Status</h2>
-
             <p className="muted small" style={{ marginTop: 8 }}>
               Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()}</strong>
             </p>
-
             <p className="muted smallest" style={{ marginTop: 8, fontWeight: 900 }}>
               Upcoming weather outlook (24–72 hours) <br />
               Based on Met Éireann forecast data.
@@ -1155,16 +1417,24 @@ export default function HomePage() {
             )}
 
             <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button type="button" className="btn btn-weather" onClick={() => loadWeather({ manual: true })} disabled={refreshingWeather}>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+              >
                 {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
               </button>
+
               <a className="btn btn-outline" href={WIND_MAP_URL} target="_blank" rel="noreferrer">
                 🌬️ Live Wind Map
               </a>
             </div>
 
             {weatherError ? (
-              <p className="muted smallest" style={{ marginTop: 8 }}>⚠️ {weatherError}</p>
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                ⚠️ {weatherError}
+              </p>
             ) : (
               <p className="muted smallest" style={{ marginTop: 8 }}>
                 Auto-updated from Met Éireann warnings
@@ -1174,7 +1444,9 @@ export default function HomePage() {
 
             {weatherWarnings.length > 0 && (
               <div style={{ marginTop: 12 }}>
-                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>Latest warnings:</p>
+                <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
+                  Latest warnings:
+                </p>
                 <ul className="list" style={{ marginTop: 0 }}>
                   {weatherWarnings.slice(0, 4).map((w, idx) => (
                     <li key={w?.id || w?.headline || idx}>
@@ -1228,7 +1500,9 @@ export default function HomePage() {
         <div className="container grid-3">
           <div className="card">
             <h2>Roofing cost idea (rough guide)</h2>
-            <p className="muted small">Handy calculator to get a feel for budget. Final prices always confirmed after inspection.</p>
+            <p className="muted small">
+              Handy calculator to get a feel for budget. Final prices always confirmed after inspection.
+            </p>
             <label className="field-label">
               Roof area (m²)
               <input
@@ -1240,7 +1514,9 @@ export default function HomePage() {
                 inputMode="decimal"
               />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{roofRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{roofRate}</strong>
+            </p>
             <p className="calc-result">
               Rough roofing total: {roofTotal ? <strong>€{roofTotal}</strong> : "— enter size above"}
             </p>
@@ -1263,7 +1539,9 @@ export default function HomePage() {
                 inputMode="decimal"
               />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{tileRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{tileRate}</strong>
+            </p>
             <p className="calc-result">
               Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
@@ -1274,7 +1552,9 @@ export default function HomePage() {
 
           <div className="card">
             <h2>Flooring cost idea</h2>
-            <p className="muted small">Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.</p>
+            <p className="muted small">
+              Rough guide for laminate, vinyl and engineered wood flooring. Final prices always confirmed after inspection.
+            </p>
             <label className="field-label">
               Floor area (m²)
               <input
@@ -1286,7 +1566,9 @@ export default function HomePage() {
                 inputMode="decimal"
               />
             </label>
-            <p className="muted small" style={{ marginTop: 8 }}>Rate per m²: <strong>€{floorRate}</strong></p>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Rate per m²: <strong>€{floorRate}</strong>
+            </p>
             <p className="calc-result">
               Rough flooring total: {floorTotal ? <strong>€{floorTotal}</strong> : "— enter size above"}
             </p>
@@ -1452,7 +1734,9 @@ export default function HomePage() {
             </div>
 
             <div className="footer-contact">
-              <p>Phone: <strong>083 176 2475</strong></p>
+              <p>
+                Phone: <strong>083 176 2475</strong>
+              </p>
               <p>
                 Email: <a href="mailto:krinedalr@outlook.com">krinedalr@outlook.com</a> /{" "}
                 <a href="mailto:krinedalr@gmail.com">krinedalr@gmail.com</a>
@@ -1480,13 +1764,26 @@ export default function HomePage() {
               </p>
 
               <div className="footer-buttons">
-                <a href="tel:0831762475" className="btn footer-call">Call</a>
-                <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="btn footer-whatsapp">
+                <a href="tel:0831762475" className="btn footer-call">
+                  Call
+                </a>
+                <a
+                  href="https://wa.me/353831762475"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn footer-whatsapp"
+                >
                   WhatsApp
                 </a>
-                <button className="btn footer-call" onClick={() => setPcOpen(true)}>People &amp; Culture</button>
-                <button className="btn footer-call" onClick={() => setTermsOpen(true)}>Website Terms</button>
-                <button className="btn footer-call" onClick={openCommunityModal}>Community Support</button>
+                <button className="btn footer-call" onClick={() => setPcOpen(true)}>
+                  People &amp; Culture
+                </button>
+                <button className="btn footer-call" onClick={() => setTermsOpen(true)}>
+                  Website Terms
+                </button>
+                <button className="btn footer-call" onClick={openCommunityModal}>
+                  Community Support
+                </button>
               </div>
 
               <div className="copyright-line">© KRINEDAL-R. All rights reserved.</div>
@@ -1496,16 +1793,42 @@ export default function HomePage() {
 
         {/* FLOATING BUTTONS (KEPT) */}
         <div className="float-stack">
-          <a href="https://wa.me/353831762475" target="_blank" rel="noreferrer" className="float-btn float-wa" aria-label="WhatsApp" title="WhatsApp">
+          <a
+            href="https://wa.me/353831762475"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-wa"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
             <IconWhatsApp />
           </a>
-          <a href="https://m.me/61581354904730" target="_blank" rel="noreferrer" className="float-btn float-msgr" aria-label="Messenger" title="Messenger">
+          <a
+            href="https://m.me/61581354904730"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-msgr"
+            aria-label="Messenger"
+            title="Messenger"
+          >
             <IconMessenger />
           </a>
-          <a href="https://www.instagram.com/krinedalr/" target="_blank" rel="noreferrer" className="float-btn float-ig" aria-label="Instagram" title="Instagram">
+          <a
+            href="https://www.instagram.com/krinedalr/"
+            target="_blank"
+            rel="noreferrer"
+            className="float-btn float-ig"
+            aria-label="Instagram"
+            title="Instagram"
+          >
             <IconInstagram />
           </a>
-          <a href="mailto:krinedalr@outlook.com" className="float-btn float-mail" aria-label="Email" title="Email">
+          <a
+            href="mailto:krinedalr@outlook.com"
+            className="float-btn float-mail"
+            aria-label="Email"
+            title="Email"
+          >
             <IconMail />
           </a>
         </div>
@@ -1513,4 +1836,3 @@ export default function HomePage() {
     </main>
   );
 }
-
