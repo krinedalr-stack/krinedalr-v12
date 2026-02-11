@@ -26,9 +26,15 @@ export async function POST(req) {
     const CONTACT_TO =
       process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
 
-    // Keep onboarding until your Resend domain is verified
+    /**
+     * ✅ IMPORTANT:
+     * - Use your VERIFIED domain for "from"
+     * - DO NOT use @send.krinedalr.ie (Resend treats it as a different domain)
+     * - Keep CONTACT_FROM in Vercel env vars as:
+     *   KRINEDAL-R <info@krinedalr.ie>
+     */
     const CONTACT_FROM =
-      process.env.CONTACT_FROM || "KRINEDAL-R <onboarding@resend.dev>";
+      process.env.CONTACT_FROM || "KRINEDAL-R <info@krinedalr.ie>";
 
     if (!RESEND_API_KEY) {
       return Response.json(
@@ -152,8 +158,11 @@ export async function POST(req) {
       to: toList,
       subject,
       html,
-      // ✅ Resend expects snake_case:
+
+      // ✅ Reply-to (set both for maximum compatibility)
       reply_to: Email || undefined,
+      replyTo: Email || undefined,
+
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
