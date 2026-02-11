@@ -14,6 +14,30 @@ function escapeHtml(s) {
     .replaceAll("'", "&#039;");
 }
 
+async function readBody(req) {
+  const ct = req.headers.get("content-type") || "";
+
+  // FormData (recommended for file uploads)
+  if (ct.includes("multipart/form-data") || ct.includes("application/x-www-form-urlencoded")) {
+    const form = await req.formData();
+    return { type: "form", form };
+  }
+
+  // JSON fallback
+  if (ct.includes("application/json")) {
+    const json = await req.json().catch(() => ({}));
+    return { type: "json", json };
+  }
+
+  // Last resort: try formData
+  try {
+    const form = await req.formData();
+    return { type: "form", form };
+  } catch {
+    return { type: "unknown", raw: "" };
+  }
+}
+
 // Quick check route exists
 export async function GET() {
   return Response.json({ ok: true, route: "/api/contact", method: "POST" });
@@ -26,71 +50,85 @@ export async function POST(req) {
     const CONTACT_TO =
       process.env.CONTACT_TO || "krinedalr@outlook.com,krinedalr@gmail.com";
 
-    /**
-     * ✅ IMPORTANT:
-     * - Use your VERIFIED domain for "from"
-     * - DO NOT use @send.krinedalr.ie (Resend treats it as a different domain)
-     * - Keep CONTACT_FROM in Vercel env vars as:
-     *   KRINEDAL-R <info@krinedalr.ie>
-     */
+    // ✅ MUST be from VERIFIED root domain (NOT send.krinedalr.ie)
     const CONTACT_FROM =
       process.env.CONTACT_FROM || "KRINEDAL-R <info@krinedalr.ie>";
 
     if (!RESEND_API_KEY) {
-      return Response.json(
-        { ok: false, error: "Missing RESEND_API_KEY" },
-        { status: 500 }
-      );
+      return Response.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
     }
 
-    const form = await req.formData();
+    const body = await readBody(req);
+
+    // Helpers to get fields from form OR json
+    const get = (key) => {
+      if (body.type === "form") return body.form.get(key);
+      if (body.type === "json") return body.json?.[key];
+      return null;
+    };
 
     // Honeypot
-    const honey = form.get("website");
+    const honey = String(get("website") || "");
     if (honey) return Response.json({ ok: true });
 
     // Common fields
-    const FormType = String(form.get("FormType") || "Estimate").trim();
-    const Name = String(form.get("Name") || "").trim();
-    const Phone = String(form.get("Phone") || "").trim();
-    const Email = String(form.get("Email") || "").trim();
-    const Eircode = String(form.get("Eircode") || "").trim();
-    const Town = String(form.get("Town/County") || "").trim();
+    const FormType = String(get("FormType") || "Estimate").trim();
+    const Name = String(get("Name") || "").trim();
+    const Phone = String(get("Phone") || "").trim();
+    const Email = String(get("Email") || "").trim();
+    const Eircode = String(get("Eircode") || "").trim();
+    const Town = String(get("Town/County") || get("Town") || "").trim();
 
     // Estimate fields
-    const Service = String(form.get("Service") || "").trim();
-    const PrefDate = String(form.get("Preferred date") || "").trim();
-    const PrefTime = String(form.get("Preferred time") || "").trim();
-    const Details = String(form.get("Details") || "").trim();
+    const Service = String(get("Service") || "").trim();
+    const PrefDate = String(get("Preferred date") || get("PreferredDate") || "").trim();
+    const PrefTime = String(get("Preferred time") || get("PreferredTime") || "").trim();
+    const Details = String(get("Details") || "").trim();
 
     // Membership fields
-    const Plan = String(form.get("Plan") || "").trim();
-    const Billing = String(form.get("Billing") || "").trim();
-    const Address = String(form.get("Address") || "").trim();
-    const MemberNotes = String(form.get("Member notes") || "").trim();
-    const AgreedToTerms = String(form.get("AgreedToTerms") || "").trim();
+    const Plan = String(get("Plan") || "").trim();
+    const Billing = String(get("Billing") || "").trim();
+    const Address = String(get("Address") || "").trim();
+    const MemberNotes = String(get("Member notes") || get("MemberNotes") || "").trim();
+    const AgreedToTerms = String(get("AgreedToTerms") || "").trim();
 
-    const toList = CONTACT_TO.split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const toList = CONTACT_TO.split(",").map((s) => s.trim()).filter(Boolean);
 
     const isMembership = FormType.toLowerCase().includes("member");
 
     // Attachments (estimate only)
-    const raw = form.getAll("files");
     const attachments = [];
-    for (const f of raw) {
-      if (!f || typeof f === "string") continue;
-      if (f.size > 6 * 1024 * 1024) continue; // 6MB per file
+    if (!isMembership && body.type === "form") {
+      // Accept multiple possible field names
+      const raw =
+        body.form.getAll("files")
+          .concat(body.form.getAll("file"))
+          .concat(body.form.getAll("attachments"));
 
-      const ab = await f.arrayBuffer();
-      attachments.push({
-        filename: f.name || "file",
-        content: toBase64(ab),
-        contentType: f.type || "application/octet-stream",
-      });
+      // Limits (Resend + serverless safety)
+      const MAX_FILES = 5;
+      const MAX_FILE_SIZE = 6 * 1024 * 1024; // 6MB each
+      const MAX_TOTAL = 12 * 1024 * 1024; // 12MB total (safe)
 
-      if (attachments.length >= 5) break;
+      let total = 0;
+
+      for (const f of raw) {
+        if (!f || typeof f === "string") continue;
+        if (f.size <= 0) continue;
+        if (f.size > MAX_FILE_SIZE) continue;
+
+        total += f.size;
+        if (total > MAX_TOTAL) break;
+
+        const ab = await f.arrayBuffer();
+        attachments.push({
+          filename: f.name || "file",
+          content: toBase64(ab),
+          contentType: f.type || "application/octet-stream",
+        });
+
+        if (attachments.length >= MAX_FILES) break;
+      }
     }
 
     const subject = isMembership
@@ -158,11 +196,8 @@ export async function POST(req) {
       to: toList,
       subject,
       html,
-
-      // ✅ Reply-to (set both for maximum compatibility)
       reply_to: Email || undefined,
       replyTo: Email || undefined,
-
       attachments: !isMembership && attachments.length ? attachments : undefined,
     };
 
@@ -179,22 +214,18 @@ export async function POST(req) {
 
     if (!r.ok) {
       console.error("RESEND FAILED", r.status, text);
+      // Return real status so you can see it in DevTools quickly
       return Response.json(
-        { ok: false, error: "Resend failed", details: text },
+        { ok: false, error: "Resend failed", resendStatus: r.status, details: text },
         { status: 500 }
       );
     }
 
-    console.log("RESEND OK", r.status, text);
     return Response.json({ ok: true });
   } catch (err) {
     console.error("CONTACT ROUTE CRASH", err);
     return Response.json(
-      {
-        ok: false,
-        error: "Server error",
-        details: String(err?.message || err || ""),
-      },
+      { ok: false, error: "Server error", details: String(err?.message || err || "") },
       { status: 500 }
     );
   }
