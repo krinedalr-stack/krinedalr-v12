@@ -549,13 +549,17 @@ export default function HomePage() {
   const [agreeMembership, setAgreeMembership] = useState(false);
 
   const PLAN_PRICING = {
-    Bronze: 349,
-    Silver: 549,
-    Gold: 799,
-    Diamond: 1199,
+    Bronze: { quarterly: 87.25, yearly: 349 },
+    Silver: { quarterly: 137.25, yearly: 549 },
+    Gold: { quarterly: 199.75, yearly: 799 },
+    Diamond: { quarterly: 299.75, yearly: 1199 },
   };
 
-  const planPriceLabel = (plan) => (PLAN_PRICING[plan] ? `€${PLAN_PRICING[plan]}` : "");
+  const planPriceLabel = (plan) => {
+    const p = PLAN_PRICING[plan];
+    if (!p) return "";
+    return `€${p.quarterly.toFixed(2)} / €${p.yearly}`;
+  };
 
   function scrollToId(id) {
     setMoreOpen(false);
@@ -603,7 +607,7 @@ export default function HomePage() {
       fd.set("FormType", "Membership");
       fd.set("Plan", selectedPlan);
       fd.set("AgreedToTerms", "YES");
-      fd.set("PlanPrice", `€${PLAN_PRICING[selectedPlan] || ""}`);
+      fd.set("PlanPrice", planPriceLabel(selectedPlan));
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json?.ok) throw new Error(json?.error || "Failed");
@@ -879,7 +883,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* MEMBERSHIPS (LOCKED updates only) */}
       <section id="membership" className="section section-memberships">
         <div className="container">
@@ -1117,6 +1120,8 @@ export default function HomePage() {
             </div>
           </div>
 
+          <p>KRINEDAL-R is VAT Registered. All pricing shown includes VAT.</p>
+
           {/* MEMBERSHIP RULES (locked clean) */}
           <div className="card" style={{ marginTop: 18 }}>
             <h3 style={{ margin: 0 }}>Membership rules (clear &amp; fair)</h3>
@@ -1130,18 +1135,19 @@ export default function HomePage() {
 
           {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
           <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
-            <h3 style={{ margin: 0 }}>🛡️ Commercial Site Membership</h3>
+            <h3 style={{ margin: 0 }}>🛡 Commercial Site Membership</h3>
             <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
               Designed for health &amp; safety managers and budget decision-makers who need predictable site support, reduced risk, and clean records.
               Services are designed to support health &amp; safety obligations, reduce site risk, and provide clear records suitable for internal reviews and external audits.
             </p>
-            <p className="muted smallest" style={{ marginTop: 10 }}>
-              <strong>Pricing:</strong> <strong>€3,850 per site</strong> • <strong>€6,750 for 2 sites</strong>
-            </p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>
-              Planned works can be scheduled during night hours to avoid disruption to daily site operations.
-              Priority booking available when timeframes are tight (scope and dates agreed in advance).
-            </p>
+
+            <p className="muted smallest" style={{ marginTop: 10 }}>Quarterly: €1,150 per site per quarter (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €3,850 per site per year (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 10 }}>2 Sites (combined under same agreement):</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Quarterly: €2,050 total per quarter (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €6,750 total per year (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 10 }}>Structured commercial support designed to reduce operational risk and support predictable maintenance planning.</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Full VAT documentation supplied.</p>
 
             <button
               type="button"
@@ -1193,7 +1199,6 @@ export default function HomePage() {
               </div>
             )}
           </div>
-
           {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
           <div id="hs-walkthrough" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
             <h3 style={{ margin: 0 }}>✅ H&amp;S Walk-Through + Hazard Notes (Commercial Add-On)</h3>
@@ -1313,7 +1318,7 @@ export default function HomePage() {
                       <option>Diamond</option>
                     </select>
                     <p className="muted smallest" style={{ marginTop: 6 }}>
-                      Selected price: <strong>€{PLAN_PRICING[selectedPlan]}</strong>
+                      Selected price: <strong>{planPriceLabel(selectedPlan)}</strong>
                     </p>
                   </div>
                 </div>
@@ -1360,6 +1365,7 @@ export default function HomePage() {
                   <p className="submit-tip">
                     Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
                   </p>
+                  <p>Membership becomes active upon cleared payment.</p>
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
                 </div>
               </form>
