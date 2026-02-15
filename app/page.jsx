@@ -1133,48 +1133,40 @@ export default function HomePage() {
             </ul>
           </div>
 
-       <h3 style={{ margin: 0, display: "flex", alignItems: "center", gap: 10, fontWeight: 950 }}>
-  <IconCommercialShield />
-  Commercial Site Membership
-</h3>
+    <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
+  <h3 style={{ margin: 0, display: "flex", alignItems: "center", gap: 10, fontWeight: 950 }}>
+    <IconCommercialShield />
+    Commercial Site Membership
+  </h3>
 
-          <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
-            <h3 style={{ margin: 0, display: "flex", alignItems: "center", gap: 10, fontWeight: 950 }}>
-  <IconCommercialShield />
-  Commercial Site Membership
-</h3>
+  <p style={{ marginTop: 12, fontWeight: 700, color: "#111827", maxWidth: 920 }}>
+    Structured commercial property support delivered with clear communication and professional standards.
+  </p>
 
-            <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
-               Structured commercial property support delivered with clear communication and professional standards.
-            </p>
+  <p style={{ marginTop: 10, fontWeight: 900, color: "#111827" }}>
+    Quarterly: €962.50 per site per quarter (VAT included)
+  </p>
 
-           <p style={{ marginTop: 10, fontWeight: 900, color: "#111827" }}>
-  Quarterly: €962.50 per site per quarter (VAT included)
-</p>
+  <p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
+    Yearly: €3,850 per site per year (VAT included)
+  </p>
 
-<p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
-  Yearly: €3,850 per site per year (VAT included)
-</p>
+  <p style={{ marginTop: 16, fontWeight: 800, color: "#111827" }}>
+    2 Sites (combined under same agreement)
+  </p>
 
-<p style={{ marginTop: 16, fontWeight: 800, color: "#111827" }}>
-  2 Sites (combined under same agreement)
-</p>
+  <p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
+    Quarterly: €1,687.50 total per quarter (VAT included)
+  </p>
 
-<p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
-  Quarterly: €1,687.50 total per quarter (VAT included)
-</p>
+  <p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
+    Yearly: €6,750 total per year (VAT included)
+  </p>
 
-<p style={{ marginTop: 6, fontWeight: 900, color: "#111827" }}>
-  Yearly: €6,750 total per year (VAT included)
-</p>
-
-<p style={{ marginTop: 18, fontWeight: 700, color: "#111827" }}>
-  Structured commercial property support delivered with clear communication and professional standards.
-</p>
-
-<p style={{ marginTop: 6, fontWeight: 800, color: "#111827" }}>
-  Full VAT documentation supplied.
-</p>
+  <p style={{ marginTop: 6, fontWeight: 800, color: "#111827" }}>
+    Full VAT documentation supplied.
+  </p>
+</div>
 
 
             <button
