@@ -1133,7 +1133,7 @@ export default function HomePage() {
             </ul>
           </div>
 
-          {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
+          🛡{/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
           <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
             <h3 style={{ margin: 0 }}>🛡 Commercial Site Membership</h3>
             <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
