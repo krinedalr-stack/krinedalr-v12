@@ -1133,7 +1133,7 @@ export default function HomePage() {
             </ul>
           </div>
 
-      {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
+  {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
 <div
   id="commercial-membership"
   className="card"
@@ -1145,22 +1145,37 @@ export default function HomePage() {
     Structured commercial property support delivered with clear communication and professional standards.
   </p>
 
-  <p
-    style={{
-      marginTop: 10,
-      fontWeight: 900,
-      color: "#111827",
-    }}
-  >
-    <p className="muted smallest" style={{ marginTop: 10 }}>Quarterly: €1,150 per site per quarter (VAT included)</p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €3,850 per site per year (VAT included)</p>
-            <p className="muted smallest" style={{ marginTop: 10 }}>2 Sites (combined under same agreement):</p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>Quarterly: €2,050 total per quarter (VAT included)</p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €6,750 total per year (VAT included)</p>
-            <p className="muted smallest" style={{ marginTop: 10 }}>Structured commercial support designed to reduce operational risk and support predictable maintenance planning.</p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>Full VAT documentation supplied.</p>
+  <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
+    Quarterly: €1,150 per site per quarter (VAT included)
+  </p>
 
-    }}
+  <p className="muted smallest" style={{ marginTop: 6 }}>
+    Yearly: €3,850 per site per year (VAT included)
+  </p>
+
+  <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
+    2 Sites (combined under same agreement):
+  </p>
+
+  <p className="muted smallest" style={{ marginTop: 6 }}>
+    Quarterly: €2,050 total per quarter (VAT included)
+  </p>
+
+  <p className="muted smallest" style={{ marginTop: 6 }}>
+    Yearly: €6,750 total per year (VAT included)
+  </p>
+
+  <p className="muted smallest" style={{ marginTop: 10 }}>
+    Structured commercial support designed to reduce operational risk and support predictable maintenance planning.
+  </p>
+
+  <p className="muted smallest" style={{ marginTop: 6 }}>
+    Full VAT documentation supplied.
+  </p>
+
+  <p
+    className="muted smallest"
+    style={{ marginTop: 10, fontWeight: 700 }}
   >
     Planned works can be scheduled during night hours to avoid disruption to daily site operations.
     Priority booking available when timeframes are tight (scope and dates agreed in advance).
@@ -1179,28 +1194,28 @@ export default function HomePage() {
   {commercialMoreOpen && (
     <div style={{ marginTop: 12 }}>
       <ul className="list">
-        <li>Flat roof inspections &amp; water pooling checks</li>
-        <li>Roof leak tracing &amp; temporary make-safe</li>
+        <li>Flat roof inspections & water pooling checks</li>
+        <li>Roof leak tracing & temporary make-safe</li>
         <li>Flashing checks around vents, ducts, skylights</li>
         <li>Emergency tarping / temporary waterproofing</li>
-        <li>Gutter &amp; valley clearance for large roof areas</li>
-        <li>Storm damage condition recording (photos &amp; notes)</li>
-        <li>Door &amp; window seal inspections</li>
-        <li>External silicone &amp; mastic renewal (selected areas)</li>
+        <li>Gutter & valley clearance for large roof areas</li>
+        <li>Storm damage condition recording (photos & notes)</li>
+        <li>Door & window seal inspections</li>
+        <li>External silicone & mastic renewal (selected areas)</li>
         <li>Expansion joint visual checks</li>
-        <li>Parapet wall &amp; coping inspections</li>
+        <li>Parapet wall & coping inspections</li>
         <li>Minor external cladding checks (visual only)</li>
         <li>Car park walkover inspections</li>
         <li>Loose paving / trip hazard identification</li>
         <li>Minor paving resets (small areas)</li>
-        <li>Kerb edge checks &amp; adjustments</li>
-        <li>Drain cover inspections &amp; seating</li>
-        <li>External steps &amp; handrail checks</li>
+        <li>Kerb edge checks & adjustments</li>
+        <li>Drain cover inspections & seating</li>
+        <li>External steps & handrail checks</li>
         <li>Weed growth control in hardstanding areas</li>
         <li>Fire exit route visual obstruction checks</li>
         <li>Roof access point condition checks</li>
-        <li>External ladder &amp; cage visual inspection</li>
-        <li>Minor wall damage patch &amp; paint (common areas)</li>
+        <li>External ladder & cage visual inspection</li>
+        <li>Minor wall damage patch & paint (common areas)</li>
         <li>Ceiling stain identification (leak tracing support)</li>
         <li>Sealant touch-ups in shared toilets / kitchens</li>
         <li>Annual condition summary</li>
