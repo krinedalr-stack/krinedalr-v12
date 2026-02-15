@@ -1152,15 +1152,14 @@ export default function HomePage() {
       color: "#111827",
     }}
   >
-    Pricing: <strong>€3,850 per site</strong> • <strong>€6,750 for 2 sites</strong>
-  </p>
+    <p className="muted smallest" style={{ marginTop: 10 }}>Quarterly: €1,150 per site per quarter (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €3,850 per site per year (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 10 }}>2 Sites (combined under same agreement):</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Quarterly: €2,050 total per quarter (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Yearly: €6,750 total per year (VAT included)</p>
+            <p className="muted smallest" style={{ marginTop: 10 }}>Structured commercial support designed to reduce operational risk and support predictable maintenance planning.</p>
+            <p className="muted smallest" style={{ marginTop: 6 }}>Full VAT documentation supplied.</p>
 
-  <p
-    style={{
-      marginTop: 6,
-      fontWeight: 700,
-      color: "#111827",
-      maxWidth: 920,
     }}
   >
     Planned works can be scheduled during night hours to avoid disruption to daily site operations.
