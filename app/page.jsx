@@ -1137,8 +1137,7 @@ export default function HomePage() {
           <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
             <h3 style={{ margin: 0 }}>🛡 Commercial Site Membership</h3>
             <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
-              Designed for health &amp; safety managers and budget decision-makers who need predictable site support, reduced risk, and clean records.
-              Services are designed to support health &amp; safety obligations, reduce site risk, and provide clear records suitable for internal reviews and external audits.
+               Structured commercial property support delivered with clear communication and professional standards.
             </p>
 
             <p className="muted smallest" style={{ marginTop: 10 }}>Quarterly: €1,150 per site per quarter (VAT included)</p>
