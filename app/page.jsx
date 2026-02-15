@@ -1134,70 +1134,90 @@ export default function HomePage() {
           </div>
 
       {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
-          <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
-            <h3 style={{ margin: 0 }}>🛡️ Commercial Site Membership</h3>
-            <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
-              Structured commercial property support delivered with clear communication and professional standards.
-            <p className="muted smallest" style={{ marginTop: 10 }}>
-              <strong>Pricing:</strong> <strong>€3,850 per site</strong> • <strong>€6,750 for 2 sites</strong>
-            </p>
-            <p className="muted smallest" style={{ marginTop: 6 }}>
-              Planned works can be scheduled during night hours to avoid disruption to daily site operations.
-              Priority booking available when timeframes are tight (scope and dates agreed in advance).
-            </p>
+<div
+  id="commercial-membership"
+  className="card"
+  style={{ marginTop: 18, scrollMarginTop: 92 }}
+>
+  <h3 style={{ margin: 0 }}>🛡️ Commercial Site Membership</h3>
 
+  <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
+    Structured commercial property support delivered with clear communication and professional standards.
+  </p>
 
+  <p
+    style={{
+      marginTop: 10,
+      fontWeight: 900,
+      color: "#111827",
+    }}
+  >
+    Pricing: <strong>€3,850 per site</strong> • <strong>€6,750 for 2 sites</strong>
+  </p>
 
-            <button
-              type="button"
-              className="btn btn-outline"
-              style={{ marginTop: 12 }}
-              onClick={() => setCommercialMoreOpen((v) => !v)}
-              aria-expanded={commercialMoreOpen}
-            >
-              {commercialMoreOpen ? "Hide details" : "Read more"}
-            </button>
+  <p
+    style={{
+      marginTop: 6,
+      fontWeight: 700,
+      color: "#111827",
+      maxWidth: 920,
+    }}
+  >
+    Planned works can be scheduled during night hours to avoid disruption to daily site operations.
+    Priority booking available when timeframes are tight (scope and dates agreed in advance).
+  </p>
 
-            {commercialMoreOpen && (
-              <div style={{ marginTop: 12 }}>
-                <ul className="list">
-                  <li>Flat roof inspections &amp; water pooling checks</li>
-                  <li>Roof leak tracing &amp; temporary make-safe</li>
-                  <li>Flashing checks around vents, ducts, skylights</li>
-                  <li>Emergency tarping / temporary waterproofing</li>
-                  <li>Gutter &amp; valley clearance for large roof areas</li>
-                  <li>Storm damage condition recording (photos &amp; notes)</li>
-                  <li>Door &amp; window seal inspections</li>
-                  <li>External silicone &amp; mastic renewal (selected areas)</li>
-                  <li>Expansion joint visual checks</li>
-                  <li>Parapet wall &amp; coping inspections</li>
-                  <li>Minor external cladding checks (visual only)</li>
-                  <li>Car park walkover inspections</li>
-                  <li>Loose paving / trip hazard identification</li>
-                  <li>Minor paving resets (small areas)</li>
-                  <li>Kerb edge checks &amp; adjustments</li>
-                  <li>Drain cover inspections &amp; seating</li>
-                  <li>External steps &amp; handrail checks</li>
-                  <li>Weed growth control in hardstanding areas</li>
-                  <li>Fire exit route visual obstruction checks</li>
-                  <li>Roof access point condition checks</li>
-                  <li>External ladder &amp; cage visual inspection</li>
-                  <li>Minor wall damage patch &amp; paint (common areas)</li>
-                  <li>Ceiling stain identification (leak tracing support)</li>
-                  <li>Sealant touch-ups in shared toilets / kitchens</li>
-                  <li>Annual condition summary</li>
-                  <li>Before / after photos for works</li>
-                  <li>Storm event records</li>
-                  <li>Maintenance history tracking</li>
-                  <li>Notes suitable for insurers / property managers</li>
-                </ul>
-                <p className="muted smallest" style={{ marginTop: 10 }}>
-                  <strong>Important:</strong> Where materials are required, they are charged separately.
-                  Site clean-up and general housekeeping excluded only after our work.
-                </p>
-              </div>
-            )}
-          </div>
+  <button
+    type="button"
+    className="btn btn-outline"
+    style={{ marginTop: 12 }}
+    onClick={() => setCommercialMoreOpen((v) => !v)}
+    aria-expanded={commercialMoreOpen}
+  >
+    {commercialMoreOpen ? "Hide details" : "Read more"}
+  </button>
+
+  {commercialMoreOpen && (
+    <div style={{ marginTop: 12 }}>
+      <ul className="list">
+        <li>Flat roof inspections &amp; water pooling checks</li>
+        <li>Roof leak tracing &amp; temporary make-safe</li>
+        <li>Flashing checks around vents, ducts, skylights</li>
+        <li>Emergency tarping / temporary waterproofing</li>
+        <li>Gutter &amp; valley clearance for large roof areas</li>
+        <li>Storm damage condition recording (photos &amp; notes)</li>
+        <li>Door &amp; window seal inspections</li>
+        <li>External silicone &amp; mastic renewal (selected areas)</li>
+        <li>Expansion joint visual checks</li>
+        <li>Parapet wall &amp; coping inspections</li>
+        <li>Minor external cladding checks (visual only)</li>
+        <li>Car park walkover inspections</li>
+        <li>Loose paving / trip hazard identification</li>
+        <li>Minor paving resets (small areas)</li>
+        <li>Kerb edge checks &amp; adjustments</li>
+        <li>Drain cover inspections &amp; seating</li>
+        <li>External steps &amp; handrail checks</li>
+        <li>Weed growth control in hardstanding areas</li>
+        <li>Fire exit route visual obstruction checks</li>
+        <li>Roof access point condition checks</li>
+        <li>External ladder &amp; cage visual inspection</li>
+        <li>Minor wall damage patch &amp; paint (common areas)</li>
+        <li>Ceiling stain identification (leak tracing support)</li>
+        <li>Sealant touch-ups in shared toilets / kitchens</li>
+        <li>Annual condition summary</li>
+        <li>Before / after photos for works</li>
+        <li>Storm event records</li>
+        <li>Maintenance history tracking</li>
+        <li>Notes suitable for insurers / property managers</li>
+      </ul>
+
+      <p className="muted smallest" style={{ marginTop: 10 }}>
+        <strong>Important:</strong> Where materials are required, they are charged separately.
+        Site clean-up and general housekeeping excluded only after our work.
+      </p>
+    </div>
+  )}
+</div>
           {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
           <div id="hs-walkthrough" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
             <h3 style={{ margin: 0 }}>✅ H&amp;S Walk-Through + Hazard Notes (Commercial Add-On)</h3>
