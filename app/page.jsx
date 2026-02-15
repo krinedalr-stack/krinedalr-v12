@@ -1133,17 +1133,30 @@ export default function HomePage() {
             </ul>
           </div>
 
-    <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
-  <h3 style={{ margin: 0, display: "flex", alignItems: "center", gap: 10, fontWeight: 950 }}>
-    <IconCommercialShield />
-    Commercial Site Membership
+   {/* COMMERCIAL MEMBERSHIP */}
+<div
+  id="commercial-membership"
+  className="card"
+  style={{ marginTop: 18, scrollMarginTop: 92 }}
+>
+  <h3
+    style={{
+      margin: 0,
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      fontWeight: 950,
+    }}
+  >
+    🛡 Commercial Site Membership
   </h3>
 
-  <p style={{ marginTop: 12, fontWeight: 700, color: "#111827", maxWidth: 920 }}>
-    Structured commercial property support delivered with clear communication and professional standards.
+  <p style={{ marginTop: 10, fontWeight: 700, color: "#111827" }}>
+    Structured commercial property support delivered with clear communication
+    and professional standards.
   </p>
 
-  <p style={{ marginTop: 10, fontWeight: 900, color: "#111827" }}>
+  <p style={{ marginTop: 14, fontWeight: 900, color: "#111827" }}>
     Quarterly: €962.50 per site per quarter (VAT included)
   </p>
 
@@ -1163,10 +1176,11 @@ export default function HomePage() {
     Yearly: €6,750 total per year (VAT included)
   </p>
 
-  <p style={{ marginTop: 6, fontWeight: 800, color: "#111827" }}>
+  <p style={{ marginTop: 18, fontWeight: 700, color: "#111827" }}>
     Full VAT documentation supplied.
   </p>
 </div>
+
 
 
             <button
