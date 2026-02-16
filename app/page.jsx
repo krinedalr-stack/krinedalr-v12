@@ -883,7 +883,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-     {/* MEMBERSHIPS (LOCKED updates only) */}
+{/* MEMBERSHIPS (LOCKED updates only) */}
 <section id="membership" className="section section-memberships">
   <div className="container">
     <div className="plans-head">
@@ -1134,8 +1134,8 @@ export default function HomePage() {
       </p>
 
       <p className="muted smallest" style={{ marginTop: 10, fontWeight: 700 }}>
-        Planned works can be scheduled during night hours to avoid disruption to daily site operations. Priority booking
-        available when timeframes are tight (scope and dates agreed in advance).
+        Planned works can be scheduled during night hours to avoid disruption to daily site operations.
+        Priority booking available when timeframes are tight (scope and dates agreed in advance).
       </p>
 
       <button
@@ -1183,8 +1183,8 @@ export default function HomePage() {
           </ul>
 
           <p className="muted smallest" style={{ marginTop: 10 }}>
-            <strong>Important:</strong> Where materials are required, they are charged separately. Site clean-up and
-            general housekeeping excluded only after our work.
+            <strong>Important:</strong> Where materials are required, they are charged separately.
+            Site clean-up and general housekeeping excluded only after our work.
           </p>
         </div>
       )}
