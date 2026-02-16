@@ -883,7 +883,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* MEMBERSHIPS (LOCKED updates only) */}
+     {/* MEMBERSHIPS (LOCKED updates only) */}
 <section id="membership" className="section section-memberships">
   <div className="container">
     <div className="plans-head">
@@ -911,10 +911,15 @@ export default function HomePage() {
         </div>
         <div className="plan-name">Bronze — essential property check</div>
 
-        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
         <div className="plan-price">
-          <div>€{PLAN_PRICING.Bronze.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
-          <div>€{PLAN_PRICING.Bronze.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+          <div>
+            €{PLAN_PRICING.Bronze.quarterly.toFixed(2)}{" "}
+            <span className="muted smallest">per quarter (VAT included)</span>
+          </div>
+          <div>
+            €{PLAN_PRICING.Bronze.yearly}{" "}
+            <span className="muted smallest">per year (VAT included)</span>
+          </div>
         </div>
 
         <ul>
@@ -925,6 +930,7 @@ export default function HomePage() {
           <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
           <li><strong>Priority booking</strong> over non-members</li>
         </ul>
+
         <div className="plan-foot">
           Best for homeowners who want early detection before problems become expensive.
         </div>
@@ -943,10 +949,15 @@ export default function HomePage() {
         </div>
         <div className="plan-name">Silver — preventative maintenance</div>
 
-        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
         <div className="plan-price">
-          <div>€{PLAN_PRICING.Silver.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
-          <div>€{PLAN_PRICING.Silver.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+          <div>
+            €{PLAN_PRICING.Silver.quarterly.toFixed(2)}{" "}
+            <span className="muted smallest">per quarter (VAT included)</span>
+          </div>
+          <div>
+            €{PLAN_PRICING.Silver.yearly}{" "}
+            <span className="muted smallest">per year (VAT included)</span>
+          </div>
         </div>
 
         <ul>
@@ -960,6 +971,7 @@ export default function HomePage() {
           <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
           <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
         </ul>
+
         <div className="plan-foot">
           Best for landlords and homeowners who want maintenance, not just inspections.
         </div>
@@ -978,10 +990,15 @@ export default function HomePage() {
         </div>
         <div className="plan-name">Gold — active property care</div>
 
-        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
         <div className="plan-price">
-          <div>€{PLAN_PRICING.Gold.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
-          <div>€{PLAN_PRICING.Gold.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+          <div>
+            €{PLAN_PRICING.Gold.quarterly.toFixed(2)}{" "}
+            <span className="muted smallest">per quarter (VAT included)</span>
+          </div>
+          <div>
+            €{PLAN_PRICING.Gold.yearly}{" "}
+            <span className="muted smallest">per year (VAT included)</span>
+          </div>
         </div>
 
         <ul>
@@ -1004,6 +1021,7 @@ export default function HomePage() {
             </span>
           </li>
         </ul>
+
         <div className="plan-foot">
           Best for high-value homes and clients who want problems fixed, not just found.
         </div>
@@ -1022,10 +1040,15 @@ export default function HomePage() {
         </div>
         <div className="plan-name">Diamond — full professional coverage</div>
 
-        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
         <div className="plan-price">
-          <div>€{PLAN_PRICING.Diamond.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
-          <div>€{PLAN_PRICING.Diamond.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+          <div>
+            €{PLAN_PRICING.Diamond.quarterly.toFixed(2)}{" "}
+            <span className="muted smallest">per quarter (VAT included)</span>
+          </div>
+          <div>
+            €{PLAN_PRICING.Diamond.yearly}{" "}
+            <span className="muted smallest">per year (VAT included)</span>
+          </div>
         </div>
 
         <ul>
@@ -1049,6 +1072,7 @@ export default function HomePage() {
             </span>
           </li>
         </ul>
+
         <div className="plan-foot">
           Best for clients who want full oversight, priority service, and long-term protection.
           <br />
@@ -1065,137 +1089,128 @@ export default function HomePage() {
     </div>
 
     <p>KRINEDAL-R is VAT Registered. All pricing shown includes VAT.</p>
-  </div>
-</section>
-          {/* MEMBERSHIP RULES (locked clean) */}
-          <div className="card" style={{ marginTop: 18 }}>
-            <h3 style={{ margin: 0 }}>Membership rules (clear &amp; fair)</h3>
-            <ul className="list" style={{ marginTop: 10 }}>
-              <li>Memberships are preventative maintenance plans (property-specific).</li>
-              <li>Not insurance contracts and not unlimited repairs.</li>
-              <li>Safety always overrides speed; severe weather limits apply.</li>
-              <li>Where materials are required, they are charged separately unless stated as included.</li>
-            </ul>
-          </div>
 
-  {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
-<div
-  id="commercial-membership"
-  className="card"
-  style={{ marginTop: 18, scrollMarginTop: 92 }}
->
-  <h3 style={{ margin: 0 }}>🛡️ Commercial Site Membership</h3>
-
-  <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
-    Structured commercial property support delivered with clear communication and professional standards.
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
-    Quarterly: €1,150 per site per quarter (VAT included)
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 6 }}>
-    Yearly: €3,850 per site per year (VAT included)
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
-    2 Sites (combined under same agreement):
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 6 }}>
-    Quarterly: €2,050 total per quarter (VAT included)
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 6 }}>
-    Yearly: €6,750 total per year (VAT included)
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 10 }}>
-    Structured commercial support designed to reduce operational risk and support predictable maintenance planning.
-  </p>
-
-  <p className="muted smallest" style={{ marginTop: 6 }}>
-    Full VAT documentation supplied.
-  </p>
-
-  <p
-    className="muted smallest"
-    style={{ marginTop: 10, fontWeight: 700 }}
-  >
-    Planned works can be scheduled during night hours to avoid disruption to daily site operations.
-    Priority booking available when timeframes are tight (scope and dates agreed in advance).
-  </p>
-
-  <button
-    type="button"
-    className="btn btn-outline"
-    style={{ marginTop: 12 }}
-    onClick={() => setCommercialMoreOpen((v) => !v)}
-    aria-expanded={commercialMoreOpen}
-  >
-    {commercialMoreOpen ? "Hide details" : "Read more"}
-  </button>
-
-  {commercialMoreOpen && (
-    <div style={{ marginTop: 12 }}>
-      <ul className="list">
-        <li>Flat roof inspections & water pooling checks</li>
-        <li>Roof leak tracing & temporary make-safe</li>
-        <li>Flashing checks around vents, ducts, skylights</li>
-        <li>Emergency tarping / temporary waterproofing</li>
-        <li>Gutter & valley clearance for large roof areas</li>
-        <li>Storm damage condition recording (photos & notes)</li>
-        <li>Door & window seal inspections</li>
-        <li>External silicone & mastic renewal (selected areas)</li>
-        <li>Expansion joint visual checks</li>
-        <li>Parapet wall & coping inspections</li>
-        <li>Minor external cladding checks (visual only)</li>
-        <li>Car park walkover inspections</li>
-        <li>Loose paving / trip hazard identification</li>
-        <li>Minor paving resets (small areas)</li>
-        <li>Kerb edge checks & adjustments</li>
-        <li>Drain cover inspections & seating</li>
-        <li>External steps & handrail checks</li>
-        <li>Weed growth control in hardstanding areas</li>
-        <li>Fire exit route visual obstruction checks</li>
-        <li>Roof access point condition checks</li>
-        <li>External ladder & cage visual inspection</li>
-        <li>Minor wall damage patch & paint (common areas)</li>
-        <li>Ceiling stain identification (leak tracing support)</li>
-        <li>Sealant touch-ups in shared toilets / kitchens</li>
-        <li>Annual condition summary</li>
-        <li>Before / after photos for works</li>
-        <li>Storm event records</li>
-        <li>Maintenance history tracking</li>
-        <li>Notes suitable for insurers / property managers</li>
+    {/* MEMBERSHIP RULES (locked clean) */}
+    <div className="card" style={{ marginTop: 18 }}>
+      <h3 style={{ margin: 0 }}>Membership rules (clear &amp; fair)</h3>
+      <ul className="list" style={{ marginTop: 10 }}>
+        <li>Memberships are preventative maintenance plans (property-specific).</li>
+        <li>Not insurance contracts and not unlimited repairs.</li>
+        <li>Safety always overrides speed; severe weather limits apply.</li>
+        <li>Where materials are required, they are charged separately unless stated as included.</li>
       </ul>
+    </div>
+
+    {/* COMMERCIAL MEMBERSHIP (Read more + H&S focus) */}
+    <div id="commercial-membership" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
+      <h3 style={{ margin: 0 }}>🛡️ Commercial Site Membership</h3>
+
+      <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
+        Structured commercial property support delivered with clear communication and professional standards.
+      </p>
+
+      <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
+        Quarterly: €1,150 per site per quarter (VAT included)
+      </p>
+      <p className="muted smallest" style={{ marginTop: 6 }}>
+        Yearly: €3,850 per site per year (VAT included)
+      </p>
+
+      <p className="muted smallest" style={{ marginTop: 10, fontWeight: 900 }}>
+        2 Sites (combined under same agreement):
+      </p>
+      <p className="muted smallest" style={{ marginTop: 6 }}>
+        Quarterly: €2,050 total per quarter (VAT included)
+      </p>
+      <p className="muted smallest" style={{ marginTop: 6 }}>
+        Yearly: €6,750 total per year (VAT included)
+      </p>
 
       <p className="muted smallest" style={{ marginTop: 10 }}>
-        <strong>Important:</strong> Where materials are required, they are charged separately.
-        Site clean-up and general housekeeping excluded only after our work.
+        Structured commercial support designed to reduce operational risk and support predictable maintenance planning.
       </p>
+      <p className="muted smallest" style={{ marginTop: 6 }}>
+        Full VAT documentation supplied.
+      </p>
+
+      <p className="muted smallest" style={{ marginTop: 10, fontWeight: 700 }}>
+        Planned works can be scheduled during night hours to avoid disruption to daily site operations. Priority booking
+        available when timeframes are tight (scope and dates agreed in advance).
+      </p>
+
+      <button
+        type="button"
+        className="btn btn-outline"
+        style={{ marginTop: 12 }}
+        onClick={() => setCommercialMoreOpen((v) => !v)}
+        aria-expanded={commercialMoreOpen}
+      >
+        {commercialMoreOpen ? "Hide details" : "Read more"}
+      </button>
+
+      {commercialMoreOpen && (
+        <div style={{ marginTop: 12 }}>
+          <ul className="list">
+            <li>Flat roof inspections &amp; water pooling checks</li>
+            <li>Roof leak tracing &amp; temporary make-safe</li>
+            <li>Flashing checks around vents, ducts, skylights</li>
+            <li>Emergency tarping / temporary waterproofing</li>
+            <li>Gutter &amp; valley clearance for large roof areas</li>
+            <li>Storm damage condition recording (photos &amp; notes)</li>
+            <li>Door &amp; window seal inspections</li>
+            <li>External silicone &amp; mastic renewal (selected areas)</li>
+            <li>Expansion joint visual checks</li>
+            <li>Parapet wall &amp; coping inspections</li>
+            <li>Minor external cladding checks (visual only)</li>
+            <li>Car park walkover inspections</li>
+            <li>Loose paving / trip hazard identification</li>
+            <li>Minor paving resets (small areas)</li>
+            <li>Kerb edge checks &amp; adjustments</li>
+            <li>Drain cover inspections &amp; seating</li>
+            <li>External steps &amp; handrail checks</li>
+            <li>Weed growth control in hardstanding areas</li>
+            <li>Fire exit route visual obstruction checks</li>
+            <li>Roof access point condition checks</li>
+            <li>External ladder &amp; cage visual inspection</li>
+            <li>Minor wall damage patch &amp; paint (common areas)</li>
+            <li>Ceiling stain identification (leak tracing support)</li>
+            <li>Sealant touch-ups in shared toilets / kitchens</li>
+            <li>Annual condition summary</li>
+            <li>Before / after photos for works</li>
+            <li>Storm event records</li>
+            <li>Maintenance history tracking</li>
+            <li>Notes suitable for insurers / property managers</li>
+          </ul>
+
+          <p className="muted smallest" style={{ marginTop: 10 }}>
+            <strong>Important:</strong> Where materials are required, they are charged separately. Site clean-up and
+            general housekeeping excluded only after our work.
+          </p>
+        </div>
+      )}
     </div>
-  )}
-</div>
-          {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
-          <div id="hs-walkthrough" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
-            <h3 style={{ margin: 0 }}>✅ H&amp;S Walk-Through + Hazard Notes (Commercial Add-On)</h3>
-            <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
-              A structured site walk-through with hazard observations, photo evidence and a clean defect log —
-              designed to support audits, reduce liability exposure, and protect the people responsible for the site.
-            </p>
-            <p className="muted smallest" style={{ marginTop: 10 }}>
-              <strong>Pricing guide:</strong> <strong>€1,200 – €3,000 per site</strong> (depending on site size and reporting level).
-            </p>
-            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button type="button" className="btn btn-outline" onClick={() => setHsOpen(true)}>
-                Read full scope
-              </button>
-              <button type="button" className="btn btn-outline" onClick={() => scrollToId("estimate")}>
-                Enquire
-              </button>
-            </div>
-          </div>
+
+    {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
+    <div id="hs-walkthrough" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
+      <h3 style={{ margin: 0 }}>✅ H&amp;S Walk-Through + Hazard Notes (Commercial Add-On)</h3>
+      <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
+        A structured site walk-through with hazard observations, photo evidence and a clean defect log —
+        designed to support audits, reduce liability exposure, and protect the people responsible for the site.
+      </p>
+      <p className="muted smallest" style={{ marginTop: 10 }}>
+        <strong>Pricing guide:</strong> <strong>€1,200 – €3,000 per site</strong> (depending on site size and reporting level).
+      </p>
+      <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <button type="button" className="btn btn-outline" onClick={() => setHsOpen(true)}>
+          Read full scope
+        </button>
+        <button type="button" className="btn btn-outline" onClick={() => scrollToId("estimate")}>
+          Enquire
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
           {/* LANDLORD SERVICES */}
           <div id="landlord-services" className="card" style={{ marginTop: 18, scrollMarginTop: 92 }}>
