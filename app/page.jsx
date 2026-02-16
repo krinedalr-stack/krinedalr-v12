@@ -1207,8 +1207,7 @@ export default function HomePage() {
         <button type="button" className="btn btn-outline" onClick={() => scrollToId("estimate")}>
           Enquire
         </button>
-      </div>
-    </div>
+    
   </div>
 </section>
 
