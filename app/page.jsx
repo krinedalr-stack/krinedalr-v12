@@ -884,244 +884,189 @@ export default function HomePage() {
         </div>
       </section>
       {/* MEMBERSHIPS (LOCKED updates only) */}
-      <section id="membership" className="section section-memberships">
-        <div className="container">
-          <div className="plans-head">
-            <div>
-              <div className="plans-title">KRINEDAL-R — Property Care Memberships</div>
-              <p className="plans-sub" style={{ maxWidth: 920 }}>
-                Ideal for homeowners, landlords and commercial clients who want predictable property care without chasing contractors.
-              </p>
-              <p className="plans-sub smallest" style={{ marginTop: 8 }}>
-                Memberships are preventative maintenance plans — <strong>not insurance</strong>, and not unlimited repairs.
-                Materials (tiles/silicone/etc.), scaffolding/MEWP, skips and specialist hire are charged separately where required.
-              </p>
-            </div>
-            <div className="status-pill">
-              <span className="status-label">Current status</span>
-              <span className={`status-badge ${weatherStatus}`}>{weatherStatus.toUpperCase()}</span>
-            </div>
-          </div>
+<section id="membership" className="section section-memberships">
+  <div className="container">
+    <div className="plans-head">
+      <div>
+        <div className="plans-title">KRINEDAL-R — Property Care Memberships</div>
+        <p className="plans-sub" style={{ maxWidth: 920 }}>
+          Ideal for homeowners, landlords and commercial clients who want predictable property care without chasing contractors.
+        </p>
+        <p className="plans-sub smallest" style={{ marginTop: 8 }}>
+          Memberships are preventative maintenance plans — <strong>not insurance</strong>, and not unlimited repairs.
+          Materials (tiles/silicone/etc.), scaffolding/MEWP, skips and specialist hire are charged separately where required.
+        </p>
+      </div>
+      <div className="status-pill">
+        <span className="status-label">Current status</span>
+        <span className={`status-badge ${weatherStatus}`}>{weatherStatus.toUpperCase()}</span>
+      </div>
+    </div>
 
-          <div className="plans-grid">
-            {/* BRONZE */}
-            <div className="plan">
-              <div className="plan-kicker">
-                <span className="plan-icon">🥉</span> BRONZE
-              </div>
-              <div className="plan-name">Bronze — essential property check</div>
-              <div className="plan-price">{planPriceLabel("Bronze")}</div>
-              <ul>
-                <li>
-                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
-                </li>
-                <li>
-                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
-                </li>
-                <li>
-                  <strong>External silicone inspection</strong> (external seals — inspection only)
-                </li>
-                <li>
-                  <strong>Written inspection notes</strong> provided if issues are found
-                </li>
-                <li>
-                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
-                </li>
-                <li>
-                  <strong>Priority booking</strong> over non-members
-                </li>
-              </ul>
-              <div className="plan-foot">
-                Best for homeowners who want early detection before problems become expensive.
-              </div>
-              <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
-                  Apply
-                </button>
-              </div>
-            </div>
+    <div className="plans-grid">
+      {/* BRONZE */}
+      <div className="plan">
+        <div className="plan-kicker">
+          <span className="plan-icon">🥉</span> BRONZE
+        </div>
+        <div className="plan-name">Bronze — essential property check</div>
 
-            {/* SILVER */}
-            <div className="plan plan-most-popular">
-              <div className="badge badge-popular">⭐ Most popular</div>
-              <div className="plan-kicker">
-                <span className="plan-icon">🥈</span> SILVER
-              </div>
-              <div className="plan-name">Silver — preventative maintenance</div>
-              <div className="plan-price">{planPriceLabel("Silver")}</div>
-              <ul>
-                <li>
-                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
-                </li>
-                <li>
-                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
-                </li>
-                <li>
-                  <strong>External silicone inspection</strong> (external seals — inspection only)
-                </li>
-                <li>
-                  <strong>Written inspection notes</strong> provided if issues are found
-                </li>
-                <li>
-                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
-                </li>
-                <li>
-                  <strong>Priority booking</strong> over non-members
-                </li>
-                <li>
-                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
-                </li>
-                <li>
-                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
-                </li>
-                <li>
-                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
-                </li>
-              </ul>
-              <div className="plan-foot">
-                Best for landlords and homeowners who want maintenance, not just inspections.
-              </div>
-              <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
-                  Apply
-                </button>
-              </div>
-            </div>
+        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
+        <div className="plan-price">
+          <div>€{PLAN_PRICING.Bronze.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
+          <div>€{PLAN_PRICING.Bronze.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+        </div>
 
-            {/* GOLD */}
-            <div className="plan plan-best-value">
-              <div className="badge badge-value">🏆 Best value / priority</div>
-              <div className="plan-kicker">
-                <span className="plan-icon">🥇</span> GOLD
-              </div>
-              <div className="plan-name">Gold — active property care</div>
-              <div className="plan-price">{planPriceLabel("Gold")}</div>
-              <ul>
-                <li>
-                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
-                </li>
-                <li>
-                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
-                </li>
-                <li>
-                  <strong>External silicone inspection</strong> (external seals — inspection only)
-                </li>
-                <li>
-                  <strong>Written inspection notes</strong> provided if issues are found
-                </li>
-                <li>
-                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
-                </li>
-                <li>
-                  <strong>Priority booking</strong> over non-members
-                </li>
-                <li>
-                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
-                </li>
-                <li>
-                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
-                </li>
-                <li>
-                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
-                </li>
-                <li>
-                  <strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)
-                </li>
-                <li>
-                  <strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)
-                </li>
-                <li>
-                  <strong>Discounted labour</strong> on additional works
-                </li>
-                <li>
-                  <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                  <span className="muted smallest">
-                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
-                  </span>
-                </li>
-              </ul>
-              <div className="plan-foot">
-                Best for high-value homes and clients who want problems fixed, not just found.
-              </div>
-              <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
-                  Apply
-                </button>
-              </div>
-            </div>
+        <ul>
+          <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+          <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+          <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+          <li><strong>Written inspection notes</strong> provided if issues are found</li>
+          <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+          <li><strong>Priority booking</strong> over non-members</li>
+        </ul>
+        <div className="plan-foot">
+          Best for homeowners who want early detection before problems become expensive.
+        </div>
+        <div className="plan-actions">
+          <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
+            Apply
+          </button>
+        </div>
+      </div>
 
-            {/* DIAMOND */}
-            <div className="plan plan-limited">
-              <div className="badge badge-limited">💎 Limited</div>
-              <div className="plan-kicker">
-                <span className="plan-icon">💎</span> DIAMOND
-              </div>
-              <div className="plan-name">Diamond — full professional coverage</div>
-              <div className="plan-price">{planPriceLabel("Diamond")}</div>
-              <ul>
-                <li>
-                  <strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)
-                </li>
-                <li>
-                  <strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)
-                </li>
-                <li>
-                  <strong>External silicone inspection</strong> (external seals — inspection only)
-                </li>
-                <li>
-                  <strong>Written inspection notes</strong> provided if issues are found
-                </li>
-                <li>
-                  <strong>{MEMBER_ALL_WARNING_LINE}</strong>
-                </li>
-                <li>
-                  <strong>Priority booking</strong> over non-members
-                </li>
-                <li>
-                  <strong>Gutter cleaning</strong> (once per year — leaves/debris removal)
-                </li>
-                <li>
-                  <strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)
-                </li>
-                <li>
-                  <strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)
-                </li>
-                <li>
-                  <strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)
-                </li>
-                <li>
-                  <strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)
-                </li>
-                <li>
-                  <strong>Annual written condition report</strong> stored and referenced for future works
-                </li>
-                <li>
-                  <strong>Direct priority contact channel</strong> + best available pricing on additional works
-                </li>
-                <li>
-                  <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                  <span className="muted smallest">
-                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
-                  </span>
-                </li>
-              </ul>
-              <div className="plan-foot">
-                Best for clients who want full oversight, priority service, and long-term protection.
-                <br />
-                <span className="muted smallest" style={{ display: "block", marginTop: 8 }}>
-                  {RED_POLICY_LINE}
-                </span>
-              </div>
-              <div className="plan-actions">
-                <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
-                  Apply
-                </button>
-              </div>
-            </div>
-          </div>
+      {/* SILVER */}
+      <div className="plan plan-most-popular">
+        <div className="badge badge-popular">⭐ Most popular</div>
+        <div className="plan-kicker">
+          <span className="plan-icon">🥈</span> SILVER
+        </div>
+        <div className="plan-name">Silver — preventative maintenance</div>
 
-          <p>KRINEDAL-R is VAT Registered. All pricing shown includes VAT.</p>
+        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
+        <div className="plan-price">
+          <div>€{PLAN_PRICING.Silver.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
+          <div>€{PLAN_PRICING.Silver.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+        </div>
 
+        <ul>
+          <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+          <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+          <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+          <li><strong>Written inspection notes</strong> provided if issues are found</li>
+          <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+          <li><strong>Priority booking</strong> over non-members</li>
+          <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+          <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+          <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+        </ul>
+        <div className="plan-foot">
+          Best for landlords and homeowners who want maintenance, not just inspections.
+        </div>
+        <div className="plan-actions">
+          <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
+            Apply
+          </button>
+        </div>
+      </div>
+
+      {/* GOLD */}
+      <div className="plan plan-best-value">
+        <div className="badge badge-value">🏆 Best value / priority</div>
+        <div className="plan-kicker">
+          <span className="plan-icon">🥇</span> GOLD
+        </div>
+        <div className="plan-name">Gold — active property care</div>
+
+        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
+        <div className="plan-price">
+          <div>€{PLAN_PRICING.Gold.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
+          <div>€{PLAN_PRICING.Gold.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+        </div>
+
+        <ul>
+          <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+          <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+          <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+          <li><strong>Written inspection notes</strong> provided if issues are found</li>
+          <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+          <li><strong>Priority booking</strong> over non-members</li>
+          <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+          <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+          <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+          <li><strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)</li>
+          <li><strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)</li>
+          <li><strong>Discounted labour</strong> on additional works</li>
+          <li>
+            <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
+            <span className="muted smallest">
+              (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+            </span>
+          </li>
+        </ul>
+        <div className="plan-foot">
+          Best for high-value homes and clients who want problems fixed, not just found.
+        </div>
+        <div className="plan-actions">
+          <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
+            Apply
+          </button>
+        </div>
+      </div>
+
+      {/* DIAMOND */}
+      <div className="plan plan-limited">
+        <div className="badge badge-limited">💎 Limited</div>
+        <div className="plan-kicker">
+          <span className="plan-icon">💎</span> DIAMOND
+        </div>
+        <div className="plan-name">Diamond — full professional coverage</div>
+
+        {/* 🔒 LOCKED: show Quarterly + Yearly clearly */}
+        <div className="plan-price">
+          <div>€{PLAN_PRICING.Diamond.quarterly.toFixed(2)} <span className="muted smallest">per quarter (VAT included)</span></div>
+          <div>€{PLAN_PRICING.Diamond.yearly} <span className="muted smallest">per year (VAT included)</span></div>
+        </div>
+
+        <ul>
+          <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+          <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+          <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+          <li><strong>Written inspection notes</strong> provided if issues are found</li>
+          <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+          <li><strong>Priority booking</strong> over non-members</li>
+          <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+          <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+          <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+          <li><strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)</li>
+          <li><strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)</li>
+          <li><strong>Annual written condition report</strong> stored and referenced for future works</li>
+          <li><strong>Direct priority contact channel</strong> + best available pricing on additional works</li>
+          <li>
+            <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
+            <span className="muted smallest">
+              (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+            </span>
+          </li>
+        </ul>
+        <div className="plan-foot">
+          Best for clients who want full oversight, priority service, and long-term protection.
+          <br />
+          <span className="muted smallest" style={{ display: "block", marginTop: 8 }}>
+            {RED_POLICY_LINE}
+          </span>
+        </div>
+        <div className="plan-actions">
+          <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p>KRINEDAL-R is VAT Registered. All pricing shown includes VAT.</p>
+  </div>
+</section>
           {/* MEMBERSHIP RULES (locked clean) */}
           <div className="card" style={{ marginTop: 18 }}>
             <h3 style={{ margin: 0 }}>Membership rules (clear &amp; fair)</h3>
