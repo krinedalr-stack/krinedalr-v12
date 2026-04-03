@@ -1148,46 +1148,66 @@ export default function HomePage() {
               {commercialMoreOpen ? "Hide details" : "Read more"}
             </button>
 
-            {commercialMoreOpen && (
-              <div style={{ marginTop: 12 }}>
-                <ul className="list">
-                  <li>Flat roof inspections &amp; water pooling checks</li>
-                  <li>Roof leak tracing &amp; temporary make-safe</li>
-                  <li>Flashing checks around vents, ducts, skylights</li>
-                  <li>Emergency tarping / temporary waterproofing</li>
-                  <li>Gutter &amp; valley clearance for large roof areas</li>
-                  <li>Storm damage condition recording (photos &amp; notes)</li>
-                  <li>Door &amp; window seal inspections</li>
-                  <li>External silicone &amp; mastic renewal (selected areas)</li>
-                  <li>Expansion joint visual checks</li>
-                  <li>Parapet wall &amp; coping inspections</li>
-                  <li>Minor external cladding checks (visual only)</li>
-                  <li>Car park walkover inspections</li>
-                  <li>Loose paving / trip hazard identification</li>
-                  <li>Minor paving resets (small areas)</li>
-                  <li>Kerb edge checks &amp; adjustments</li>
-                  <li>Drain cover inspections &amp; seating</li>
-                  <li>External steps &amp; handrail checks</li>
-                  <li>Weed growth control in hardstanding areas</li>
-                  <li>Fire exit route visual obstruction checks</li>
-                  <li>Roof access point condition checks</li>
-                  <li>External ladder &amp; cage visual inspection</li>
-                  <li>Minor wall damage patch &amp; paint (common areas)</li>
-                  <li>Ceiling stain identification (leak tracing support)</li>
-                  <li>Sealant touch-ups in shared toilets / kitchens</li>
-                  <li>Annual condition summary</li>
-                  <li>Before / after photos for works</li>
-                  <li>Storm event records</li>
-                  <li>Maintenance history tracking</li>
-                  <li>Notes suitable for insurers / property managers</li>
-                </ul>
+           {commercialMoreOpen && (
+  <div style={{ marginTop: 12 }}>
 
-                <p className="muted smallest" style={{ marginTop: 10 }}>
-                  <strong>Important:</strong> Where materials are required, they are charged separately.
-                  Site clean-up and general housekeeping excluded only after our work.
-                </p>
-              </div>
-            )}
+    <p className="muted small" style={{ marginBottom: 10 }}>
+      This is not a general maintenance contract.
+      It’s a structured system combining inspections, reporting,
+      and controlled minor works — ensuring nothing is missed and everything is documented.
+    </p>
+
+    <div className="k-block">
+      <div className="k-title">Inspection & reporting (core focus)</div>
+      <ul className="list">
+        <li>Flat roof inspections & water pooling checks</li>
+        <li>Flashing checks (vents, ducts, skylights)</li>
+        <li>Door & window seal inspections</li>
+        <li>Expansion joint visual checks</li>
+        <li>Parapet wall & coping inspections</li>
+        <li>External cladding checks (visual only)</li>
+        <li>Car park walkover inspections</li>
+        <li>Trip hazard identification (paving, kerbs, access routes)</li>
+        <li>Drain cover condition & seating checks</li>
+        <li>External steps & handrail checks</li>
+        <li>Fire exit route obstruction checks</li>
+        <li>Roof access points / ladder / cage checks</li>
+        <li>Ceiling stain identification (leak tracing support)</li>
+        <li>Storm damage condition recording (photos & notes)</li>
+        <li>Maintenance history tracking</li>
+        <li>Annual condition summary</li>
+        <li>Notes suitable for insurers / property managers</li>
+      </ul>
+    </div>
+
+    <div className="k-block">
+      <div className="k-title">Minor works included (controlled scope)</div>
+      <ul className="list">
+        <li>Roof leak tracing & temporary make-safe</li>
+        <li>Emergency tarping / temporary waterproofing</li>
+        <li>Targeted gutter & valley clearance</li>
+        <li>External silicone & mastic touch-ups (selected areas)</li>
+        <li>Minor paving resets (small areas only)</li>
+        <li>Kerb edge adjustments</li>
+        <li>Weed control in hardstanding areas</li>
+        <li>Minor wall patch & paint (common areas)</li>
+        <li>Sealant touch-ups in shared toilets / kitchens</li>
+      </ul>
+    </div>
+
+    <p className="muted smallest" style={{ marginTop: 10 }}>
+      <strong>Important:</strong> This membership is built around inspections and reporting first,
+      with minor works included only as support.
+      Larger repairs, materials, access equipment (MEWP/scaffolding), and specialist works are quoted separately.
+    </p>
+
+    <p className="muted smallest" style={{ marginTop: 6 }}>
+      Where materials are required, they are charged separately.
+      Site clean-up and general housekeeping excluded except after our work.
+    </p>
+
+  </div>
+)}
           </div>
 
           {/* ✅ NEW: H&S Walk-Through + Hazard Notes */}
