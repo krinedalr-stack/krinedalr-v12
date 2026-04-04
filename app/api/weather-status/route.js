@@ -64,16 +64,23 @@ export async function GET() {
   const fetchedAt = new Date().toISOString();
 
   try {
+    // 🔥 TIMEOUT CONTROL (VERY IMPORTANT)
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+
     const r = await fetch(
-      "https://www.met.ie/Open_Data/json/warning_IRELAND.json",
+      "https://www.met.ie/Open_Data/json/warning_IRELAND.json?nocache=1",
       {
         cache: "no-store",
+        signal: controller.signal,
         headers: {
           "User-Agent": "Mozilla/5.0",
           "Accept": "application/json",
         },
       }
     );
+
+    clearTimeout(timeout);
 
     if (!r.ok) {
       throw new Error("Met Éireann fetch failed: " + r.status);
@@ -144,7 +151,7 @@ export async function GET() {
     return new Response(
       JSON.stringify({
         ok: false,
-        error: "Weather fetch failed",
+        error: e.message || "Weather fetch failed",
         fetchedAt,
       }),
       {
