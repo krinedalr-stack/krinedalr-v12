@@ -35,12 +35,6 @@ function levelRank(level) {
   return 0;
 }
 
-function parseDate(d) {
-  if (!d) return null;
-  const date = new Date(d);
-  return isNaN(date) ? null : date;
-}
-
 function extractFips(w) {
   const arr =
     w?.regions ||
@@ -66,16 +60,10 @@ function uniq(arr) {
   return [...new Set(arr)];
 }
 
-function extractStorm(headline) {
-  const match = headline?.match(/Storm\s+\w+/i);
-  return match ? match[0] : null;
-}
-
 export async function GET() {
   const fetchedAt = new Date().toISOString();
 
   try {
-    // 🔥 FIXED FETCH (THIS WAS YOUR ISSUE)
     const r = await fetch(
       "https://www.met.ie/Open_Data/json/warning_IRELAND.json",
       {
@@ -87,53 +75,15 @@ export async function GET() {
       }
     );
 
-    // DEBUG (optional remove later)
-    console.log("MET FETCH STATUS:", r.status);
-
     if (!r.ok) {
-      return new Response(JSON.stringify({
-        ok: true,
-        status: "green",
-        warnings: [],
-        upcoming: null,
-        affectedCounties: [],
-        fallback: true,
-        fetchedAt,
-      }), { headers: { "content-type": "application/json" } });
+      throw new Error("Met Éireann fetch failed: " + r.status);
     }
 
     const data = await r.json();
     const warnings = Array.isArray(data) ? data : [];
 
-    if (warnings.length === 0) {
-      return new Response(JSON.stringify({
-        ok: true,
-        status: "green",
-        warnings: [],
-        upcoming: null,
-        affectedCounties: [],
-        fetchedAt,
-      }), { headers: { "content-type": "application/json" } });
-    }
-
     const cleaned = warnings.map((w) => {
       const level = normalizeLevel(w);
-
-      const start = parseDate(
-        w?.onset || w?.Onset ||
-        w?.start || w?.Start ||
-        w?.effective ||
-        w?.valid_from || w?.validFrom ||
-        w?.startTime
-      );
-
-      const end = parseDate(
-        w?.expires || w?.Expires ||
-        w?.end || w?.End ||
-        w?.expiry ||
-        w?.valid_to || w?.validTo ||
-        w?.endTime
-      );
 
       const headline = (
         w?.headline ||
@@ -143,8 +93,6 @@ export async function GET() {
         w?.event ||
         ""
       ).toString();
-
-      const storm = extractStorm(headline);
 
       const fips = extractFips(w);
 
@@ -158,14 +106,11 @@ export async function GET() {
       return {
         level,
         headline,
-        storm,
         counties,
-        start,
-        end,
       };
     });
 
-    // 🔥 HIGHEST WARNING (WHAT YOU WANT)
+    // 🔥 HIGHEST WARNING LEVEL
     let status = "green";
     for (const w of cleaned) {
       if (levelRank(w.level) > levelRank(status)) {
@@ -173,38 +118,41 @@ export async function GET() {
       }
     }
 
-    // upcoming (optional display)
-    const now = new Date();
-    const upcoming = cleaned
-      .filter((w) => w.start && w.start > now)
-      .sort((a, b) => a.start - b.start)[0] || null;
-
     const allCounties = uniq(
-      cleaned.flatMap((w) => w.counties)
+      cleaned.flatMap((x) => x.counties)
     ).sort();
 
-    return new Response(JSON.stringify({
-      ok: true,
-      status,
-      upcoming,
-      warnings: cleaned.slice(0, 10),
-      affectedCounties: allCounties,
-      fetchedAt,
-    }), {
-      headers: { "content-type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        status,
+        warnings: cleaned,
+        affectedCounties: allCounties,
+        fetchedAt,
+      }),
+      {
+        headers: {
+          "content-type": "application/json",
+          "cache-control": "no-store",
+        },
+      }
+    );
 
   } catch (e) {
     console.error("WEATHER ERROR:", e);
 
-    return new Response(JSON.stringify({
-      ok: true,
-      status: "green",
-      warnings: [],
-      upcoming: null,
-      affectedCounties: [],
-      fallback: true,
-      fetchedAt,
-    }), { headers: { "content-type": "application/json" } });
+    return new Response(
+      JSON.stringify({
+        ok: false,
+        error: "Weather fetch failed",
+        fetchedAt,
+      }),
+      {
+        headers: {
+          "content-type": "application/json",
+          "cache-control": "no-store",
+        },
+      }
+    );
   }
 }
