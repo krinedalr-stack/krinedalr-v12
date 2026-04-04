@@ -64,7 +64,7 @@ export async function GET() {
   const fetchedAt = new Date().toISOString();
 
   try {
-    // 🔥 TIMEOUT CONTROL (VERY IMPORTANT)
+    // 🔥 TIMEOUT CONTROL
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
 
@@ -86,7 +86,14 @@ export async function GET() {
       throw new Error("Met Éireann fetch failed: " + r.status);
     }
 
-    const data = await r.json();
+    // 🔥 READ AS TEXT (NOT JSON)
+    const raw = await r.text();
+
+    // 🔥 CLEAN BAD CONTROL CHARACTERS
+    const safe = raw.replace(/[\u0000-\u001F]+/g, "");
+
+    // 🔥 PARSE CLEAN JSON
+    const data = JSON.parse(safe);
     const warnings = Array.isArray(data) ? data : [];
 
     const cleaned = warnings.map((w) => {
@@ -117,7 +124,7 @@ export async function GET() {
       };
     });
 
-    // 🔥 HIGHEST WARNING LEVEL
+    // 🔥 GET HIGHEST WARNING LEVEL
     let status = "green";
     for (const w of cleaned) {
       if (levelRank(w.level) > levelRank(status)) {
@@ -146,12 +153,10 @@ export async function GET() {
     );
 
   } catch (e) {
-    console.error("WEATHER ERROR:", e);
-
     return new Response(
       JSON.stringify({
         ok: false,
-        error: e.message || "Weather fetch failed",
+        error: e.message,
         fetchedAt,
       }),
       {
