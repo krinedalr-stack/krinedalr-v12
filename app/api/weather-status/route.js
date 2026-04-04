@@ -15,14 +15,17 @@ const FIPS_TO_COUNTY = {
 function normalizeLevel(w) {
   const raw = (
     w?.level ||
+    w?.Level ||
     w?.severity ||
+    w?.Severity ||
     w?.awareness_level ||
+    w?.AwarenessLevel ||
     ""
   ).toString().toLowerCase();
 
-  if (raw.includes("red")) return "red";
-  if (raw.includes("orange")) return "orange";
-  if (raw.includes("yellow")) return "yellow";
+  if (raw.includes("red") || raw.includes("extreme")) return "red";
+  if (raw.includes("orange") || raw.includes("severe")) return "orange";
+  if (raw.includes("yellow") || raw.includes("moderate")) return "yellow";
   return "green";
 }
 
@@ -35,9 +38,13 @@ function parseDate(d) {
 function extractFips(w) {
   const arr =
     w?.regions ||
+    w?.Regions ||
     w?.areas ||
+    w?.Areas ||
     w?.fips ||
+    w?.FIPS ||
     w?.geocode ||
+    w?.Geocode ||
     [];
 
   if (Array.isArray(arr)) return arr.map(String);
@@ -101,17 +108,40 @@ export async function GET() {
     const cleaned = warnings.map((w) => {
       const level = normalizeLevel(w);
 
+      // 🔥 FULL DATE COVERAGE (THIS WAS YOUR ISSUE)
       const start = parseDate(
-        w?.onset || w?.start || w?.effective
+        w?.onset ||
+        w?.Onset ||
+        w?.start ||
+        w?.Start ||
+        w?.effective ||
+        w?.Effective ||
+        w?.valid_from ||
+        w?.validFrom ||
+        w?.startTime ||
+        w?.StartTime
       );
 
       const end = parseDate(
-        w?.expires || w?.end || w?.expiry
+        w?.expires ||
+        w?.Expires ||
+        w?.end ||
+        w?.End ||
+        w?.expiry ||
+        w?.Expiry ||
+        w?.valid_to ||
+        w?.validTo ||
+        w?.endTime ||
+        w?.EndTime
       );
 
       const headline = (
         w?.headline ||
+        w?.Headline ||
+        w?.title ||
+        w?.Title ||
         w?.event ||
+        w?.Event ||
         ""
       ).toString();
 
@@ -121,11 +151,12 @@ export async function GET() {
 
       const counties = uniq(
         fips
+          .map((c) => c.toString().trim().toUpperCase())
           .map((c) => FIPS_TO_COUNTY[c])
           .filter(Boolean)
       );
 
-      // ACTIVE
+      // ✅ ACTIVE
       if (start && end && start <= now && end >= now) {
         if (level === "red") currentStatus = "red";
         else if (level === "orange" && currentStatus !== "red")
@@ -134,7 +165,7 @@ export async function GET() {
           currentStatus = "yellow";
       }
 
-      // UPCOMING
+      // ✅ UPCOMING
       if (start && start > now) {
         upcoming.push({
           level,
@@ -156,7 +187,7 @@ export async function GET() {
       };
     });
 
-    // sort upcoming by closest
+    // closest upcoming
     upcoming.sort((a, b) => a.start - b.start);
     const nextWarning = upcoming[0] || null;
 
@@ -175,7 +206,7 @@ export async function GET() {
       headers: { "content-type": "application/json" },
     });
 
-  } catch {
+  } catch (e) {
     return new Response(JSON.stringify({
       ok: true,
       status: "green",
