@@ -1437,6 +1437,7 @@ export default function HomePage() {
                   </p>
                   <p>Membership becomes active upon cleared payment.</p>
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
+                </div>
 </form>          
 </section>
       {/* STORM + WEATHER */}
