@@ -169,26 +169,19 @@ a:hover{ text-decoration: underline; }
 }
 
 /* ✅ 4 floating clovers (kept) */
-.shamrock-global{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
 .shamrock{
   position:absolute;
   font-size:1.6rem;
   animation: floatY 12s ease-in-out infinite;
-  z-index:0;
+  z-index:1;
   user-select:none;
   pointer-events:none;
-  opacity: 0.12;
 }
 /* ✅ locked: 2 bigger (adults), 2 smaller (children) */
-.shamrock-1{ top:8vh; left:16px; font-size: 2.1rem; }
-.shamrock-2{ top:22vh; right:16px; animation-delay:3s; font-size: 2.1rem; }
-.shamrock-3{ top:58vh; left:22px; animation-delay:5s; font-size: 1.6rem; }
-.shamrock-4{ top:84vh; right:22px; animation-delay:7s; font-size: 1.6rem; }
+.shamrock-1{ top:18px; left:16px; font-size: 2.1rem; }
+.shamrock-2{ top:22px; right:16px; animation-delay:3s; font-size: 2.1rem; }
+.shamrock-3{ bottom:18px; left:22px; animation-delay:5s; font-size: 1.6rem; }
+.shamrock-4{ bottom:18px; right:22px; animation-delay:7s; font-size: 1.6rem; }
 
 @keyframes floatY{
   0%,100%{ transform:translateY(0); }
@@ -847,23 +840,4 @@ input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill{
   background:#fff;
   border-color:#e5e7eb;
   color:#111827;
-}
-
-
-.hero, .section, .topbar, .float-stack, .modal-backdrop {
-  position: relative;
-  z-index: 1;
-}
-
-.membership-rules-card,
-.form-card,
-.card,
-.footer {
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width:600px){
-  .float-stack{ right:12px; bottom:14px; }
-  .footer{ gap:12px; }
 }
