@@ -1428,11 +1428,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-              
-</form>
-</div>
-</section>
-<section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
+              <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
   <div className="container grid-2">
     <div className="card">
       <h2>24/7 Storm Call-Out</h2>
