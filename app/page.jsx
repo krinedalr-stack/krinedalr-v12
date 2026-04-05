@@ -1439,6 +1439,7 @@ export default function HomePage() {
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
               </div>
 </form>
+</div>              
 </section>
       {/* STORM + WEATHER */}
 <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
