@@ -1465,7 +1465,7 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-
+  </form>
   </div>
 </section>
 
