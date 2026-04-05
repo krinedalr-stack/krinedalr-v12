@@ -1437,14 +1437,11 @@ export default function HomePage() {
                   </p>
                   <p>Membership becomes active upon cleared payment.</p>
                   {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
-                </div>
               </form>
             </div>
           </section>
-        </div>
-      </section>
       {/* STORM + WEATHER */}
-      <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: 92 }}>
+    <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: 92 }}>
         <div className="container grid-2">
           <div className="card">
             <h2>24/7 Storm Call-Out</h2>
