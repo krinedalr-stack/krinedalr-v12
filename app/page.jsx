@@ -1428,50 +1428,12 @@ export default function HomePage() {
                   </div>
                 </div>
 
-              <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
-  <div className="container grid-2">
-    <div className="card">
-      <h2>24/7 Storm Call-Out</h2>
-      <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
-      <a href="tel:0831762475" className="btn btn-storm">
-        🚨 24/7 STORM EMERGENCY LINE
-      </a>
-
-      <div className="callout-pricing">
-        <div className="callout-title">Emergency call-out fee guide</div>
-
-        <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
-          <span className="left">GREEN</span>
-          <span className="right">€200</span>
-        </div>
-
-        <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
-          <span className="left">YELLOW</span>
-          <span className="right">€250</span>
-        </div>
-
-        <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
-          <span className="left">ORANGE</span>
-          <span className="right">€350</span>
-        </div>
-
-        <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
-          <span className="left">RED</span>
-          <span className="right">€450 + documentation</span>
-        </div>
-
-       </div>
-</div>
-</div>
-
+              
 </form>
 </div>
 </section>
-
-{/* STORM + WEATHER */}
 <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
   <div className="container grid-2">
-
     <div className="card">
       <h2>24/7 Storm Call-Out</h2>
       <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
@@ -1507,84 +1469,49 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-
-    <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
-      <h2>Live Weather Status</h2>
-
-      <p className="muted small" style={{ marginTop: 8 }}>
-        Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()}</strong>
-      </p>
-
-      <p className="muted smallest" style={{ marginTop: 8, fontWeight: 900 }}>
-        Upcoming weather outlook (24–72 hours) <br />
-        Based on Met Éireann forecast data.
-      </p>
-
-      {weatherStatus !== "green" && affectedCounties.length > 0 && (
-        <p className="muted small" style={{ marginTop: 8 }}>
-          Affected counties: <strong>{affectedCounties.join(", ")}</strong>
-        </p>
-      )}
-
-      <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
-        <button
-          type="button"
-          className="btn btn-weather"
-          onClick={() => loadWeather({ manual: true })}
-          disabled={refreshingWeather}
-        >
-          {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
-        </button>
-
-        <a className="btn btn-outline" href={WIND_MAP_URL} target="_blank" rel="noreferrer">
-          🌬️ Live Wind Map
-        </a>
-      </div>
-
-      {weatherError ? (
-        <p className="muted smallest" style={{ marginTop: 8 }}>
-          ⚠️ {weatherError}
-        </p>
-      ) : (
-        <p className="muted smallest" style={{ marginTop: 8 }}>
-          Auto-updated from Met Éireann warnings
-          {fetchedAt && <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span>}
-        </p>
-      )}
-
-      {weatherWarnings.length > 0 && (
-        <div style={{ marginTop: 12 }}>
-          <p className="muted small" style={{ fontWeight: 700, marginBottom: 6 }}>
-            Latest warnings:
-          </p>
-          <ul className="list" style={{ marginTop: 0 }}>
-            {weatherWarnings.slice(0, 4).map((w, idx) => (
-              <li key={w?.id || w?.headline || idx}>
-                <strong style={{ textTransform: "uppercase" }}>{w.level}</strong>
-                {w.headline ? ` – ${w.headline}` : ""}
-                {Array.isArray(w.counties) && w.counties.length > 0 ? ` (${w.counties.join(", ")})` : ""}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <p className="muted small" style={{ marginTop: 12 }}>
-        Follow{" "}
-        <a
-          href="https://m.facebook.com/profile.php?id=61581354904730"
-          target="_blank"
-          rel="noreferrer"
-          className="brand-inline"
-        >
-          Krinedal-R on Facebook
-        </a>{" "}
-        for live updates.
-      </p>
-    </div>
-
+  </form>
   </div>
 </section>
+
+          <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
+            <h2>Live Weather Status</h2>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Current: <strong className={weatherUI.textClass}>{weatherStatus.toUpperCase()}</strong>
+            </p>
+            <p className="muted smallest" style={{ marginTop: 8, fontWeight: 900 }}>
+              Upcoming weather outlook (24–72 hours) <br />
+              Based on Met Éireann forecast data.
+            </p>
+
+            {weatherStatus !== "green" && affectedCounties.length > 0 && (
+              <p className="muted small" style={{ marginTop: 8 }}>
+                Affected counties: <strong>{affectedCounties.join(", ")}</strong>
+              </p>
+            )}
+
+            <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <button
+                type="button"
+                className="btn btn-weather"
+                onClick={() => loadWeather({ manual: true })}
+                disabled={refreshingWeather}
+              >
+                {refreshingWeather ? "Refreshing…" : "↻ Refresh weather"}
+              </button>
+
+              <a className="btn btn-outline" href={WIND_MAP_URL} target="_blank" rel="noreferrer">
+                🌬️ Live Wind Map
+              </a>
+            </div>
+
+            {weatherError ? (
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                ⚠️ {weatherError}
+              </p>
+            ) : (
+              <p className="muted smallest" style={{ marginTop: 8 }}>
+                Auto-updated from Met Éireann warnings
+                {fetchedAt && <span> • Last check: {new Date(fetchedAt).toLocaleString()}</span>}
               </p>
             )}
 
