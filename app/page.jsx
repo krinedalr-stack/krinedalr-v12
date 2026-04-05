@@ -1428,49 +1428,46 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="form-actions">
-                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
-                    {membershipSubmitting ? "Sending…" : "Send membership application"}
-                  </button>
-                  <p className="submit-tip">
-                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
-                  </p>
-                  <p>Membership becomes active upon cleared payment.</p>
-                  {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
-                </div>
-</form>          
-</section>
-      {/* STORM + WEATHER */}
-<section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
-        <div className="container grid-2">
-          <div className="card">
-            <h2>24/7 Storm Call-Out</h2>
-            <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
-            <a href="tel:0831762475" className="btn btn-storm">
-              🚨 24/7 STORM EMERGENCY LINE
-            </a>
+              <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
+  <div className="container grid-2">
+    <div className="card">
+      <h2>24/7 Storm Call-Out</h2>
+      <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
+      <a href="tel:0831762475" className="btn btn-storm">
+        🚨 24/7 STORM EMERGENCY LINE
+      </a>
 
-            <div className="callout-pricing">
-              <div className="callout-title">Emergency call-out fee guide</div>
-              <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
-                <span className="left">GREEN</span>
-                <span className="right">€200</span>
-              </div>
-              <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
-                <span className="left">YELLOW</span>
-                <span className="right">€250</span>
-              </div>
-              <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
-                <span className="left">ORANGE</span>
-                <span className="right">€350</span>
-              </div>
-              <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
-                <span className="left">RED</span>
-                <span className="right">€450 + documentation</span>
-              </div>
-              <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
-            </div>
-          </div>
+      <div className="callout-pricing">
+        <div className="callout-title">Emergency call-out fee guide</div>
+
+        <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
+          <span className="left">GREEN</span>
+          <span className="right">€200</span>
+        </div>
+
+        <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
+          <span className="left">YELLOW</span>
+          <span className="right">€250</span>
+        </div>
+
+        <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
+          <span className="left">ORANGE</span>
+          <span className="right">€350</span>
+        </div>
+
+        <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
+          <span className="left">RED</span>
+          <span className="right">€450 + documentation</span>
+        </div>
+
+        <div className="callout-foot">
+          Includes call-out + make-safe only. Final price confirmed before work.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
           <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
             <h2>Live Weather Status</h2>
