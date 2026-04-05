@@ -409,12 +409,6 @@ export default function HomePage() {
 
   // NEW: H&S modal
   const [hsOpen, setHsOpen] = useState(false);
-  const [membershipOpen, setMembershipOpen] = useState(false);
-  const [estimateOpen, setEstimateOpen] = useState(false);
-  const [expandedPlan, setExpandedPlan] = useState(null);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [documentationMoreOpen, setDocumentationMoreOpen] = useState(false);
-  const [vacantMoreOpen, setVacantMoreOpen] = useState(false);
 
   useEffect(() => {
     function onDocClick(e) {
@@ -575,19 +569,9 @@ export default function HomePage() {
     }, 60);
   }
 
-  function scrollToEstimate() {
-    setEstimateOpen(true);
-    setMoreOpen(false);
-    setTimeout(() => {
-      const el = document.getElementById("estimate");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 80);
-  }
-
   function scrollToMembershipApplication(plan = "Silver") {
     setSelectedPlan(plan);
     setMembershipMsg("");
-    setMembershipOpen(true);
     setMoreOpen(false);
     setTimeout(() => {
       const el = document.getElementById("membership-application");
@@ -658,12 +642,6 @@ export default function HomePage() {
 
   return (
     <main>
-      <div className="shamrock-global" aria-hidden="true">
-        <span className="shamrock shamrock-1">☘️</span>
-        <span className="shamrock shamrock-2">☘️</span>
-        <span className="shamrock shamrock-3">☘️</span>
-        <span className="shamrock shamrock-4">☘️</span>
-      </div>
       {/* TOP BAR */}
       <header className="topbar">
         <div className="container topbar-inner">
@@ -774,7 +752,7 @@ export default function HomePage() {
                   <button className="more-item" onClick={openTermsModal}>
                     Website Terms
                   </button>
-                  <button className="more-item" onClick={scrollToEstimate}>
+                  <button className="more-item" onClick={() => scrollToId("estimate")}>
                     Contact
                   </button>
                 </div>
@@ -792,6 +770,11 @@ export default function HomePage() {
 
       {/* HERO (LOCKED: minimal) */}
       <section className="hero">
+        <span className="shamrock shamrock-1">☘️</span>
+        <span className="shamrock shamrock-2">☘️</span>
+        <span className="shamrock shamrock-3">☘️</span>
+        <span className="shamrock shamrock-4">☘️</span>
+
         <div className="container hero-inner">
           <div className="hero-min">
             <h1 className="hero-title">
@@ -802,6 +785,11 @@ export default function HomePage() {
               <IrelandFlag className="flag" /> PREMIUM PROPERTY CARE ACROSS IRELAND <span>☘️</span>
             </p>
 
+            <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
+
+            <p className="hero-lead">
+              24/7 storm damage call-outs, roof renewals and luxury tiling across Ireland.
+            </p>
 
             <div className="hero-actions">
               <a href="tel:0831762475" className="btn btn-primary">
@@ -835,6 +823,21 @@ export default function HomePage() {
                 </button>
               </div>
 
+              <p className="muted small" style={{ marginTop: 8, fontWeight: 800 }}>
+                {operationalLine}
+              </p>
+
+              {weatherStatus !== "green" && affectedCounties.length > 0 && (
+                <p className="muted smallest" style={{ marginTop: 6 }}>
+                  Affected: <strong>{affectedCounties.join(", ")}</strong>
+                </p>
+              )}
+
+              {weatherError && (
+                <p className="muted smallest" style={{ marginTop: 6 }}>
+                  ⚠️ {weatherError}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -848,22 +851,11 @@ export default function HomePage() {
             <p className="muted" style={{ marginTop: 8 }}>
               From emergency leaks to premium finishes — we keep your home safe, dry and beautifully finished.
             </p>
-            <button
-              type="button"
-              className="btn btn-outline"
-              style={{ marginTop: 12 }}
-              onClick={() => setServicesOpen((v) => !v)}
-              aria-expanded={servicesOpen}
-            >
-              {servicesOpen ? "Hide services" : "View services"}
-            </button>
-            {servicesOpen && (
-              <ul className="list" style={{ marginTop: 12 }}>
-                {SERVICES.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
-            )}
+            <ul className="list" style={{ marginTop: 12 }}>
+              {SERVICES.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
             <p className="muted smallest" style={{ marginTop: 10 }}>
               *Response time depends on location &amp; weather conditions.
             </p>
@@ -930,26 +922,19 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {expandedPlan === "Bronze" && (
-                <>
-                  <ul>
-                    <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                    <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                    <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                    <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                    <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                    <li><strong>Priority booking</strong> over non-members</li>
-                  </ul>
+              <ul>
+                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+                <li><strong>Written inspection notes</strong> provided if issues are found</li>
+                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+                <li><strong>Priority booking</strong> over non-members</li>
+              </ul>
 
-                  <div className="plan-foot">
-                    Best for homeowners who want early detection before problems become expensive.
-                  </div>
-                </>
-              )}
+              <div className="plan-foot">
+                Best for homeowners who want early detection before problems become expensive.
+              </div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => setExpandedPlan((v) => (v === "Bronze" ? null : "Bronze"))}>
-                  {expandedPlan === "Bronze" ? "Hide full plan" : "View full plan"}
-                </button>
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Bronze")}>
                   Apply
                 </button>
@@ -975,29 +960,22 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {expandedPlan === "Silver" && (
-                <>
-                  <ul>
-                    <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                    <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                    <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                    <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                    <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                    <li><strong>Priority booking</strong> over non-members</li>
-                    <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                    <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                    <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
-                  </ul>
+              <ul>
+                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+                <li><strong>Written inspection notes</strong> provided if issues are found</li>
+                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+                <li><strong>Priority booking</strong> over non-members</li>
+                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+              </ul>
 
-                  <div className="plan-foot">
-                    Best for landlords and homeowners who want maintenance, not just inspections.
-                  </div>
-                </>
-              )}
+              <div className="plan-foot">
+                Best for landlords and homeowners who want maintenance, not just inspections.
+              </div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => setExpandedPlan((v) => (v === "Silver" ? null : "Silver"))}>
-                  {expandedPlan === "Silver" ? "Hide full plan" : "View full plan"}
-                </button>
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Silver")}>
                   Apply
                 </button>
@@ -1023,38 +1001,31 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {expandedPlan === "Gold" && (
-                <>
-                  <ul>
-                    <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                    <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                    <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                    <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                    <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                    <li><strong>Priority booking</strong> over non-members</li>
-                    <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                    <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                    <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
-                    <li><strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)</li>
-                    <li><strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)</li>
-                    <li><strong>Discounted labour</strong> on additional works</li>
-                    <li>
-                      <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                      <span className="muted smallest">
-                        (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
-                      </span>
-                    </li>
-                  </ul>
+              <ul>
+                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+                <li><strong>Written inspection notes</strong> provided if issues are found</li>
+                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+                <li><strong>Priority booking</strong> over non-members</li>
+                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+                <li><strong>Roof maintenance works</strong> (tile resets, ridge/verge checks, minor flashing adjustments)</li>
+                <li><strong>Full bathroom OR kitchen silicone reseal</strong> (one full area per year)</li>
+                <li><strong>Discounted labour</strong> on additional works</li>
+                <li>
+                  <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
+                  <span className="muted smallest">
+                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+                  </span>
+                </li>
+              </ul>
 
-                  <div className="plan-foot">
-                    Best for high-value homes and clients who want problems fixed, not just found.
-                  </div>
-                </>
-              )}
+              <div className="plan-foot">
+                Best for high-value homes and clients who want problems fixed, not just found.
+              </div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => setExpandedPlan((v) => (v === "Gold" ? null : "Gold"))}>
-                  {expandedPlan === "Gold" ? "Hide full plan" : "View full plan"}
-                </button>
                 <button className="btn btn-outline" type="button" onClick={() => scrollToMembershipApplication("Gold")}>
                   Apply
                 </button>
@@ -1080,43 +1051,36 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {expandedPlan === "Diamond" && (
-                <>
-                  <ul>
-                    <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
-                    <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
-                    <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
-                    <li><strong>Written inspection notes</strong> provided if issues are found</li>
-                    <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
-                    <li><strong>Priority booking</strong> over non-members</li>
-                    <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
-                    <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
-                    <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
-                    <li><strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)</li>
-                    <li><strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)</li>
-                    <li><strong>Annual written condition report</strong> stored and referenced for future works</li>
-                    <li><strong>Direct priority contact channel</strong> + best available pricing on additional works</li>
-                    <li>
-                      <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
-                      <span className="muted smallest">
-                        (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
-                      </span>
-                    </li>
-                  </ul>
+              <ul>
+                <li><strong>Annual roof inspection</strong> (visual: tiles, ridge caps, valleys, flashing)</li>
+                <li><strong>Annual gutter inspection</strong> (blockage/overflow risk, damage)</li>
+                <li><strong>External silicone inspection</strong> (external seals — inspection only)</li>
+                <li><strong>Written inspection notes</strong> provided if issues are found</li>
+                <li><strong>{MEMBER_ALL_WARNING_LINE}</strong></li>
+                <li><strong>Priority booking</strong> over non-members</li>
+                <li><strong>Gutter cleaning</strong> (once per year — leaves/debris removal)</li>
+                <li><strong>Minor roof repairs</strong> (slipped/broken tiles — materials charged if required)</li>
+                <li><strong>Silicone resealing</strong> (limited areas — bathroom OR kitchen, one area per year)</li>
+                <li><strong>Comprehensive roof maintenance</strong> (tile replacement, ridge/verge attention, flashing repairs — materials charged if required)</li>
+                <li><strong>Full bathroom AND kitchen silicone reseal</strong> (once per year)</li>
+                <li><strong>Annual written condition report</strong> stored and referenced for future works</li>
+                <li><strong>Direct priority contact channel</strong> + best available pricing on additional works</li>
+                <li>
+                  <strong>Preferred member pricing</strong> on one small landscaping project per year{" "}
+                  <span className="muted smallest">
+                    (e.g. garden tidy-up, minor paving or edging works — scope agreed in advance).
+                  </span>
+                </li>
+              </ul>
 
-                  <div className="plan-foot">
-                    Best for clients who want full oversight, priority service, and long-term protection.
-                    <br />
-                    <span className="muted smallest" style={{ display: "block", marginTop: 8 }}>
-                      {RED_POLICY_LINE}
-                    </span>
-                  </div>
-                </>
-              )}
+              <div className="plan-foot">
+                Best for clients who want full oversight, priority service, and long-term protection.
+                <br />
+                <span className="muted smallest" style={{ display: "block", marginTop: 8 }}>
+                  {RED_POLICY_LINE}
+                </span>
+              </div>
               <div className="plan-actions">
-                <button className="btn btn-outline" type="button" onClick={() => setExpandedPlan((v) => (v === "Diamond" ? null : "Diamond"))}>
-                  {expandedPlan === "Diamond" ? "Hide full plan" : "View full plan"}
-                </button>
                 <button className="btn btn-primary" type="button" onClick={() => scrollToMembershipApplication("Diamond")}>
                   Apply
                 </button>
@@ -1260,7 +1224,7 @@ export default function HomePage() {
               <button type="button" className="btn btn-outline" onClick={() => setHsOpen(true)}>
                 Read full scope
               </button>
-              <button type="button" className="btn btn-outline" onClick={scrollToEstimate}>
+              <button type="button" className="btn btn-outline" onClick={() => scrollToId("estimate")}>
                 Enquire
               </button>
             </div>
@@ -1286,23 +1250,12 @@ export default function HomePage() {
             <p className="muted" style={{ marginTop: 8, maxWidth: 920 }}>
               Clear paperwork for homeowners, landlords and commercial sites — designed to support internal reviews, external audits, and insurer-safe records where required.
             </p>
-            <button
-              type="button"
-              className="btn btn-outline"
-              style={{ marginTop: 12 }}
-              onClick={() => setDocumentationMoreOpen((v) => !v)}
-              aria-expanded={documentationMoreOpen}
-            >
-              {documentationMoreOpen ? "Hide details" : "Read more"}
-            </button>
-            {documentationMoreOpen && (
-              <ul className="list" style={{ marginTop: 10 }}>
-                <li>Photo records (before / during / after)</li>
-                <li>Written condition summaries</li>
-                <li>Storm event records (where applicable)</li>
-                <li>Maintenance history tracking (for repeat sites / ongoing care)</li>
-              </ul>
-            )}
+            <ul className="list" style={{ marginTop: 10 }}>
+              <li>Photo records (before / during / after)</li>
+              <li>Written condition summaries</li>
+              <li>Storm event records (where applicable)</li>
+              <li>Maintenance history tracking (for repeat sites / ongoing care)</li>
+            </ul>
           </div>
 
           {/* VACANT PROPERTY CARE */}
@@ -1314,27 +1267,15 @@ export default function HomePage() {
             <p className="muted smallest" style={{ marginTop: 10 }}>
               <strong>Pricing:</strong> <strong>€150 per visit</strong> • <strong>Holiday home check-ups: €450 a week</strong>
             </p>
-            <button
-              type="button"
-              className="btn btn-outline"
-              style={{ marginTop: 12 }}
-              onClick={() => setVacantMoreOpen((v) => !v)}
-              aria-expanded={vacantMoreOpen}
-            >
-              {vacantMoreOpen ? "Hide details" : "Read more"}
-            </button>
-            {vacantMoreOpen && (
-              <ul className="list" style={{ marginTop: 10 }}>
-                <li>Scheduled property visit and visual checks</li>
-                <li>Photos and short written update</li>
-                <li>Visible issues logged and flagged early (leaks, damage, access concerns)</li>
-                <li>Next steps recommended (quoted separately where needed)</li>
-              </ul>
-            )}
+            <ul className="list" style={{ marginTop: 10 }}>
+              <li>Scheduled property visit and visual checks</li>
+              <li>Photos and short written update</li>
+              <li>Visible issues logged and flagged early (leaks, damage, access concerns)</li>
+              <li>Next steps recommended (quoted separately where needed)</li>
+            </ul>
           </div>
 
           {/* MEMBERSHIP APPLICATION */}
-          {membershipOpen && (
           <section id="membership-application" style={{ scrollMarginTop: 92 }}>
             <div className="form-card membership-form">
               <h2>Membership application</h2>
@@ -1428,46 +1369,52 @@ export default function HomePage() {
                   </div>
                 </div>
 
-              <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: "92px" }}>
-  <div className="container grid-2">
-    <div className="card">
-      <h2>24/7 Storm Call-Out</h2>
-      <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
-      <a href="tel:0831762475" className="btn btn-storm">
-        🚨 24/7 STORM EMERGENCY LINE
-      </a>
-
-      <div className="callout-pricing">
-        <div className="callout-title">Emergency call-out fee guide</div>
-
-        <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
-          <span className="left">GREEN</span>
-          <span className="right">€200</span>
+                <div className="form-actions">
+                  <button type="submit" className="btn btn-emerald" disabled={membershipSubmitting}>
+                    {membershipSubmitting ? "Sending…" : "Send membership application"}
+                  </button>
+                  <p className="submit-tip">
+                    Once approved, we’ll confirm your plan and activation by phone/email. Emergency line: <strong>083 176 2475</strong>.
+                  </p>
+                  <p>Membership becomes active upon cleared payment.</p>
+                  {membershipMsg && <p className="membership-msg">{membershipMsg}</p>}
+                </div>
+              </form>
+            </div>
+          </section>
         </div>
+      </section>
+      {/* STORM + WEATHER */}
+      <section className="section section-alt" id="live-weather" style={{ scrollMarginTop: 92 }}>
+        <div className="container grid-2">
+          <div className="card">
+            <h2>24/7 Storm Call-Out</h2>
+            <p className="muted">Red warning, heavy rain or leaking roof – we respond fast, day or night.</p>
+            <a href="tel:0831762475" className="btn btn-storm">
+              🚨 24/7 STORM EMERGENCY LINE
+            </a>
 
-        <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
-          <span className="left">YELLOW</span>
-          <span className="right">€250</span>
-        </div>
-
-        <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
-          <span className="left">ORANGE</span>
-          <span className="right">€350</span>
-        </div>
-
-        <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
-          <span className="left">RED</span>
-          <span className="right">€450 + documentation</span>
-        </div>
-
-        <div className="callout-foot">
-          Includes call-out + make-safe only. Final price confirmed before work.
-        </div>
-      </div>
-    </div>
-  </form>
-  </div>
-</section>
+            <div className="callout-pricing">
+              <div className="callout-title">Emergency call-out fee guide</div>
+              <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
+                <span className="left">GREEN</span>
+                <span className="right">€250 – €350</span>
+              </div>
+              <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
+                <span className="left">YELLOW</span>
+                <span className="right">€350 – €450</span>
+              </div>
+              <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
+                <span className="left">ORANGE</span>
+                <span className="right">€450 – €550</span>
+              </div>
+              <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
+                <span className="left">RED</span>
+                <span className="right">€550 – €1000</span>
+              </div>
+              <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
+            </div>
+          </div>
 
           <div className="card" id="wind-weather" style={{ scrollMarginTop: 92 }}>
             <h2>Live Weather Status</h2>
@@ -1648,24 +1595,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section section-alt">
-        <div className="container">
-          <div className="card">
-            <h2>Request a Free Estimate</h2>
-            <p className="muted" style={{ marginTop: 8 }}>
-              Estimate form stays closed until you need it — tap below and it opens automatically.
-            </p>
-            <div style={{ marginTop: 14 }}>
-              <button type="button" className="btn btn-outline" onClick={scrollToEstimate}>
-                Open estimate form
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ESTIMATE FORM */}
-      {estimateOpen && (
       <section id="estimate" className="section section-form">
         <div className="container">
           <div className="form-card">
@@ -1789,7 +1719,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      )}
 
       {/* FOOTER */}
       <section className="section section-dark">
