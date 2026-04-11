@@ -1412,7 +1412,7 @@ export default function HomePage() {
                 <span className="left">RED</span>
                 <span className="right">€550+</span>
               </div>
-              <div className="callout-foot">Final price depends on level of response and work required.</div>
+              <div className="callout-foot">Final price confirmed before work begins. Includes call-out and make safe work.</div>
             </div>
           </div>
 
