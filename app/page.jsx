@@ -1503,7 +1503,7 @@ export default function HomePage() {
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, storm didn't stop him. Trust 100% , insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Heavy rain didn't stop him. Trust 100% , insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
