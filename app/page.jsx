@@ -426,7 +426,7 @@ export default function HomePage() {
   const SERVICES = [
     "Emergency storm make-safe within hours*",
     "Full roof change & leak tracing",
-    "Luxury bathroom & kitchen tiling",
+    "Precision bathroom & kitchen tiling",
     "Flooring installation (laminate, vinyl & engineered wood)",
     "Garage flooring systems (rubber / PVC tiles / resin-coated floors)",
     "Marble-look & decorative floor coatings",
@@ -788,7 +788,7 @@ export default function HomePage() {
             <p className="hero-subline">Built on standards • Run by systems • Powered by people</p>
 
             <p className="hero-lead">
-              24/7 storm damage call-outs, roof renewals and luxury tiling across Ireland.
+              24/7 storm damage call-outs, roof renewals and Precision tiling across Ireland.
             </p>
 
             <div className="hero-actions">
@@ -1496,14 +1496,14 @@ export default function HomePage() {
           <article className="card review-card">
             <p className="review-label">★★★★★ CUSTOMER FEEDBACK</p>
             <p className="review-text">
-              “Krinedal-R did our full luxury bathroom tiling last week – Chris just phenomenal. Clean, fast and extremely professional. Couldn't be happier.”
+              “Krinedal-R did our full bathroom tiling last week – Chris just phenomenal. Clean, fast and extremely professional. Couldn't be happier.”
             </p>
             <p className="review-author">— Aoife, Navan</p>
           </article>
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, rain and storm didn't stop him. Trust 100% , insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, storm didn't stop him. Trust 100% , insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
