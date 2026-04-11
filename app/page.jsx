@@ -1561,7 +1561,7 @@ export default function HomePage() {
               Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Premium Precision tiling often ranges <strong>€60–€100 per m²</strong>; this calculator uses <strong>€85 per m²</strong>.
+              Premium Precision tiling often ranges <strong>€60–€100 per m²</strong>; this calculator uses <strong>€75 per m²</strong>.
             </p>
           </div>
 
