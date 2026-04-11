@@ -1398,21 +1398,21 @@ export default function HomePage() {
               <div className="callout-title">Emergency call-out fee guide</div>
               <div className={`callout-row green ${weatherStatus === "green" ? "active" : ""}`}>
                 <span className="left">GREEN</span>
-                <span className="right">€250 – €350</span>
+                <span className="right">€200</span>
               </div>
               <div className={`callout-row yellow ${weatherStatus === "yellow" ? "active" : ""}`}>
                 <span className="left">YELLOW</span>
-                <span className="right">€350 – €450</span>
+                <span className="right">€300</span>
               </div>
               <div className={`callout-row orange ${weatherStatus === "orange" ? "active" : ""}`}>
                 <span className="left">ORANGE</span>
-                <span className="right">€450 – €550</span>
+                <span className="right">€450</span>
               </div>
               <div className={`callout-row red ${weatherStatus === "red" ? "active" : ""}`}>
                 <span className="left">RED</span>
-                <span className="right">€550 – €1000</span>
+                <span className="right">€550+</span>
               </div>
-              <div className="callout-foot">Includes call-out + make-safe only. Final price confirmed before work.</div>
+              <div className="callout-foot">Final price depends on level of response and work required.</div>
             </div>
           </div>
 
