@@ -303,17 +303,17 @@ function CommunitySupportModal({ open, onClose, RED_POLICY_LINE }) {
         <div className="k-block">
           <div className="k-title">Why we do this</div>
           <p>
-            Many elderly people built this country through decades of hard work and contribution. When
+           1) Many elderly people built this country through decades of hard work and contribution. When
             severe weather hits, they are often the most vulnerable. We believe they deserve respect,
             safety, and fast help when their home is at risk.
           </p>
           <p>
-            Single parents often carry full responsibility for their household alone. During emergencies
+           2) Single parents often carry full responsibility for their household alone. During emergencies
             there is no second person to share the pressure or cost. We reduce the call-out fee to help
             keep the home safe during difficult moments
           </p>
           <p>
-            Families caring for children with severe disabilities often face constant pressure, emotional
+            3) Families caring for children with severe disabilities often face constant pressure, emotional
             strain, and unexpected emergencies. During severe weather or urgent home safety issues, these
             families have little flexibility and fewer options to respond quickly. Parents cannot leave
             children unattended in dangerous conditions while also trying to make the home safe. We
@@ -865,7 +865,6 @@ export default function HomePage() {
           </div>
 
           <div className="card">
-            <h2>We don’t compete on price.</h2>
             <p className="muted" style={{ marginTop: 8 }}>
               We compete on standards, systems, and accountability.
             </p>
@@ -1504,7 +1503,7 @@ export default function HomePage() {
 
           <article className="card review-card">
             <p className="review-text">
-              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, rain and storm didn't stop him. Trust 100% saved number - completed, insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
+              “We had a roof leak in heavy rain, Chris arrived close to 3Am in the midnight, to make the house safe. Snow, rain and storm didn't stop him. Trust 100% , insurance claim report was issued within couple hours. Can’t imagine better service. Thank you Chris.”
             </p>
             <p className="review-author">— Patrick, Dublin</p>
           </article>
@@ -1542,7 +1541,7 @@ export default function HomePage() {
           </div>
 
           <div className="card">
-            <h2>Luxury tiling cost idea</h2>
+            <h2>Precision tiling cost idea</h2>
             <p className="muted small">For hotel-style bathrooms and premium finishes. Labour only, tiles &amp; materials separate.</p>
             <label className="field-label">
               Tiled area (m²)
@@ -1562,7 +1561,7 @@ export default function HomePage() {
               Rough tiling total: {tileTotal ? <strong>€{tileTotal}</strong> : "— enter size above"}
             </p>
             <p className="muted smallest">
-              Premium luxury tiling often ranges <strong>€60–€85 per m²</strong>; this calculator uses <strong>€75 per m²</strong>.
+              Premium Precision tiling often ranges <strong>€60–€100 per m²</strong>; this calculator uses <strong>€85 per m²</strong>.
             </p>
           </div>
 
@@ -1643,7 +1642,7 @@ export default function HomePage() {
                     <option>Storm / leak emergency</option>
                     <option>Full roof renewal</option>
                     <option>Roof repair</option>
-                    <option>Luxury bathroom tiling</option>
+                    <option>Precision bathroom tiling</option>
                     <option>Kitchen tiling</option>
                     <option>Flooring installation (laminate / vinyl / engineered wood)</option>
                     <option>Garage flooring systems (rubber / tiles / resin-coated)</option>
